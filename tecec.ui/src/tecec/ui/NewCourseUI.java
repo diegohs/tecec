@@ -17,9 +17,13 @@ import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextArea;
+
 
 public class NewCourseUI extends JFrame {	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private tecec.ui.contract.NewCourseController newCourseController;
 	
 	private void storeCourse(){
