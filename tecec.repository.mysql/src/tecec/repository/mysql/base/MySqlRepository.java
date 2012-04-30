@@ -17,7 +17,7 @@ public abstract class MySqlRepository {
 		this.connectionConfig = connectionConfig;
 	}
 
-	public ResultSet Select(String query) throws Exception {
+	public ResultSet select(String query) throws Exception {
 		Connection connection = null;
 		Statement statement = null;
 
@@ -43,7 +43,7 @@ public abstract class MySqlRepository {
 		}
 	}
 
-	public int Execute(String command) throws Exception {
+	public int execute(String command) throws Exception {
 		Connection connection = null;
 		Statement statement = null;
 

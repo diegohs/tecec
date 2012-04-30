@@ -35,7 +35,7 @@ public class MySqlCourseRepository extends MySqlRepository implements
 			command = String.format(command, course.getPKCourse(),
 					course.getName());
 
-			super.Execute(command);
+			super.execute(command);
 		} catch (Exception e) {
 			throw new RuntimeException(
 					"Ocorreu um erro durante a inserção de um novo curso: "

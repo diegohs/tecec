@@ -23,14 +23,13 @@ public class MySqlStudentRepository extends MySqlRepository implements
 
 			if (student.getPkStudent() == null
 					|| student.getPkStudent().trim().isEmpty()) {
-				throw new IllegalArgumentException(
-						"A chave primária do estudante deve ser um UUID.");
+				student.setPkStudent(UUID.randomUUID().toString());
 			} else {
 				if (student.getPkStudent().length() != 36) {
 					throw new IllegalArgumentException(
 							"A chave primária do estudante deve ser um UUID.");
 				}
-			}
+			}			
 
 			if (student.getEmail() == null
 					|| student.getEmail().trim().isEmpty()) {
@@ -40,8 +39,8 @@ public class MySqlStudentRepository extends MySqlRepository implements
 
 			String command = " INSERT INTO Student (PkStudent, Name, Email) VALUES ('%1s, '%2s','%3s')";
 			command = String.format(command, student.getPkStudent(),
-					student.getName(), student.getName());
-			super.Execute(command);
+					student.getName(), student.getEmail());
+			super.execute(command);
 		} catch (Exception e) {
 			throw new RuntimeException(
 					"Ocorreu um erro durante a inserção de um novo estudante: "
