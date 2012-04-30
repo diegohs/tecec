@@ -1,71 +1,20 @@
 package tecec.repository.mysql.base;
 
-import java.sql.*;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.datasource.*;
+
 
 public abstract class MySqlRepository {
-	private MySqlConnectionConfig connectionConfig;
+    protected NamedParameterJdbcTemplate jdbcTemplate;
 
-	static {
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public MySqlRepository(MySqlConnectionConfig connectionConfig) {
-		this.connectionConfig = connectionConfig;
-	}
-
-	public ResultSet select(String query) throws Exception {
-		Connection connection = null;
-		Statement statement = null;
-
-		try {
-			connection = DriverManager.getConnection(
-					this.connectionConfig.getHost(),
-					this.connectionConfig.getUser(),
-					this.connectionConfig.getPassword());
-
-			statement = connection.createStatement();
-
-			return statement.executeQuery(query);
-		} catch (Exception e) {
-			throw e;
-		} finally {
-			if (connection != null) {
-				connection.close();
-			}
-
-			if (statement != null) {
-				statement.close();
-			}
-		}
-	}
-
-	public int execute(String command) throws Exception {
-		Connection connection = null;
-		Statement statement = null;
-
-		try {
-			connection = DriverManager.getConnection(
-					this.connectionConfig.getHost(),
-					this.connectionConfig.getUser(),
-					this.connectionConfig.getPassword());
-
-			statement = connection.createStatement();
-
-			return statement.executeUpdate(command);
-		} catch (Exception e) {
-			throw e;
-		} finally {
-			if (connection != null) {
-				connection.close();
-			}
-
-			if (statement != null) {
-				statement.close();
-			}
-		}
+	public MySqlRepository(MySqlConnectionConfig connectionConfig) {		
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		
+		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+		dataSource.setUrl(connectionConfig.getHost());
+		dataSource.setUsername(connectionConfig.getUser());
+		dataSource.setPassword(connectionConfig.getPassword());
+		
+		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 	}
 }

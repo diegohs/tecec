@@ -7,6 +7,7 @@ public class InjectorFactory {
 	public MutablePicoContainer CreateInjector() {
 		MutablePicoContainer container = new DefaultPicoContainer();
 
+		RegisterModel(container);
 		RegisterUI(container);
 		RegisterConfig(container);
 		RegisterRepositores(container);
@@ -14,15 +15,19 @@ public class InjectorFactory {
 
 		return container;
 	}
-	
-	private void RegisterUI(MutablePicoContainer container)
-	{
+
+	private void RegisterModel(MutablePicoContainer container) {
+		container.addComponent(tecec.contract.writer.ICourseWriter.class,
+				tecec.business.writer.CourseWriter.class);
+	}
+
+	private void RegisterUI(MutablePicoContainer container) {
 		container.addComponent(tecec.ui.NewCourseUI.class);
 	}
-	
-	private void RegisterControllers(MutablePicoContainer container)
-	{
-		container.addComponent(tecec.ui.contract.NewCourseController.class, tecec.ui.control.DefaultNewCourseController.class);
+
+	private void RegisterControllers(MutablePicoContainer container) {
+		container.addComponent(tecec.ui.contract.INewCourseController.class,
+				tecec.ui.control.NewCourseController.class);
 	}
 
 	private void RegisterConfig(MutablePicoContainer container) {
@@ -33,7 +38,7 @@ public class InjectorFactory {
 
 	private void RegisterRepositores(MutablePicoContainer container) {
 		container.addComponent(
-				tecec.contract.repository.CourseRepository.class,
+				tecec.contract.repository.ICourseRepository.class,
 				tecec.repository.mysql.MySqlCourseRepository.class);
 	}
 }

@@ -5,5 +5,13 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/tecec.contract"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/tecec.dto"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.19-bin.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.asm-3.1.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.beans-3.1.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.context-3.1.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.core-3.1.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.expression-3.1.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.jdbc-3.1.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.transaction-3.1.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

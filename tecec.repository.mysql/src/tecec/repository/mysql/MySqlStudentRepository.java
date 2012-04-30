@@ -40,7 +40,8 @@ public class MySqlStudentRepository extends MySqlRepository implements
 			String command = " INSERT INTO Student (PkStudent, Name, Email) VALUES ('%1s, '%2s','%3s')";
 			command = String.format(command, student.getPkStudent(),
 					student.getName(), student.getEmail());
-			super.execute(command);
+			
+			this.jdbcTemplate.getJdbcOperations().update(command);
 		} catch (Exception e) {
 			throw new RuntimeException(
 					"Ocorreu um erro durante a inserção de um novo estudante: "

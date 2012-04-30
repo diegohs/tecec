@@ -43,7 +43,7 @@ public class MySqlAdvisorRepository extends MySqlRepository implements
 			command = String.format(command, advisor.getPkAdvisor(),
 					advisor.getName(), advisor.getEmail());
 
-			super.execute(command);
+			this.jdbcTemplate.getJdbcOperations().update(command);
 		} catch (Exception e) {
 			throw new RuntimeException(
 					"Ocorreu um erro durante a inserção de um novo coordenador: "
