@@ -5,5 +5,4 @@ public class TececMySqlConnectionConfig extends tecec.repository.mysql.base.MySq
 	public TececMySqlConnectionConfig() {
 		super("jdbc:mysql://localhost:3306/tecec", "root", "lester");
 	}
-
 }

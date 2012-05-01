@@ -1,6 +1,7 @@
 package tecec.dto;
 
 public class Advisor {
+
 	private String pkAdvisor;
 	private String name;
 	private String email;

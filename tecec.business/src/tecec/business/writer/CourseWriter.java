@@ -63,7 +63,7 @@ public class CourseWriter implements tecec.contract.writer.ICourseWriter {
 
 		if (course != null) {
 			return new RuleViolation(
-					"Já existe outro curso cadastrado com o mesmo nome.");
+					"JÃ¡ existe outro curso cadastrado com o mesmo nome.");
 		}
 
 		return null;
@@ -75,7 +75,7 @@ public class CourseWriter implements tecec.contract.writer.ICourseWriter {
 
 		if (course == null) {
 			return new RuleViolation(
-					"O curso selecionado não existe no banco de dados.");
+					"O curso selecionado nï¿½o existe no banco de dados.");
 		}
 		
 		if (newName == null || newName.trim().isEmpty()) {
@@ -87,7 +87,7 @@ public class CourseWriter implements tecec.contract.writer.ICourseWriter {
 		if (course != null) {
 			if (!course.getPKCourse().equals(pKCourse)) {
 				return new RuleViolation(
-						"Já existe outro curso cadastrado com este nome.");
+						"Jï¿½ existe outro curso cadastrado com este nome.");
 			}
 		}
 

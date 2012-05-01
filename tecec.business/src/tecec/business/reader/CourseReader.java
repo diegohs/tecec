@@ -5,7 +5,7 @@ import java.util.List;
 import tecec.contract.repository.ICourseRepository;
 import tecec.dto.Course;
 
-public class CourseReader implements tecec.contract.reader.ICourseReader {	
+public class CourseReader implements tecec.contract.reader.ICourseReader {
 	private tecec.contract.repository.ICourseRepository courseRepository;
 
 	public CourseReader(ICourseRepository courseRepository) {

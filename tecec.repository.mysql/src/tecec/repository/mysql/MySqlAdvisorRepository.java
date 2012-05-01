@@ -1,54 +1,172 @@
 package tecec.repository.mysql;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.UUID;
 
-import tecec.contract.repository.AdvisorRepository;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+
+import tecec.contract.repository.IAdvisorRepository;
+
 import tecec.dto.Advisor;
 import tecec.repository.mysql.base.MySqlConnectionConfig;
 import tecec.repository.mysql.base.MySqlRepository;
 
 public class MySqlAdvisorRepository extends MySqlRepository implements
-		AdvisorRepository {
+		IAdvisorRepository {
 
 	public MySqlAdvisorRepository(MySqlConnectionConfig connectionConfig) {
 		super(connectionConfig);
 	}
 
-	@Override
-	public void insertAdvisor(Advisor advisor) {
-		try {
-			if (advisor.getName() == null || advisor.getName().trim().isEmpty()) {
+	private void validateAdvisor(Advisor advisor) {
+		if (advisor.getName() == null || advisor.getName().trim().isEmpty()) {
+			throw new IllegalArgumentException(
+					"O campo 'nome' do orientador n√£o pode ser nulo.");
+		}
+
+		if (advisor.getEmail() == null || advisor.getEmail().trim().isEmpty()) {
+			throw new IllegalArgumentException(
+					"O campo 'e-mail' do orientador n√£o pode ser nulo.");
+		}
+
+		if (advisor.getPkAdvisor() == null
+				|| advisor.getPkAdvisor().trim().isEmpty()) {
+			advisor.setPkAdvisor(UUID.randomUUID().toString());
+		} else {
+			if (advisor.getPkAdvisor().length() != 36) {
 				throw new IllegalArgumentException(
-						"O campo 'nome' do coordenador n„o pode ser nulo.");
+						"A chave prim√°ria do coordenador deve ser um UUID.");
 			}
-
-			if (advisor.getPkAdvisor() == null
-					|| advisor.getPkAdvisor().trim().isEmpty()) {
-				advisor.setPkAdvisor(UUID.randomUUID().toString());
-			} else {
-				if (advisor.getPkAdvisor().length() != 36) {
-					throw new IllegalArgumentException(
-							"A chave prim·ria do coordenador deve ser um UUID.");
-				}
-			}
-
-			if (advisor.getEmail() == null
-					|| advisor.getEmail().trim().isEmpty()) {
-				throw new IllegalArgumentException(
-						"O campo 'e-mail' n„o pode ser nulo.");
-			}
-
-			String command = "INSERT INTO Advisor (PkAdvisor, Name, Email) VALUES ('%1s', '%2s', '%3s')";
-
-			command = String.format(command, advisor.getPkAdvisor(),
-					advisor.getName(), advisor.getEmail());
-
-			this.jdbcTemplate.getJdbcOperations().update(command);
-		} catch (Exception e) {
-			throw new RuntimeException(
-					"Ocorreu um erro durante a inserÁ„o de um novo coordenador: "
-							+ e.getMessage(), e);
 		}
 	}
 
+	@Override
+	public void insertAdvisor(Advisor advisor) {
+		validateAdvisor(advisor);
+		String command = "INSERT INTO Advisor(PKAdvisor, Name, Email) VALUES (:pkAdvisor, :name, :email);";
+		SqlParameterSource namedParameter = new BeanPropertySqlParameterSource(
+				advisor);
+		this.jdbcTemplate.update(command, namedParameter);
+	}
+
+	@Override
+	public void updateAdvisor(Advisor advisor) {
+		String query = "UPDATE Advisor SET Name = :name, Email = :email WHERE PKAdvisor = :pkAdvisor;";
+		SqlParameterSource parameters = new BeanPropertySqlParameterSource(
+				advisor);
+		this.jdbcTemplate.update(query, parameters);
+	}
+
+	@Override
+	public Advisor getAdvisorByName(String name) {
+		String query = "SELECT * FROM Advisor WHERE Name = :name;";
+		SqlParameterSource parameters = new MapSqlParameterSource("name", name);
+
+		List<Advisor> result = this.jdbcTemplate.query(query, parameters,
+				new RowMapper<Advisor>() {
+					@Override
+					public Advisor mapRow(ResultSet arg0, int arg1)
+							throws SQLException {
+						Advisor advisor = new Advisor();
+						advisor.setName(arg0.getString("Name"));
+						advisor.setEmail(arg0.getString("Email"));
+						advisor.setPkAdvisor(arg0.getString("PKAdvisor"));
+
+						return advisor;
+					}
+				});
+
+		if (result.isEmpty()) {
+			return null;
+		} else {
+			return result.get(0);
+		}
+	}
+
+	@Override
+	public Advisor getAdvisorByPk(String pkAdvisor) {
+		String query = "SELECT * FROM Advisor WHERE PKAdvisor = :pkAdvisor;";
+		SqlParameterSource parameters = new MapSqlParameterSource("pkAdvisor",
+				pkAdvisor);
+
+		List<Advisor> result = this.jdbcTemplate.query(query, parameters,
+				new RowMapper<Advisor>() {
+					@Override
+					public Advisor mapRow(ResultSet arg0, int arg1)
+							throws SQLException {
+						Advisor advisor = new Advisor();
+						advisor.setName(arg0.getString("Name"));
+						advisor.setEmail(arg0.getString("Email"));
+						advisor.setPkAdvisor(arg0.getString("PKAdvisor"));
+
+						return advisor;
+					}
+				});
+
+		if (result.isEmpty()) {
+			return null;
+		} else {
+			return result.get(0);
+		}
+	}
+
+	@Override
+	public Advisor getAdvisorByEmail(String email) {
+		String query = "SELECT * FROM Advisor WHERE Email = :email;";
+		SqlParameterSource parameters = new MapSqlParameterSource("email",
+				email);
+
+		List<Advisor> result = this.jdbcTemplate.query(query, parameters,
+				new RowMapper<Advisor>() {
+					@Override
+					public Advisor mapRow(ResultSet arg0, int arg1)
+							throws SQLException {
+						Advisor advisor = new Advisor();
+						advisor.setName(arg0.getString("Name"));
+						advisor.setEmail(arg0.getString("Email"));
+						advisor.setPkAdvisor(arg0.getString("PKAdvisor"));
+
+						return advisor;
+					}
+				});
+
+		if (result.isEmpty()) {
+			return null;
+		} else {
+			return result.get(0);
+		}
+	}
+
+	@Override
+	public List<Advisor> getAdvisors(String nameFilter) {
+		String query = "SELECT * FROM Advisor WHERE Name Like :nameFilter;";
+
+		if (nameFilter == null)
+			nameFilter = "";
+
+		SqlParameterSource parameters = new MapSqlParameterSource("nameFilter",
+				"%" + nameFilter + "%");
+
+		List<Advisor> result = this.jdbcTemplate.query(query, parameters,
+				new RowMapper<Advisor>() {
+					@Override
+					public Advisor mapRow(ResultSet arg0, int arg1)
+							throws SQLException {
+						Advisor advisor = new Advisor();
+
+						advisor.setName(arg0.getString("Name"));
+						advisor.setEmail(arg0.getString("Email"));
+						advisor.setPkAdvisor(arg0.getString("PKAdvisor"));
+
+						return advisor;
+					}
+				});
+		return result;
+	}
 }

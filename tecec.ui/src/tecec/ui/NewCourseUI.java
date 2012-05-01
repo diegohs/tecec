@@ -1,10 +1,8 @@
 package tecec.ui;
 
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+import javax.swing.JDialog;import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.WindowConstants;
+
 import javax.swing.border.EmptyBorder;
 
 import tecec.ui.contract.INewCourseController;
@@ -23,6 +21,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class NewCourseUI extends JDialog {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private tecec.ui.contract.INewCourseController newCourseController;
 	
 	public void showUI(Container parent){		

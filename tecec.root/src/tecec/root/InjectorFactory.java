@@ -3,7 +3,6 @@ package tecec.root;
 import org.picocontainer.DefaultPicoContainer;
 import org.picocontainer.MutablePicoContainer;
 
-import tecec.root.config.TececMySqlConnectionConfig;
 
 public class InjectorFactory {
 	public MutablePicoContainer CreateInjector() {

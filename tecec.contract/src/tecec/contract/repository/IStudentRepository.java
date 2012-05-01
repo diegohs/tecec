@@ -1,0 +1,21 @@
+package tecec.contract.repository;
+
+import java.util.List;
+
+import tecec.dto.Student;
+
+public interface IStudentRepository {
+
+	void insertStudent(Student student);
+
+	void updateStudent(Student student);
+
+	Student getStudentByName(String name);
+
+	Student getStudentByPk(String pkStudent);
+
+	Student getStudentByEmail(String email);
+
+	List<Student> getStudents(String nameFilter);
+
+}

@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import net.miginfocom.swing.MigLayout;
 
-import javax.swing.JDialog;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -19,10 +19,6 @@ import java.util.List;
 import tecec.dto.Course;
 import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.SwingBindings;
-import javax.swing.border.TitledBorder;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
-import javax.swing.ListSelectionModel;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -30,6 +26,10 @@ import java.awt.event.ActionEvent;
 
 public class CourseViewerUI extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ICourseViewerController courseViewerController;
 	private NewCourseUI newCourseUI;
 	private UpdateCourseUI updateCourseUI;

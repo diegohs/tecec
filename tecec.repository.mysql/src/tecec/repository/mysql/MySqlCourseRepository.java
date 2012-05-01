@@ -1,6 +1,5 @@
 package tecec.repository.mysql;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -24,7 +23,7 @@ public class MySqlCourseRepository extends MySqlRepository implements
 	private void validateCourse(Course course) {
 		if (course.getName() == null || course.getName().trim().isEmpty()) {
 			throw new IllegalArgumentException(
-					"O campo 'nome' do curso n„o pode ser nulo.");
+					"O campo 'nome' do curso n√£o pode ser nulo.");
 		}
 
 		if (course.getPKCourse() == null
@@ -33,7 +32,7 @@ public class MySqlCourseRepository extends MySqlRepository implements
 		} else {
 			if (course.getPKCourse().length() != 36) {
 				throw new IllegalArgumentException(
-						"A chave prim·ria do curso deve ser um UUID.");
+						"A chave prim√°ria do curso deve ser um UUID.");
 			}
 		}
 	}
@@ -81,7 +80,8 @@ public class MySqlCourseRepository extends MySqlRepository implements
 	public Course getCourseByPK(String pKCourse) {
 		String query = " SELECT * FROM Course WHERE PKCourse = :pKCourse;";
 
-		SqlParameterSource parameters = new MapSqlParameterSource("pKCourse", pKCourse);
+		SqlParameterSource parameters = new MapSqlParameterSource("pKCourse",
+				pKCourse);
 
 		List<Course> result = this.jdbcTemplate.query(query, parameters,
 				new RowMapper<Course>() {
@@ -107,9 +107,10 @@ public class MySqlCourseRepository extends MySqlRepository implements
 	@Override
 	public void updateCourse(Course course) {
 		String query = "UPDATE Course SET Name = :name WHERE PKCourse = :pKCourse;";
-		
-		SqlParameterSource parameters = new BeanPropertySqlParameterSource(course);
-		
+
+		SqlParameterSource parameters = new BeanPropertySqlParameterSource(
+				course);
+
 		this.jdbcTemplate.update(query, parameters);
 	}
 
