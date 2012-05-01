@@ -22,19 +22,19 @@ public class AdvisorWriter implements IAdvisorWriter {
 		Advisor advisor = this.advisorRepository.getAdvisorByPk(pkAdvisor);
 		
 		if (advisor == null)
-			return new RuleViolation ("O coordenador selecionado não existe no banco de dados.");
+			return new RuleViolation ("O orientador selecionado não existe no banco de dados.");
 		
 		if (newName == null || newName.trim().isEmpty()) 
-			return new RuleViolation("O nome do coordenador deve ser preenchido.");
+			return new RuleViolation("O nome do orientador deve ser preenchido.");
 		
 		if (email == null || email.trim().isEmpty())
-			return new RuleViolation("O e-mail do coordenador deve ser preenchido.");
+			return new RuleViolation("O e-mail do orientador deve ser preenchido.");
 		
 		advisor = this.advisorRepository.getAdvisorByEmail(email);
 		
 		if (advisor != null) {
 			if (!advisor.getPkAdvisor().equals(pkAdvisor)) {
-				return new RuleViolation ("Já existe outro coordenador cadastrado com este e-mail.");
+				return new RuleViolation ("Já existe outro orientador cadastrado com este e-mail.");
 			}
 		}
 		
@@ -76,21 +76,21 @@ public class AdvisorWriter implements IAdvisorWriter {
 
 		if (name == null || name.trim().isEmpty()) {
 			return new RuleViolation(
-					"O nome do coordenador deve ser preenchido.");
+					"O nome do orientador deve ser preenchido.");
 		} else {
 			if (name.length() > 128) {
 				return new RuleViolation(
-						"O nome do coordenador deve ser menor que 128 caracteres.");
+						"O nome do orientador deve ser menor que 128 caracteres.");
 			}
 		}
 
 		if (email == null || email.trim().isEmpty()) {
 			return new RuleViolation(
-					"O e-mail do coordenador deve ser preenchido.");
+					"O e-mail do orientador deve ser preenchido.");
 		} else {
 			if (email.length() > 128) {
 				return new RuleViolation(
-						"O e-mail do coordenador deve ser menor que 128 caracteres.");
+						"O e-mail do orientador deve ser menor que 128 caracteres.");
 			}
 		}
 
@@ -99,14 +99,14 @@ public class AdvisorWriter implements IAdvisorWriter {
 
 		if (advisorName != null && advisorEmail != null) {
 			return new RuleViolation(
-					"Já existe outro coordenador cadastrado com o mesmo nome e e-mail.");
+					"Já existe outro orientador cadastrado com o mesmo nome e e-mail.");
 		}
 
 		/* Nao pode ter duas pessoas com o mesmo e-mail, acho que devemos permitir nome
 		 * pois eu já estudei com pessoas com nomes idênticos, acontece*/
 		if (advisorEmail != null) {
 			return new RuleViolation(
-					"Já existe outro coordenador cadastrado com o mesmo e-mail.");
+					"Já existe outro orientador cadastrado com o mesmo e-mail.");
 		}
 
 		return null;

@@ -41,7 +41,7 @@ public class MySqlAdvisorRepository extends MySqlRepository implements
 		} else {
 			if (advisor.getPkAdvisor().length() != 36) {
 				throw new IllegalArgumentException(
-						"A chave primária do coordenador deve ser um UUID.");
+						"A chave primária do orientador deve ser um UUID.");
 			}
 		}
 	}
