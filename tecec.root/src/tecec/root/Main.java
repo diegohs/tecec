@@ -15,7 +15,7 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					NewCourseUI window = container.getComponent(NewCourseUI.class);
+					CourseViewerUI window = container.getComponent(CourseViewerUI.class);
 					window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

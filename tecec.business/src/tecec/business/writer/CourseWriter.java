@@ -33,9 +33,19 @@ public class CourseWriter implements tecec.contract.writer.ICourseWriter {
 	}
 
 	@Override
-	public void updateCourse(String pKCourse, String newName) {
-		// TODO Auto-generated method stub
-
+	public void updateCourse(String pKCourse, String newName) throws RuleViolationException {
+		RuleViolation violation = getUpdateViolation(pKCourse, newName);
+		
+		if (violation != null) {
+			throw new RuleViolationException(violation);
+		}
+		
+		Course course = new Course();
+		
+		course.setPKCourse(pKCourse);
+		course.setName(newName);
+		
+		this.courseRepository.updateCourse(course);
 	}
 
 	@Override
@@ -49,11 +59,36 @@ public class CourseWriter implements tecec.contract.writer.ICourseWriter {
 			}
 		}
 
-		Course course = courseRepository.getCourse(name);
+		Course course = courseRepository.getCourseByName(name);
 
 		if (course != null) {
 			return new RuleViolation(
 					"Já existe outro curso cadastrado com o mesmo nome.");
+		}
+
+		return null;
+	}
+
+	@Override
+	public RuleViolation getUpdateViolation(String pKCourse, String newName) {
+		Course course = this.courseRepository.getCourseByPK(pKCourse);
+
+		if (course == null) {
+			return new RuleViolation(
+					"O curso selecionado não existe no banco de dados.");
+		}
+		
+		if (newName == null || newName.trim().isEmpty()) {
+			return new RuleViolation("O nome do curso deve ser preenchido.");
+		}
+
+		course = this.courseRepository.getCourseByName(newName);
+
+		if (course != null) {
+			if (!course.getPKCourse().equals(pKCourse)) {
+				return new RuleViolation(
+						"Já existe outro curso cadastrado com este nome.");
+			}
 		}
 
 		return null;

@@ -4,10 +4,10 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 import tecec.ui.contract.INewCourseController;
+import tecec.ui.contract.IUpdateCourseController;
 import tecec.contract.RuleViolation;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
@@ -22,28 +22,32 @@ import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class NewCourseUI extends JDialog {
-	private tecec.ui.contract.INewCourseController newCourseController;
+public class UpdateCourseUI extends JDialog {
+	private IUpdateCourseController updateCourseController;
 	
-	public void showUI(Container parent){		
+	public void showUI(Container parent, String pkCourse, String courseName){
+		this.updateCourseController.setPKCourse(pkCourse);
+		this.updateCourseController.setCourseName(courseName);
+		
 		this.setModal(true);
 		this.setLocationRelativeTo(parent);
 		
 		this.setVisible(true);
 	}
-	
+
 	private void storeCourse() {
 		try {
-			RuleViolation violation = this.newCourseController
-					.getCreationViolation();
+			RuleViolation violation = this.updateCourseController
+					.getUpdateViolation();
+
 			if (violation != null) {
 				JOptionPane.showMessageDialog(this, violation.getDescription(),
 						"Erro", JOptionPane.ERROR_MESSAGE);
 			} else {
-				this.newCourseController.createCourse();
+				this.updateCourseController.updateCourse();
 
 				JOptionPane.showMessageDialog(this,
-						"Curso cadastrado com sucesso.");
+						"Curso atualizado com sucesso.");
 				
 				this.setVisible(false);
 			}
@@ -56,18 +60,13 @@ public class NewCourseUI extends JDialog {
 
 	private JPanel contentPane;
 	private JTextField txtCourseName;
-	private JButton btnCreateCourse;
+	private JButton btnUpdateCourse;
 
 	/**
 	 * Create the frame.
 	 */
-	public NewCourseUI(
-			tecec.ui.contract.INewCourseController newCourseController) {
-		if (newCourseController == null) {
-			throw new IllegalArgumentException("newCourseController");
-		}
-
-		this.newCourseController = newCourseController;
+	public UpdateCourseUI(IUpdateCourseController updateCourseController) {
+		this.updateCourseController = updateCourseController;
 
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		setBounds(100, 100, 436, 245);
@@ -77,7 +76,7 @@ public class NewCourseUI extends JDialog {
 		contentPane.setLayout(new MigLayout("", "[grow][grow][grow]",
 				"[grow][][56.00][29.00][grow]"));
 
-		JLabel lblNewLabel = new JLabel("Cadastrar Novo Curso");
+		JLabel lblNewLabel = new JLabel("Atualizar Curso");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
 		contentPane.add(lblNewLabel, "cell 1 1,alignx center");
 
@@ -88,25 +87,19 @@ public class NewCourseUI extends JDialog {
 		contentPane.add(txtCourseName, "cell 1 2,growx");
 		txtCourseName.setColumns(10);
 
-		btnCreateCourse = new JButton("Cadastrar");
-		btnCreateCourse.addActionListener(new ActionListener() {
+		btnUpdateCourse = new JButton("Atualizar");
+		btnUpdateCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				storeCourse();
 			}
 		});
-		contentPane.add(btnCreateCourse, "cell 1 3,alignx center,growy");
+		contentPane.add(btnUpdateCourse, "cell 1 3,alignx center,growy");
 		initDataBindings();
 	}
-
 	protected void initDataBindings() {
-		BeanProperty<INewCourseController, String> iNewCourseControllerBeanProperty = BeanProperty
-				.create("courseName");
-		BeanProperty<JTextField, String> jTextFieldBeanProperty = BeanProperty
-				.create("text");
-		AutoBinding<INewCourseController, String, JTextField, String> autoBinding = Bindings
-				.createAutoBinding(UpdateStrategy.READ_WRITE,
-						newCourseController, iNewCourseControllerBeanProperty,
-						txtCourseName, jTextFieldBeanProperty);
+		BeanProperty<IUpdateCourseController, String> iUpdateCourseControllerBeanProperty = BeanProperty.create("courseName");
+		BeanProperty<JTextField, String> jTextFieldBeanProperty = BeanProperty.create("text");
+		AutoBinding<IUpdateCourseController, String, JTextField, String> autoBinding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, updateCourseController, iUpdateCourseControllerBeanProperty, txtCourseName, jTextFieldBeanProperty);
 		autoBinding.bind();
 	}
 }

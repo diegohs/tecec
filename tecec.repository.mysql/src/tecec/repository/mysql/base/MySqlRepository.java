@@ -5,7 +5,7 @@ import org.springframework.jdbc.datasource.*;
 
 
 public abstract class MySqlRepository {
-    protected NamedParameterJdbcTemplate jdbcTemplate;
+    protected NamedParameterJdbcTemplate jdbcTemplate;    
 
 	public MySqlRepository(MySqlConnectionConfig connectionConfig) {		
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();

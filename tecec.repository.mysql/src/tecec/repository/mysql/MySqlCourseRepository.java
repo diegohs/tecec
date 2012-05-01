@@ -51,7 +51,7 @@ public class MySqlCourseRepository extends MySqlRepository implements
 	}
 
 	@Override
-	public Course getCourse(String name) {
+	public Course getCourseByName(String name) {
 		String query = " SELECT * FROM Course WHERE Name = :name;";
 
 		SqlParameterSource parameters = new MapSqlParameterSource("name", name);
@@ -64,6 +64,34 @@ public class MySqlCourseRepository extends MySqlRepository implements
 						Course course = new Course();
 
 						course.setName(arg0.getString("Name"));
+						course.setPKCourse(arg0.getString("PKCourse"));
+
+						return course;
+					}
+				});
+
+		if (result.isEmpty()) {
+			return null;
+		} else {
+			return result.get(0);
+		}
+	}
+
+	@Override
+	public Course getCourseByPK(String pKCourse) {
+		String query = " SELECT * FROM Course WHERE PKCourse = :pKCourse;";
+
+		SqlParameterSource parameters = new MapSqlParameterSource("pKCourse", pKCourse);
+
+		List<Course> result = this.jdbcTemplate.query(query, parameters,
+				new RowMapper<Course>() {
+					@Override
+					public Course mapRow(ResultSet arg0, int arg1)
+							throws SQLException {
+						Course course = new Course();
+
+						course.setName(arg0.getString("Name"));
+						course.setPKCourse(arg0.getString("PKCourse"));
 
 						return course;
 					}
@@ -78,8 +106,39 @@ public class MySqlCourseRepository extends MySqlRepository implements
 
 	@Override
 	public void updateCourse(Course course) {
-		// TODO Auto-generated method stub
+		String query = "UPDATE Course SET Name = :name WHERE PKCourse = :pKCourse;";
+		
+		SqlParameterSource parameters = new BeanPropertySqlParameterSource(course);
+		
+		this.jdbcTemplate.update(query, parameters);
+	}
 
+	@Override
+	public List<Course> getCourses(String nameFilter) {
+		String query = " SELECT * FROM Course WHERE Name LIKE :nameFilter;";
+
+		if (nameFilter == null) {
+			nameFilter = "";
+		}
+
+		SqlParameterSource parameters = new MapSqlParameterSource("nameFilter",
+				"%" + nameFilter + "%");
+
+		List<Course> result = this.jdbcTemplate.query(query, parameters,
+				new RowMapper<Course>() {
+					@Override
+					public Course mapRow(ResultSet arg0, int arg1)
+							throws SQLException {
+						Course course = new Course();
+
+						course.setName(arg0.getString("Name"));
+						course.setPKCourse(arg0.getString("PKCourse"));
+
+						return course;
+					}
+				});
+
+		return result;
 	}
 
 }
