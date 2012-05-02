@@ -17,4 +17,9 @@ public class CourseReader implements tecec.contract.reader.ICourseReader {
 		return courseRepository.getCourses(nameFilter);
 	}
 
+	@Override
+	public Course getCourseByPK(String pKCourse) {
+		return courseRepository.getCourseByPK(pKCourse);
+	}
+
 }

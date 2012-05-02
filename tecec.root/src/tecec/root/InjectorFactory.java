@@ -3,7 +3,6 @@ package tecec.root;
 import org.picocontainer.DefaultPicoContainer;
 import org.picocontainer.MutablePicoContainer;
 
-
 public class InjectorFactory {
 	public MutablePicoContainer CreateInjector() {
 		MutablePicoContainer container = new DefaultPicoContainer();
@@ -26,19 +25,27 @@ public class InjectorFactory {
 	}
 
 	private void RegisterUI(MutablePicoContainer container) {
-		container.addComponent(tecec.ui.NewCourseUI.class);
-		container.addComponent(tecec.ui.CourseViewerUI.class);
-		container.addComponent(tecec.ui.UpdateCourseUI.class);
+		container.addComponent(tecec.ui.contract.view.INewCourseUI.class,
+				tecec.ui.NewCourseUI.class);
+
+		container.addComponent(tecec.ui.contract.view.ICouseViewerUI.class,
+				tecec.ui.CourseViewerUI.class);
+
+		container.addComponent(tecec.ui.contract.view.IUpdateCourseUI.class,
+				tecec.ui.UpdateCourseUI.class);
 	}
 
 	private void RegisterControllers(MutablePicoContainer container) {
-		container.addComponent(tecec.ui.contract.INewCourseController.class,
+		container.addComponent(
+				tecec.ui.contract.control.INewCourseController.class,
 				tecec.ui.control.NewCourseController.class);
 
-		container.addComponent(tecec.ui.contract.ICourseViewerController.class,
+		container.addComponent(
+				tecec.ui.contract.control.ICourseViewerController.class,
 				tecec.ui.control.CourseViewerController.class);
 
-		container.addComponent(tecec.ui.contract.IUpdateCourseController.class,
+		container.addComponent(
+				tecec.ui.contract.control.IUpdateCourseController.class,
 				tecec.ui.control.UpdateCourseController.class);
 	}
 

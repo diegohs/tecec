@@ -1,16 +1,16 @@
 package tecec.ui;
 
+
 import javax.swing.JDialog;import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
 import javax.swing.border.EmptyBorder;
 
-import tecec.ui.contract.INewCourseController;
+import tecec.ui.contract.control.INewCourseController;
+import tecec.ui.contract.view.INewCourseUI;
 import tecec.contract.RuleViolation;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 
-import java.awt.Container;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -20,18 +20,12 @@ import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class NewCourseUI extends JDialog {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private tecec.ui.contract.INewCourseController newCourseController;
-	
-	public void showUI(Container parent){		
-		this.setModal(true);
-		this.setLocationRelativeTo(parent);
+public class NewCourseUI extends JDialog implements INewCourseUI {
+	private tecec.ui.contract.control.INewCourseController newCourseController;
 		
-		this.setVisible(true);
+	@Override
+	public void setVisible(boolean visible){
+		super.setVisible(visible);
 	}
 	
 	private void storeCourse() {
@@ -43,9 +37,6 @@ public class NewCourseUI extends JDialog {
 						"Erro", JOptionPane.ERROR_MESSAGE);
 			} else {
 				this.newCourseController.createCourse();
-
-				JOptionPane.showMessageDialog(this,
-						"Curso cadastrado com sucesso.");
 				
 				this.setVisible(false);
 			}
@@ -64,13 +55,15 @@ public class NewCourseUI extends JDialog {
 	 * Create the frame.
 	 */
 	public NewCourseUI(
-			tecec.ui.contract.INewCourseController newCourseController) {
+			tecec.ui.contract.control.INewCourseController newCourseController) {
 		if (newCourseController == null) {
 			throw new IllegalArgumentException("newCourseController");
 		}
 
 		this.newCourseController = newCourseController;
 
+		setLocationByPlatform(true);
+		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		setBounds(100, 100, 436, 245);
 		contentPane = new JPanel();

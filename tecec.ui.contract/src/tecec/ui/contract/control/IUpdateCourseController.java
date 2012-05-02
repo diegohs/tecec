@@ -1,4 +1,4 @@
-package tecec.ui.contract;
+package tecec.ui.contract.control;
 
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;

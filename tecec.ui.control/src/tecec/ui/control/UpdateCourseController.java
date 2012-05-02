@@ -2,22 +2,32 @@ package tecec.ui.control;
 
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
+import tecec.contract.reader.ICourseReader;
 import tecec.contract.writer.ICourseWriter;
-import tecec.ui.contract.IUpdateCourseController;
+import tecec.dto.Course;
+import tecec.ui.contract.control.IUpdateCourseController;
 
 public class UpdateCourseController extends BaseController implements IUpdateCourseController {
 
 	private String pKCourse;
 	private String courseName;
 	private ICourseWriter courseWriter;
+	private ICourseReader courseReader;
 	
-	public UpdateCourseController(ICourseWriter courseWriter) {
+	public UpdateCourseController(ICourseWriter courseWriter, ICourseReader courseReader) {
 		this.courseWriter = courseWriter;
+		this.courseReader = courseReader;
 	}
 	
 	@Override
 	public void setPKCourse(String pKCourse) {
 		this.pKCourse = pKCourse;
+		
+		Course course = this.courseReader.getCourseByPK(pKCourse);
+		
+		if (course != null) {
+			this.setCourseName(course.getName());
+		}
 	}
 
 	@Override

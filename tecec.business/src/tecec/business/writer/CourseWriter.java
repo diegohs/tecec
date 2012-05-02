@@ -94,4 +94,9 @@ public class CourseWriter implements tecec.contract.writer.ICourseWriter {
 		return null;
 	}
 
+	@Override
+	public void deleteCourse(String pKCourse) {
+		this.courseRepository.deleteCourse(pKCourse);
+	}
+
 }

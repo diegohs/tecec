@@ -1,4 +1,4 @@
-package tecec.ui.contract;
+package tecec.ui.contract.control;
 
 import java.util.List;
 
@@ -11,4 +11,12 @@ public interface ICourseViewerController {
 	void setSelectedCourse(Course course);
 	Course getSelectedCourse();
 	List<Course> getCourses();
+	
+	void deleteCourse();
+	
+	boolean getCanUpdateCourse();
+	boolean getCanDeleteCourse();
+	
+	void showNewCourseUI();
+	void showUpdateCourseUI();
 }

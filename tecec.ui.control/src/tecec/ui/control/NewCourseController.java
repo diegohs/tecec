@@ -5,7 +5,8 @@ import tecec.contract.RuleViolationException;
 import tecec.contract.writer.ICourseWriter;
 
 public class NewCourseController extends BaseController implements
-		tecec.ui.contract.INewCourseController {
+		tecec.ui.contract.control.INewCourseController {
+	
 	private ICourseWriter courseWriter;
 	private String courseName;
 

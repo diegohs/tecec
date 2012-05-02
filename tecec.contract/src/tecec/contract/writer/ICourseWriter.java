@@ -9,7 +9,7 @@ public interface ICourseWriter {
 	RuleViolation getUpdateViolation(String pKCourse, String newName);
 
 	void createCourse(String name) throws RuleViolationException;
-
 	void updateCourse(String pKCourse, String newName)
 			throws RuleViolationException;
+	void deleteCourse(String pKCourse);
 }

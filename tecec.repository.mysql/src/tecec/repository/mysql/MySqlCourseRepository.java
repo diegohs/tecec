@@ -11,7 +11,8 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
 import tecec.dto.Course;
-import tecec.repository.mysql.base.*;
+import tecec.repository.mysql.base.MySqlConnectionConfig;
+import tecec.repository.mysql.base.MySqlRepository;
 
 public class MySqlCourseRepository extends MySqlRepository implements
 		tecec.contract.repository.ICourseRepository {
@@ -45,6 +46,16 @@ public class MySqlCourseRepository extends MySqlRepository implements
 
 		SqlParameterSource namedParameter = new BeanPropertySqlParameterSource(
 				course);
+
+		this.jdbcTemplate.update(command, namedParameter);
+	}
+
+	@Override
+	public void deleteCourse(String pKCourse) {
+		String command = " DELETE FROM Course WHERE PKCourse = :pKCourse;";
+
+		SqlParameterSource namedParameter = new MapSqlParameterSource(
+				"pKCourse", pKCourse);
 
 		this.jdbcTemplate.update(command, namedParameter);
 	}

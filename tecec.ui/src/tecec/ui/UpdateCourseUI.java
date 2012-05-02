@@ -1,42 +1,41 @@
 package tecec.ui;
 
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import tecec.ui.contract.IUpdateCourseController;
 import tecec.contract.RuleViolation;
 import net.miginfocom.swing.MigLayout;
-import javax.swing.JLabel;
 
-import java.awt.Container;
-import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import org.jdesktop.beansbinding.*;
+import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
+import org.jdesktop.beansbinding.BeanProperty;
+import org.jdesktop.beansbinding.Bindings;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import tecec.ui.contract.control.IUpdateCourseController;
+import tecec.ui.contract.view.IUpdateCourseUI;
 
-public class UpdateCourseUI extends JDialog {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class UpdateCourseUI extends JDialog implements IUpdateCourseUI {
 	private IUpdateCourseController updateCourseController;
-	
-	public void showUI(Container parent, String pkCourse, String courseName){
-		this.updateCourseController.setPKCourse(pkCourse);
-		this.updateCourseController.setCourseName(courseName);
-		
-		this.setModal(true);
-		this.setLocationRelativeTo(parent);
-		
-		this.setVisible(true);
-	}
 
+	@Override
+	public void setpKCourse(String pKCourse) {
+		this.updateCourseController.setPKCourse(pKCourse);
+	}
+	
+	@Override
+	public void setVisible(boolean visible){
+		super.setVisible(visible);
+	}
+	
 	private void storeCourse() {
 		try {
 			RuleViolation violation = this.updateCourseController
@@ -47,9 +46,6 @@ public class UpdateCourseUI extends JDialog {
 						"Erro", JOptionPane.ERROR_MESSAGE);
 			} else {
 				this.updateCourseController.updateCourse();
-
-				JOptionPane.showMessageDialog(this,
-						"Curso atualizado com sucesso.");
 				
 				this.setVisible(false);
 			}
@@ -70,6 +66,7 @@ public class UpdateCourseUI extends JDialog {
 	public UpdateCourseUI(IUpdateCourseController updateCourseController) {
 		this.updateCourseController = updateCourseController;
 
+		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		setBounds(100, 100, 436, 245);
 		contentPane = new JPanel();
