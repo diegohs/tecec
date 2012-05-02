@@ -2,16 +2,16 @@ package tecec.dto;
 
 public class Advisor {
 
-	private String pkAdvisor;
+	private String pKAdvisor;
 	private String name;
 	private String email;
 
-	public String getPkAdvisor() {
-		return pkAdvisor;
+	public String getPKAdvisor() {
+		return pKAdvisor;
 	}
 
-	public void setPkAdvisor(String pkAdvisor) {
-		this.pkAdvisor = pkAdvisor;
+	public void setPKAdvisor(String pkAdvisor) {
+		this.pKAdvisor = pkAdvisor;
 	}
 
 	public String getName() {
