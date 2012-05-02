@@ -49,7 +49,7 @@ public class MySqlAdvisorRepository extends MySqlRepository implements
 	@Override
 	public void insertAdvisor(Advisor advisor) {
 		validateAdvisor(advisor);
-		String command = "INSERT INTO Advisor(PKAdvisor, Name, Email) VALUES (:pkAdvisor, :name, :email);";
+		String command = "INSERT INTO Advisor(PKAdvisor, Name, Email) VALUES (:pKAdvisor, :name, :email);";
 		SqlParameterSource namedParameter = new BeanPropertySqlParameterSource(
 				advisor);
 		this.jdbcTemplate.update(command, namedParameter);
@@ -57,7 +57,7 @@ public class MySqlAdvisorRepository extends MySqlRepository implements
 
 	@Override
 	public void updateAdvisor(Advisor advisor) {
-		String query = "UPDATE Advisor SET Name = :name, Email = :email WHERE PKAdvisor = :pkAdvisor;";
+		String query = "UPDATE Advisor SET Name = :name, Email = :email WHERE PKAdvisor = :pKAdvisor;";
 		SqlParameterSource parameters = new BeanPropertySqlParameterSource(
 				advisor);
 		this.jdbcTemplate.update(query, parameters);
@@ -91,8 +91,8 @@ public class MySqlAdvisorRepository extends MySqlRepository implements
 
 	@Override
 	public Advisor getAdvisorByPk(String pkAdvisor) {
-		String query = "SELECT * FROM Advisor WHERE PKAdvisor = :pkAdvisor;";
-		SqlParameterSource parameters = new MapSqlParameterSource("pkAdvisor",
+		String query = "SELECT * FROM Advisor WHERE PKAdvisor = :pKAdvisor;";
+		SqlParameterSource parameters = new MapSqlParameterSource("pKAdvisor",
 				pkAdvisor);
 
 		List<Advisor> result = this.jdbcTemplate.query(query, parameters,
@@ -145,7 +145,7 @@ public class MySqlAdvisorRepository extends MySqlRepository implements
 
 	@Override
 	public List<Advisor> getAdvisors(String nameFilter) {
-		String query = "SELECT * FROM Advisor WHERE Name Like :nameFilter;";
+		String query = "SELECT * FROM Advisor WHERE Name LIKE :nameFilter;";
 
 		if (nameFilter == null)
 			nameFilter = "";
@@ -172,9 +172,9 @@ public class MySqlAdvisorRepository extends MySqlRepository implements
 
 	@Override
 	public void deleteAdvisor(String pkAdvisor) {
-		String command = " DELETE FROM Advisor WHERE PKAdvisor = :pkAdvisor;";
+		String command = " DELETE FROM Advisor WHERE PKAdvisor = :pKAdvisor;";
 		SqlParameterSource namedParameter = new MapSqlParameterSource(
-				"pkAdvisor", pkAdvisor);
+				"pKAdvisor", pkAdvisor);
 		this.jdbcTemplate.update(command, namedParameter);		
 	}
 }

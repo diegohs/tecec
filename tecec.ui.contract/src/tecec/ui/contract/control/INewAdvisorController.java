@@ -4,13 +4,13 @@ import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
 
 public interface INewAdvisorController {
-	String getAdvisorName ();
+	String getAdvisorName();
 	void setAdvisorName (String name);
 	
-	String getAdvisorEmail ();
+	String getAdvisorEmail();
 	void setAdvisorEmail (String email);
 	
-	void createAdvisor () throws RuleViolationException;
+	void createAdvisor() throws RuleViolationException;
 	RuleViolation getCreationViolation();
 }
 

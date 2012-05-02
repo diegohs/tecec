@@ -39,7 +39,7 @@ public class NewAdvisorController extends BaseController implements
 
 	@Override
 	public void setAdvisorEmail(String email) {
-		String oldValue = getAdvisorName();
+		String oldValue = getAdvisorEmail();
 		this.advisorEmail = email;
 		notifyOfPropertyChange("advisorEmail", oldValue, email);		
 	}
@@ -55,7 +55,7 @@ public class NewAdvisorController extends BaseController implements
 		advisorWriter.createAdvisor(this.advisorName, this.advisorEmail);
 
 		setAdvisorName("");
-		
+		setAdvisorEmail("");
 	}
 
 	@Override

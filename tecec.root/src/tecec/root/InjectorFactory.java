@@ -22,6 +22,14 @@ public class InjectorFactory {
 
 		container.addComponent(tecec.contract.reader.ICourseReader.class,
 				tecec.business.reader.CourseReader.class);
+
+		container.addComponent(tecec.contract.writer.IAdvisorWriter.class,
+				tecec.business.writer.AdvisorWriter.class);
+
+		container.addComponent(tecec.contract.reader.IAdvisorReader.class,
+				tecec.business.reader.AdvisorReader.class);
+		
+		// fazer para student
 	}
 
 	private void RegisterUI(MutablePicoContainer container) {
@@ -33,6 +41,15 @@ public class InjectorFactory {
 
 		container.addComponent(tecec.ui.contract.view.IUpdateCourseUI.class,
 				tecec.ui.UpdateCourseUI.class);
+
+		container.addComponent(tecec.ui.contract.view.INewAdvisorUI.class,
+				tecec.ui.NewAdvisorUI.class);		
+
+		container.addComponent(tecec.ui.contract.view.IAdvisorViewerUI.class,
+				tecec.ui.AdvisorViewerUI.class);
+		
+		container.addComponent(tecec.ui.contract.view.IUpdateAdvisorUI.class,
+				tecec.ui.UpdateAdvisorUI.class);
 	}
 
 	private void RegisterControllers(MutablePicoContainer container) {
@@ -47,6 +64,14 @@ public class InjectorFactory {
 		container.addComponent(
 				tecec.ui.contract.control.IUpdateCourseController.class,
 				tecec.ui.control.UpdateCourseController.class);
+
+		container.addComponent(
+				tecec.ui.contract.control.INewAdvisorController.class,
+				tecec.ui.control.NewAdvisorController.class);
+
+		container.addComponent(
+				tecec.ui.contract.control.IAdvisorViewerController.class,
+				tecec.ui.control.AdvisorViewerController.class);
 	}
 
 	private void RegisterConfig(MutablePicoContainer container) {
@@ -59,5 +84,9 @@ public class InjectorFactory {
 		container.addComponent(
 				tecec.contract.repository.ICourseRepository.class,
 				tecec.repository.mysql.MySqlCourseRepository.class);
+
+		container.addComponent(
+				tecec.contract.repository.IAdvisorRepository.class,
+				tecec.repository.mysql.MySqlAdvisorRepository.class);
 	}
 }

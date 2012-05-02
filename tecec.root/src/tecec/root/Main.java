@@ -4,7 +4,7 @@ import java.awt.EventQueue;
 
 import org.picocontainer.MutablePicoContainer;
 
-import tecec.ui.contract.view.ICourseViewerUI;
+import tecec.ui.contract.view.*;
 
 public class Main {
 	
@@ -16,7 +16,8 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ICourseViewerUI window = container.getComponent(ICourseViewerUI.class);
+					IAdvisorViewerUI window = container.getComponent(IAdvisorViewerUI.class);
+					
 					window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
