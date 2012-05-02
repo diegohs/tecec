@@ -2,8 +2,14 @@ package tecec.ui.control;
 
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
+import tecec.contract.reader.IStudentReader;
+import tecec.contract.reader.ICourseReader;
 import tecec.contract.writer.IStudentWriter;
-import tecec.ui.contract.IUpdateStudentController;
+import tecec.contract.writer.ICourseWriter;
+import tecec.dto.Student;
+import tecec.dto.Course;
+import tecec.ui.contract.control.IUpdateStudentController;
+import tecec.ui.contract.control.IUpdateCourseController;
 
 public class UpdateStudentController extends BaseController implements
 		IUpdateStudentController {
@@ -12,22 +18,30 @@ public class UpdateStudentController extends BaseController implements
 	private String studentName;
 	private String studentEmail;
 	private IStudentWriter studentWriter;
+	private IStudentReader studentReader;
 
-	public UpdateStudentController(IStudentWriter studentWriter) {
+	public UpdateStudentController(IStudentWriter studentWriter,
+			IStudentReader studentReader) {
 		this.studentWriter = studentWriter;
+		this.studentReader = studentReader;
 	}
 
 	@Override
 	public void setPKStudent(String pkStudent) {
 		this.pkStudent = pkStudent;
-
+		Student student = this.studentReader.getStudentByPk(pkStudent);
+		if (student != null)
+			this.setStudentName(student.getName());
 	}
 
 	@Override
 	public void setStudentName(String name) {
 		String old = this.studentName;
+
 		this.studentName = name;
+
 		super.notifyOfPropertyChange("studentName", old, name);
+
 	}
 
 	@Override
@@ -48,12 +62,12 @@ public class UpdateStudentController extends BaseController implements
 	}
 
 	@Override
-	public void updateCourse() throws RuleViolationException {
+	public void updateStudent() throws RuleViolationException {
 		RuleViolation violation = getUpdateViolation();
 
-		if (violation != null)
+		if (violation != null) {
 			throw new RuleViolationException(violation);
-
+		}
 		this.studentWriter.updateStudent(this.pkStudent, this.studentName,
 				this.studentEmail);
 

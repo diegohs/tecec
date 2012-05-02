@@ -5,10 +5,11 @@ import java.util.List;
 import tecec.dto.Student;
 
 public interface IStudentRepository {
-
 	void insertStudent(Student student);
 
 	void updateStudent(Student student);
+
+	void deleteStudent(String pkStudent);
 
 	Student getStudentByName(String name);
 

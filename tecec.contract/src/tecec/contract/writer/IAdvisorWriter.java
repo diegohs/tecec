@@ -13,5 +13,7 @@ public interface IAdvisorWriter {
 
 	void updateAdvisor(String pkAdvisor, String newName, String email)
 			throws RuleViolationException;
+	
+	void deleteAdvisor (String pkAdvisor);	
 
 }

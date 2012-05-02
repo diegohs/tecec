@@ -169,4 +169,12 @@ public class MySqlAdvisorRepository extends MySqlRepository implements
 				});
 		return result;
 	}
+
+	@Override
+	public void deleteAdvisor(String pkAdvisor) {
+		String command = " DELETE FROM Advisor WHERE PKAdvisor = :pkAdvisor;";
+		SqlParameterSource namedParameter = new MapSqlParameterSource(
+				"pkAdvisor", pkAdvisor);
+		this.jdbcTemplate.update(command, namedParameter);		
+	}
 }

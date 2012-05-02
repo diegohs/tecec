@@ -18,4 +18,9 @@ public class AdvisorReader implements IAdvisorReader {
 		return advisorRepository.getAdvisors(nameFilter);
 	}
 
+	@Override
+	public Advisor getAdvisorByPk(String pkAdvisor) {
+		return advisorRepository.getAdvisorByPk(pkAdvisor);
+	}
+
 }

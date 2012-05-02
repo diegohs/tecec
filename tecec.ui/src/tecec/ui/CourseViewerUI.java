@@ -15,7 +15,6 @@ import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
 
-import javax.swing.JOptionPane;
 
 import org.jdesktop.beansbinding.BeanProperty;
 
@@ -27,10 +26,10 @@ import org.jdesktop.swingbinding.SwingBindings;
 
 import tecec.dto.Course;
 import tecec.ui.contract.control.ICourseViewerController;
-import tecec.ui.contract.view.ICouseViewerUI;
+import tecec.ui.contract.view.ICourseViewerUI;
 import javax.swing.ListSelectionModel;
 
-public class CourseViewerUI extends JFrame implements ICouseViewerUI {
+public class CourseViewerUI extends JFrame implements ICourseViewerUI {
 	
 	/**
 	 * 

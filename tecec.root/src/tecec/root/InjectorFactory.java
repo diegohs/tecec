@@ -28,7 +28,7 @@ public class InjectorFactory {
 		container.addComponent(tecec.ui.contract.view.INewCourseUI.class,
 				tecec.ui.NewCourseUI.class);
 
-		container.addComponent(tecec.ui.contract.view.ICouseViewerUI.class,
+		container.addComponent(tecec.ui.contract.view.ICourseViewerUI.class,
 				tecec.ui.CourseViewerUI.class);
 
 		container.addComponent(tecec.ui.contract.view.IUpdateCourseUI.class,

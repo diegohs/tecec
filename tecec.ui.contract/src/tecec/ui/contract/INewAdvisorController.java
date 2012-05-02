@@ -12,4 +12,5 @@ public interface INewAdvisorController {
 	
 	void createAdvisor () throws RuleViolationException;
 	RuleViolation getCreationViolation();
+
 }

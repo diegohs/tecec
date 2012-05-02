@@ -112,4 +112,9 @@ public class AdvisorWriter implements IAdvisorWriter {
 		return null;
 	}
 
+	@Override
+	public void deleteAdvisor(String pkAdvisor) {
+		this.advisorRepository.deleteAdvisor(pkAdvisor);		
+	}
+
 }

@@ -1,5 +1,5 @@
 package tecec.ui.contract.view;
 
-public interface ICouseViewerUI {
+public interface ICourseViewerUI {
 	void setVisible(boolean visible);
 }

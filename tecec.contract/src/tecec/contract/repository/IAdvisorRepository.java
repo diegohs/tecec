@@ -9,6 +9,8 @@ public interface IAdvisorRepository {
 
 	void updateAdvisor(Advisor advisor);
 
+	void deleteAdvisor(String pkAdvisor);
+
 	Advisor getAdvisorByName(String name);
 
 	Advisor getAdvisorByPk(String pkAdvisor);
@@ -16,4 +18,5 @@ public interface IAdvisorRepository {
 	Advisor getAdvisorByEmail(String email);
 
 	List<Advisor> getAdvisors(String nameFilter);
+
 }

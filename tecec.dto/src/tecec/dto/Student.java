@@ -5,11 +5,11 @@ public class Student {
 	private String name;
 	private String email;
 
-	public String getPkStudent() {
+	public String getPKStudent() {
 		return pkStudent;
 	}
 
-	public void setPkStudent(String pkStudent) {
+	public void setPKStudent(String pkStudent) {
 		this.pkStudent = pkStudent;
 	}
 

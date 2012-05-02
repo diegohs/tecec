@@ -33,7 +33,7 @@ public class StudentWriter implements IStudentWriter {
 		student = this.studentRepository.getStudentByEmail(email);
 		
 		if (student != null) {
-			if (!student.getPkStudent().equals(pkStudent)) {
+			if (!student.getPKStudent().equals(pkStudent)) {
 				return new RuleViolation ("Já existe outro estudante cadastrado com este e-mail.");
 			}
 		}
@@ -50,7 +50,7 @@ public class StudentWriter implements IStudentWriter {
 			throw new RuleViolationException (violation);
 		
 		Student student = new Student ();
-		student.setPkStudent(pkStudent);
+		student.setPKStudent(pkStudent);
 		student.setName(newName);
 		student.setEmail(email);
 		
@@ -110,6 +110,11 @@ public class StudentWriter implements IStudentWriter {
 		}
 
 		return null;
+	}
+
+	@Override
+	public void deleteStudent(String pkStudent) {
+		this.studentRepository.deleteStudent(pkStudent);		
 	}
 
 }

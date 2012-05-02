@@ -13,5 +13,7 @@ public interface IStudentWriter {
 
 	void updateStudent(String pkStudent, String newName, String email)
 			throws RuleViolationException;
+	
+	void deleteStudent (String pkStudent);	
 
 }

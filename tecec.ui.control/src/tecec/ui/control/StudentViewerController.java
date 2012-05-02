@@ -3,24 +3,35 @@ package tecec.ui.control;
 import java.util.List;
 
 import tecec.contract.reader.IStudentReader;
+import tecec.contract.writer.IStudentWriter;
 import tecec.dto.Student;
-import tecec.ui.contract.IStudentViewerController;
+import tecec.ui.contract.control.IStudentViewerController;
+import tecec.ui.contract.view.INewStudentUI;
+import tecec.ui.contract.view.IUpdateStudentUI;
 
-public class StudentViewerController extends BaseController implements IStudentViewerController{
+public class StudentViewerController  extends BaseController implements IStudentViewerController{
 
 	private String nameFilter;
 	private Student selectedStudent;
-	private IStudentReader studentReader;
 	
-	public StudentViewerController (IStudentReader studentReader) {
+	private IStudentReader studentReader;
+	private IStudentWriter studentWriter;	
+	private INewStudentUI newStudentUI;
+	private IUpdateStudentUI updateStudentUI;
+	
+	public StudentViewerController (IStudentReader studentReader, IStudentWriter studentWriter, 
+			INewStudentUI newStudentUI, IUpdateStudentUI updateAdviorUI) {
 		this.studentReader = studentReader;
+		this.studentWriter = studentWriter;
+		this.newStudentUI = newStudentUI;
+		this.updateStudentUI = updateAdviorUI;
 	}
 	
 	@Override
 	public void setNameFilter(String nameFilter) {
-		String old = this.nameFilter;
+		String old = this.nameFilter;		
 		this.nameFilter = nameFilter;
-		super.notifyOfPropertyChange("nameFilter", old, nameFilter);
+		super.notifyOfPropertyChange("nameFilter", old, nameFilter);		
 		super.notifyOfPropertyChange("students", null, getStudents());		
 	}
 
@@ -31,9 +42,11 @@ public class StudentViewerController extends BaseController implements IStudentV
 
 	@Override
 	public void setSelectedStudent(Student student) {
-		Student old = this.selectedStudent;
-		this.selectedStudent = student;		
-		super.notifyOfPropertyChange("selectedStudent", old, student);		
+		Student old = this.selectedStudent;		
+		this.selectedStudent = student;
+		super.notifyOfPropertyChange("selectedStudent", old, student);
+		super.notifyOfPropertyChange("canUpdateStudent", old, student);
+		super.notifyOfPropertyChange("canDeleteStudent", old, student);		
 	}
 
 	@Override
@@ -43,8 +56,38 @@ public class StudentViewerController extends BaseController implements IStudentV
 
 	@Override
 	public List<Student> getStudents() {
-		List <Student> students = this.studentReader.getStudents(this.nameFilter);
+		List<Student> students = this.studentReader.getStudents(this.nameFilter);		
 		return students;
 	}
-	
+
+	@Override
+	public void deleteStudent() {
+		this.studentWriter.deleteStudent(this.selectedStudent.getPKStudent());			
+		super.notifyOfPropertyChange("students", null, getStudents());
+		
+	}
+
+	@Override
+	public boolean getCanUpdateStudent() {
+		return this.selectedStudent != null;
+	}
+
+	@Override
+	public boolean getCanDeleteStudent() {
+		return this.selectedStudent != null;
+	}
+
+	@Override
+	public void showNewStudentUI() {
+		this.newStudentUI.setVisible(true);		
+		super.notifyOfPropertyChange("students", null, getStudents());			
+	}
+
+	@Override
+	public void showUpdateStudentUI() {
+		this.updateStudentUI.setpkStudent(this.selectedStudent.getPKStudent());
+		this.updateStudentUI.setVisible(true);		
+		super.notifyOfPropertyChange("students", null, getStudents());		
+	}
+
 }

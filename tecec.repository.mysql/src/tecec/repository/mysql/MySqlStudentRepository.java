@@ -27,21 +27,21 @@ public class MySqlStudentRepository extends MySqlRepository implements
 	private void validateStudent(Student student) {
 		if (student.getName() == null || student.getName().trim().isEmpty()) {
 			throw new IllegalArgumentException(
-					"O campo 'nome' do aluno não pode ser nulo.");
+					"O campo 'nome' do estudante não pode ser nulo.");
 		}
 
 		if (student.getEmail() == null || student.getEmail().trim().isEmpty()) {
 			throw new IllegalArgumentException(
-					"O campo 'e-mail' do aluno não pode ser nulo.");
+					"O campo 'e-mail' do estudante não pode ser nulo.");
 		}
 
-		if (student.getPkStudent() == null
-				|| student.getPkStudent().trim().isEmpty()) {
-			student.setPkStudent(UUID.randomUUID().toString());
+		if (student.getPKStudent() == null
+				|| student.getPKStudent().trim().isEmpty()) {
+			student.setPKStudent(UUID.randomUUID().toString());
 		} else {
-			if (student.getPkStudent().length() != 36) {
+			if (student.getPKStudent().length() != 36) {
 				throw new IllegalArgumentException(
-						"A chave primária do aluno deve ser um UUID.");
+						"A chave primária do estudante deve ser um UUID.");
 			}
 		}
 	}
@@ -76,7 +76,7 @@ public class MySqlStudentRepository extends MySqlRepository implements
 						Student student = new Student();
 						student.setName(arg0.getString("Name"));
 						student.setEmail(arg0.getString("Email"));
-						student.setPkStudent(arg0.getString("PKStudent"));
+						student.setPKStudent(arg0.getString("PKStudent"));
 
 						return student;
 					}
@@ -103,7 +103,7 @@ public class MySqlStudentRepository extends MySqlRepository implements
 						Student student = new Student();
 						student.setName(arg0.getString("Name"));
 						student.setEmail(arg0.getString("Email"));
-						student.setPkStudent(arg0.getString("PKStudent"));
+						student.setPKStudent(arg0.getString("PKStudent"));
 
 						return student;
 					}
@@ -130,7 +130,7 @@ public class MySqlStudentRepository extends MySqlRepository implements
 						Student student = new Student();
 						student.setName(arg0.getString("Name"));
 						student.setEmail(arg0.getString("Email"));
-						student.setPkStudent(arg0.getString("PKStudent"));
+						student.setPKStudent(arg0.getString("PKStudent"));
 
 						return student;
 					}
@@ -162,11 +162,19 @@ public class MySqlStudentRepository extends MySqlRepository implements
 
 						student.setName(arg0.getString("Name"));
 						student.setEmail(arg0.getString("Email"));
-						student.setPkStudent(arg0.getString("PKStudent"));
+						student.setPKStudent(arg0.getString("PKStudent"));
 
 						return student;
 					}
 				});
 		return result;
+	}
+
+	@Override
+	public void deleteStudent(String pkStudent) {
+		String command = " DELETE FROM Student WHERE PKStudent = :pkStudent;";
+		SqlParameterSource namedParameter = new MapSqlParameterSource(
+				"pkStudent", pkStudent);
+		this.jdbcTemplate.update(command, namedParameter);		
 	}
 }

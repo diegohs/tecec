@@ -2,8 +2,14 @@ package tecec.ui.control;
 
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
+import tecec.contract.reader.IAdvisorReader;
+import tecec.contract.reader.ICourseReader;
 import tecec.contract.writer.IAdvisorWriter;
-import tecec.ui.contract.IUpdateAdvisorController;
+import tecec.contract.writer.ICourseWriter;
+import tecec.dto.Advisor;
+import tecec.dto.Course;
+import tecec.ui.contract.control.IUpdateAdvisorController;
+import tecec.ui.contract.control.IUpdateCourseController;
 
 public class UpdateAdvisorController extends BaseController implements
 		IUpdateAdvisorController {
@@ -12,22 +18,30 @@ public class UpdateAdvisorController extends BaseController implements
 	private String advisorName;
 	private String advisorEmail;
 	private IAdvisorWriter advisorWriter;
+	private IAdvisorReader advisorReader;
 
-	public UpdateAdvisorController(IAdvisorWriter advisorWriter) {
+	public UpdateAdvisorController(IAdvisorWriter advisorWriter,
+			IAdvisorReader advisorReader) {
 		this.advisorWriter = advisorWriter;
+		this.advisorReader = advisorReader;
 	}
 
 	@Override
 	public void setPKAdvisor(String pkAdvisor) {
 		this.pkAdvisor = pkAdvisor;
-
+		Advisor advisor = this.advisorReader.getAdvisorByPk(pkAdvisor);
+		if (advisor != null)
+			this.setAdvisorName(advisor.getName());
 	}
 
 	@Override
 	public void setAdvisorName(String name) {
 		String old = this.advisorName;
+
 		this.advisorName = name;
+
 		super.notifyOfPropertyChange("advisorName", old, name);
+
 	}
 
 	@Override
@@ -48,12 +62,12 @@ public class UpdateAdvisorController extends BaseController implements
 	}
 
 	@Override
-	public void updateCourse() throws RuleViolationException {
+	public void updateAdvisor() throws RuleViolationException {
 		RuleViolation violation = getUpdateViolation();
 
-		if (violation != null)
+		if (violation != null) {
 			throw new RuleViolationException(violation);
-
+		}
 		this.advisorWriter.updateAdvisor(this.pkAdvisor, this.advisorName,
 				this.advisorEmail);
 

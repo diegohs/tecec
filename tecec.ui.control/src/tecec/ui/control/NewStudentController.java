@@ -3,14 +3,14 @@ package tecec.ui.control;
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
 import tecec.contract.writer.IStudentWriter;
-import tecec.ui.contract.INewStudentController;
 
 public class NewStudentController extends BaseController implements
-		INewStudentController {
+	tecec.ui.contract.control.INewStudentController {
+	
 	private IStudentWriter studentWriter;
 	private String studentName;
 	private String studentEmail;
-
+	
 	public NewStudentController(IStudentWriter studentWriter) {
 		if (studentWriter == null) {
 			throw new IllegalArgumentException("studentWriter");
@@ -29,34 +29,38 @@ public class NewStudentController extends BaseController implements
 		String oldValue = getStudentName();
 		this.studentName = name;
 		notifyOfPropertyChange("studentName", oldValue, name);
+		
 	}
 
 	@Override
 	public String getStudentEmail() {
-		return studentEmail;
+		return this.studentEmail;
 	}
 
 	@Override
 	public void setStudentEmail(String email) {
 		String oldValue = getStudentName();
 		this.studentEmail = email;
-		notifyOfPropertyChange("studentEmail", oldValue, email);
+		notifyOfPropertyChange("studentEmail", oldValue, email);		
 	}
 
 	@Override
 	public void createStudent() throws RuleViolationException {
 		RuleViolation violation = getCreationViolation();
-		if (violation != null)
+
+		if (violation != null) {
 			throw new RuleViolationException(violation);
+		}
 
 		studentWriter.createStudent(this.studentName, this.studentEmail);
+
 		setStudentName("");
-		setStudentEmail("");
+		
 	}
 
 	@Override
 	public RuleViolation getCreationViolation() {
-		return studentWriter.getCreationViolation(this.getStudentName(),
-				this.getStudentEmail());
+		return studentWriter.getCreationViolation(this.getStudentName(), this.getStudentEmail());
 	}
+
 }
