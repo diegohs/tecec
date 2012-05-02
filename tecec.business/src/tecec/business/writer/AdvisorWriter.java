@@ -33,7 +33,7 @@ public class AdvisorWriter implements IAdvisorWriter {
 		advisor = this.advisorRepository.getAdvisorByEmail(email);
 		
 		if (advisor != null) {
-			if (!advisor.getPkAdvisor().equals(pkAdvisor)) {
+			if (!advisor.getPKAdvisor().equals(pkAdvisor)) {
 				return new RuleViolation ("Já existe outro orientador cadastrado com este e-mail.");
 			}
 		}
@@ -50,7 +50,7 @@ public class AdvisorWriter implements IAdvisorWriter {
 			throw new RuleViolationException (violation);
 		
 		Advisor advisor = new Advisor ();
-		advisor.setPkAdvisor(pkAdvisor);
+		advisor.setPKAdvisor(pkAdvisor);
 		advisor.setName(newName);
 		advisor.setEmail(email);
 		
