@@ -24,6 +24,10 @@ import tecec.ui.contract.control.IUpdateCourseController;
 import tecec.ui.contract.view.IUpdateCourseUI;
 
 public class UpdateCourseUI extends JDialog implements IUpdateCourseUI {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private IUpdateCourseController updateCourseController;
 
 	@Override

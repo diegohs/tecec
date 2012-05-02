@@ -3,13 +3,9 @@ package tecec.ui.control;
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
 import tecec.contract.reader.IStudentReader;
-import tecec.contract.reader.ICourseReader;
 import tecec.contract.writer.IStudentWriter;
-import tecec.contract.writer.ICourseWriter;
 import tecec.dto.Student;
-import tecec.dto.Course;
 import tecec.ui.contract.control.IUpdateStudentController;
-import tecec.ui.contract.control.IUpdateCourseController;
 
 public class UpdateStudentController extends BaseController implements
 		IUpdateStudentController {

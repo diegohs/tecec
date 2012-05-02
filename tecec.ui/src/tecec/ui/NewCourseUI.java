@@ -21,6 +21,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class NewCourseUI extends JDialog implements INewCourseUI {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private tecec.ui.contract.control.INewCourseController newCourseController;
 		
 	@Override
