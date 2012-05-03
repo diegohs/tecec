@@ -12,8 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import tecec.contract.RuleViolation;
-import tecec.ui.contract.control.INewAdvisorController;
-import tecec.ui.contract.view.INewAdvisorUI;
+import tecec.ui.contract.control.INewStudentController;
+import tecec.ui.contract.view.INewStudentUI;
 import org.jdesktop.beansbinding.BeanProperty;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.Bindings;
@@ -21,26 +21,26 @@ import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class NewAdvisorUI extends JDialog implements INewAdvisorUI {
+public class NewStudentUI extends JDialog implements INewStudentUI {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private INewAdvisorController newAdvisorController;
+	private INewStudentController newStudentController;
 
 	@Override
 	public void setVisible(boolean visible) {
 		super.setVisible(visible);
 	}
 
-	private void createAdvisor() {
+	private void createStudent() {
 		try {
-			RuleViolation violation = this.newAdvisorController
+			RuleViolation violation = this.newStudentController
 					.getCreationViolation();
 
 			if (violation == null) {
-				this.newAdvisorController.createAdvisor();
+				this.newStudentController.createStudent();
 
 				this.setVisible(false);
 			} else {
@@ -61,8 +61,8 @@ public class NewAdvisorUI extends JDialog implements INewAdvisorUI {
 	/**
 	 * Create the dialog.
 	 */
-	public NewAdvisorUI(INewAdvisorController newAdvisorController) {
-		this.newAdvisorController = newAdvisorController;
+	public NewStudentUI(INewStudentController newStudentController) {
+		this.newStudentController = newStudentController;
 
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
@@ -94,7 +94,7 @@ public class NewAdvisorUI extends JDialog implements INewAdvisorUI {
 			JButton btnNewCourse = new JButton("Adicionar");
 			btnNewCourse.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					createAdvisor();
+					createStudent();
 				}
 			});
 			contentPanel.add(btnNewCourse, "flowx,cell 1 5,alignx right");
@@ -103,25 +103,25 @@ public class NewAdvisorUI extends JDialog implements INewAdvisorUI {
 	}
 
 	protected void initDataBindings() {
-		BeanProperty<INewAdvisorController, String> iNewAdvisorControllerBeanProperty = BeanProperty
-				.create("advisorName");
+		BeanProperty<INewStudentController, String> iNewStudentControllerBeanProperty = BeanProperty
+				.create("studentName");
 		BeanProperty<JTextField, String> jTextFieldBeanProperty = BeanProperty
 				.create("text");
-		AutoBinding<INewAdvisorController, String, JTextField, String> autoBinding = Bindings
+		AutoBinding<INewStudentController, String, JTextField, String> autoBinding = Bindings
 				.createAutoBinding(UpdateStrategy.READ_WRITE,
-						newAdvisorController,
-						iNewAdvisorControllerBeanProperty, txtName,
+						newStudentController,
+						iNewStudentControllerBeanProperty, txtName,
 						jTextFieldBeanProperty);
 		autoBinding.bind();
-		
-		BeanProperty<INewAdvisorController, String> iNewAdvisorControllerBeanProperty_1 = BeanProperty
-				.create("advisorEmail");
+		//
+		BeanProperty<INewStudentController, String> iNewStudentControllerBeanProperty_1 = BeanProperty
+				.create("studentEmail");
 		BeanProperty<JTextField, String> jTextFieldBeanProperty_1 = BeanProperty
 				.create("text");
-		AutoBinding<INewAdvisorController, String, JTextField, String> autoBinding_1 = Bindings
+		AutoBinding<INewStudentController, String, JTextField, String> autoBinding_1 = Bindings
 				.createAutoBinding(UpdateStrategy.READ_WRITE,
-						newAdvisorController,
-						iNewAdvisorControllerBeanProperty_1, txtEmail,
+						newStudentController,
+						iNewStudentControllerBeanProperty_1, txtEmail,
 						jTextFieldBeanProperty_1);
 		autoBinding_1.bind();
 	}

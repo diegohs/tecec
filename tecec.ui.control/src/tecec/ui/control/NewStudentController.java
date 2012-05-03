@@ -39,7 +39,7 @@ public class NewStudentController extends BaseController implements
 
 	@Override
 	public void setStudentEmail(String email) {
-		String oldValue = getStudentName();
+		String oldValue = getStudentEmail();
 		this.studentEmail = email;
 		notifyOfPropertyChange("studentEmail", oldValue, email);		
 	}
@@ -55,6 +55,7 @@ public class NewStudentController extends BaseController implements
 		studentWriter.createStudent(this.studentName, this.studentEmail);
 
 		setStudentName("");
+		setStudentEmail("");
 		
 	}
 

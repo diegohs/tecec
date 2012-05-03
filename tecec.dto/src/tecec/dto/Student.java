@@ -1,16 +1,17 @@
 package tecec.dto;
 
 public class Student {
-	private String pkStudent;
+
+	private String pKStudent;
 	private String name;
 	private String email;
 
 	public String getPKStudent() {
-		return pkStudent;
+		return pKStudent;
 	}
 
 	public void setPKStudent(String pkStudent) {
-		this.pkStudent = pkStudent;
+		this.pKStudent = pkStudent;
 	}
 
 	public String getName() {

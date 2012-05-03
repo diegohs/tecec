@@ -1,8 +1,6 @@
 package tecec.ui;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -10,8 +8,6 @@ import javax.swing.border.EmptyBorder;
 
 import tecec.ui.contract.control.IAdvisorViewerController;
 import tecec.ui.contract.view.IAdvisorViewerUI;
-import tecec.ui.contract.view.INewAdvisorUI;
-import tecec.ui.contract.view.IUpdateAdvisorUI;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -28,17 +24,17 @@ import org.jdesktop.swingbinding.SwingBindings;
 import javax.swing.ListSelectionModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JComboBox;
+
 
 public class AdvisorViewerUI extends JDialog implements IAdvisorViewerUI {	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private IAdvisorViewerController advisorViewerController;
 	
 	private void showNewAdvisorUI(){
 		this.advisorViewerController.showNewAdvisorUI();
-	}
-	
-	private void showUpdateAdvisorUI(){
-		this.advisorViewerController.showUpdateAdvisorUI();
 	}
 	
 	private void deleteAdvisor(){

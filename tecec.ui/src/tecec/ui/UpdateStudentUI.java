@@ -8,9 +8,9 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import tecec.ui.contract.view.IUpdateAdvisorUI;
+import tecec.ui.contract.view.IUpdateStudentUI;
 
-public class UpdateAdvisorUI extends JDialog implements IUpdateAdvisorUI {
+public class UpdateStudentUI extends JDialog implements IUpdateStudentUI {
 
 	/**
 	 * 
@@ -19,7 +19,7 @@ public class UpdateAdvisorUI extends JDialog implements IUpdateAdvisorUI {
 	private final JPanel contentPanel = new JPanel();
 
 	@Override
-	public void setpkAdvisor(String pkAdvisor) {
+	public void setpkStudent(String pkStudent) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -27,7 +27,7 @@ public class UpdateAdvisorUI extends JDialog implements IUpdateAdvisorUI {
 	/**
 	 * Create the dialog.
 	 */
-	public UpdateAdvisorUI() {
+	public UpdateStudentUI() {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());

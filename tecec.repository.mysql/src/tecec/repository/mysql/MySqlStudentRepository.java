@@ -49,7 +49,7 @@ public class MySqlStudentRepository extends MySqlRepository implements
 	@Override
 	public void insertStudent(Student student) {
 		validateStudent(student);
-		String command = "INSERT INTO Student(PKStudent, Name, Email) VALUES (:pkStudent, :name, :email);";
+		String command = "INSERT INTO Student(PKStudent, Name, Email) VALUES (:pKStudent, :name, :email);";
 		SqlParameterSource namedParameter = new BeanPropertySqlParameterSource(
 				student);
 		this.jdbcTemplate.update(command, namedParameter);
@@ -57,7 +57,7 @@ public class MySqlStudentRepository extends MySqlRepository implements
 
 	@Override
 	public void updateStudent(Student student) {
-		String query = "UPDATE Student SET Name = :name, Email = :email WHERE PKStudent = :pkStudent;";
+		String query = "UPDATE Student SET Name = :name, Email = :email WHERE PKStudent = :pKStudent;";
 		SqlParameterSource parameters = new BeanPropertySqlParameterSource(
 				student);
 		this.jdbcTemplate.update(query, parameters);
@@ -91,8 +91,8 @@ public class MySqlStudentRepository extends MySqlRepository implements
 
 	@Override
 	public Student getStudentByPk(String pkStudent) {
-		String query = "SELECT * FROM Student WHERE PKStudent = :pkStudent;";
-		SqlParameterSource parameters = new MapSqlParameterSource("pkStudent",
+		String query = "SELECT * FROM Student WHERE PKStudent = :pKStudent;";
+		SqlParameterSource parameters = new MapSqlParameterSource("pKStudent",
 				pkStudent);
 
 		List<Student> result = this.jdbcTemplate.query(query, parameters,
@@ -145,7 +145,7 @@ public class MySqlStudentRepository extends MySqlRepository implements
 
 	@Override
 	public List<Student> getStudents(String nameFilter) {
-		String query = "SELECT * FROM Student WHERE Name Like :nameFilter;";
+		String query = "SELECT * FROM Student WHERE Name LIKE :nameFilter;";
 
 		if (nameFilter == null)
 			nameFilter = "";
@@ -172,9 +172,9 @@ public class MySqlStudentRepository extends MySqlRepository implements
 
 	@Override
 	public void deleteStudent(String pkStudent) {
-		String command = " DELETE FROM Student WHERE PKStudent = :pkStudent;";
+		String command = " DELETE FROM Student WHERE PKStudent = :pKStudent;";
 		SqlParameterSource namedParameter = new MapSqlParameterSource(
-				"pkStudent", pkStudent);
+				"pKStudent", pkStudent);
 		this.jdbcTemplate.update(command, namedParameter);		
 	}
 }
