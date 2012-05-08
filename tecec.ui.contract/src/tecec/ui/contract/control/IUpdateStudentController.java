@@ -9,8 +9,10 @@ public interface IUpdateStudentController {
 	void setStudentName (String name);
 	void setStudentEmail (String email);
 	
-	String getStudentName ();
-	String getStudentEmail ();
+	String getStudentName();
+	String getStudentEmail();
+	
+	boolean getCanUpdate();
 	
 	void updateStudent () throws RuleViolationException;
 	RuleViolation getUpdateViolation();

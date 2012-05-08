@@ -38,6 +38,10 @@ public class StudentViewerUI extends JDialog implements IStudentViewerUI {
 		this.studentViewerController.showNewStudentUI();
 	}
 	
+	private void showUpdateStudentUI(){
+		this.studentViewerController.showUpdateStudentUI();
+	}
+	
 	private void deleteStudent(){
 		this.studentViewerController.deleteStudent();
 	}
@@ -86,6 +90,11 @@ public class StudentViewerUI extends JDialog implements IStudentViewerUI {
 		}
 		{
 			btnUpdateStudent = new JButton("Atualizar Selecionado");
+			btnUpdateStudent.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					showUpdateStudentUI();
+				}
+			});
 			contentPanel.add(btnUpdateStudent, "cell 1 4,alignx right");
 		}
 		{

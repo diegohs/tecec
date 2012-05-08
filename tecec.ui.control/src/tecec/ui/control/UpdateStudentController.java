@@ -25,9 +25,11 @@ public class UpdateStudentController extends BaseController implements
 	@Override
 	public void setPKStudent(String pkStudent) {
 		this.pkStudent = pkStudent;
+		
 		Student student = this.studentReader.getStudentByPk(pkStudent);
-		if (student != null)
-			this.setStudentName(student.getName());
+
+		this.setStudentName(student.getName());
+		this.setStudentEmail(student.getEmail());
 	}
 
 	@Override
@@ -37,14 +39,17 @@ public class UpdateStudentController extends BaseController implements
 		this.studentName = name;
 
 		super.notifyOfPropertyChange("studentName", old, name);
-
+		super.notifyOfPropertyChange("canUpdate", null, getCanUpdate());
 	}
 
 	@Override
 	public void setStudentEmail(String email) {
 		String old = this.studentEmail;
+
 		this.studentEmail = email;
+
 		super.notifyOfPropertyChange("studentEmail", old, email);
+		super.notifyOfPropertyChange("canUpdate", null, getCanUpdate());
 	}
 
 	@Override
@@ -73,5 +78,10 @@ public class UpdateStudentController extends BaseController implements
 	public RuleViolation getUpdateViolation() {
 		return this.studentWriter.getUpdateViolation(this.pkStudent,
 				this.studentName, this.studentEmail);
+	}
+
+	@Override
+	public boolean getCanUpdate() {
+		return this.studentEmail != null && this.studentName != null && !this.studentEmail.isEmpty() && !this.studentName.isEmpty();
 	}
 }

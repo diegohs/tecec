@@ -49,7 +49,7 @@ public class MySqlStudentRepository extends MySqlRepository implements
 	@Override
 	public void insertStudent(Student student) {
 		validateStudent(student);
-		String command = "INSERT INTO Student(PKStudent, Name, Email) VALUES (:pkStudent, :name, :email);";
+		String command = "INSERT INTO Student(PKStudent, Name, Email) VALUES (:pKStudent, :name, :email);";
 		SqlParameterSource namedParameter = new BeanPropertySqlParameterSource(
 				student);
 		jdbcTemplate.update(command, namedParameter);
@@ -57,7 +57,7 @@ public class MySqlStudentRepository extends MySqlRepository implements
 
 	@Override
 	public void updateStudent(Student student) {
-		String query = "UPDATE Student SET Name = :name, Email = :email WHERE PKStudent = :pkStudent;";
+		String query = "UPDATE Student SET Name = :name, Email = :email WHERE PKStudent = :pKStudent;";
 		SqlParameterSource parameters = new BeanPropertySqlParameterSource(
 				student);
 		jdbcTemplate.update(query, parameters);
@@ -90,10 +90,10 @@ public class MySqlStudentRepository extends MySqlRepository implements
 	}
 
 	@Override
-	public Student getStudentByPk(String pkStudent) {
-		String query = "SELECT * FROM Student WHERE PKStudent = :pkStudent;";
-		SqlParameterSource parameters = new MapSqlParameterSource("pkStudent",
-				pkStudent);
+	public Student getStudentByPk(String pKStudent) {
+		String query = "SELECT * FROM Student WHERE PKStudent = :pKStudent;";
+		SqlParameterSource parameters = new MapSqlParameterSource("pKStudent",
+				pKStudent);
 
 		List<Student> result = jdbcTemplate.query(query, parameters,
 				new RowMapper<Student>() {
@@ -171,10 +171,10 @@ public class MySqlStudentRepository extends MySqlRepository implements
 	}
 
 	@Override
-	public void deleteStudent(String pkStudent) {
-		String command = " DELETE FROM Student WHERE PKStudent = :pkStudent;";
+	public void deleteStudent(String pKStudent) {
+		String command = " DELETE FROM Student WHERE PKStudent = :pKStudent;";
 		SqlParameterSource namedParameter = new MapSqlParameterSource(
-				"pkStudent", pkStudent);
+				"pKStudent", pKStudent);
 		jdbcTemplate.update(command, namedParameter);		
 	}
 }
