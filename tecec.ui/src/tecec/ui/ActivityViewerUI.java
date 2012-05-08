@@ -33,6 +33,10 @@ import tecec.ui.contract.control.IActivityViewerController;
 public class ActivityViewerUI extends JDialog implements
 		tecec.ui.contract.view.IActivityViewerUI {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private tecec.ui.contract.control.IActivityViewerController activityViewerController;
 
 	private void showNewActivityUI() {

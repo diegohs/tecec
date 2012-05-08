@@ -33,6 +33,11 @@ import tecec.ui.contract.view.IUpdateAreaUI;
 
 public class UpdateAreaUI extends JDialog implements IUpdateAreaUI {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private final JPanel contentPanel = new JPanel();
 
 	private IUpdateAreaController updateAreaController;

@@ -113,7 +113,7 @@ public class NewAdvisorUI extends JDialog implements INewAdvisorUI {
 						iNewAdvisorControllerBeanProperty, txtName,
 						jTextFieldBeanProperty);
 		autoBinding.bind();
-		
+		//
 		BeanProperty<INewAdvisorController, String> iNewAdvisorControllerBeanProperty_1 = BeanProperty
 				.create("advisorEmail");
 		BeanProperty<JTextField, String> jTextFieldBeanProperty_1 = BeanProperty

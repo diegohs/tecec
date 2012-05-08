@@ -28,6 +28,11 @@ import org.jdesktop.swingbinding.SwingBindings;
 
 public class NewAreaUI extends JDialog implements INewAreaUI {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private void createArea() {
 		RuleViolation violation = this.newAreaController.getCreationViolation();
 

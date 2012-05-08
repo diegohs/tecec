@@ -79,16 +79,14 @@ public class AdvisorViewerController  extends BaseController implements IAdvisor
 
 	@Override
 	public void showNewAdvisorUI() {
-		this.newAdvisorUI.setVisible(true);
-		
+		this.newAdvisorUI.setVisible(true);		
 		super.notifyOfPropertyChange("advisors", null, getAdvisors());			
 	}
 
 	@Override
 	public void showUpdateAdvisorUI() {
 		this.updateAdvisorUI.setpkAdvisor(this.selectedAdvisor.getPKAdvisor());
-		this.updateAdvisorUI.setVisible(true);
-		
+		this.updateAdvisorUI.setVisible(true);		
 		super.notifyOfPropertyChange("advisors", null, getAdvisors());		
 	}
 

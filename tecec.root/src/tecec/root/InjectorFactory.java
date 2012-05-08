@@ -17,6 +17,7 @@ public class InjectorFactory {
 	}
 
 	private void RegisterModel(MutablePicoContainer container) {
+		
 		container.addComponent(tecec.contract.writer.ICourseWriter.class,
 				tecec.business.writer.CourseWriter.class);
 
@@ -49,6 +50,7 @@ public class InjectorFactory {
 	}
 
 	private void RegisterUI(MutablePicoContainer container) {
+		
 		container.addComponent(tecec.ui.contract.view.INewCourseUI.class,
 				tecec.ui.NewCourseUI.class);
 
@@ -114,10 +116,14 @@ public class InjectorFactory {
 		container.addComponent(
 				tecec.ui.contract.control.INewAdvisorController.class,
 				tecec.ui.control.NewAdvisorController.class);
+		
+		container.addComponent(
+				tecec.ui.contract.control.IUpdateAdvisorController.class,
+				tecec.ui.control.UpdateAdvisorController.class);
 
 		container.addComponent(
 				tecec.ui.contract.control.IAdvisorViewerController.class,
-				tecec.ui.control.AdvisorViewerController.class);
+				tecec.ui.control.AdvisorViewerController.class);	
 
 		container.addComponent(
 				tecec.ui.contract.control.INewAreaController.class,

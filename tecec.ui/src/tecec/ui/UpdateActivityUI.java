@@ -28,6 +28,10 @@ import tecec.ui.contract.view.IUpdateActivityUI;
 
 public class UpdateActivityUI extends JDialog implements IUpdateActivityUI {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private tecec.ui.contract.control.IUpdateActivityController updateActivityController;
 
 	private void updateActivity() {

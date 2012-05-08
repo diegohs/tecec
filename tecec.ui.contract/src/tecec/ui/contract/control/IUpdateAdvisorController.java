@@ -9,10 +9,11 @@ public interface IUpdateAdvisorController {
 	void setAdvisorName (String name);
 	void setAdvisorEmail (String email);
 	
-	String getAdvisorName ();
-	String getAdvisorEmail ();
+	String getAdvisorName();
+	String getAdvisorEmail();
+	
+	boolean getCanUpdate();
 	
 	void updateAdvisor () throws RuleViolationException;
 	RuleViolation getUpdateViolation();
-
 }

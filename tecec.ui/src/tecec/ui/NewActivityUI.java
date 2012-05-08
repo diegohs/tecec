@@ -28,6 +28,10 @@ import java.awt.event.ActionEvent;
 
 public class NewActivityUI extends JDialog implements INewActivityUI {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private tecec.ui.contract.control.INewActivityController newActivityController;
 
 	private void insertActivity() {

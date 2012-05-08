@@ -32,6 +32,10 @@ import tecec.ui.contract.view.IAreaViewerUI;
 
 public class AreaViewerUI extends JDialog implements IAreaViewerUI {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private tecec.ui.contract.control.IAreaViewerController areaViewerController;
 
 	private void createArea() {

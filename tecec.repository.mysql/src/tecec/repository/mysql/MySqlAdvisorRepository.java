@@ -90,10 +90,10 @@ public class MySqlAdvisorRepository extends MySqlRepository implements
 	}
 
 	@Override
-	public Advisor getAdvisorByPk(String pkAdvisor) {
+	public Advisor getAdvisorByPk(String pKAdvisor) {
 		String query = "SELECT * FROM Advisor WHERE PKAdvisor = :pKAdvisor;";
 		SqlParameterSource parameters = new MapSqlParameterSource("pKAdvisor",
-				pkAdvisor);
+				pKAdvisor);
 
 		List<Advisor> result = jdbcTemplate.query(query, parameters,
 				new RowMapper<Advisor>() {
@@ -145,7 +145,7 @@ public class MySqlAdvisorRepository extends MySqlRepository implements
 
 	@Override
 	public List<Advisor> getAdvisors(String nameFilter) {
-		String query = "SELECT * FROM Advisor WHERE Name LIKE :nameFilter;";
+		String query = "SELECT * FROM Advisor WHERE Name Like :nameFilter;";
 
 		if (nameFilter == null)
 			nameFilter = "";
@@ -171,10 +171,10 @@ public class MySqlAdvisorRepository extends MySqlRepository implements
 	}
 
 	@Override
-	public void deleteAdvisor(String pkAdvisor) {
+	public void deleteAdvisor(String pKAdvisor) {
 		String command = " DELETE FROM Advisor WHERE PKAdvisor = :pKAdvisor;";
 		SqlParameterSource namedParameter = new MapSqlParameterSource(
-				"pKAdvisor", pkAdvisor);
+				"pKAdvisor", pKAdvisor);
 		jdbcTemplate.update(command, namedParameter);		
 	}
 }

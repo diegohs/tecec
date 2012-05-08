@@ -1,34 +1,37 @@
 package tecec.ui;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 
-import net.miginfocom.swing.MigLayout;
-
-import org.jdesktop.beansbinding.AutoBinding;
-import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
-import org.jdesktop.beansbinding.BeanProperty;
-import org.jdesktop.beansbinding.Bindings;
-import org.jdesktop.swingbinding.JTableBinding;
-import org.jdesktop.swingbinding.SwingBindings;
-
-import tecec.dto.Advisor;
 import tecec.ui.contract.control.IAdvisorViewerController;
 import tecec.ui.contract.view.IAdvisorViewerUI;
+import net.miginfocom.swing.MigLayout;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import org.jdesktop.beansbinding.BeanProperty;
+import org.jdesktop.beansbinding.AutoBinding;
+import org.jdesktop.beansbinding.Bindings;
+import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
+import java.util.List;
+import tecec.dto.Advisor;
+import org.jdesktop.swingbinding.JTableBinding;
+import org.jdesktop.swingbinding.SwingBindings;
+import javax.swing.ListSelectionModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 
 public class AdvisorViewerUI extends JDialog implements IAdvisorViewerUI {	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private IAdvisorViewerController advisorViewerController;
 	
 	private void showNewAdvisorUI(){
@@ -87,6 +90,11 @@ public class AdvisorViewerUI extends JDialog implements IAdvisorViewerUI {
 		}
 		{
 			btnUpdateAdvisor = new JButton("Atualizar Selecionado");
+			btnUpdateAdvisor.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					showUpdateAdvisorUI();
+				}
+			});
 			contentPanel.add(btnUpdateAdvisor, "cell 1 4,alignx right");
 		}
 		{

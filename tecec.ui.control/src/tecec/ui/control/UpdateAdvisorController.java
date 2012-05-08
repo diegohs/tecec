@@ -25,9 +25,11 @@ public class UpdateAdvisorController extends BaseController implements
 	@Override
 	public void setPKAdvisor(String pkAdvisor) {
 		this.pkAdvisor = pkAdvisor;
+		
 		Advisor advisor = this.advisorReader.getAdvisorByPk(pkAdvisor);
-		if (advisor != null)
-			this.setAdvisorName(advisor.getName());
+
+		this.setAdvisorName(advisor.getName());
+		this.setAdvisorEmail(advisor.getEmail());
 	}
 
 	@Override
@@ -37,14 +39,17 @@ public class UpdateAdvisorController extends BaseController implements
 		this.advisorName = name;
 
 		super.notifyOfPropertyChange("advisorName", old, name);
-
+		super.notifyOfPropertyChange("canUpdate", null, getCanUpdate());
 	}
 
 	@Override
 	public void setAdvisorEmail(String email) {
 		String old = this.advisorEmail;
+
 		this.advisorEmail = email;
+
 		super.notifyOfPropertyChange("advisorEmail", old, email);
+		super.notifyOfPropertyChange("canUpdate", null, getCanUpdate());
 	}
 
 	@Override
@@ -73,5 +78,10 @@ public class UpdateAdvisorController extends BaseController implements
 	public RuleViolation getUpdateViolation() {
 		return this.advisorWriter.getUpdateViolation(this.pkAdvisor,
 				this.advisorName, this.advisorEmail);
+	}
+
+	@Override
+	public boolean getCanUpdate() {
+		return this.advisorEmail != null && this.advisorName != null && !this.advisorEmail.isEmpty() && !this.advisorName.isEmpty();
 	}
 }
