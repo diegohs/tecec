@@ -29,12 +29,17 @@ public class InjectorFactory {
 		container.addComponent(tecec.contract.reader.IAdvisorReader.class,
 				tecec.business.reader.AdvisorReader.class);
 
-		container.addComponent(tecec.contract.writer.IStudentWriter.class,
-				tecec.business.writer.StudentWriter.class);
+		container.addComponent(tecec.contract.writer.IAreaWriter.class,
+				tecec.business.writer.AreaWriter.class);
 
-		container.addComponent(tecec.contract.reader.IStudentReader.class,
-				tecec.business.reader.StudentReader.class);
+		container.addComponent(tecec.contract.reader.IAreaReader.class,
+				tecec.business.reader.AreaReader.class);
 
+		container.addComponent(tecec.contract.writer.IActivityWriter.class,
+				tecec.business.writer.ActivityWriter.class);
+
+		container.addComponent(tecec.contract.reader.IActivityReader.class,
+				tecec.business.reader.ActivityReader.class);
 	}
 
 	private void RegisterUI(MutablePicoContainer container) {
@@ -55,17 +60,27 @@ public class InjectorFactory {
 
 		container.addComponent(tecec.ui.contract.view.IUpdateAdvisorUI.class,
 				tecec.ui.UpdateAdvisorUI.class);
+
+		container.addComponent(tecec.ui.contract.view.INewAreaUI.class,
+				tecec.ui.NewAreaUI.class);
+
+		container.addComponent(tecec.ui.contract.view.IAreaViewerUI.class,
+				tecec.ui.AreaViewerUI.class);
+
+		container.addComponent(tecec.ui.contract.view.IUpdateAreaUI.class,
+				tecec.ui.UpdateAreaUI.class);
 		
-		container.addComponent(tecec.ui.contract.view.INewStudentUI.class,
-				tecec.ui.NewStudentUI.class);
-
-		container.addComponent(tecec.ui.contract.view.IStudentViewerUI.class,
-				tecec.ui.StudentViewerUI.class);
-
-		container.addComponent(tecec.ui.contract.view.IUpdateStudentUI.class,
-				tecec.ui.UpdateStudentUI.class);
-
+		container.addComponent(tecec.ui.contract.view.INewActivityUI.class,
+				tecec.ui.NewActivityUI.class);
 		
+		container.addComponent(tecec.ui.contract.view.IActivityViewerUI.class,
+				tecec.ui.ActivityViewerUI.class);
+		
+		container.addComponent(tecec.ui.contract.view.IUpdateActivityUI.class,
+				tecec.ui.UpdateActivityUI.class);
+
+		container.addComponent(tecec.ui.contract.view.IMainUI.class,
+				tecec.ui.MainUI.class);
 	}
 
 	private void RegisterControllers(MutablePicoContainer container) {
@@ -88,15 +103,34 @@ public class InjectorFactory {
 		container.addComponent(
 				tecec.ui.contract.control.IAdvisorViewerController.class,
 				tecec.ui.control.AdvisorViewerController.class);
+
+		container.addComponent(
+				tecec.ui.contract.control.INewAreaController.class,
+				tecec.ui.control.NewAreaController.class);
+
+		container.addComponent(
+				tecec.ui.contract.control.IAreaViewerController.class,
+				tecec.ui.control.AreaViewerController.class);
+
+		container.addComponent(
+				tecec.ui.contract.control.IUpdateAreaController.class,
+				tecec.ui.control.UpdateAreaController.class);
 		
 		container.addComponent(
-				tecec.ui.contract.control.INewStudentController.class,
-				tecec.ui.control.NewStudentController.class);
+				tecec.ui.contract.control.INewActivityController.class,
+				tecec.ui.control.NewActivityController.class);
 
 		container.addComponent(
-				tecec.ui.contract.control.IStudentViewerController.class,
-				tecec.ui.control.StudentViewerController.class);
+				tecec.ui.contract.control.IActivityViewerController.class,
+				tecec.ui.control.ActivityViewerController.class);
 
+		container.addComponent(
+				tecec.ui.contract.control.IUpdateActivityController.class,
+				tecec.ui.control.UpdateActivityController.class);
+
+		container.addComponent(
+				tecec.ui.contract.control.IMainUIController.class,
+				tecec.ui.control.MainUIController.class);
 	}
 
 	private void RegisterConfig(MutablePicoContainer container) {
@@ -113,9 +147,12 @@ public class InjectorFactory {
 		container.addComponent(
 				tecec.contract.repository.IAdvisorRepository.class,
 				tecec.repository.mysql.MySqlAdvisorRepository.class);
-		
+
+		container.addComponent(tecec.contract.repository.IAreaRepository.class,
+				tecec.repository.mysql.MySqlAreaRepository.class);
+
 		container.addComponent(
-				tecec.contract.repository.IStudentRepository.class,
-				tecec.repository.mysql.MySqlStudentRepository.class);
+				tecec.contract.repository.IActivityRepository.class,
+				tecec.repository.mysql.MySqlActivityRepository.class);
 	}
 }

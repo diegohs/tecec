@@ -5,16 +5,18 @@ import org.springframework.jdbc.datasource.*;
 
 
 public abstract class MySqlRepository {
-    protected NamedParameterJdbcTemplate jdbcTemplate;    
+    protected static NamedParameterJdbcTemplate jdbcTemplate;
 
 	public MySqlRepository(MySqlConnectionConfig connectionConfig) {		
-		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		
-		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl(connectionConfig.getHost());
-		dataSource.setUsername(connectionConfig.getUser());
-		dataSource.setPassword(connectionConfig.getPassword());
-		
-		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
+		if (jdbcTemplate == null) {
+			DriverManagerDataSource dataSource = new DriverManagerDataSource();
+			
+			dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+			dataSource.setUrl(connectionConfig.getHost());
+			dataSource.setUsername(connectionConfig.getUser());
+			dataSource.setPassword(connectionConfig.getPassword());
+			
+			jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
+		}		
 	}
 }

@@ -49,18 +49,18 @@ public class MySqlStudentRepository extends MySqlRepository implements
 	@Override
 	public void insertStudent(Student student) {
 		validateStudent(student);
-		String command = "INSERT INTO Student(PKStudent, Name, Email) VALUES (:pKStudent, :name, :email);";
+		String command = "INSERT INTO Student(PKStudent, Name, Email) VALUES (:pkStudent, :name, :email);";
 		SqlParameterSource namedParameter = new BeanPropertySqlParameterSource(
 				student);
-		this.jdbcTemplate.update(command, namedParameter);
+		jdbcTemplate.update(command, namedParameter);
 	}
 
 	@Override
 	public void updateStudent(Student student) {
-		String query = "UPDATE Student SET Name = :name, Email = :email WHERE PKStudent = :pKStudent;";
+		String query = "UPDATE Student SET Name = :name, Email = :email WHERE PKStudent = :pkStudent;";
 		SqlParameterSource parameters = new BeanPropertySqlParameterSource(
 				student);
-		this.jdbcTemplate.update(query, parameters);
+		jdbcTemplate.update(query, parameters);
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class MySqlStudentRepository extends MySqlRepository implements
 		String query = "SELECT * FROM Student WHERE Name = :name;";
 		SqlParameterSource parameters = new MapSqlParameterSource("name", name);
 
-		List<Student> result = this.jdbcTemplate.query(query, parameters,
+		List<Student> result = jdbcTemplate.query(query, parameters,
 				new RowMapper<Student>() {
 					@Override
 					public Student mapRow(ResultSet arg0, int arg1)
@@ -91,11 +91,11 @@ public class MySqlStudentRepository extends MySqlRepository implements
 
 	@Override
 	public Student getStudentByPk(String pkStudent) {
-		String query = "SELECT * FROM Student WHERE PKStudent = :pKStudent;";
-		SqlParameterSource parameters = new MapSqlParameterSource("pKStudent",
+		String query = "SELECT * FROM Student WHERE PKStudent = :pkStudent;";
+		SqlParameterSource parameters = new MapSqlParameterSource("pkStudent",
 				pkStudent);
 
-		List<Student> result = this.jdbcTemplate.query(query, parameters,
+		List<Student> result = jdbcTemplate.query(query, parameters,
 				new RowMapper<Student>() {
 					@Override
 					public Student mapRow(ResultSet arg0, int arg1)
@@ -122,7 +122,7 @@ public class MySqlStudentRepository extends MySqlRepository implements
 		SqlParameterSource parameters = new MapSqlParameterSource("email",
 				email);
 
-		List<Student> result = this.jdbcTemplate.query(query, parameters,
+		List<Student> result = jdbcTemplate.query(query, parameters,
 				new RowMapper<Student>() {
 					@Override
 					public Student mapRow(ResultSet arg0, int arg1)
@@ -145,7 +145,7 @@ public class MySqlStudentRepository extends MySqlRepository implements
 
 	@Override
 	public List<Student> getStudents(String nameFilter) {
-		String query = "SELECT * FROM Student WHERE Name LIKE :nameFilter;";
+		String query = "SELECT * FROM Student WHERE Name Like :nameFilter;";
 
 		if (nameFilter == null)
 			nameFilter = "";
@@ -153,7 +153,7 @@ public class MySqlStudentRepository extends MySqlRepository implements
 		SqlParameterSource parameters = new MapSqlParameterSource("nameFilter",
 				"%" + nameFilter + "%");
 
-		List<Student> result = this.jdbcTemplate.query(query, parameters,
+		List<Student> result = jdbcTemplate.query(query, parameters,
 				new RowMapper<Student>() {
 					@Override
 					public Student mapRow(ResultSet arg0, int arg1)
@@ -172,9 +172,9 @@ public class MySqlStudentRepository extends MySqlRepository implements
 
 	@Override
 	public void deleteStudent(String pkStudent) {
-		String command = " DELETE FROM Student WHERE PKStudent = :pKStudent;";
+		String command = " DELETE FROM Student WHERE PKStudent = :pkStudent;";
 		SqlParameterSource namedParameter = new MapSqlParameterSource(
-				"pKStudent", pkStudent);
-		this.jdbcTemplate.update(command, namedParameter);		
+				"pkStudent", pkStudent);
+		jdbcTemplate.update(command, namedParameter);		
 	}
 }

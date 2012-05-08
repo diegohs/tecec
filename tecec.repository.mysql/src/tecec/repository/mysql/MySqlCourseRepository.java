@@ -47,7 +47,7 @@ public class MySqlCourseRepository extends MySqlRepository implements
 		SqlParameterSource namedParameter = new BeanPropertySqlParameterSource(
 				course);
 
-		this.jdbcTemplate.update(command, namedParameter);
+		jdbcTemplate.update(command, namedParameter);
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class MySqlCourseRepository extends MySqlRepository implements
 		SqlParameterSource namedParameter = new MapSqlParameterSource(
 				"pKCourse", pKCourse);
 
-		this.jdbcTemplate.update(command, namedParameter);
+		jdbcTemplate.update(command, namedParameter);
 	}
 
 	@Override
@@ -66,7 +66,7 @@ public class MySqlCourseRepository extends MySqlRepository implements
 
 		SqlParameterSource parameters = new MapSqlParameterSource("name", name);
 
-		List<Course> result = this.jdbcTemplate.query(query, parameters,
+		List<Course> result = jdbcTemplate.query(query, parameters,
 				new RowMapper<Course>() {
 					@Override
 					public Course mapRow(ResultSet arg0, int arg1)
@@ -94,7 +94,7 @@ public class MySqlCourseRepository extends MySqlRepository implements
 		SqlParameterSource parameters = new MapSqlParameterSource("pKCourse",
 				pKCourse);
 
-		List<Course> result = this.jdbcTemplate.query(query, parameters,
+		List<Course> result = jdbcTemplate.query(query, parameters,
 				new RowMapper<Course>() {
 					@Override
 					public Course mapRow(ResultSet arg0, int arg1)
@@ -122,7 +122,7 @@ public class MySqlCourseRepository extends MySqlRepository implements
 		SqlParameterSource parameters = new BeanPropertySqlParameterSource(
 				course);
 
-		this.jdbcTemplate.update(query, parameters);
+		jdbcTemplate.update(query, parameters);
 	}
 
 	@Override
@@ -136,7 +136,7 @@ public class MySqlCourseRepository extends MySqlRepository implements
 		SqlParameterSource parameters = new MapSqlParameterSource("nameFilter",
 				"%" + nameFilter + "%");
 
-		List<Course> result = this.jdbcTemplate.query(query, parameters,
+		List<Course> result = jdbcTemplate.query(query, parameters,
 				new RowMapper<Course>() {
 					@Override
 					public Course mapRow(ResultSet arg0, int arg1)

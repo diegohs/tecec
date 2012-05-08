@@ -52,7 +52,7 @@ public class MySqlAdvisorRepository extends MySqlRepository implements
 		String command = "INSERT INTO Advisor(PKAdvisor, Name, Email) VALUES (:pKAdvisor, :name, :email);";
 		SqlParameterSource namedParameter = new BeanPropertySqlParameterSource(
 				advisor);
-		this.jdbcTemplate.update(command, namedParameter);
+		jdbcTemplate.update(command, namedParameter);
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class MySqlAdvisorRepository extends MySqlRepository implements
 		String query = "UPDATE Advisor SET Name = :name, Email = :email WHERE PKAdvisor = :pKAdvisor;";
 		SqlParameterSource parameters = new BeanPropertySqlParameterSource(
 				advisor);
-		this.jdbcTemplate.update(query, parameters);
+		jdbcTemplate.update(query, parameters);
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class MySqlAdvisorRepository extends MySqlRepository implements
 		String query = "SELECT * FROM Advisor WHERE Name = :name;";
 		SqlParameterSource parameters = new MapSqlParameterSource("name", name);
 
-		List<Advisor> result = this.jdbcTemplate.query(query, parameters,
+		List<Advisor> result = jdbcTemplate.query(query, parameters,
 				new RowMapper<Advisor>() {
 					@Override
 					public Advisor mapRow(ResultSet arg0, int arg1)
@@ -95,7 +95,7 @@ public class MySqlAdvisorRepository extends MySqlRepository implements
 		SqlParameterSource parameters = new MapSqlParameterSource("pKAdvisor",
 				pkAdvisor);
 
-		List<Advisor> result = this.jdbcTemplate.query(query, parameters,
+		List<Advisor> result = jdbcTemplate.query(query, parameters,
 				new RowMapper<Advisor>() {
 					@Override
 					public Advisor mapRow(ResultSet arg0, int arg1)
@@ -122,7 +122,7 @@ public class MySqlAdvisorRepository extends MySqlRepository implements
 		SqlParameterSource parameters = new MapSqlParameterSource("email",
 				email);
 
-		List<Advisor> result = this.jdbcTemplate.query(query, parameters,
+		List<Advisor> result = jdbcTemplate.query(query, parameters,
 				new RowMapper<Advisor>() {
 					@Override
 					public Advisor mapRow(ResultSet arg0, int arg1)
@@ -153,7 +153,7 @@ public class MySqlAdvisorRepository extends MySqlRepository implements
 		SqlParameterSource parameters = new MapSqlParameterSource("nameFilter",
 				"%" + nameFilter + "%");
 
-		List<Advisor> result = this.jdbcTemplate.query(query, parameters,
+		List<Advisor> result = jdbcTemplate.query(query, parameters,
 				new RowMapper<Advisor>() {
 					@Override
 					public Advisor mapRow(ResultSet arg0, int arg1)
@@ -175,6 +175,6 @@ public class MySqlAdvisorRepository extends MySqlRepository implements
 		String command = " DELETE FROM Advisor WHERE PKAdvisor = :pKAdvisor;";
 		SqlParameterSource namedParameter = new MapSqlParameterSource(
 				"pKAdvisor", pkAdvisor);
-		this.jdbcTemplate.update(command, namedParameter);		
+		jdbcTemplate.update(command, namedParameter);		
 	}
 }

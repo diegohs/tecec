@@ -1,0 +1,9 @@
+package tecec.ui.contract.control;
+
+public interface IMainUIController {
+	void showStudentViewerUI();
+	void showCouseViewerUI();
+	void showAdvisorViewerUI();
+	void showAreaViewerUI();
+	void showActivityViewerUI();
+}
