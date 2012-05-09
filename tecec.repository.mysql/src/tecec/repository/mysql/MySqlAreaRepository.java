@@ -71,7 +71,7 @@ public class MySqlAreaRepository extends MySqlRepository implements
 
 	@Override
 	public void deleteArea(String pKArea) {
-		String command = " DELETE FROM AREA WHERE PKArea = :pKArea";
+		String command = " DELETE FROM Area WHERE PKArea = :pKArea";
 		
 		SqlParameterSource parameters = new MapSqlParameterSource("pKArea", pKArea);
 		
