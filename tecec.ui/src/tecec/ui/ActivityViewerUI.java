@@ -76,7 +76,7 @@ public class ActivityViewerUI extends JDialog implements
 
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		setBounds(100, 100, 520, 335);
+		setBounds(100, 100, 600, 335);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
