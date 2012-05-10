@@ -4,13 +4,14 @@ import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
 
 public interface IMonographWriter {
+	
 	RuleViolation getCreationViolation(String name);
 
-	RuleViolation getUpdateViolation(String PKMonograph, String newName);
+	RuleViolation getUpdateViolation(String pKMonograph, String newName);
 
 	void createMonograph(String name) throws RuleViolationException;
 
-	void updateMonograph(String PKMonograph, String newName)
+	void updateMonograph(String pKMonograph, String newName)
 			throws RuleViolationException;
-	void deleteMonograph(String PKMonograph);
+	void deleteMonograph(String pKMonograph);
 }

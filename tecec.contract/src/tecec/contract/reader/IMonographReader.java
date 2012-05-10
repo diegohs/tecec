@@ -5,5 +5,5 @@ import tecec.dto.Monograph;
 
 public interface IMonographReader {
 	List<Monograph> getMonograph(String nameFilter);
-	Monograph getMonographByPK(String PKMonograph);
+	Monograph getMonographByPK(String pKMonograph);
 }
