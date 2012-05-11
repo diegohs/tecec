@@ -7,11 +7,13 @@ import tecec.contract.repository.IStatusRepository;
 import tecec.dto.Status;
 
 public class StatusReader implements IStatusReader {
+	
 	private IStatusRepository statusRepository;
 	
 	public StatusReader (IStatusRepository statusRepository) {
 		this.statusRepository = statusRepository;
 	}
+	
 
 	@Override
 	public List<Status> getStatus(String nameFilter) {
@@ -19,8 +21,7 @@ public class StatusReader implements IStatusReader {
 	}
 
 	@Override
-	public Status getStatusByPk(String pKStatus) {
-		return statusRepository.getStatusByPk(pKStatus);
-	}
-
+	public Status getStatusByPK(String pKStatus) {
+		return statusRepository.getStatusByPK(pKStatus);
+	}	
 }

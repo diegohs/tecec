@@ -57,6 +57,14 @@ public class InjectorFactory {
 
 		container.addComponent(tecec.contract.reader.IStudentReader.class,
 				tecec.business.reader.StudentReader.class);
+		
+		/* Status */
+
+		container.addComponent(tecec.contract.writer.IStatusWriter.class,
+				tecec.business.writer.StatusWriter.class);
+
+		container.addComponent(tecec.contract.reader.IStatusReader.class,
+				tecec.business.reader.StatusReader.class);
 	}
 
 	private void RegisterUI(MutablePicoContainer container) {
@@ -120,6 +128,17 @@ public class InjectorFactory {
 
 		container.addComponent(tecec.ui.contract.view.IUpdateStudentUI.class,
 				tecec.ui.UpdateStudentUI.class);
+		
+		/* Status */
+		
+		container.addComponent(tecec.ui.contract.view.INewStatusUI.class,
+				tecec.ui.NewStatusUI.class);
+
+		container.addComponent(tecec.ui.contract.view.IStatusViewerUI.class,
+				tecec.ui.StatusViewerUI.class);
+
+		container.addComponent(tecec.ui.contract.view.IUpdateStatusUI.class,
+				tecec.ui.UpdateStatusUI.class);
 	}
 
 	private void RegisterControllers(MutablePicoContainer container) {
@@ -197,6 +216,19 @@ public class InjectorFactory {
 		container.addComponent(
 				tecec.ui.contract.control.IStudentViewerController.class,
 				tecec.ui.control.StudentViewerController.class);
+		
+		/* Status */
+		container.addComponent(		
+				tecec.ui.contract.control.INewStatusController.class,
+				tecec.ui.control.NewStatusController.class);
+
+		container.addComponent(
+				tecec.ui.contract.control.IStatusViewerController.class,
+				tecec.ui.control.StatusViewerController.class);
+
+		container.addComponent(
+				tecec.ui.contract.control.IUpdateStatusController.class,
+				tecec.ui.control.UpdateStatusController.class);
 	}
 
 	private void RegisterConfig(MutablePicoContainer container) {
@@ -229,5 +261,10 @@ public class InjectorFactory {
 		container.addComponent(
 				tecec.contract.repository.IStudentRepository.class,
 				tecec.repository.mysql.MySqlStudentRepository.class);
+		
+		/* Course */
+		container.addComponent(
+				tecec.contract.repository.IStatusRepository.class,
+				tecec.repository.mysql.MySqlStatusRepository.class);
 	}
 }
