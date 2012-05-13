@@ -10,17 +10,19 @@ public class MainUIController extends BaseController implements IMainUIControlle
 	private IStudentViewerUI studentViewerUI;
 	private IActivityViewerUI activityViewerUI;
 	private ICourseViewerUI courseViewerUI;
-	
-	
-	
+	private IStatusViewerUI statusViewerUI;
+
+
+
 	public MainUIController(IAreaViewerUI areaViewerUI,
 			IAdvisorViewerUI advisorViewerUI, IStudentViewerUI studentViewerUI,
-			IActivityViewerUI activityViewerUI, ICourseViewerUI courseViewerUI) {
+			IActivityViewerUI activityViewerUI, ICourseViewerUI courseViewerUI, IStatusViewerUI statusViewerUI) {
 		this.areaViewerUI = areaViewerUI;
 		this.advisorViewerUI = advisorViewerUI;
 		this.studentViewerUI = studentViewerUI;
 		this.activityViewerUI = activityViewerUI;
 		this.courseViewerUI = courseViewerUI;
+		this.statusViewerUI = statusViewerUI;
 	}
 
 	@Override
@@ -47,5 +49,10 @@ public class MainUIController extends BaseController implements IMainUIControlle
 	public void showActivityViewerUI() {
 		this.activityViewerUI.setVisible(true);
 	}
-	
+
+	@Override
+	public void showStatusViewerUI(){
+		this.statusViewerUI.setVisible(true);
+	}
+
 }

@@ -6,4 +6,5 @@ public interface IMainUIController {
 	void showAdvisorViewerUI();
 	void showAreaViewerUI();
 	void showActivityViewerUI();
+	void showStatusViewerUI();
 }

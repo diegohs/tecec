@@ -31,23 +31,27 @@ public class MainUI implements IMainUI {
 	private void showStudentUI(){
 		mainUIController.showStudentViewerUI();
 	}
-	
+
 	private void showCourseUI(){
 		mainUIController.showCouseViewerUI();
 	}
-	
+
 	private void showAreaUI(){
 		mainUIController.showAreaViewerUI();
 	}
-	
+
 	private void showActivityUI(){
 		mainUIController.showActivityViewerUI();
 	}
-	
+
 	private void showAdvisorUI(){
 		mainUIController.showAdvisorViewerUI();
 	}
-	
+
+	private void showStatusUI(){
+		mainUIController.showStatusViewerUI();
+	}
+
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 558, 352);
@@ -98,6 +102,14 @@ public class MainUI implements IMainUI {
 			}
 		});
 		mnCadastro.add(mntmOrientador);
+
+		JMenuItem mntmStatus = new JMenuItem("Status");
+		mntmStatus.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				showStatusUI();
+			}
+		});
+		mnCadastro.add(mntmStatus);
 	}
 
 }
