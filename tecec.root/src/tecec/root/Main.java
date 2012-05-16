@@ -14,7 +14,6 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					//IStatusViewerUI window = container.getComponent(IStatusViewerUI.class);
 					IMainUI window = container.getComponent(IMainUI.class);
 					window.setVisible(true);
 				} catch (Exception e) {

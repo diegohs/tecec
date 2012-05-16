@@ -58,7 +58,7 @@ public class MySqlMonographRepository extends MySqlRepository implements
 	}
 
 	@Override
-	public void deleteMonograph(Monograph monograph) {
+	public void deleteMonograph(String monograph) {
 		String command = "DELETE FROM Monograph WHERE PKMonograph = :pKMonograph;";
 		SqlParameterSource parameters = new BeanPropertySqlParameterSource(monograph);
 		jdbcTemplate.update(command, parameters);

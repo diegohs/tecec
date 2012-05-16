@@ -65,6 +65,13 @@ public class InjectorFactory {
 
 		container.addComponent(tecec.contract.reader.IStatusReader.class,
 				tecec.business.reader.StatusReader.class);
+		
+		/* Monograph */
+		container.addComponent(tecec.contract.writer.IMonographWriter.class,
+				tecec.business.writer.MonographWriter.class);
+		
+		container.addComponent(tecec.contract.reader.IMonographReader.class,
+				tecec.business.reader.MonographReader.class);
 	}
 
 	private void RegisterUI(MutablePicoContainer container) {
@@ -139,6 +146,17 @@ public class InjectorFactory {
 
 		container.addComponent(tecec.ui.contract.view.IUpdateStatusUI.class,
 				tecec.ui.UpdateStatusUI.class);
+		
+		/* Monograph */
+		
+		container.addComponent(tecec.ui.contract.view.INewMonographUI.class,
+				tecec.ui.NewMonographUI.class);
+		
+		container.addComponent(tecec.ui.contract.view.IMonographViewerUI.class,
+				tecec.ui.MonographViewerUI.class);
+		
+		container.addComponent(tecec.ui.contract.view.IUpdateMonographUI.class,
+				tecec.ui.UpdateMonographUI.class);
 	}
 
 	private void RegisterControllers(MutablePicoContainer container) {
@@ -229,6 +247,20 @@ public class InjectorFactory {
 		container.addComponent(
 				tecec.ui.contract.control.IUpdateStatusController.class,
 				tecec.ui.control.UpdateStatusController.class);
+		
+		/* Monograph */
+		
+		container.addComponent(
+				tecec.ui.contract.control.INewMonographController.class,
+				tecec.ui.control.NewMonographController.class);
+		
+		container.addComponent(
+				tecec.ui.contract.control.IMonographViewerController.class,
+				tecec.ui.control.MonographViewerController.class);
+		
+		container.addComponent(
+				tecec.ui.contract.control.IUpdateMonographController.class,
+				tecec.ui.control.UpdateMonographController.class);
 	}
 
 	private void RegisterConfig(MutablePicoContainer container) {
@@ -266,5 +298,10 @@ public class InjectorFactory {
 		container.addComponent(
 				tecec.contract.repository.IStatusRepository.class,
 				tecec.repository.mysql.MySqlStatusRepository.class);
+		
+		/* Monograph */
+		container.addComponent(
+				tecec.contract.repository.IMonographRepository.class,
+				tecec.repository.mysql.MySqlMonographRepository.class);
 	}
 }

@@ -51,6 +51,10 @@ public class MainUI implements IMainUI {
 	private void showStatusUI(){
 		mainUIController.showStatusViewerUI();
 	}
+	
+	private void showMonographUI(){
+		mainUIController.showMonographViewerUI();
+	}
 
 	private void initialize() {
 		frame = new JFrame();
@@ -102,6 +106,14 @@ public class MainUI implements IMainUI {
 			}
 		});
 		mnCadastro.add(mntmOrientador);
+		
+		JMenuItem mntmMonografia = new JMenuItem("Monografia");
+		mntmMonografia.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				showMonographUI();
+			}
+		});
+		mnCadastro.add(mntmMonografia);
 
 		JMenuItem mntmStatus = new JMenuItem("Status");
 		mntmStatus.addActionListener(new ActionListener() {

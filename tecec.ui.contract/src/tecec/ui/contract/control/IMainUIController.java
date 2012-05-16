@@ -7,4 +7,5 @@ public interface IMainUIController {
 	void showAreaViewerUI();
 	void showActivityViewerUI();
 	void showStatusViewerUI();
+	void showMonographViewerUI();
 }
