@@ -47,6 +47,13 @@ public interface INewMonographController {
 	void setSelectedAdvisorIndex(int i);
 	int getSelectedAdvisorIndex();
 	
+	/*CoAdvisor*/
+	List<Advisor> getCoadvisors();
+	Advisor getSelectedCoadvisor();
+	void setSelectedCoadvisor(Advisor coadvisor);
+	void setSelectedCoadvisorIndex(int i);
+	int getSelectedCoadvisorIndex();
+	
 	/*Status*/
 	List<Status> getStatus();
 	Status getSelectedStatus();

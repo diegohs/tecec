@@ -125,6 +125,11 @@ public class NewMonographUI extends JDialog implements INewMonographUI {
 		contentPane.add(cboCurso, "cell 1 2,growx");
 		
 		cboCurso.setRenderer(new DefaultListCellRenderer(){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public Component getListCellRendererComponent(JList list,
 					Object value, int index, boolean isSelected,
@@ -148,6 +153,11 @@ public class NewMonographUI extends JDialog implements INewMonographUI {
 		contentPane.add(cboArea, "cell 1 3,growx");
 		
 		cboArea.setRenderer(new DefaultListCellRenderer(){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public Component getListCellRendererComponent(JList list,
 					Object value, int index, boolean isSelected,
@@ -171,6 +181,11 @@ public class NewMonographUI extends JDialog implements INewMonographUI {
 		contentPane.add(cboAluno, "cell 1 4,growx");
 		
 		cboAluno.setRenderer(new DefaultListCellRenderer(){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public Component getListCellRendererComponent(JList list,
 					Object value, int index, boolean isSelected,
@@ -195,6 +210,11 @@ public class NewMonographUI extends JDialog implements INewMonographUI {
 		contentPane.add(cboOrientador, "cell 1 5,growx");
 		
 		cboOrientador.setRenderer(new DefaultListCellRenderer(){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public Component getListCellRendererComponent(JList list,
 					Object value, int index, boolean isSelected,
@@ -218,6 +238,11 @@ public class NewMonographUI extends JDialog implements INewMonographUI {
 		contentPane.add(cboCoorientador, "cell 1 6,growx");
 		
 		cboCoorientador.setRenderer(new DefaultListCellRenderer(){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public Component getListCellRendererComponent(JList list,
 					Object value, int index, boolean isSelected,
@@ -241,6 +266,11 @@ public class NewMonographUI extends JDialog implements INewMonographUI {
 		contentPane.add(cboStatus, "cell 1 7,growx");
 		
 		cboStatus.setRenderer(new DefaultListCellRenderer(){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public Component getListCellRendererComponent(JList list,
 					Object value, int index, boolean isSelected,
@@ -322,15 +352,6 @@ public class NewMonographUI extends JDialog implements INewMonographUI {
 		AutoBinding<INewMonographController, Advisor, JComboBox, Object> autoBinding_8 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, newMonographController, iNewMonographControllerBeanProperty_12, cboOrientador, jComboBoxBeanProperty_1);
 		autoBinding_8.bind();
 		//
-		JComboBoxBinding<Advisor, INewMonographController, JComboBox> jComboBinding_4 = SwingBindings.createJComboBoxBinding(UpdateStrategy.READ_WRITE, newMonographController, iNewMonographControllerBeanProperty_10, cboCoorientador);
-		jComboBinding_4.bind();
-		//
-		AutoBinding<INewMonographController, Integer, JComboBox, Integer> autoBinding_9 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, newMonographController, iNewMonographControllerBeanProperty_11, cboCoorientador, jComboBoxBeanProperty);
-		autoBinding_9.bind();
-		//
-		AutoBinding<INewMonographController, Advisor, JComboBox, Object> autoBinding_10 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, newMonographController, iNewMonographControllerBeanProperty_12, cboCoorientador, jComboBoxBeanProperty_1);
-		autoBinding_10.bind();
-		//
 		BeanProperty<INewMonographController, List<Status>> iNewMonographControllerBeanProperty_13 = BeanProperty.create("status");
 		JComboBoxBinding<Status, INewMonographController, JComboBox> jComboBinding_5 = SwingBindings.createJComboBoxBinding(UpdateStrategy.READ_WRITE, newMonographController, iNewMonographControllerBeanProperty_13, cboStatus);
 		jComboBinding_5.bind();
@@ -342,5 +363,17 @@ public class NewMonographUI extends JDialog implements INewMonographUI {
 		BeanProperty<INewMonographController, Status> iNewMonographControllerBeanProperty_15 = BeanProperty.create("selectedStatus");
 		AutoBinding<INewMonographController, Status, JComboBox, Object> autoBinding_12 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, newMonographController, iNewMonographControllerBeanProperty_15, cboStatus, jComboBoxBeanProperty_1);
 		autoBinding_12.bind();
+		//
+		BeanProperty<INewMonographController, List<Advisor>> iNewMonographControllerBeanProperty_16 = BeanProperty.create("coadvisors");
+		JComboBoxBinding<Advisor, INewMonographController, JComboBox> jComboBinding_4 = SwingBindings.createJComboBoxBinding(UpdateStrategy.READ_WRITE, newMonographController, iNewMonographControllerBeanProperty_16, cboCoorientador);
+		jComboBinding_4.bind();
+		//
+		BeanProperty<INewMonographController, Integer> iNewMonographControllerBeanProperty_17 = BeanProperty.create("selectedCoadvisorIndex");
+		AutoBinding<INewMonographController, Integer, JComboBox, Integer> autoBinding_9 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, newMonographController, iNewMonographControllerBeanProperty_17, cboCoorientador, jComboBoxBeanProperty);
+		autoBinding_9.bind();
+		//
+		BeanProperty<INewMonographController, Advisor> iNewMonographControllerBeanProperty_18 = BeanProperty.create("selectedCoadvisor");
+		AutoBinding<INewMonographController, Advisor, JComboBox, Object> autoBinding_10 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, newMonographController, iNewMonographControllerBeanProperty_18, cboCoorientador, jComboBoxBeanProperty_1);
+		autoBinding_10.bind();
 	}
 }

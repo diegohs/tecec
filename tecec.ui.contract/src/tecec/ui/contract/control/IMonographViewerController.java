@@ -8,15 +8,16 @@ public interface IMonographViewerController {
 	void setNameFilter (String nameFilter);
 	String getNameFilter ();
 	
-	void setSelectedMonograph (Monograph monograph);
+	List<Monograph> getMonographs();
 	Monograph getSelectedMonograph();
-	List <Monograph> getMonograph ();
-	
-	void deleteMonograph ();	
-	
-	boolean getCanUpdateMonograph ();
-	boolean getCanDeleteMonograph ();	
+	void setSelectedMonograph(Monograph monograph);
 	
 	void showNewMonographUI();
-	void showUpdateMonographUI();
+	void showUpdateMonographUI();	
+	
+	boolean getCanCreateNewMonograph();
+	boolean getCanUpdateMonograph();
+	boolean getCanDeleteMonograph ();
+	
+	void deleteMonograph ();
 }

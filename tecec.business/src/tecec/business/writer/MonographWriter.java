@@ -68,6 +68,12 @@ public class MonographWriter implements IMonographWriter {
 		
 		Monograph monograph = new Monograph();
 		monograph.setTitle(newMonograph.getTitle());
+		monograph.setfKAdvisor(newMonograph.getfKAdvisor());
+		monograph.setfKArea(newMonograph.getfKArea());
+		monograph.setfKCoadvisor(newMonograph.getfKCoadvisor());
+		monograph.setfKCourse(newMonograph.getfKCourse());
+		monograph.setfKStatus(newMonograph.getfKStatus());
+		monograph.setfKStudent(newMonograph.getfKStudent());
 		this.monograhRepository.insertMonograph(monograph);
 
 	}

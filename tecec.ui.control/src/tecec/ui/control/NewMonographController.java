@@ -91,7 +91,16 @@ public class NewMonographController extends BaseController implements INewMonogr
 		if(this.selectedAdvisor != null)
 			newMonograph.setfKAdvisor(this.selectedAdvisor.getPKAdvisor());
 		
-		return null;
+		if(this.selectedCoadvisor != null)
+			newMonograph.setfKCoadvisor(this.selectedCoadvisor.getPKAdvisor());
+		
+		if(this.selectedStatus != null)
+			newMonograph.setfKStatus(this.selectedStatus.getpKStatus());
+		
+		if(this.selectedStudent != null)
+			newMonograph.setfKStudent(this.selectedStudent.getPKStudent());
+		
+		return newMonograph;
 	}
 
 	@Override
@@ -196,7 +205,7 @@ public class NewMonographController extends BaseController implements INewMonogr
 		List<Student> students = this.studentReader.getStudents("");
 		Student emptyStudent = new Student();
 		
-		emptyStudent.setName("");
+		emptyStudent.setName(" ");
 		students.add(0, emptyStudent);
 		
 		return students;
@@ -293,4 +302,39 @@ public class NewMonographController extends BaseController implements INewMonogr
 	}
 	
 	/*End of Status*/
+
+	/*Coadvisor*/
+	
+	@Override
+	public List<Advisor> getCoadvisors() {
+		List<Advisor> coadvisors = this.coadvisorReader.getAdvisors("");
+		Advisor emptyCoadvisor = new Advisor();
+		
+		emptyCoadvisor.setName(" ");
+		coadvisors.add(0, emptyCoadvisor);
+		
+		return coadvisors;
+	}
+
+	@Override
+	public Advisor getSelectedCoadvisor() {
+		return this.selectedCoadvisor;
+	}
+
+	@Override
+	public void setSelectedCoadvisor(Advisor coadvisor) {
+		this.selectedCoadvisor = coadvisor;		
+	}
+
+	@Override
+	public void setSelectedCoadvisorIndex(int i) {
+		this.selectedCoadvisorIndex = i;
+	}
+
+	@Override
+	public int getSelectedCoadvisorIndex() {
+		return this.selectedCoadvisorIndex;
+	}
+	
+	/*End of Coadvisor*/
 }

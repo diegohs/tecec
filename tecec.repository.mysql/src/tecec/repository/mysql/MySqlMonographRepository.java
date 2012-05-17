@@ -39,7 +39,7 @@ public class MySqlMonographRepository extends MySqlRepository implements
 			}
 		}
 
-		String command = "INSERT INTO Monograph(PKMonograph, FKArea, FKStudent, FKCourse, FKAdvisor, FKCoadvisor, FKStatus) VALUES(:pKMonograph, :fKArea, :fKStudent, :fKCourse, :fKAdvisor, :fKCoadvisor, :fKStatus, :title);";
+		String command = "INSERT INTO Monograph(PKMonograph, FKArea, FKStudent, FKCourse, FKAdvisor, FKCoadvisor, FKStatus, Title) VALUES(:pKMonograph, :fKArea, :fKStudent, :fKCourse, :fKAdvisor, :fKCoadvisor, :fKStatus, :title);";
 		SqlParameterSource parameters = new BeanPropertySqlParameterSource(monograph);
 		jdbcTemplate.update(command, parameters);
 	}
@@ -66,7 +66,7 @@ public class MySqlMonographRepository extends MySqlRepository implements
 
 	@Override
 	public Monograph getMonographByTitle(String title) {
-		String query = "SELECT * FROM Status WHERE Title = :title;";
+		String query = "SELECT * FROM Monograph WHERE Title = :title;";
 		SqlParameterSource parameters = new MapSqlParameterSource ("title", title);
 
 		List<Monograph> result = jdbcTemplate.query(query, parameters,

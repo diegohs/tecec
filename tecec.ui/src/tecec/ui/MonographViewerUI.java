@@ -109,33 +109,36 @@ public class MonographViewerUI extends JFrame implements IMonographViewerUI {
 		contentPane.add(btnDeleteMonograph, "flowx,cell 2 5,alignx right,aligny bottom");
 		initDataBindings();
 	}
-	
 	protected void initDataBindings() {
 		BeanProperty<IMonographViewerController, String> iMonographViewerControllerBeanProperty = BeanProperty.create("nameFilter");
 		BeanProperty<JTextField, String> jTextFieldBeanProperty = BeanProperty.create("text");
 		AutoBinding<IMonographViewerController, String, JTextField, String> autoBinding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, monographViewerController, iMonographViewerControllerBeanProperty, txtFilter, jTextFieldBeanProperty);
 		autoBinding.bind();
 		//
-		BeanProperty<IMonographViewerController, List<Monograph>> iMonographViewerControllerBeanProperty_1 = BeanProperty.create("monograph");
+		BeanProperty<IMonographViewerController, List<Monograph>> iMonographViewerControllerBeanProperty_1 = BeanProperty.create("monographs");
 		JTableBinding<Monograph, IMonographViewerController, JTable> jTableBinding = SwingBindings.createJTableBinding(UpdateStrategy.READ, monographViewerController, iMonographViewerControllerBeanProperty_1, table);
 		//
-		BeanProperty<Monograph, String> monographBeanProperty = BeanProperty.create("description");
-		jTableBinding.addColumnBinding(monographBeanProperty).setColumnName("Monograph");
+		BeanProperty<Monograph, String> monographBeanProperty = BeanProperty.create("fKAdvisor");
+		jTableBinding.addColumnBinding(monographBeanProperty).setColumnName("Orientador");
+		//
+		BeanProperty<Monograph, String> monographBeanProperty_1 = BeanProperty.create("title");
+		jTableBinding.addColumnBinding(monographBeanProperty_1).setColumnName("T\u00EDtulo");
+		//
+		BeanProperty<Monograph, String> monographBeanProperty_2 = BeanProperty.create("fKArea");
+		jTableBinding.addColumnBinding(monographBeanProperty_2).setColumnName("\u00C1rea");
+		//
+		BeanProperty<Monograph, String> monographBeanProperty_3 = BeanProperty.create("fKCoadvisor");
+		jTableBinding.addColumnBinding(monographBeanProperty_3).setColumnName("Coorientador");
+		//
+		BeanProperty<Monograph, String> monographBeanProperty_4 = BeanProperty.create("fKCourse");
+		jTableBinding.addColumnBinding(monographBeanProperty_4).setColumnName("Curso");
+		//
+		BeanProperty<Monograph, String> monographBeanProperty_5 = BeanProperty.create("fKStatus");
+		jTableBinding.addColumnBinding(monographBeanProperty_5).setColumnName("Status");
+		//
+		BeanProperty<Monograph, String> monographBeanProperty_6 = BeanProperty.create("fKStudent");
+		jTableBinding.addColumnBinding(monographBeanProperty_6).setColumnName("Aluno");
 		//
 		jTableBinding.bind();
-		//
-		BeanProperty<IMonographViewerController, Monograph> iMonographViewerControllerBeanProperty_2 = BeanProperty.create("selectedMonograph");
-		BeanProperty<JTable, Monograph> jTableBeanProperty = BeanProperty.create("selectedElement");
-		AutoBinding<IMonographViewerController, Monograph, JTable, Monograph> autoBinding_1 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, monographViewerController, iMonographViewerControllerBeanProperty_2, table, jTableBeanProperty);
-		autoBinding_1.bind();
-		//
-		BeanProperty<IMonographViewerController, Boolean> iMonographViewerControllerBeanProperty_3 = BeanProperty.create("canUpdateMonograph");
-		BeanProperty<JButton, Boolean> jButtonBeanProperty = BeanProperty.create("enabled");
-		AutoBinding<IMonographViewerController, Boolean, JButton, Boolean> autoBinding_2 = Bindings.createAutoBinding(UpdateStrategy.READ, monographViewerController, iMonographViewerControllerBeanProperty_3, btnUpdateMonograph, jButtonBeanProperty);
-		autoBinding_2.bind();
-		//
-		BeanProperty<IMonographViewerController, Boolean> iMonographViewerControllerBeanProperty_4 = BeanProperty.create("canDeleteMonograph");
-		AutoBinding<IMonographViewerController, Boolean, JButton, Boolean> autoBinding_3 = Bindings.createAutoBinding(UpdateStrategy.READ, monographViewerController, iMonographViewerControllerBeanProperty_4, btnDeleteMonograph, jButtonBeanProperty);
-		autoBinding_3.bind();
 	}
 }

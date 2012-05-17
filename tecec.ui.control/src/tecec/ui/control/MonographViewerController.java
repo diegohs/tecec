@@ -3,7 +3,6 @@ package tecec.ui.control;
 import java.util.List;
 
 import tecec.contract.reader.IMonographReader;
-
 import tecec.contract.writer.IMonographWriter;
 
 import tecec.dto.Monograph;
@@ -36,7 +35,7 @@ public class MonographViewerController extends BaseController implements IMonogr
 		this.nameFilter = nameFilter;
 
 		super.notifyOfPropertyChange("nameFilter", old, nameFilter);
-		super.notifyOfPropertyChange("monograph", null, getMonograph());
+		super.notifyOfPropertyChange("monograph", null, getMonographs());
 	}
 
 	@Override
@@ -61,15 +60,9 @@ public class MonographViewerController extends BaseController implements IMonogr
 	}
 
 	@Override
-	public List<Monograph> getMonograph() {
-		List <Monograph> monograph = this.monographReader.getMonograph(this.nameFilter);
-		return monograph;	
-	}
-
-	@Override
 	public void deleteMonograph() {
 		this.monographWriter.deleteMonograph(this.selectedMonograph.getpKMonograph());
-		super.notifyOfPropertyChange("monograph", null, getMonograph());	
+		super.notifyOfPropertyChange("monograph", null, getMonographs());	
 	}
 
 	@Override
@@ -85,13 +78,25 @@ public class MonographViewerController extends BaseController implements IMonogr
 	@Override
 	public void showNewMonographUI() {
 		this.newMonographUI.setVisible(true);
-		super.notifyOfPropertyChange("monograph", null, getMonograph());
+		super.notifyOfPropertyChange("monograph", null, getMonographs());
 	}	
 
 	@Override
 	public void showUpdateMonographUI() {
 		this.updateMonographUI.setPKMonograph(this.selectedMonograph.getpKMonograph());
 		this.updateMonographUI.setVisible(true);		
-		super.notifyOfPropertyChange("monograph", null, getMonograph());
+		super.notifyOfPropertyChange("monograph", null, getMonographs());
+	}
+
+	@Override
+	public List<Monograph> getMonographs() {
+		List<Monograph> monographs = this.monographReader.getMonograph("");
+		return monographs;
+	}
+
+	@Override
+	public boolean getCanCreateNewMonograph() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
