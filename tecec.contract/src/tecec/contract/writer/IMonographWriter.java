@@ -2,16 +2,16 @@ package tecec.contract.writer;
 
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
+import tecec.dto.Monograph;
 
 public interface IMonographWriter {
-	RuleViolation getCreationViolation (String title);
+	RuleViolation getCreationViolation (Monograph newMonograph);
 	
-	RuleViolation getUpdateViolation (String pKMonograph, String newTitle);
+	RuleViolation getUpdateViolation (Monograph newMonograph);
 	
-	void createMonograph (String title) throws RuleViolationException;
+	void createMonograph (Monograph newMonograph) throws RuleViolationException;
 	
-	void updateMonograph (String pKMonograph, String newTitle)
-		throws RuleViolationException;
+	void updateMonograph (Monograph newMonograph)	throws RuleViolationException;
 	
 	void deleteMonograph (String pKMonograph);
 }

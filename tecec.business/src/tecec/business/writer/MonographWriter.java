@@ -16,16 +16,18 @@ public class MonographWriter implements IMonographWriter {
 		this.monograhRepository = monographRepository;
 	}
 	
+	/*Rules*/
+	
 	@Override
-	public RuleViolation getCreationViolation(String title) {
-		if(title == null || title.trim().isEmpty()){
+	public RuleViolation getCreationViolation(Monograph newMonograph) {
+		if(newMonograph.getTitle() == null || newMonograph.getTitle().trim().isEmpty()){
 			return new RuleViolation ("O título da monografia deve ser preenchido.");
 		} else {
-			if(title.length() > 512)
+			if(newMonograph.getTitle().length() > 512)
 				return new RuleViolation ("O título da monografia deve ser menor que 512 caracteres.");			
 		}
 		
-		Monograph monograph = monograhRepository.getMonographByTitle(title);
+		Monograph monograph = monograhRepository.getMonographByTitle(newMonograph.getTitle());
 		
 		if (monograph != null)
 			return new RuleViolation ("Já existe outra monografia cadastrada com a mesma descrição.");
@@ -34,50 +36,52 @@ public class MonographWriter implements IMonographWriter {
 	}
 
 	@Override
-	public RuleViolation getUpdateViolation(String pKMonograph, String newTitle) {
-		Monograph monograph = this.monograhRepository.getMonographByPK(pKMonograph);
+	public RuleViolation getUpdateViolation(Monograph newMonograph) {
+		Monograph monograph = this.monograhRepository.getMonographByPK(newMonograph.getpKMonograph());
 		
 		if (monograph == null)
 			return new RuleViolation ("A monografia selecionada não existe no banco de dados.");
 		
-		if (newTitle == null || newTitle.trim().isEmpty())
+		if (newMonograph.getTitle() == null || newMonograph.getTitle().trim().isEmpty())
 			return new RuleViolation ("O novo título da monografia deve ser preenchida.");
 		
-		monograph = this.monograhRepository.getMonographByTitle(newTitle);
+		monograph = this.monograhRepository.getMonographByTitle(newMonograph.getTitle());
 		
 		if(monograph != null){
-			if(!monograph.getpKMonograph().equals(pKMonograph))
+			if(!monograph.getpKMonograph().equals(newMonograph.getpKMonograph()))
 				return new RuleViolation ("Já existe outra monografia cadastrada com esta descrição.");
 		}
 		
 		return null;
 	}
+	
+	/*End of rules*/
+	
+	/*Data settings methods*/
 
 	@Override
-	public void createMonograph(String title)
-			throws RuleViolationException {
-		RuleViolation violation = getCreationViolation(title);
+	public void createMonograph(Monograph newMonograph) throws RuleViolationException {
+		RuleViolation violation = getCreationViolation(newMonograph);
 		
 		if(violation != null)
 			throw new RuleViolationException(violation);
 		
 		Monograph monograph = new Monograph();
-		monograph.setTitle(title);
+		monograph.setTitle(newMonograph.getTitle());
 		this.monograhRepository.insertMonograph(monograph);
 
 	}
 
 	@Override
-	public void updateMonograph(String pKMonograph, String newTitle)
-			throws RuleViolationException {
-		RuleViolation violation = getUpdateViolation(pKMonograph, newTitle);
+	public void updateMonograph(Monograph newMonograph) throws RuleViolationException {
+		RuleViolation violation = getUpdateViolation(newMonograph);
 		
 		if(violation != null)
 			throw new RuleViolationException(violation);
 		
 		Monograph monograph = new Monograph();
-		monograph.setpKMonograph(pKMonograph);
-		monograph.setTitle(newTitle);
+		monograph.setpKMonograph(newMonograph.getpKMonograph());
+		monograph.setTitle(newMonograph.getTitle());
 		
 		this.monograhRepository.updateMonograph(monograph);
 	}
@@ -86,5 +90,4 @@ public class MonographWriter implements IMonographWriter {
 	public void deleteMonograph(String pKMonograph) {
 		this.monograhRepository.deleteMonograph(pKMonograph);
 	}
-
 }
