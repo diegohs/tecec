@@ -129,26 +129,26 @@ public class MonographViewerUI extends JFrame implements IMonographViewerUI {
 		BeanProperty<IMonographViewerController, List<MonographRecord>> iMonographViewerControllerBeanProperty_3 = BeanProperty.create("monographs");
 		JTableBinding<MonographRecord, IMonographViewerController, JTable> jTableBinding = SwingBindings.createJTableBinding(UpdateStrategy.READ, monographViewerController, iMonographViewerControllerBeanProperty_3, tblMonograph);
 		//
-		BeanProperty<MonographRecord, String> monographRecordBeanProperty = BeanProperty.create("student");
-		jTableBinding.addColumnBinding(monographRecordBeanProperty).setColumnName("Aluno").setEditable(false);
+		BeanProperty<MonographRecord, String> monographRecordBeanProperty = BeanProperty.create("monograph.title");
+		jTableBinding.addColumnBinding(monographRecordBeanProperty).setColumnName("T\u00EDtulo").setEditable(false);
 		//
-		BeanProperty<MonographRecord, String> monographRecordBeanProperty_6 = BeanProperty.create("monograph.title");
-		jTableBinding.addColumnBinding(monographRecordBeanProperty_6).setColumnName("T\u00EDtulo").setEditable(false);
+		BeanProperty<MonographRecord, String> monographRecordBeanProperty_1 = BeanProperty.create("student");
+		jTableBinding.addColumnBinding(monographRecordBeanProperty_1).setColumnName("Aluno").setEditable(false);
 		//
-		BeanProperty<MonographRecord, String> monographRecordBeanProperty_1 = BeanProperty.create("course");
-		jTableBinding.addColumnBinding(monographRecordBeanProperty_1).setColumnName("Curso").setEditable(false);
+		BeanProperty<MonographRecord, String> monographRecordBeanProperty_2 = BeanProperty.create("course");
+		jTableBinding.addColumnBinding(monographRecordBeanProperty_2).setColumnName("Curso").setEditable(false);
 		//
-		BeanProperty<MonographRecord, String> monographRecordBeanProperty_2 = BeanProperty.create("area");
-		jTableBinding.addColumnBinding(monographRecordBeanProperty_2).setColumnName("\u00C1rea").setEditable(false);
+		BeanProperty<MonographRecord, String> monographRecordBeanProperty_3 = BeanProperty.create("area");
+		jTableBinding.addColumnBinding(monographRecordBeanProperty_3).setColumnName("\u00C1rea").setEditable(false);
 		//
-		BeanProperty<MonographRecord, String> monographRecordBeanProperty_3 = BeanProperty.create("advisor");
-		jTableBinding.addColumnBinding(monographRecordBeanProperty_3).setColumnName("Orientador").setEditable(false);
+		BeanProperty<MonographRecord, String> monographRecordBeanProperty_4 = BeanProperty.create("advisor");
+		jTableBinding.addColumnBinding(monographRecordBeanProperty_4).setColumnName("Orientador").setEditable(false);
 		//
-		BeanProperty<MonographRecord, String> monographRecordBeanProperty_4 = BeanProperty.create("coadvisor");
-		jTableBinding.addColumnBinding(monographRecordBeanProperty_4).setColumnName("Coorientador").setEditable(false);
+		BeanProperty<MonographRecord, String> monographRecordBeanProperty_5 = BeanProperty.create("coadvisor");
+		jTableBinding.addColumnBinding(monographRecordBeanProperty_5).setColumnName("Coorientador").setEditable(false);
 		//
-		BeanProperty<MonographRecord, String> monographRecordBeanProperty_5 = BeanProperty.create("status");
-		jTableBinding.addColumnBinding(monographRecordBeanProperty_5).setColumnName("Status").setEditable(false);
+		BeanProperty<MonographRecord, String> monographRecordBeanProperty_6 = BeanProperty.create("status");
+		jTableBinding.addColumnBinding(monographRecordBeanProperty_6).setColumnName("Status").setEditable(false);
 		//
 		jTableBinding.bind();
 		//

@@ -18,13 +18,13 @@ public interface IUpdateMonographController {
 	Course getSelectedCourse();
 	void setSelectedCourse(Course course);
 	void setSelectedCourseIndex(int i);
-	int getSelecteCourseIndex();	
+	int getSelectedCourseIndex();	
 	
 	/*Area*/
 	List<Area> getAreas();
 	Area getSelectedArea();
 	void setSelectedArea(Area area);
-	void setSelectecAreaIndex(int i);
+	void setSelectedAreaIndex(int i);
 	int getSelectedAreaIndex();
 	
 	/*Student*/
@@ -57,7 +57,7 @@ public interface IUpdateMonographController {
 	
 	/*Monograph*/
 	List<Monograph> getMonographs();
-	void setMonographPK(String pKMonograph);
+	void setPKMonograph(String pKMonograph);
 	void setMonographTitle(String title);
 	String getMonographTitle();
 	

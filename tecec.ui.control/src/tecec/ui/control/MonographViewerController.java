@@ -63,7 +63,7 @@ public class MonographViewerController extends BaseController implements IMonogr
 	public void setNameFilter(String nameFilter) {
 		this.nameFilter = nameFilter;
 
-		super.notifyOfPropertyChange("monograph", null, getMonographs());
+		super.notifyOfPropertyChange("monographs", null, getMonographs());
 	}
 
 	@Override
@@ -75,7 +75,7 @@ public class MonographViewerController extends BaseController implements IMonogr
 	public void showNewMonographUI() {
 		this.newMonographUI.setVisible(true);
 		
-		super.notifyOfPropertyChange("monograph", null, getMonographs());
+		super.notifyOfPropertyChange("monographs", null, getMonographs());
 	}
 	
 	@Override
@@ -83,14 +83,14 @@ public class MonographViewerController extends BaseController implements IMonogr
 		this.updateMonographUI.setPKMonograph(this.selectedMonograph.getMonograph().getpKMonograph());
 		this.updateMonographUI.setVisible(true);		
 		
-		super.notifyOfPropertyChange("monograph", null, getMonographs());
+		super.notifyOfPropertyChange("monographs", null, getMonographs());
 	}
 	
 	@Override
 	public void deleteMonograph() {
 		this.monographWriter.deleteMonograph(this.selectedMonograph.getMonograph().getpKMonograph());
 		
-		super.notifyOfPropertyChange("monograph", null, getMonographs());	
+		super.notifyOfPropertyChange("monographs", null, getMonographs());	
 	}
 	
 	@Override
@@ -105,8 +105,8 @@ public class MonographViewerController extends BaseController implements IMonogr
 		this.selectedMonograph = monograph;
 
 		super.notifyOfPropertyChange("selectedMonograph", old, monograph);
-		super.notifyOfPropertyChange("canUpdateMonograph", old, monograph);
-		super.notifyOfPropertyChange("canDeleteMonograph", old, monograph);
+		super.notifyOfPropertyChange("canUpdateMonograph", null, getCanUpdateMonograph());
+		super.notifyOfPropertyChange("canDeleteMonograph", null, getCanDeleteMonograph());
 
 	}
 	

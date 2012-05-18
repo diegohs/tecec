@@ -7,6 +7,7 @@ import tecec.contract.RuleViolationException;
 import tecec.contract.reader.IAdvisorReader;
 import tecec.contract.reader.IAreaReader;
 import tecec.contract.reader.ICourseReader;
+import tecec.contract.reader.IMonographReader;
 import tecec.contract.reader.IStatusReader;
 import tecec.contract.reader.IStudentReader;
 import tecec.contract.writer.IMonographWriter;
@@ -23,6 +24,7 @@ public class NewMonographController extends BaseController implements INewMonogr
 	
 	/*Monograph*/
 	private IMonographWriter monographWriter;
+	private IMonographReader monographReader;
 	private String title;
 	
 	/*Course*/
@@ -58,7 +60,8 @@ public class NewMonographController extends BaseController implements INewMonogr
 	/*Constructor*/
 	
 	public NewMonographController(IMonographWriter monographWriter, ICourseReader courseReader, IAreaReader areaReader,
-			IStudentReader studentReader, IAdvisorReader advisorReader, IStatusReader statusReader, IAdvisorReader coadvisorReader){
+			IStudentReader studentReader, IAdvisorReader advisorReader, IStatusReader statusReader,
+			IAdvisorReader coadvisorReader, IMonographReader monographReader){
 		if(monographWriter == null)
 			throw new IllegalArgumentException("monographWriter");
 		this.monographWriter = monographWriter;
@@ -68,6 +71,7 @@ public class NewMonographController extends BaseController implements INewMonogr
 		this.advisorReader = advisorReader;
 		this.statusReader = statusReader;
 		this.coadvisorReader = coadvisorReader;
+		this.monographReader = monographReader;
 	}
 	
 	@Override
@@ -110,11 +114,10 @@ public class NewMonographController extends BaseController implements INewMonogr
 
 	@Override
 	public void setMonographTitle(String title) {
-		String oldValue = getMonographTitle();
-		
+				
 		this.title = title;
 		
-		notifyOfPropertyChange("monographTitle", oldValue, title);
+		super.notifyOfPropertyChange("monographTitle", null, title);
 	}
 
 	@Override
@@ -126,7 +129,21 @@ public class NewMonographController extends BaseController implements INewMonogr
 		
 		monographWriter.createMonograph(getMonograph());
 		setMonographTitle("");
+		
+		super.notifyOfPropertyChange("monographs", null, getMonographs());
 	}
+	
+	@Override
+	public List<Monograph> getMonographs() {
+		List<Monograph> monographs = this.monographReader.getMonograph("");
+		Monograph emptyMonograph = new Monograph();
+		
+		emptyMonograph.setTitle(" ");
+		monographs.add(0, emptyMonograph);
+		
+		return monographs;
+	}
+
 	
 	/*End of Monograph*/
 	
