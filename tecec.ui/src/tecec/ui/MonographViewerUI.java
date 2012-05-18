@@ -28,6 +28,8 @@ import tecec.ui.contract.control.IMonographViewerController;
 import tecec.ui.contract.view.IMonographViewerUI;
 
 import javax.swing.ListSelectionModel;
+import tecec.ui.contract.record.MonographRecord;
+import org.jdesktop.beansbinding.ObjectProperty;
 
 public class MonographViewerUI extends JFrame implements IMonographViewerUI {
 
@@ -52,7 +54,7 @@ public class MonographViewerUI extends JFrame implements IMonographViewerUI {
 	private JPanel contentPane;
 	private JTextField txtFilter;
 	private JScrollPane scrollPane;
-	private JTable table;
+	private JTable tblMonograph;
 	private JButton btnNewMonograph;
 	private JButton btnUpdateMonograph;
 	private JButton btnDeleteMonograph;
@@ -80,9 +82,9 @@ public class MonographViewerUI extends JFrame implements IMonographViewerUI {
 		scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, "cell 1 3 2 1,grow");
 		
-		table = new JTable();
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		scrollPane.setViewportView(table);
+		tblMonograph = new JTable();
+		tblMonograph.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPane.setViewportView(tblMonograph);
 		
 		btnNewMonograph = new JButton("Adicionar Novo");
 		btnNewMonograph.addActionListener(new ActionListener() {
@@ -115,30 +117,44 @@ public class MonographViewerUI extends JFrame implements IMonographViewerUI {
 		AutoBinding<IMonographViewerController, String, JTextField, String> autoBinding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, monographViewerController, iMonographViewerControllerBeanProperty, txtFilter, jTextFieldBeanProperty);
 		autoBinding.bind();
 		//
-		BeanProperty<IMonographViewerController, List<Monograph>> iMonographViewerControllerBeanProperty_1 = BeanProperty.create("monographs");
-		JTableBinding<Monograph, IMonographViewerController, JTable> jTableBinding = SwingBindings.createJTableBinding(UpdateStrategy.READ, monographViewerController, iMonographViewerControllerBeanProperty_1, table);
+		BeanProperty<IMonographViewerController, Boolean> iMonographViewerControllerBeanProperty_1 = BeanProperty.create("canUpdateMonograph");
+		BeanProperty<JButton, Boolean> jButtonBeanProperty = BeanProperty.create("enabled");
+		AutoBinding<IMonographViewerController, Boolean, JButton, Boolean> autoBinding_1 = Bindings.createAutoBinding(UpdateStrategy.READ, monographViewerController, iMonographViewerControllerBeanProperty_1, btnUpdateMonograph, jButtonBeanProperty);
+		autoBinding_1.bind();
 		//
-		BeanProperty<Monograph, String> monographBeanProperty = BeanProperty.create("fKAdvisor");
-		jTableBinding.addColumnBinding(monographBeanProperty).setColumnName("Orientador");
+		BeanProperty<IMonographViewerController, Boolean> iMonographViewerControllerBeanProperty_2 = BeanProperty.create("canDeleteMonograph");
+		AutoBinding<IMonographViewerController, Boolean, JButton, Boolean> autoBinding_2 = Bindings.createAutoBinding(UpdateStrategy.READ, monographViewerController, iMonographViewerControllerBeanProperty_2, btnDeleteMonograph, jButtonBeanProperty);
+		autoBinding_2.bind();
 		//
-		BeanProperty<Monograph, String> monographBeanProperty_1 = BeanProperty.create("title");
-		jTableBinding.addColumnBinding(monographBeanProperty_1).setColumnName("T\u00EDtulo");
+		BeanProperty<IMonographViewerController, List<MonographRecord>> iMonographViewerControllerBeanProperty_3 = BeanProperty.create("monographs");
+		JTableBinding<MonographRecord, IMonographViewerController, JTable> jTableBinding = SwingBindings.createJTableBinding(UpdateStrategy.READ, monographViewerController, iMonographViewerControllerBeanProperty_3, tblMonograph);
 		//
-		BeanProperty<Monograph, String> monographBeanProperty_2 = BeanProperty.create("fKArea");
-		jTableBinding.addColumnBinding(monographBeanProperty_2).setColumnName("\u00C1rea");
+		BeanProperty<MonographRecord, String> monographRecordBeanProperty = BeanProperty.create("student");
+		jTableBinding.addColumnBinding(monographRecordBeanProperty).setColumnName("Aluno").setEditable(false);
 		//
-		BeanProperty<Monograph, String> monographBeanProperty_3 = BeanProperty.create("fKCoadvisor");
-		jTableBinding.addColumnBinding(monographBeanProperty_3).setColumnName("Coorientador");
+		BeanProperty<MonographRecord, String> monographRecordBeanProperty_6 = BeanProperty.create("monograph.title");
+		jTableBinding.addColumnBinding(monographRecordBeanProperty_6).setColumnName("T\u00EDtulo").setEditable(false);
 		//
-		BeanProperty<Monograph, String> monographBeanProperty_4 = BeanProperty.create("fKCourse");
-		jTableBinding.addColumnBinding(monographBeanProperty_4).setColumnName("Curso");
+		BeanProperty<MonographRecord, String> monographRecordBeanProperty_1 = BeanProperty.create("course");
+		jTableBinding.addColumnBinding(monographRecordBeanProperty_1).setColumnName("Curso").setEditable(false);
 		//
-		BeanProperty<Monograph, String> monographBeanProperty_5 = BeanProperty.create("fKStatus");
-		jTableBinding.addColumnBinding(monographBeanProperty_5).setColumnName("Status");
+		BeanProperty<MonographRecord, String> monographRecordBeanProperty_2 = BeanProperty.create("area");
+		jTableBinding.addColumnBinding(monographRecordBeanProperty_2).setColumnName("\u00C1rea").setEditable(false);
 		//
-		BeanProperty<Monograph, String> monographBeanProperty_6 = BeanProperty.create("fKStudent");
-		jTableBinding.addColumnBinding(monographBeanProperty_6).setColumnName("Aluno");
+		BeanProperty<MonographRecord, String> monographRecordBeanProperty_3 = BeanProperty.create("advisor");
+		jTableBinding.addColumnBinding(monographRecordBeanProperty_3).setColumnName("Orientador").setEditable(false);
+		//
+		BeanProperty<MonographRecord, String> monographRecordBeanProperty_4 = BeanProperty.create("coadvisor");
+		jTableBinding.addColumnBinding(monographRecordBeanProperty_4).setColumnName("Coorientador").setEditable(false);
+		//
+		BeanProperty<MonographRecord, String> monographRecordBeanProperty_5 = BeanProperty.create("status");
+		jTableBinding.addColumnBinding(monographRecordBeanProperty_5).setColumnName("Status").setEditable(false);
 		//
 		jTableBinding.bind();
+		//
+		BeanProperty<IMonographViewerController, MonographRecord> iMonographViewerControllerBeanProperty_4 = BeanProperty.create("selectedMonograph");
+		BeanProperty<JTable, MonographRecord> jTableBeanProperty = BeanProperty.create("selectedElement");
+		AutoBinding<IMonographViewerController, MonographRecord, JTable, MonographRecord> autoBinding_3 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, monographViewerController, iMonographViewerControllerBeanProperty_4, tblMonograph, jTableBeanProperty);
+		autoBinding_3.bind();
 	}
 }

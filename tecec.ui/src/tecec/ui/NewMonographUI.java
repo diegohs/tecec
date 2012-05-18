@@ -34,6 +34,7 @@ import java.util.List;
 import org.jdesktop.swingbinding.JComboBoxBinding;
 import org.jdesktop.swingbinding.SwingBindings;
 import tecec.dto.Area;
+import javax.swing.SwingConstants;
 
 public class NewMonographUI extends JDialog implements INewMonographUI {	
 	/**
@@ -101,11 +102,11 @@ public class NewMonographUI extends JDialog implements INewMonographUI {
 		setLocationByPlatform(true);
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		setBounds(100, 100, 436, 302);
+		setBounds(100, 100, 436, 307);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[grow][grow][grow]", "[grow][][56.00][][29.00][grow]"));		
+		contentPane.setLayout(new MigLayout("", "[grow][grow][grow]", "[grow][][56.00][][29.00][grow][][][][][][][]"));		
 		
 		lblTitulo = new JLabel("Cadastrar Nova Monografia");
 		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -286,14 +287,15 @@ public class NewMonographUI extends JDialog implements INewMonographUI {
 				return this;
 			}
 		});
-
-		btnCreateMonograph = new JButton("Cadastrar");
-		btnCreateMonograph.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				storeMonograph();
-			}
-		});
-		contentPane.add(btnCreateMonograph, "cell 1 8,alignx center,growy");
+												
+														btnCreateMonograph = new JButton("Cadastrar");
+														btnCreateMonograph.setHorizontalAlignment(SwingConstants.RIGHT);
+														btnCreateMonograph.addActionListener(new ActionListener() {
+															public void actionPerformed(ActionEvent arg0) {
+																storeMonograph();
+															}
+														});
+														contentPane.add(btnCreateMonograph, "cell 1 8,alignx right,growy");
 		initDataBindings();
 	}
 	protected void initDataBindings() {

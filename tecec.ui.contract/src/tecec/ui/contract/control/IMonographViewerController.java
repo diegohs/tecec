@@ -1,21 +1,21 @@
 package tecec.ui.contract.control;
 
 import java.util.List;
-import tecec.dto.Monograph;
+
+import tecec.ui.contract.record.MonographRecord;
 
 public interface IMonographViewerController {
 
 	void setNameFilter (String nameFilter);
 	String getNameFilter ();
 	
-	List<Monograph> getMonographs();
-	Monograph getSelectedMonograph();
-	void setSelectedMonograph(Monograph monograph);
+	List<MonographRecord> getMonographs();
+	MonographRecord getSelectedMonograph();
+	void setSelectedMonograph(MonographRecord monograph);
 	
 	void showNewMonographUI();
 	void showUpdateMonographUI();	
 	
-	boolean getCanCreateNewMonograph();
 	boolean getCanUpdateMonograph();
 	boolean getCanDeleteMonograph ();
 	

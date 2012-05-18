@@ -58,9 +58,10 @@ public class MySqlMonographRepository extends MySqlRepository implements
 	}
 
 	@Override
-	public void deleteMonograph(String monograph) {
-		String command = "DELETE FROM Monograph WHERE PKMonograph = :pKMonograph;";
-		SqlParameterSource parameters = new BeanPropertySqlParameterSource(monograph);
+	public void deleteMonograph(String pKMonograph) {
+		String command = " DELETE FROM Monograph WHERE PKMonograph = :pKMonograph;";
+		
+		SqlParameterSource parameters = new MapSqlParameterSource("pKMonograph",pKMonograph);
 		jdbcTemplate.update(command, parameters);
 	}
 
@@ -110,13 +111,18 @@ public class MySqlMonographRepository extends MySqlRepository implements
 
 	@Override
 	public List<Monograph> getMonograph(String nameFilter) {
-		String query = "SELECT * FROM Monograph WHERE Title LIKE :nameFilter;";
 		if (nameFilter == null)
 			nameFilter = "";
-
+		
+		String query = " SELECT * FROM Monograph WHERE Title LIKE :nameFilter ORDER BY FKStudent;";
+		
 		SqlParameterSource parameters = new MapSqlParameterSource("nameFilter",
 				"%" + nameFilter + "%");
 
+		return getMonograph(query, parameters);		
+	}
+	
+	private List<Monograph> getMonograph(String query, SqlParameterSource parameters){
 		List<Monograph> result = jdbcTemplate.query(query, parameters,
 				new RowMapper<Monograph>() {
 			@Override
@@ -124,10 +130,16 @@ public class MySqlMonographRepository extends MySqlRepository implements
 				Monograph monograph = new Monograph();
 				monograph.setTitle(arg0.getString("Title"));
 				monograph.setpKMonograph(arg0.getString("PKMonograph"));
+				monograph.setfKAdvisor(arg0.getString("FKAdvisor"));
+				monograph.setfKArea(arg0.getString("FKArea"));
+				monograph.setfKCoadvisor(arg0.getString("FKCoadvisor"));
+				monograph.setfKCourse(arg0.getString("FKCourse"));
+				monograph.setfKStatus(arg0.getString("FKStatus"));
+				monograph.setfKStudent(arg0.getString("FKStudent"));
 				return monograph;
 			}
 		});
-
+		
 		return result;
 	}
 

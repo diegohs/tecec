@@ -5,7 +5,12 @@ import java.util.List;
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
 
+import tecec.contract.reader.IAdvisorReader;
+import tecec.contract.reader.IAreaReader;
+import tecec.contract.reader.ICourseReader;
 import tecec.contract.reader.IMonographReader;
+import tecec.contract.reader.IStatusReader;
+import tecec.contract.reader.IStudentReader;
 
 import tecec.contract.writer.IMonographWriter;
 
@@ -20,38 +25,144 @@ import tecec.ui.contract.control.IUpdateMonographController;
 
 public class UpdateMonographController extends BaseController implements IUpdateMonographController {
 	
-	private String pKMonograph;
-	private String monographTitle;
+	/*Monograph*/
 	private IMonographWriter monographWriter;
-	private IMonographReader monographReader;	
+	private IMonographReader monographReader;
+	private String pKMonograph;
+	private String title;
 	
-	/* Construtor */
-	public UpdateMonographController (IMonographWriter monographWriter, IMonographReader monographReader) {
+	/*Course*/
+	private ICourseReader courseReader;
+	private Course selectedCourse;
+	private int selectedCourseIndex;
+	
+	/*Area*/
+	private IAreaReader areaReader;
+	private Area selectedArea;
+	private int selectedAreaIndex;
+	
+	/*Student*/
+	private IStudentReader studentReader;
+	private Student selectedStudent;
+	private int selectedStudentIndex;
+	
+	/*Advisor*/
+	private IAdvisorReader advisorReader;
+	private Advisor selectedAdvisor;
+	private int selectedAdvisorIndex;
+	
+	/*Coadvisor*/
+	private IAdvisorReader coadvisorReader;
+	private Advisor selectedCoadvisor;
+	private int selectedCoadvisorIndex;
+	
+	/*Status*/
+	private IStatusReader statusReader;
+	private Status selectedStatus;
+	private int selectedStatusIndex;
+	
+	/*Constructor*/
+
+	public UpdateMonographController (IMonographReader monographReader, IMonographWriter monographWriter, ICourseReader courseReader, IAreaReader areaReader,
+			IStudentReader studentReader, IAdvisorReader advisorReader, IStatusReader statusReader, IAdvisorReader coadvisorReader) {
 		this.monographWriter = monographWriter;
 		this.monographReader = monographReader;
+		this.courseReader = courseReader;
+		this.areaReader = areaReader;
+		this.studentReader = studentReader;
+		this.advisorReader = advisorReader;
+		this.statusReader = statusReader;
+		this.coadvisorReader = coadvisorReader;
 	}
 	
 
 	@Override
 	public RuleViolation getUpdateViolation() {
-		// TODO Auto-generated method stub
-		return null;
+		Monograph monograph = new Monograph();
+		
+		return this.monographWriter.getUpdateViolation(monograph);
 	}
 	
 	/*Monograph*/
+
+	@Override
+	public void setMonographTitle(String title) {
+		this.title = title;
+	}
+
+
+	@Override
+	public String getMonographTitle() {
+		return this.title;
+	}
+	
+	@Override
+	public void setMonographPK(String pKMonograph){
+		this.pKMonograph = pKMonograph;
+		
+		Monograph monograph = this.monographReader.getMonographByPK(this.pKMonograph);
+		this.setMonographTitle(monograph.getTitle());
+	}
 	
 	private Monograph getMonograph(){
-		return null;
+		Monograph monograph = new Monograph();
+		
+		monograph.setpKMonograph(this.pKMonograph);
+		
+		if(this.selectedAdvisor != null)
+			monograph.setfKAdvisor(this.selectedAdvisor.getPKAdvisor());
+		
+		if(this.selectedArea != null)
+			monograph.setfKArea(this.selectedArea.getpKArea());
+		
+		if(this.selectedCoadvisor != null)
+			monograph.setfKCoadvisor(this.selectedCoadvisor.getPKAdvisor());
+		
+		if(this.selectedCourse != null)
+			monograph.setfKCourse(this.selectedCourse.getPKCourse());
+		
+		if(this.selectedStatus != null)
+			monograph.setfKStatus(this.selectedStatus.getpKStatus());
+		
+		if(this.selectedStudent != null)
+			monograph.setfKStudent(this.selectedStudent.getPKStudent());
+		
+		return monograph;
 	}
+
 
 	@Override
 	public void updateMonograph() throws RuleViolationException {
-		RuleViolation violation = getUpdateViolation();
-		if (violation != null) {
-			throw new RuleViolationException(violation);
+		Monograph monograph = getMonograph();
+		
+		this.monographWriter.updateMonograph(monograph);
+		
+		this.setSelectedAdvisor(null);
+		this.setSelectedArea(null);
+		this.setSelectedCoadvisor(null);
+		this.setSelectedCourse(null);
+		this.setSelectedStatus(null);
+		this.setSelectedStudent(null);
+		
+		this.setMonographTitle("");
+	}
+	
+	@Override
+	public List<Monograph> getMonographs() {
+		List<Monograph> monographs = this.monographReader.getMonograph("");
+		Monograph emptyMonograph = new Monograph();
+		
+		emptyMonograph.setTitle(" ");
+		monographs.add(0, emptyMonograph);
+		
+		if(this.pKMonograph != null && !this.pKMonograph.isEmpty()){
+			for(int i=0; i< monographs.size(); i++){
+				if(this.pKMonograph.equals(monographs.get(i).getpKMonograph())){
+					monographs.remove(i);
+				}		
+			}
 		}
-		this.monographWriter.updateMonograph(getMonograph());
-				
+		return null;
 	}
 	
 	/*End of Monograph*/
@@ -60,32 +171,33 @@ public class UpdateMonographController extends BaseController implements IUpdate
 
 	@Override
 	public List<Course> getCourses() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Course> courses = this.courseReader.getCourses("");
+		Course emptyCourse = new Course();
+		
+		emptyCourse.setName(" ");
+		courses.add(0, emptyCourse);
+		
+		return courses;
 	}
 
 	@Override
 	public Course getSelectedCourse() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.selectedCourse;
 	}
 
 	@Override
 	public void setSelectedCourse(Course course) {
-		// TODO Auto-generated method stub
-		
+		this.selectedCourse = course;
 	}
 
 	@Override
 	public void setSelectedCourseIndex(int i) {
-		// TODO Auto-generated method stub
-		
+		this.selectedCourseIndex = i;
 	}
 
 	@Override
 	public int getSelecteCourseIndex() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.selectedCourseIndex;
 	}
 	
 	/*End of Courses*/
@@ -94,32 +206,33 @@ public class UpdateMonographController extends BaseController implements IUpdate
 
 	@Override
 	public List<Area> getAreas() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Area> areas = this.areaReader.getAreas("");
+		Area emptyArea = new Area();
+		
+		emptyArea.setDescription(" ");
+		areas.add(0, emptyArea);
+		
+		return areas;
 	}
 
 	@Override
 	public Area getSelectedArea() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.selectedArea;
 	}
 
 	@Override
 	public void setSelectedArea(Area area) {
-		// TODO Auto-generated method stub
-		
+		this.selectedArea = area;
 	}
 
 	@Override
 	public void setSelectecAreaIndex(int i) {
-		// TODO Auto-generated method stub
-		
+		this.selectedAreaIndex = i;
 	}
 
 	@Override
 	public int getSelectedAreaIndex() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.selectedAreaIndex;
 	}
 	
 	/*End of Area*/
@@ -128,32 +241,33 @@ public class UpdateMonographController extends BaseController implements IUpdate
 
 	@Override
 	public List<Student> getStudents() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Student> students = this.studentReader.getStudents("");
+		Student emptyStudent = new Student();
+		
+		emptyStudent.setName(" ");
+		students.add(0, emptyStudent);
+		
+		return students;
 	}
 
 	@Override
 	public Student getSelectedStudent() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.selectedStudent;
 	}
 
 	@Override
 	public void setSelectedStudent(Student student) {
-		// TODO Auto-generated method stub
-		
+		this.selectedStudent = student;
 	}
 
 	@Override
 	public void setSelectedStudentIndex(int i) {
-		// TODO Auto-generated method stub
-		
+		this.selectedStudentIndex = i;
 	}
 
 	@Override
 	public int getSelectedStudentIndex() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.selectedStudentIndex;
 	}
 	
 	/*End of Student*/
@@ -162,38 +276,33 @@ public class UpdateMonographController extends BaseController implements IUpdate
 
 	@Override
 	public List<Advisor> getAdvisors() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Advisor> advisors = this.advisorReader.getAdvisors("");
+		Advisor emptyAdvisor = new Advisor();
+		
+		emptyAdvisor.setName(" ");
+		advisors.add(0, emptyAdvisor);
+		
+		return advisors;
 	}
 
 	@Override
 	public Advisor getSelectedAdvisor() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.selectedAdvisor;
 	}
 
 	@Override
 	public void setSelectedAdvisor(Advisor advisor) {
-		// TODO Auto-generated method stub
-		
+		this.selectedAdvisor = advisor;
 	}
 
 	@Override
 	public void setSelectedAdvisorIndex(int i) {
-		// TODO Auto-generated method stub
-		
+		this.selectedAdvisorIndex = i;
 	}
 
 	@Override
 	public int getSelectedAdvisorIndex() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public List<Advisor> getCoadvisors() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.selectedAdvisorIndex;
 	}
 	
 	/*End of Advisor*/
@@ -201,27 +310,34 @@ public class UpdateMonographController extends BaseController implements IUpdate
 	/*Coadvisor*/
 
 	@Override
+	public List<Advisor> getCoadvisors() {
+		List<Advisor> coadvisors = this.coadvisorReader.getAdvisors("");
+		Advisor emptyCoadvisor = new Advisor();
+		
+		emptyCoadvisor.setName(" ");
+		coadvisors.add(0, emptyCoadvisor);
+		
+		return coadvisors;
+	}
+
+	@Override
 	public Advisor getSelectedCoadvisor() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.selectedCoadvisor;
 	}
 
 	@Override
 	public void setSelectedCoadvisor(Advisor coadvisor) {
-		// TODO Auto-generated method stub
-		
+		this.selectedCoadvisor = coadvisor;
 	}
 
 	@Override
 	public void setSelectedCoadvisorIndex(int i) {
-		// TODO Auto-generated method stub
-		
+		this.selectedCoadvisorIndex = i;
 	}
 
 	@Override
 	public int getSelectedCoadvisorIndex() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.selectedCoadvisorIndex;
 	}
 	
 	/*End of Coadvisor*/
@@ -230,31 +346,34 @@ public class UpdateMonographController extends BaseController implements IUpdate
 
 	@Override
 	public List<Status> getStatus() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Status> statuses = this.statusReader.getStatus("");
+		Status emptyStatus = new Status();
+		
+		emptyStatus.setDescription(" ");
+		statuses.add(0, emptyStatus);
+		
+		return statuses;
 	}
 
 	@Override
 	public Status getSelectedStatus() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.selectedStatus;
 	}
 
 	@Override
-	public void setSeletectedStatus(Status status) {
-		// TODO Auto-generated method stub
-		
+	public void setSelectedStatus(Status status) {
+		this.selectedStatus = status;
 	}
 
 	@Override
 	public void setSelectedStatusIndex(int i) {
-		// TODO Auto-generated method stub
-		
+		this.selectedStatusIndex = i;
 	}
 
 	@Override
 	public int getSelectedStatusIndex() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.selectedStatusIndex;
 	}
+	
+	/*End of Status*/
 }
