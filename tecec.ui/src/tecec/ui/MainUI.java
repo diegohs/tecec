@@ -57,6 +57,7 @@ public class MainUI implements IMainUI {
 	}
 
 	private void initialize() {
+		frame.setDefaultLookAndFeelDecorated(true);
 		frame = new JFrame();
 		frame.setBounds(100, 100, 558, 352);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
