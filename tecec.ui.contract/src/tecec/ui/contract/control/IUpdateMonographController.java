@@ -58,7 +58,7 @@ public interface IUpdateMonographController {
 	/*Monograph*/
 	List<Monograph> getMonographs();
 	void setPKMonograph(String pKMonograph);
-	void setMonographTitle(String title);
+	void setMonographTitle(String monographTitle);
 	String getMonographTitle();
 	
 	

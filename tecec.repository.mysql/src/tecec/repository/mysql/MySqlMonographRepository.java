@@ -77,6 +77,12 @@ public class MySqlMonographRepository extends MySqlRepository implements
 				Monograph monograph = new Monograph();
 				monograph.setTitle(arg0.getString("Title"));
 				monograph.setpKMonograph(arg0.getString("PKMonograph"));
+				monograph.setfKAdvisor(arg0.getString("FKAdvisor"));
+				monograph.setfKArea(arg0.getString("FKArea"));
+				monograph.setfKCoadvisor(arg0.getString("FKCoadvisor"));
+				monograph.setfKCourse(arg0.getString("FKCourse"));
+				monograph.setfKStatus(arg0.getString("FKStatus"));
+				monograph.setfKStudent(arg0.getString("FKStudent"));
 				return monograph;
 			}
 		});
@@ -99,6 +105,12 @@ public class MySqlMonographRepository extends MySqlRepository implements
 				Monograph monograph = new Monograph();
 				monograph.setTitle(arg0.getString("Title"));
 				monograph.setpKMonograph(arg0.getString("PKMonograph"));
+				monograph.setfKAdvisor(arg0.getString("FKAdvisor"));
+				monograph.setfKArea(arg0.getString("FKArea"));
+				monograph.setfKCoadvisor(arg0.getString("FKCoadvisor"));
+				monograph.setfKCourse(arg0.getString("FKCourse"));
+				monograph.setfKStatus(arg0.getString("FKStatus"));
+				monograph.setfKStudent(arg0.getString("FKStudent"));
 				return monograph;
 			}
 		});

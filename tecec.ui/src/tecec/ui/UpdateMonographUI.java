@@ -266,11 +266,6 @@ public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 		this.updateMonographController.setPKMonograph(pKMonograph);
 	}
 	protected void initDataBindings() {
-		BeanProperty<IUpdateMonographController, String> iUpdateMonographControllerBeanProperty = BeanProperty.create("monographTitle");
-		BeanProperty<JTextField, String> jTextFieldBeanProperty = BeanProperty.create("text");
-		AutoBinding<IUpdateMonographController, String, JTextField, String> autoBinding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, updateMonographController, iUpdateMonographControllerBeanProperty, txtMonographTitle, jTextFieldBeanProperty);
-		autoBinding.bind();
-		//
 		BeanProperty<IUpdateMonographController, List<Course>> iUpdateMonographControllerBeanProperty_1 = BeanProperty.create("courses");
 		JComboBoxBinding<Course, IUpdateMonographController, JComboBox> jComboBinding = SwingBindings.createJComboBoxBinding(UpdateStrategy.READ, updateMonographController, iUpdateMonographControllerBeanProperty_1, cboCourse);
 		jComboBinding.bind();
@@ -344,5 +339,10 @@ public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 		BeanProperty<IUpdateMonographController, Integer> iUpdateMonographControllerBeanProperty_18 = BeanProperty.create("selectedStatusIndex");
 		AutoBinding<IUpdateMonographController, Integer, JComboBox, Integer> autoBinding_12 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, updateMonographController, iUpdateMonographControllerBeanProperty_18, cboStatus, jComboBoxBeanProperty_1);
 		autoBinding_12.bind();
+		//
+		BeanProperty<IUpdateMonographController, String> iUpdateMonographControllerBeanProperty = BeanProperty.create("monographTitle");
+		BeanProperty<JTextField, String> jTextFieldBeanProperty = BeanProperty.create("text");
+		AutoBinding<IUpdateMonographController, String, JTextField, String> autoBinding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, updateMonographController, iUpdateMonographControllerBeanProperty, txtMonographTitle, jTextFieldBeanProperty);
+		autoBinding.bind();
 	}
 }

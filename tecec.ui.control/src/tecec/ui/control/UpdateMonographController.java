@@ -29,7 +29,7 @@ public class UpdateMonographController extends BaseController implements IUpdate
 	private IMonographWriter monographWriter;
 	private IMonographReader monographReader;
 	private String pKMonograph;
-	private String title;
+	private String monographTitle;
 	
 	/*Course*/
 	private ICourseReader courseReader;
@@ -78,7 +78,7 @@ public class UpdateMonographController extends BaseController implements IUpdate
 
 	@Override
 	public RuleViolation getUpdateViolation() {
-		Monograph monograph = new Monograph();
+		Monograph monograph = getMonograph();
 		
 		return this.monographWriter.getUpdateViolation(monograph);
 	}
@@ -86,16 +86,16 @@ public class UpdateMonographController extends BaseController implements IUpdate
 	/*Monograph*/
 
 	@Override
-	public void setMonographTitle(String title) {
-		this.title = title;
+	public void setMonographTitle(String monographTitle) {
+		this.monographTitle = monographTitle;
 		
-		super.notifyOfPropertyChange("title", null, title);
+		super.notifyOfPropertyChange("monographTitle", null, monographTitle);
 	}
 
 
 	@Override
 	public String getMonographTitle() {
-		return this.title;
+		return this.monographTitle;
 	}
 	
 	@Override
@@ -177,6 +177,8 @@ public class UpdateMonographController extends BaseController implements IUpdate
 		
 		monograph.setpKMonograph(this.pKMonograph);
 		
+		monograph.setTitle(this.monographTitle);
+		
 		if(this.selectedAdvisor != null)
 			monograph.setfKAdvisor(this.selectedAdvisor.getPKAdvisor());
 		
@@ -223,14 +225,15 @@ public class UpdateMonographController extends BaseController implements IUpdate
 		emptyMonograph.setTitle(" ");
 		monographs.add(0, emptyMonograph);
 		
-		if(this.pKMonograph != null && !this.pKMonograph.isEmpty()){
+		/*if(this.pKMonograph != null && !this.pKMonograph.isEmpty()){
 			for(int i=0; i< monographs.size(); i++){
 				if(this.pKMonograph.equals(monographs.get(i).getpKMonograph())){
 					monographs.remove(i);
 				}		
 			}
-		}
-		return null;
+		}*/
+		
+		return monographs;
 	}
 	
 	/*End of Monograph*/
