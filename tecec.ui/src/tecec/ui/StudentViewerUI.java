@@ -54,6 +54,8 @@ public class StudentViewerUI extends JDialog implements IStudentViewerUI {
 
 	public StudentViewerUI(IStudentViewerController studentViewerController) {
 		this.studentViewerController = studentViewerController;
+		
+		setDefaultLookAndFeelDecorated(true);
 
 		setModal(true);
 		setBounds(100, 100, 687, 345);

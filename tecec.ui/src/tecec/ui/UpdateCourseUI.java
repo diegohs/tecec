@@ -69,6 +69,8 @@ public class UpdateCourseUI extends JDialog implements IUpdateCourseUI {
 	 */
 	public UpdateCourseUI(IUpdateCourseController updateCourseController) {
 		this.updateCourseController = updateCourseController;
+		
+		setDefaultLookAndFeelDecorated(true);
 
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);

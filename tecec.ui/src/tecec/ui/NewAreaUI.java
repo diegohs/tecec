@@ -63,6 +63,8 @@ public class NewAreaUI extends JDialog implements INewAreaUI {
 	public NewAreaUI(INewAreaController newAreaController) {
 		this.newAreaController = newAreaController;
 		
+		setDefaultLookAndFeelDecorated(true);
+		
 
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);

@@ -175,8 +175,7 @@ public class UpdateMonographController extends BaseController implements IUpdate
 	private Monograph getMonograph(){
 		Monograph monograph = new Monograph();
 		
-		monograph.setpKMonograph(this.pKMonograph);
-		
+		monograph.setpKMonograph(this.pKMonograph);		
 		monograph.setTitle(this.monographTitle);
 		
 		if(this.selectedAdvisor != null)
@@ -224,14 +223,6 @@ public class UpdateMonographController extends BaseController implements IUpdate
 		
 		emptyMonograph.setTitle(" ");
 		monographs.add(0, emptyMonograph);
-		
-		/*if(this.pKMonograph != null && !this.pKMonograph.isEmpty()){
-			for(int i=0; i< monographs.size(); i++){
-				if(this.pKMonograph.equals(monographs.get(i).getpKMonograph())){
-					monographs.remove(i);
-				}		
-			}
-		}*/
 		
 		return monographs;
 	}

@@ -51,7 +51,7 @@ public class MySqlMonographRepository extends MySqlRepository implements
 					"O campo 'Título' não pode ser nulo");
 		}
 
-		String command = "UPDATE Monograph SET Title= :title WHERE PKMonograph = :pKMonograph;";
+		String command = "UPDATE Monograph SET FKArea = :fKArea, FKStudent = :fKStudent, FKCourse = :fKCourse, FKAdvisor = :fKAdvisor, FKCoadvisor = :fKCoadvisor, FKStatus = :fKStatus, Title= :title WHERE PKMonograph = :pKMonograph;";
 		SqlParameterSource parameters = new BeanPropertySqlParameterSource(monograph);
 		jdbcTemplate.update(command, parameters);
 

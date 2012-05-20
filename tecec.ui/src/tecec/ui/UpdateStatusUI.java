@@ -73,6 +73,8 @@ public class UpdateStatusUI extends JDialog implements IUpdateStatusUI {
 	 */
 	public UpdateStatusUI(IUpdateStatusController updateStatusController) {
 		this.updateStatusController = updateStatusController;
+		
+		setDefaultLookAndFeelDecorated(true);
 
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);

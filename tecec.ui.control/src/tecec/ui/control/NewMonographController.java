@@ -127,8 +127,18 @@ public class NewMonographController extends BaseController implements INewMonogr
 		if (violation != null)
 			throw new RuleViolationException (violation);
 		
-		monographWriter.createMonograph(getMonograph());
-		setMonographTitle("");
+		Monograph monograph = getMonograph();
+		
+		monographWriter.createMonograph(monograph);
+		
+		this.setSelectedAdvisor(null);
+		this.setSelectedArea(null);
+		this.setSelectedCoadvisor(null);
+		this.setSelectedCourse(null);
+		this.setSelectedStatus(null);
+		this.setSelectedStudent(null);
+		
+		this.setMonographTitle("");
 		
 		super.notifyOfPropertyChange("monographs", null, getMonographs());
 	}
@@ -304,7 +314,7 @@ public class NewMonographController extends BaseController implements INewMonogr
 	}
 
 	@Override
-	public void setSeletectedStatus(Status status) {
+	public void setSelectedStatus(Status status) {
 		this.selectedStatus = status;
 	}
 

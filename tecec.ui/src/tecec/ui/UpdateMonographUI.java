@@ -92,6 +92,8 @@ public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 	 */
 	public UpdateMonographUI(IUpdateMonographController updateMonographController) {
 		this.updateMonographController = updateMonographController;
+		
+		setDefaultLookAndFeelDecorated(true);
 
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
@@ -120,6 +122,11 @@ public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 		contentPane.add(cboCourse, "cell 1 3,growx");
 		
 		cboCourse.setRenderer(new DefaultListCellRenderer(){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public Component getListCellRendererComponent(JList list,
 					Object value, int index, boolean isSelected,
@@ -143,6 +150,11 @@ public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 		contentPane.add(cboArea, "cell 1 4,growx");
 		
 		cboArea.setRenderer(new DefaultListCellRenderer(){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public Component getListCellRendererComponent(JList list,
 					Object value, int index, boolean isSelected,
@@ -166,6 +178,11 @@ public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 		contentPane.add(cboStudent, "cell 1 5,growx");
 		
 		cboStudent.setRenderer(new DefaultListCellRenderer(){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public Component getListCellRendererComponent(JList list,
 					Object value, int index, boolean isSelected,
@@ -189,6 +206,11 @@ public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 		contentPane.add(cboAdvisor, "cell 1 6,growx");
 		
 		cboAdvisor.setRenderer(new DefaultListCellRenderer(){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public Component getListCellRendererComponent(JList list,
 					Object value, int index, boolean isSelected,
@@ -212,6 +234,11 @@ public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 		contentPane.add(cboCoadvisor, "cell 1 7,growx");
 		
 		cboCoadvisor.setRenderer(new DefaultListCellRenderer(){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public Component getListCellRendererComponent(JList list,
 					Object value, int index, boolean isSelected,
@@ -235,6 +262,11 @@ public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 		contentPane.add(cboStatus, "cell 1 8,growx");
 		
 		cboStatus.setRenderer(new DefaultListCellRenderer(){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public Component getListCellRendererComponent(JList list,
 					Object value, int index, boolean isSelected,

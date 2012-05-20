@@ -54,6 +54,8 @@ public class AdvisorViewerUI extends JDialog implements IAdvisorViewerUI {
 
 	public AdvisorViewerUI(IAdvisorViewerController advisorViewerController) {
 		this.advisorViewerController = advisorViewerController;
+		
+		setDefaultLookAndFeelDecorated(true);
 
 		setModal(true);
 		setBounds(100, 100, 687, 345);

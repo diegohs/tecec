@@ -63,6 +63,8 @@ public class NewAdvisorUI extends JDialog implements INewAdvisorUI {
 	 */
 	public NewAdvisorUI(INewAdvisorController newAdvisorController) {
 		this.newAdvisorController = newAdvisorController;
+		
+		setDefaultLookAndFeelDecorated(true);
 
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);

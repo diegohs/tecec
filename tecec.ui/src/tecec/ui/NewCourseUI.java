@@ -65,6 +65,8 @@ public class NewCourseUI extends JDialog implements INewCourseUI {
 		}
 
 		this.newCourseController = newCourseController;
+		
+		setDefaultLookAndFeelDecorated(true);
 
 		setLocationByPlatform(true);
 		setModal(true);

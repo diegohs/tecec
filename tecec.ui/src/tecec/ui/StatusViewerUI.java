@@ -63,6 +63,8 @@ public class StatusViewerUI extends JFrame implements IStatusViewerUI {
 	public StatusViewerUI(IStatusViewerController statusViewerController) {
 		this.statusViewerController = statusViewerController;	
 		
+		setDefaultLookAndFeelDecorated(true);
+		
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 726, 441);
 		contentPane = new JPanel();

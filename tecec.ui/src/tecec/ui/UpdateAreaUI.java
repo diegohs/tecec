@@ -70,6 +70,8 @@ public class UpdateAreaUI extends JDialog implements IUpdateAreaUI {
 
 	public UpdateAreaUI(IUpdateAreaController updateAreaController) {
 		this.updateAreaController = updateAreaController;
+		
+		setDefaultLookAndFeelDecorated(true);
 
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);

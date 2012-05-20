@@ -59,7 +59,7 @@ public interface INewMonographController {
 	/*Status*/
 	List<Status> getStatus();
 	Status getSelectedStatus();
-	void setSeletectedStatus(Status status);
+	void setSelectedStatus(Status status);
 	void setSelectedStatusIndex(int i);
 	int getSelectedStatusIndex();	
 }

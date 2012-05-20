@@ -73,6 +73,8 @@ public class ActivityViewerUI extends JDialog implements
 
 	public ActivityViewerUI(IActivityViewerController activityViewerController) {
 		this.activityViewerController = activityViewerController;
+		
+		setDefaultLookAndFeelDecorated(true);
 
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);

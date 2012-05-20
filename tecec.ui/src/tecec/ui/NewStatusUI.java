@@ -64,6 +64,8 @@ public class NewStatusUI extends JDialog implements INewStatusUI {
 		}
 
 		this.newStatusController = newStatusController;
+		
+		setDefaultLookAndFeelDecorated(true);
 
 		setLocationByPlatform(true);
 		setModal(true);

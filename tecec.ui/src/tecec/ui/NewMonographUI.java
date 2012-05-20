@@ -98,6 +98,8 @@ public class NewMonographUI extends JDialog implements INewMonographUI {
 		}
 
 		this.newMonographController = newMonographController;
+		
+		setDefaultLookAndFeelDecorated(true);
 
 		setLocationByPlatform(true);
 		setModal(true);

@@ -65,6 +65,8 @@ public class UpdateActivityUI extends JDialog implements IUpdateActivityUI {
 
 	public UpdateActivityUI(IUpdateActivityController updateActivityController) {
 		this.updateActivityController = updateActivityController;
+		
+		setDefaultLookAndFeelDecorated(true);
 
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);

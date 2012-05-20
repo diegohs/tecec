@@ -75,6 +75,8 @@ public class AreaViewerUI extends JDialog implements IAreaViewerUI {
 	 */
 	public AreaViewerUI(IAreaViewerController areViewerController) {
 		this.areaViewerController = areViewerController;
+		
+		setDefaultLookAndFeelDecorated(true);
 
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);

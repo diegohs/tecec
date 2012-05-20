@@ -61,6 +61,8 @@ public class NewActivityUI extends JDialog implements INewActivityUI {
 
 	public NewActivityUI(INewActivityController newActivityController) {
 		this.newActivityController = newActivityController;
+		
+		setDefaultLookAndFeelDecorated(true);
 
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);

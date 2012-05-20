@@ -60,6 +60,8 @@ public class UpdateStudentUI extends JDialog implements IUpdateStudentUI {
 	public UpdateStudentUI(IUpdateStudentController updateStudentController) {
 		this.updateStudentController = updateStudentController;
 		
+		setDefaultLookAndFeelDecorated(true);
+		
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);

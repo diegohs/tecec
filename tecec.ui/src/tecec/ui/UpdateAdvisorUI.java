@@ -60,6 +60,8 @@ public class UpdateAdvisorUI extends JDialog implements IUpdateAdvisorUI {
 	public UpdateAdvisorUI(IUpdateAdvisorController updateAdvisorController) {
 		this.updateAdvisorController = updateAdvisorController;
 		
+		setDefaultLookAndFeelDecorated(true);
+		
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);

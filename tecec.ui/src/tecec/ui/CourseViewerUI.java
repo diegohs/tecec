@@ -63,6 +63,8 @@ public class CourseViewerUI extends JFrame implements ICourseViewerUI {
 	public CourseViewerUI(ICourseViewerController courseViewerController) {
 		this.courseViewerController = courseViewerController;	
 		
+		setDefaultLookAndFeelDecorated(true);
+		
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 726, 441);
 		contentPane = new JPanel();

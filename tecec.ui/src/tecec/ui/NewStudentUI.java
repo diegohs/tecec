@@ -63,6 +63,8 @@ public class NewStudentUI extends JDialog implements INewStudentUI {
 	 */
 	public NewStudentUI(INewStudentController newStudentController) {
 		this.newStudentController = newStudentController;
+		
+		setDefaultLookAndFeelDecorated(true);
 
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);

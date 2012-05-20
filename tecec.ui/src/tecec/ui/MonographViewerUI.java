@@ -65,6 +65,8 @@ public class MonographViewerUI extends JFrame implements IMonographViewerUI {
 	public MonographViewerUI(IMonographViewerController monographViewerController) {
 		this.monographViewerController = monographViewerController;	
 		
+		setDefaultLookAndFeelDecorated(true);
+		
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 726, 441);
 		contentPane = new JPanel();
