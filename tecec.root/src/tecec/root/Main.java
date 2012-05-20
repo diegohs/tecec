@@ -2,7 +2,6 @@ package tecec.root;
 
 import java.awt.EventQueue;
 
-import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -27,7 +26,7 @@ public class Main {
 						
 						// Estilo Mac
 						UIManager.setLookAndFeel("ch.randelshofer.quaqua.QuaquaLookAndFeel");
-	                    
+						
 						// Default do SO
 						//UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 						

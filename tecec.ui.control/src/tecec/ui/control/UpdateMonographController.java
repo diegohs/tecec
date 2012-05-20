@@ -106,63 +106,78 @@ public class UpdateMonographController extends BaseController implements IUpdate
 		
 		this.setMonographTitle(monograph.getTitle());
 		
-		List<Monograph> monographs = getMonographs();
+		List<Advisor> advisors = getAdvisors();
 		
 		if(monograph.getfKAdvisor() != null && !monograph.getfKAdvisor().isEmpty()){
-			for(int i=0;i<monographs.size();i++){
-				if(monograph.getfKAdvisor().equals(monographs.get(i).getfKAdvisor())){
+			for(int i=0;i<advisors.size();i++){
+				if(monograph.getfKAdvisor().equals(advisors.get(i).getPKAdvisor())){
 					this.selectedAdvisorIndex = i;
 					break;
 				}
 			}
 		}
 		
+		List<Area> areas = getAreas();
+		
 		if(monograph.getfKArea() != null && !monograph.getfKArea().isEmpty()){
-			for(int i=0;i<monographs.size();i++){
-				if(monograph.getfKArea().equals(monographs.get(i).getfKArea())){
+			for(int i=0;i<areas.size();i++){
+				if(monograph.getfKArea().equals(areas.get(i).getpKArea())){
 					this.selectedAreaIndex = i;
 					break;
 				}
 			}
 		}
 		
+		List<Advisor> coadvisors = getAdvisors();
+		
 		if(monograph.getfKCoadvisor() != null && !monograph.getfKCoadvisor().isEmpty()){
-			for(int i=0;i<monographs.size();i++){
-				if(monograph.getfKCoadvisor().equals(monographs.get(i).getfKCoadvisor())){
+			for(int i=0;i<coadvisors.size();i++){
+				if(monograph.getfKCoadvisor().equals(coadvisors.get(i).getPKAdvisor())){
 					this.selectedCoadvisorIndex = i;
 					break;
 				}
 			}
 		}
 		
+		List<Course> courses = getCourses();
+		
 		if(monograph.getfKCourse() != null && !monograph.getfKCourse().isEmpty()){
-			for(int i=0;i<monographs.size();i++){
-				if(monograph.getfKCourse().equals(monographs.get(i).getfKCourse())){
+			for(int i=0;i<courses.size();i++){
+				if(monograph.getfKCourse().equals(courses.get(i).getPKCourse())){
 					this.selectedCourseIndex = i;
 					break;
 				}
 			}
 		}
 		
+		List<Status> statuses = getStatus();
+		
 		if(monograph.getfKStatus() != null && !monograph.getfKStatus().isEmpty()){
-			for(int i=0;i<monographs.size();i++){
-				if(monograph.getfKStatus().equals(monographs.get(i).getfKStatus())){
+			for(int i=0;i<statuses.size();i++){
+				if(monograph.getfKStatus().equals(statuses.get(i).getpKStatus())){
 					this.selectedStatusIndex = i;
 					break;
 				}
 			}
 		}
 		
+		List<Student> students = getStudents();
+		
 		if(monograph.getfKStudent() != null && !monograph.getfKStudent().isEmpty()){
-			for(int i=0;i<monographs.size();i++){
-				if(monograph.getfKStudent().equals(monographs.get(i).getfKStudent())){
+			for(int i=0;i<students.size();i++){
+				if(monograph.getfKStudent().equals(students.get(i).getPKStudent())){
 					this.selectedStudentIndex = i;
 					break;
 				}
 			}
 		}
 		
-		super.notifyOfPropertyChange("monographs", null, monographs);
+		super.notifyOfPropertyChange("areas", null, areas);
+		super.notifyOfPropertyChange("advisors", null, advisors);
+		super.notifyOfPropertyChange("coadvisors", null, coadvisors);
+		super.notifyOfPropertyChange("statuses", null, statuses);
+		super.notifyOfPropertyChange("students", null, students);
+		super.notifyOfPropertyChange("courses", null, courses);
 		super.notifyOfPropertyChange("selectedAdvisorIndex", null,	this.selectedAdvisorIndex);
 		super.notifyOfPropertyChange("selectedAreaIndex", null,	this.selectedAreaIndex);
 		super.notifyOfPropertyChange("selectedCoadvisorIndex", null,	this.selectedCoadvisorIndex);

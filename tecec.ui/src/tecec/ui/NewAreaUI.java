@@ -63,12 +63,12 @@ public class NewAreaUI extends JDialog implements INewAreaUI {
 	public NewAreaUI(INewAreaController newAreaController) {
 		this.newAreaController = newAreaController;
 		
-		setDefaultLookAndFeelDecorated(true);
-		
+		JDialog.setDefaultLookAndFeelDecorated(true);	
 
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		setBounds(100, 100, 493, 277);
+		
 		getContentPane().setLayout(
 				new MigLayout("", "[][grow][]", "[grow][][][][][][][][grow]"));
 		{
@@ -106,6 +106,11 @@ public class NewAreaUI extends JDialog implements INewAreaUI {
 			cboAreas = new JComboBox();
 			
 			cboAreas.setRenderer(new DefaultListCellRenderer(){
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
 				@Override
 				public Component getListCellRendererComponent(JList list,
 						Object value, int index, boolean isSelected,

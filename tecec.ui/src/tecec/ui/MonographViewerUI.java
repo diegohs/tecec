@@ -23,13 +23,12 @@ import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.SwingBindings;
 
-import tecec.dto.Monograph;
 import tecec.ui.contract.control.IMonographViewerController;
 import tecec.ui.contract.view.IMonographViewerUI;
 
 import javax.swing.ListSelectionModel;
 import tecec.ui.contract.record.MonographRecord;
-import org.jdesktop.beansbinding.ObjectProperty;
+
 
 public class MonographViewerUI extends JFrame implements IMonographViewerUI {
 

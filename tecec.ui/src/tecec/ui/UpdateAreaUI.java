@@ -107,6 +107,11 @@ public class UpdateAreaUI extends JDialog implements IUpdateAreaUI {
 			cboMainArea = new JComboBox();
 			
 			cboMainArea.setRenderer(new DefaultListCellRenderer(){
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
 				@Override
 				public Component getListCellRendererComponent(JList list,
 						Object value, int index, boolean isSelected,
