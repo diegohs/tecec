@@ -55,6 +55,11 @@ public class MainUI implements IMainUI {
 	private void showMonographUI(){
 		mainUIController.showMonographViewerUI();
 	}
+	
+	private void showProfileUI () {
+		mainUIController.showProfileViewerUI();
+	}
+	
 
 	private void initialize() {
 		JFrame.setDefaultLookAndFeelDecorated(true);
@@ -123,6 +128,14 @@ public class MainUI implements IMainUI {
 			}
 		});
 		mnCadastro.add(mntmStatus);
+		
+		JMenuItem mntmProfile = new JMenuItem("Perfil");
+		mntmProfile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				showProfileUI();
+			}
+		});
+		mnCadastro.add(mntmProfile);
 	}
 
 }

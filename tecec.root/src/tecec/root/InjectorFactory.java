@@ -72,6 +72,14 @@ public class InjectorFactory {
 		
 		container.addComponent(tecec.contract.reader.IMonographReader.class,
 				tecec.business.reader.MonographReader.class);
+		
+		/* Perfil */
+
+		container.addComponent(tecec.contract.writer.IProfileWriter.class,
+				tecec.business.writer.ProfileWriter.class);
+
+		container.addComponent(tecec.contract.reader.IProfileReader.class,
+				tecec.business.reader.ProfileReader.class);
 	}
 
 	private void RegisterUI(MutablePicoContainer container) {
@@ -157,6 +165,19 @@ public class InjectorFactory {
 		
 		container.addComponent(tecec.ui.contract.view.IUpdateMonographUI.class,
 				tecec.ui.UpdateMonographUI.class);
+		
+		/* Course */
+		
+		container.addComponent(tecec.ui.contract.view.INewProfileUI.class,
+				tecec.ui.NewProfileUI.class);
+
+		container.addComponent(tecec.ui.contract.view.IProfileViewerUI.class,
+				tecec.ui.ProfileViewerUI.class);
+
+		container.addComponent(tecec.ui.contract.view.IUpdateProfileUI.class,
+				tecec.ui.UpdateProfileUI.class);
+		
+		
 	}
 
 	private void RegisterControllers(MutablePicoContainer container) {
@@ -261,6 +282,19 @@ public class InjectorFactory {
 		container.addComponent(
 				tecec.ui.contract.control.IUpdateMonographController.class,
 				tecec.ui.control.UpdateMonographController.class);
+		
+		/* Profile */
+		container.addComponent(		
+				tecec.ui.contract.control.INewProfileController.class,
+				tecec.ui.control.NewProfileController.class);
+
+		container.addComponent(
+				tecec.ui.contract.control.IProfileViewerController.class,
+				tecec.ui.control.ProfileViewerController.class);
+
+		container.addComponent(
+				tecec.ui.contract.control.IUpdateProfileController.class,
+				tecec.ui.control.UpdateProfileController.class);
 	}
 
 	private void RegisterConfig(MutablePicoContainer container) {
@@ -294,7 +328,7 @@ public class InjectorFactory {
 				tecec.contract.repository.IStudentRepository.class,
 				tecec.repository.mysql.MySqlStudentRepository.class);
 		
-		/* Course */
+		/* Status */
 		container.addComponent(
 				tecec.contract.repository.IStatusRepository.class,
 				tecec.repository.mysql.MySqlStatusRepository.class);
@@ -303,5 +337,10 @@ public class InjectorFactory {
 		container.addComponent(
 				tecec.contract.repository.IMonographRepository.class,
 				tecec.repository.mysql.MySqlMonographRepository.class);
+		
+		/* Profile */
+		container.addComponent(
+				tecec.contract.repository.IProfileRepository.class,
+				tecec.repository.mysql.MySqlProfileRepository.class);
 	}
 }

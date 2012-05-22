@@ -8,4 +8,5 @@ public interface IMainUIController {
 	void showActivityViewerUI();
 	void showStatusViewerUI();
 	void showMonographViewerUI();
+	void showProfileViewerUI();
 }

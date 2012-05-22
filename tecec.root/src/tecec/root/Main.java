@@ -43,7 +43,9 @@ public class Main {
 	                } catch (ClassNotFoundException ex) {  
 	                     ex.printStackTrace();  
 	                }
+					
 					IMainUI window = container.getComponent(IMainUI.class);
+					//IProfileViewerUI window = container.getComponent(IProfileViewerUI.class);
 					window.setVisible(true);
 					
 				} catch (Exception e) {
