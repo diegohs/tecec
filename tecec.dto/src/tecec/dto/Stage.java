@@ -3,7 +3,7 @@ package tecec.dto;
 public class Stage {
 	private String pKStage;
 	private String name;
-	private int year;
+	private Integer year;
 	
 	
 	public String getpKStage() {
@@ -18,10 +18,10 @@ public class Stage {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getYear() {
+	public Integer getYear() {
 		return year;
 	}
-	public void setYear(int year) {
+	public void setYear(Integer year) {
 		this.year = year;
 	}
 }

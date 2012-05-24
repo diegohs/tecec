@@ -18,7 +18,7 @@ public class StageWriter implements IStageWriter {
 	}
 	
 	@Override
-	public RuleViolation getCreationViolation(String name, int year) {
+	public RuleViolation getCreationViolation(String name, Integer year) {
 		if (name == null || name.trim().isEmpty()) {
 			return new RuleViolation ("O nome do estágio deve ser preenchido.");
 		} else {
@@ -26,10 +26,17 @@ public class StageWriter implements IStageWriter {
 				return new RuleViolation ("O nome do estágio deve ser menor que 128 caracteres.");
 		}
 		
+		/* Primeira turma do campus entrou em 2007 */
+		if (year == null || year <=2006)
+			return new RuleViolation ("O ano do estágio deve ser maior que 2006.");
+		
+		
 		/* Eu acho que pode ter status iguais, mas não pode ter no mesmo ano
 		 * 
 		 *  Por: Bruno
 		 *  */
+		
+		
 		Stage stage = stageRepository.getStageByName(name);		
 		if (stage != null && stage.getYear()==year) {
 			return new RuleViolation ("Já existe outro estágio cadastrado com os mesmos dados: nome e ano.");
@@ -40,7 +47,7 @@ public class StageWriter implements IStageWriter {
 
 	@Override
 	public RuleViolation getUpdateViolation(String pKStage, String newName,
-			int newYear) {
+			Integer newYear) {
 		
 		Stage stage = this.stageRepository.getStageByPK(pKStage);
 		
@@ -50,6 +57,8 @@ public class StageWriter implements IStageWriter {
 		if (newName == null || newName.trim().isEmpty())
 			return new RuleViolation ("O nome do estágio deve ser preenchido.");
 		
+		if (newYear == null || newYear <=2006)
+			return new RuleViolation ("O ano do estágio deve ser superior a 2006.");
 		
 		stage = this.stageRepository.getStageByName(newName);
 		
@@ -63,7 +72,7 @@ public class StageWriter implements IStageWriter {
 	}
 
 	@Override
-	public void createStage(String name, int year)
+	public void createStage(String name, Integer year)
 			throws RuleViolationException {
 		RuleViolation violation = getCreationViolation (name,year);
 		if (violation != null)
@@ -76,7 +85,7 @@ public class StageWriter implements IStageWriter {
 	}
 
 	@Override
-	public void updateStage(String pKStage, String newName, int newYear) throws RuleViolationException {
+	public void updateStage(String pKStage, String newName, Integer newYear) throws RuleViolationException {
 			RuleViolation violation = getUpdateViolation (pKStage, newName, newYear);
 			if (violation != null)
 				throw new RuleViolationException (violation);

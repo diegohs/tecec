@@ -102,7 +102,7 @@ public class MysqlStageRepository extends MySqlRepository implements IStageRepos
 	}
 
 	@Override
-	public Stage getStageByYear(int year) {
+	public Stage getStageByYear(Integer year) {
 		String query = "SELECT * FROM Stage WHERE Year = :year;";
 		SqlParameterSource parameters = new MapSqlParameterSource ("year", year);
 		

@@ -10,6 +10,6 @@ public interface IStageRepository {
 	void deleteStage (String pKStage);
 	Stage getStageByName (String name);
 	Stage getStageByPK (String pKStage);
-	Stage getStageByYear (int year);	
+	Stage getStageByYear (Integer year);	
 	List <Stage> getStages (String nameFilter);
 }
