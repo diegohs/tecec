@@ -80,6 +80,14 @@ public class InjectorFactory {
 
 		container.addComponent(tecec.contract.reader.IProfileReader.class,
 				tecec.business.reader.ProfileReader.class);
+		
+		/* Turn */
+
+		container.addComponent(tecec.contract.writer.ITurnWriter.class,
+				tecec.business.writer.TurnWriter.class);
+
+		container.addComponent(tecec.contract.reader.ITurnReader.class,
+				tecec.business.reader.TurnReader.class);
 	}
 
 	private void RegisterUI(MutablePicoContainer container) {
@@ -176,6 +184,17 @@ public class InjectorFactory {
 
 		container.addComponent(tecec.ui.contract.view.IUpdateProfileUI.class,
 				tecec.ui.UpdateProfileUI.class);
+		
+		/* Turn */
+		
+		container.addComponent(tecec.ui.contract.view.INewTurnUI.class,
+				tecec.ui.NewTurnUI.class);
+
+		container.addComponent(tecec.ui.contract.view.ITurnViewerUI.class,
+				tecec.ui.TurnViewerUI.class);
+
+		container.addComponent(tecec.ui.contract.view.IUpdateTurnUI.class,
+				tecec.ui.UpdateTurnUI.class);
 		
 		
 	}
@@ -295,6 +314,19 @@ public class InjectorFactory {
 		container.addComponent(
 				tecec.ui.contract.control.IUpdateProfileController.class,
 				tecec.ui.control.UpdateProfileController.class);
+		
+		/* Turn */
+		container.addComponent(		
+				tecec.ui.contract.control.INewTurnController.class,
+				tecec.ui.control.NewTurnController.class);
+
+		container.addComponent(
+				tecec.ui.contract.control.ITurnViewerController.class,
+				tecec.ui.control.TurnViewerController.class);
+
+		container.addComponent(
+				tecec.ui.contract.control.IUpdateTurnController.class,
+				tecec.ui.control.UpdateTurnController.class);
 	}
 
 	private void RegisterConfig(MutablePicoContainer container) {
@@ -342,5 +374,10 @@ public class InjectorFactory {
 		container.addComponent(
 				tecec.contract.repository.IProfileRepository.class,
 				tecec.repository.mysql.MySqlProfileRepository.class);
+		
+		/* Course */
+		container.addComponent(
+				tecec.contract.repository.ITurnRepository.class,
+				tecec.repository.mysql.MySqlTurnRepository.class);
 	}
 }

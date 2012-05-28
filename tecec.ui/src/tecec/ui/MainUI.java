@@ -60,6 +60,10 @@ public class MainUI implements IMainUI {
 		mainUIController.showProfileViewerUI();
 	}
 	
+	private void showTurnUI () {
+		mainUIController.showTurnViewerUI();
+	}
+	
 
 	private void initialize() {
 		JFrame.setDefaultLookAndFeelDecorated(true);
@@ -136,6 +140,14 @@ public class MainUI implements IMainUI {
 			}
 		});
 		mnCadastro.add(mntmProfile);
+		
+		JMenuItem mntmTurn = new JMenuItem("Turn");
+		mntmTurn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				showTurnUI();
+			}
+		});
+		mnCadastro.add(mntmTurn);
 	}
 
 }
