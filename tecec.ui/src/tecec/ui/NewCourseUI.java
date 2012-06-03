@@ -1,48 +1,58 @@
 package tecec.ui;
 
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JDialog;import javax.swing.JOptionPane;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import tecec.contract.RuleViolation;
 import tecec.ui.contract.control.INewCourseController;
 import tecec.ui.contract.view.INewCourseUI;
-import tecec.contract.RuleViolation;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
-
-import java.awt.Font;
 import javax.swing.JTextField;
-import javax.swing.JButton;
-import org.jdesktop.beansbinding.*;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import org.jdesktop.beansbinding.BeanProperty;
+import org.jdesktop.beansbinding.AutoBinding;
+import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
 public class NewCourseUI extends JDialog implements INewCourseUI {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private tecec.ui.contract.control.INewCourseController newCourseController;
-		
+	private final JPanel contentPanel = new JPanel();
+	
+	private INewCourseController newCourseController;
+	private JTextField textField;
+	private JComboBox comboTurn;
+	private JComboBox comboYear;
+	
 	@Override
-	public void setVisible(boolean visible){
+	public void setVisible(boolean visible) {
 		super.setVisible(visible);
 	}
 	
-	private void storeCourse() {
+	private void createCourse() {
 		try {
 			RuleViolation violation = this.newCourseController
 					.getCreationViolation();
-			if (violation != null) {
+
+			if (violation == null) {
+				this.newCourseController.createCourse();
+
+				this.setVisible(false);
+			} else {
 				JOptionPane.showMessageDialog(this, violation.getDescription(),
 						"Erro", JOptionPane.ERROR_MESSAGE);
-			} else {
-				this.newCourseController.createCourse();
-				
-				this.setVisible(false);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -50,64 +60,75 @@ public class NewCourseUI extends JDialog implements INewCourseUI {
 					JOptionPane.ERROR_MESSAGE);
 		}
 	}
-
-	private JPanel contentPane;
-	private JTextField txtCourseName;
-	private JButton btnCreateCourse;
-
-	/**
-	 * Create the frame.
-	 */
-	public NewCourseUI(
-			tecec.ui.contract.control.INewCourseController newCourseController) {
-		if (newCourseController == null) {
-			throw new IllegalArgumentException("newCourseController");
-		}
-
-		this.newCourseController = newCourseController;
+	
+	
+	public NewCourseUI(INewCourseController newCourseController) {	
 		
+		if (newCourseController == null)
+			throw new IllegalArgumentException ("newCourseController");
+		
+		this.newCourseController = newCourseController;
 		setDefaultLookAndFeelDecorated(true);
 
-		setLocationByPlatform(true);
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		setBounds(100, 100, 436, 245);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[grow][grow][grow]",
-				"[grow][][56.00][29.00][grow]"));
-
-		JLabel lblNewLabel = new JLabel("Cadastrar Novo Curso");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
-		contentPane.add(lblNewLabel, "cell 1 1,alignx center");
-
+		
+		setBounds(100, 100, 450, 300);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(new MigLayout("", "[][][][grow][][]", "[][][][][][][][]"));
+		
+		JLabel lblAdicionarNovoCurso = new JLabel("Adicionar novo curso");
+		contentPanel.add(lblAdicionarNovoCurso, "cell 3 2");
+		
 		JLabel lblNome = new JLabel("Nome:");
-		contentPane.add(lblNome, "flowx,cell 1 2");
+		contentPanel.add(lblNome, "cell 2 3,alignx trailing");
+		
+		textField = new JTextField();
+		contentPanel.add(textField, "cell 3 3,growx");
+		textField.setColumns(10);
+		
+		JLabel lblTurno = new JLabel("Turno:");
+		contentPanel.add(lblTurno, "cell 2 4,alignx trailing");
+		
+		comboTurn = new JComboBox();
+		comboTurn.setModel(new DefaultComboBoxModel(new String[] {"Noturno", "Vespertino", "Integral", "EAD", "Diurno"}));
+		contentPanel.add(comboTurn, "cell 3 4,growx");
+		
+		JLabel lblAno = new JLabel("Ano:");
+		contentPanel.add(lblAno, "cell 2 5,alignx trailing");
+		
+		comboYear = new JComboBox();
+		comboYear.setModel(new DefaultComboBoxModel(new String[] {"2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033", "2034", "2035", "2036", "2037", "2038", "2039", "2040", "2041", "2042", "2043", "2044", "2045", "2046", "2047", "2048", "2049", "2050", "2051", "2052", "2053", "2054", "2055", "2056", "2057", "2058", "2059", "2060", "2061", "2062", "2063", "2064", "2065", "2066", "2067", "2068", "2069", "2070", "2071", "2072", "2073", "2074", "2075", "2076", "2077", "2078", "2079", "2080", "2081", "2082", "2083", "2084", "2085", "2086", "2087", "2088", "2089", "2090", "2091", "2092", "2093", "2094", "2095", "2096", "2097", "2098", "2099"}));
+		contentPanel.add(comboYear, "cell 3 5,growx");
+		
+		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.addActionListener(new ActionListener () {
 
-		txtCourseName = new JTextField();
-		contentPane.add(txtCourseName, "cell 1 2,growx");
-		txtCourseName.setColumns(10);
-
-		btnCreateCourse = new JButton("Cadastrar");
-		btnCreateCourse.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				storeCourse();
+				createCourse();
 			}
+			
 		});
-		contentPane.add(btnCreateCourse, "cell 1 3,alignx center,growy");
+		
+		contentPanel.add(btnCadastrar, "cell 3 7,alignx right");
 		initDataBindings();
 	}
-
 	protected void initDataBindings() {
-		BeanProperty<INewCourseController, String> iNewCourseControllerBeanProperty = BeanProperty
-				.create("courseName");
-		BeanProperty<JTextField, String> jTextFieldBeanProperty = BeanProperty
-				.create("text");
-		AutoBinding<INewCourseController, String, JTextField, String> autoBinding = Bindings
-				.createAutoBinding(UpdateStrategy.READ_WRITE,
-						newCourseController, iNewCourseControllerBeanProperty,
-						txtCourseName, jTextFieldBeanProperty);
+		BeanProperty<INewCourseController, String> iNewCourseControllerBeanProperty = BeanProperty.create("courseName");
+		BeanProperty<JTextField, String> jTextFieldBeanProperty = BeanProperty.create("text");
+		AutoBinding<INewCourseController, String, JTextField, String> autoBinding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, newCourseController, iNewCourseControllerBeanProperty, textField, jTextFieldBeanProperty);
 		autoBinding.bind();
+		//
+		BeanProperty<INewCourseController, String> iNewCourseControllerBeanProperty_1 = BeanProperty.create("courseTurn");
+		BeanProperty<JComboBox, Object> jComboBoxBeanProperty = BeanProperty.create("selectedItem");
+		AutoBinding<INewCourseController, String, JComboBox, Object> autoBinding_1 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, newCourseController, iNewCourseControllerBeanProperty_1, comboTurn, jComboBoxBeanProperty);
+		autoBinding_1.bind();
+		//
+		BeanProperty<INewCourseController, String> iNewCourseControllerBeanProperty_2 = BeanProperty.create("courseYear");
+		AutoBinding<INewCourseController, String, JComboBox, Object> autoBinding_2 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, newCourseController, iNewCourseControllerBeanProperty_2, comboYear, jComboBoxBeanProperty);
+		autoBinding_2.bind();
 	}
 }

@@ -8,7 +8,9 @@ public interface ICourseRepository {
 	void insertCourse(Course course);
 	void updateCourse(Course course);
 	void deleteCourse(String pKCourse);
-	Course getCourseByName(String name);
+	
+	Course getCourseByNameAndTurnAndYear(String name, String turn, String year);
 	Course getCourseByPK(String pKCourse);
+	
 	List<Course> getCourses(String nameFilter);
 }

@@ -26,6 +26,7 @@ import java.util.List;
 import tecec.dto.Stage;
 import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.SwingBindings;
+import javax.swing.ListSelectionModel;
 
 public class StageViewerUI extends JDialog implements IStageViewerUI {
 
@@ -84,6 +85,7 @@ public class StageViewerUI extends JDialog implements IStageViewerUI {
 			contentPanel.add(scrollPane, "cell 1 2,grow");
 			{
 				table = new JTable();
+				table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 				scrollPane.setRowHeaderView(table);
 			}
 		}

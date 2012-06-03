@@ -49,7 +49,7 @@ public class NewStageController extends BaseController implements INewStageContr
 		if (violation != null)
 			throw new RuleViolationException (violation);
 		
-		stageWriter.createAdvisor(this.stageName, this.stageYear);
+		stageWriter.createStage(this.stageName, this.stageYear);
 		
 		setStageName ("");
 		setStageYear ("2007");

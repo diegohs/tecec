@@ -6,8 +6,18 @@ import tecec.contract.RuleViolationException;
 public interface IUpdateCourseController {
 	void setPKCourse(String pKCourse);
 	void setCourseName(String name);
+	void setCourseTurn (String turn);
+	void setCourseYear (String year);
+	
 	String getCourseName();
+	String getCourseTurn ();
+	String getCourseYear ();
+	
+	boolean getCanUpdate();
 	
 	void updateCourse() throws RuleViolationException;
 	RuleViolation getUpdateViolation();
+	
+
+
 }

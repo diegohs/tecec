@@ -60,9 +60,7 @@ public class MainUI implements IMainUI {
 		mainUIController.showProfileViewerUI();
 	}
 	
-	private void showTurnUI () {
-		mainUIController.showTurnViewerUI();
-	}
+	
 	
 	private void showStageUI () {
 		mainUIController.showStageViewerUI();
@@ -145,13 +143,6 @@ public class MainUI implements IMainUI {
 		});
 		mnCadastro.add(mntmProfile);
 		
-		JMenuItem mntmTurn = new JMenuItem("Turn");
-		mntmTurn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				showTurnUI();
-			}
-		});
-		mnCadastro.add(mntmTurn);
 		
 		JMenuItem mntmStage = new JMenuItem("Estágio");
 		mntmStage.addActionListener(new ActionListener () {

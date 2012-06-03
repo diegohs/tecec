@@ -10,7 +10,7 @@ public interface IStageWriter {
 
 	RuleViolation getUpdateViolation(Stage newStage);
 
-	void createAdvisor(String name, String year) throws RuleViolationException;
+	void createStage(String name, String year) throws RuleViolationException;
 
 	void updateStage(String pKStage, String newName, String newYear)
 			throws RuleViolationException;

@@ -79,7 +79,7 @@ public class StageWriter implements IStageWriter {
 	}
 
 	@Override
-	public void createAdvisor(String name, String year)
+	public void createStage(String name, String year)
 			throws RuleViolationException {
 
 		RuleViolation violation = getCreationViolation(name, year);

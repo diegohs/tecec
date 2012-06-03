@@ -9,6 +9,8 @@ public class NewCourseController extends BaseController implements
 	
 	private ICourseWriter courseWriter;
 	private String courseName;
+	private String courseTurn;
+	private String courseYear;
 
 	public NewCourseController(ICourseWriter courseWriter) {
 		if (courseWriter == null) {
@@ -19,35 +21,62 @@ public class NewCourseController extends BaseController implements
 	}
 
 	@Override
-	public void createCourse() throws RuleViolationException {
-		RuleViolation violation = getCreationViolation();
-
-		if (violation != null) {
-			throw new RuleViolationException(violation);
-		}
-
-		courseWriter.createCourse(this.courseName);
-
-		setCourseName("");
-	}
-
-	@Override
 	public String getCourseName() {
 		return this.courseName;
 	}
 
 	@Override
 	public void setCourseName(String name) {
-		String oldValue = getCourseName();
-
+		
+		String old = getCourseName ();
 		this.courseName = name;
+		notifyOfPropertyChange("courseName", old, name);
+		
 
-		notifyOfPropertyChange("courseName", oldValue, name);
+	}
+
+	@Override
+	public String getCourseTurn() {
+		return this.courseTurn;
+	}
+
+	@Override
+	public void setCourseTurn(String turn) {
+		String old = getCourseTurn ();
+		this.courseTurn = turn;
+		notifyOfPropertyChange("courseTurn", old, turn);
+		
+	}
+
+	@Override
+	public String getCourseYear() {
+		return this.courseYear;
+	}
+
+	@Override
+	public void setCourseYear(String year) {
+		String old = getCourseYear ();
+		this.courseYear = year;
+		notifyOfPropertyChange("courseYear", old, year);
+		
+	}
+
+	@Override
+	public void createCourse() throws RuleViolationException {
+		RuleViolation violation = getCreationViolation ();
+		if (violation != null)
+			throw new RuleViolationException (violation);
+		
+		courseWriter.createCourse(this.courseName, this.courseTurn, this.courseYear);
+		
+		setCourseName ("");
+		setCourseYear ("2007");
+		setCourseTurn ("Noturno");		
 	}
 
 	@Override
 	public RuleViolation getCreationViolation() {
-		return courseWriter.getCreationViolation(this.getCourseName());
+		return courseWriter.getCreationViolation(this.courseName, this.courseTurn, this.courseYear);
 	}
-
+	
 }

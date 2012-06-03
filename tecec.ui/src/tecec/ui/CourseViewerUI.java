@@ -1,127 +1,150 @@
 package tecec.ui;
 
+import java.awt.BorderLayout;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import tecec.ui.contract.control.ICourseViewerController;
+import tecec.ui.contract.view.ICourseViewerUI;
 import net.miginfocom.swing.MigLayout;
-
-
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import org.jdesktop.beansbinding.BeanProperty;
-
 import org.jdesktop.beansbinding.AutoBinding;
-import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 import org.jdesktop.beansbinding.Bindings;
+import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
+import java.util.List;
+import tecec.dto.Course;
 import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.SwingBindings;
 
-import tecec.dto.Course;
-import tecec.ui.contract.control.ICourseViewerController;
-import tecec.ui.contract.view.ICourseViewerUI;
-import javax.swing.ListSelectionModel;
+public class CourseViewerUI extends JDialog implements ICourseViewerUI {
 
-public class CourseViewerUI extends JFrame implements ICourseViewerUI {
-	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private final JPanel contentPanel = new JPanel();
+	
+	
 	private ICourseViewerController courseViewerController;
+	private JTextField textField;
+	private JTable table;
+	private JButton btnAtualizar;
+	private JButton btnRemover;
 	
-	private void showUpdateCourseUI(){
-		this.courseViewerController.showUpdateCourseUI();
+	private void showNewCourseUI () {
+		courseViewerController.showNewCourseUI();
 	}
 	
-	private void showNewCourseUI(){
-		this.courseViewerController.showNewCourseUI();
+	private void showUpdateCourseUI () {
+		courseViewerController.showUpdateCourseUI();
 	}
 	
-	private void deleteCourse(){
+	private void deleteCourseUI () {
 		this.courseViewerController.deleteCourse();
 	}
 
-	private JPanel contentPane;
-	private JTextField txtFilter;
-	private JScrollPane scrollPane;
-	private JTable table;
-	private JButton btnNewCourse;
-	private JButton btnUpdateCourse;
-	private JButton btnDeleteCourse;
-
-	/**
-	 * Create the frame.
-	 */
 	public CourseViewerUI(ICourseViewerController courseViewerController) {
-		this.courseViewerController = courseViewerController;	
+		if (courseViewerController == null)
+			throw new IllegalArgumentException ("courseViewerController");
+		
+		this.courseViewerController = courseViewerController;
 		
 		setDefaultLookAndFeelDecorated(true);
+		setModal(true);
 		
-		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		setBounds(100, 100, 726, 441);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[][grow][grow 50][]", "[20px:n][][20px:n][grow][5px:n][20px:n]"));
-		
-		JLabel lblFilter = new JLabel("Filtro:");
-		contentPane.add(lblFilter, "flowx,cell 1 1");
-		
-		txtFilter = new JTextField();
-		contentPane.add(txtFilter, "cell 1 1 2 1,growx");
-		txtFilter.setColumns(10);
-		
-		scrollPane = new JScrollPane();
-		contentPane.add(scrollPane, "cell 1 3 2 1,grow");
-		
-		table = new JTable();
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		scrollPane.setViewportView(table);
-		
-		btnNewCourse = new JButton("Adicionar Novo");
-		btnNewCourse.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				showNewCourseUI();
+		setBounds(100, 100, 568, 300);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(new MigLayout("", "[][][grow]", "[][][grow][]"));
+		{
+			JLabel lblFiltro = new JLabel("Filtro:");
+			contentPanel.add(lblFiltro, "cell 1 1,alignx trailing");
+		}
+		{
+			textField = new JTextField();
+			contentPanel.add(textField, "cell 2 1,growx");
+			textField.setColumns(10);
+		}
+		{
+			JScrollPane scrollPane = new JScrollPane();
+			contentPanel.add(scrollPane, "cell 2 2,grow");
+			{
+				table = new JTable();
+				scrollPane.setViewportView(table);
 			}
-		});
-		contentPane.add(btnNewCourse, "flowx,cell 2 5,alignx right,aligny bottom");
-		
-		btnUpdateCourse = new JButton("Atualizar Selecionado");
-		btnUpdateCourse.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				showUpdateCourseUI();				
-			}
-		});
-		contentPane.add(btnUpdateCourse, "flowx,cell 2 5,alignx right,aligny bottom");
-		
-		btnDeleteCourse = new JButton("Excluir Selecionado");
-		btnDeleteCourse.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				deleteCourse();
-			}
-		});
-		contentPane.add(btnDeleteCourse, "flowx,cell 2 5,alignx right,aligny bottom");
+		}
+		{
+			JButton btnNovo = new JButton("Cadastrar Novo");
+			btnNovo.addActionListener(new ActionListener () {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					showNewCourseUI();
+				}
+				
+			});
+			contentPanel.add(btnNovo, "flowx,cell 2 3,alignx left");
+		}
+		{
+			btnAtualizar = new JButton("Atualizar Selecionado");
+			btnAtualizar.addActionListener(new ActionListener () {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					showUpdateCourseUI();
+					
+				}
+				
+			});
+			
+			contentPanel.add(btnAtualizar, "cell 2 3");
+		}
+		{
+			btnRemover = new JButton("Remover Selecionado");
+			btnRemover.addActionListener(new ActionListener () {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					deleteCourseUI();
+				}
+				
+			});
+			contentPanel.add(btnRemover, "cell 2 3");
+		}
 		initDataBindings();
 	}
+	
+	
+	
 	protected void initDataBindings() {
 		BeanProperty<ICourseViewerController, String> iCourseViewerControllerBeanProperty = BeanProperty.create("nameFilter");
 		BeanProperty<JTextField, String> jTextFieldBeanProperty = BeanProperty.create("text");
-		AutoBinding<ICourseViewerController, String, JTextField, String> autoBinding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, courseViewerController, iCourseViewerControllerBeanProperty, txtFilter, jTextFieldBeanProperty);
+		AutoBinding<ICourseViewerController, String, JTextField, String> autoBinding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, courseViewerController, iCourseViewerControllerBeanProperty, textField, jTextFieldBeanProperty);
 		autoBinding.bind();
 		//
 		BeanProperty<ICourseViewerController, List<Course>> iCourseViewerControllerBeanProperty_1 = BeanProperty.create("courses");
 		JTableBinding<Course, ICourseViewerController, JTable> jTableBinding = SwingBindings.createJTableBinding(UpdateStrategy.READ, courseViewerController, iCourseViewerControllerBeanProperty_1, table);
 		//
 		BeanProperty<Course, String> courseBeanProperty = BeanProperty.create("name");
-		jTableBinding.addColumnBinding(courseBeanProperty).setColumnName("Curso");
+		jTableBinding.addColumnBinding(courseBeanProperty).setColumnName("Nome");
+		//
+		BeanProperty<Course, String> courseBeanProperty_1 = BeanProperty.create("turn");
+		jTableBinding.addColumnBinding(courseBeanProperty_1).setColumnName("Turno");
+		//
+		BeanProperty<Course, String> courseBeanProperty_2 = BeanProperty.create("year");
+		jTableBinding.addColumnBinding(courseBeanProperty_2).setColumnName("Ano");
 		//
 		jTableBinding.bind();
 		//
@@ -132,11 +155,11 @@ public class CourseViewerUI extends JFrame implements ICourseViewerUI {
 		//
 		BeanProperty<ICourseViewerController, Boolean> iCourseViewerControllerBeanProperty_3 = BeanProperty.create("canUpdateCourse");
 		BeanProperty<JButton, Boolean> jButtonBeanProperty = BeanProperty.create("enabled");
-		AutoBinding<ICourseViewerController, Boolean, JButton, Boolean> autoBinding_2 = Bindings.createAutoBinding(UpdateStrategy.READ, courseViewerController, iCourseViewerControllerBeanProperty_3, btnUpdateCourse, jButtonBeanProperty);
+		AutoBinding<ICourseViewerController, Boolean, JButton, Boolean> autoBinding_2 = Bindings.createAutoBinding(UpdateStrategy.READ, courseViewerController, iCourseViewerControllerBeanProperty_3, btnAtualizar, jButtonBeanProperty);
 		autoBinding_2.bind();
 		//
 		BeanProperty<ICourseViewerController, Boolean> iCourseViewerControllerBeanProperty_4 = BeanProperty.create("canDeleteCourse");
-		AutoBinding<ICourseViewerController, Boolean, JButton, Boolean> autoBinding_3 = Bindings.createAutoBinding(UpdateStrategy.READ, courseViewerController, iCourseViewerControllerBeanProperty_4, btnDeleteCourse, jButtonBeanProperty);
+		AutoBinding<ICourseViewerController, Boolean, JButton, Boolean> autoBinding_3 = Bindings.createAutoBinding(UpdateStrategy.READ, courseViewerController, iCourseViewerControllerBeanProperty_4, btnRemover, jButtonBeanProperty);
 		autoBinding_3.bind();
 	}
 }
