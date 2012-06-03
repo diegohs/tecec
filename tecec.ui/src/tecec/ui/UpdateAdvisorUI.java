@@ -52,11 +52,8 @@ public class UpdateAdvisorUI extends JDialog implements IUpdateAdvisorUI {
 				JOptionPane.showMessageDialog(this, e, "ERRO", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-	}
-	
-	/**
-	 * Create the dialog.
-	 */
+	}	
+
 	public UpdateAdvisorUI(IUpdateAdvisorController updateAdvisorController) {
 		this.updateAdvisorController = updateAdvisorController;
 		
@@ -64,6 +61,7 @@ public class UpdateAdvisorUI extends JDialog implements IUpdateAdvisorUI {
 		
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
+		
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

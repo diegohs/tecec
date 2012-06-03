@@ -64,6 +64,10 @@ public class MainUI implements IMainUI {
 		mainUIController.showTurnViewerUI();
 	}
 	
+	private void showStageUI () {
+		mainUIController.showStageViewerUI();
+	}
+	
 
 	private void initialize() {
 		JFrame.setDefaultLookAndFeelDecorated(true);
@@ -148,6 +152,17 @@ public class MainUI implements IMainUI {
 			}
 		});
 		mnCadastro.add(mntmTurn);
+		
+		JMenuItem mntmStage = new JMenuItem("Estágio");
+		mntmStage.addActionListener(new ActionListener () {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				showStageUI ();
+			}
+		});
+		
+		mnCadastro.add(mntmStage);
 	}
 
 }

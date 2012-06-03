@@ -10,4 +10,5 @@ public interface IMainUIController {
 	void showMonographViewerUI();
 	void showProfileViewerUI();
 	void showTurnViewerUI ();
+	void showStageViewerUI();
 }
