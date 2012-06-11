@@ -14,6 +14,7 @@ public class MainUIController extends BaseController implements IMainUIControlle
 	private IMonographViewerUI monographViewerUI;
 	private IProfileViewerUI profileViewerUI;	
 	private IStageViewerUI stageViewerUI;
+	private IPermissionViewerUI permissionViewerUI;
 
 
 
@@ -21,7 +22,8 @@ public class MainUIController extends BaseController implements IMainUIControlle
 			IAdvisorViewerUI advisorViewerUI, IStudentViewerUI studentViewerUI,
 			IActivityViewerUI activityViewerUI, ICourseViewerUI courseViewerUI, IStatusViewerUI statusViewerUI, IMonographViewerUI monographViewerUI,
 			IProfileViewerUI profileViewerUI,		
-			IStageViewerUI stageViewerUI) {
+			IStageViewerUI stageViewerUI,
+			IPermissionViewerUI permissionViewerUI) {
 		this.areaViewerUI = areaViewerUI;
 		this.advisorViewerUI = advisorViewerUI;
 		this.studentViewerUI = studentViewerUI;
@@ -31,6 +33,7 @@ public class MainUIController extends BaseController implements IMainUIControlle
 		this.monographViewerUI = monographViewerUI;
 		this.profileViewerUI = profileViewerUI;	
 		this.stageViewerUI = stageViewerUI;
+		this.permissionViewerUI = permissionViewerUI;
 	}
 
 	@Override
@@ -79,6 +82,12 @@ public class MainUIController extends BaseController implements IMainUIControlle
 	@Override
 	public void showStageViewerUI () {
 		this.stageViewerUI.setVisible(true);
+	}
+
+	@Override
+	public void showPermissionViewerUI() {
+		// TODO Auto-generated method stub
+		this.permissionViewerUI.setVisible(true);
 	}
 
 }

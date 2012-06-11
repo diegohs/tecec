@@ -88,6 +88,14 @@ public class InjectorFactory {
 
 		container.addComponent(tecec.contract.reader.IStageReader.class,
 				tecec.business.reader.StageReader.class);
+		
+		/* Permission */
+
+		container.addComponent(tecec.contract.writer.IPermissionWriter.class,
+				tecec.business.writer.PermissionWriter.class);
+
+		container.addComponent(tecec.contract.reader.IPermissionReader.class,
+				tecec.business.reader.PermissionReader.class);
 	}
 
 	private void RegisterUI(MutablePicoContainer container) {
@@ -197,6 +205,18 @@ public class InjectorFactory {
 
 		container.addComponent(tecec.ui.contract.view.IUpdateStageUI.class,
 				tecec.ui.UpdateStageUI.class);
+		
+		
+		/* Permission */
+		
+		container.addComponent(tecec.ui.contract.view.INewPermissionUI.class,
+				tecec.ui.NewPermissionUI.class);
+
+		container.addComponent(tecec.ui.contract.view.IPermissionViewerUI.class,
+				tecec.ui.PermissionViewerUI.class);
+
+		container.addComponent(tecec.ui.contract.view.IUpdatePermissionUI.class,
+				tecec.ui.UpdatePermissionUI.class);
 		
 		
 	}
@@ -331,6 +351,19 @@ public class InjectorFactory {
 		container.addComponent(
 				tecec.ui.contract.control.IUpdateStageController.class,
 				tecec.ui.control.UpdateStageController.class);
+		
+		/* Permission */
+		container.addComponent(		
+				tecec.ui.contract.control.INewPermissionController.class,
+				tecec.ui.control.NewPermissionController.class);
+
+		container.addComponent(
+				tecec.ui.contract.control.IPermissionViewerController.class,
+				tecec.ui.control.PermissionViewerController.class);
+
+		container.addComponent(
+				tecec.ui.contract.control.IUpdatePermissionController.class,
+				tecec.ui.control.UpdatePermissionController.class);
 	}
 
 	private void RegisterConfig(MutablePicoContainer container) {
@@ -385,5 +418,10 @@ public class InjectorFactory {
 		container.addComponent(
 				tecec.contract.repository.IStageRepository.class,
 				tecec.repository.mysql.MySqlStageRepository.class);
+		
+		/* Permission */
+		container.addComponent(
+				tecec.contract.repository.IPermissionRepository.class,
+				tecec.repository.mysql.MySqlPermissionRepository.class);
 	}
 }

@@ -37,4 +37,8 @@ public class Course {
 	public void setTurn(String turn) {
 		this.turn = turn;
 	}
+	
+	public String toString () {
+		return getName() + " / " + getYear() + " / " + getTurn();
+	}
 }

@@ -1,15 +1,15 @@
 package tecec.dto;
 
-public class Status {
-	private String pKStatus;
+public class Permission {
+	private String pKPermission;
 	private String description;
 
-	public String getpKStatus() {
-		return pKStatus;
+	public String getpKPermission() {
+		return pKPermission;
 	}
 
-	public void setpKStatus(String pKStatus) {
-		this.pKStatus = pKStatus;
+	public void setpKPermission(String pKPermission) {
+		this.pKPermission = pKPermission;
 	}
 
 	public String getDescription() {

@@ -66,6 +66,10 @@ public class MainUI implements IMainUI {
 		mainUIController.showStageViewerUI();
 	}
 	
+	private void showPermissionUI () {
+		mainUIController.showPermissionViewerUI();
+	}
+	
 
 	private void initialize() {
 		JFrame.setDefaultLookAndFeelDecorated(true);
@@ -154,6 +158,14 @@ public class MainUI implements IMainUI {
 		});
 		
 		mnCadastro.add(mntmStage);
+		
+		JMenuItem mntmPermission = new JMenuItem("Permissão");
+		mntmPermission.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				showPermissionUI();
+			}
+		});
+		mnCadastro.add(mntmPermission);
 	}
 
 }
