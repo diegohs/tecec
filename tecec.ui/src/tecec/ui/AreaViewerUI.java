@@ -29,6 +29,7 @@ import tecec.contract.RuleViolation;
 import tecec.ui.contract.control.IAreaViewerController;
 import tecec.ui.contract.record.AreaRecord;
 import tecec.ui.contract.view.IAreaViewerUI;
+import java.awt.Font;
 
 public class AreaViewerUI extends JDialog implements IAreaViewerUI {
 
@@ -88,6 +89,7 @@ public class AreaViewerUI extends JDialog implements IAreaViewerUI {
 				"[][][][grow][][]"));
 		{
 			JLabel lblNewLabel = new JLabel("Filtro");
+			lblNewLabel.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
 			contentPanel.add(lblNewLabel, "flowx,cell 1 1");
 		}
 		{

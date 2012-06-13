@@ -25,6 +25,7 @@ import tecec.ui.contract.control.INewActivityController;
 import tecec.ui.contract.view.INewActivityUI;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class NewActivityUI extends JDialog implements INewActivityUI {
 
@@ -58,6 +59,7 @@ public class NewActivityUI extends JDialog implements INewActivityUI {
 	private JTextField txtDescription;
 	private JFormattedTextField txtDueDate;
 	private JButton btnNewActivity;
+	private JLabel lblAdicionarNovaAtividade;
 
 	public NewActivityUI(INewActivityController newActivityController) {
 		this.newActivityController = newActivityController;
@@ -70,29 +72,33 @@ public class NewActivityUI extends JDialog implements INewActivityUI {
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new MigLayout("", "[][grow][]",
-				"[grow][][][][][][][][grow]"));
+		contentPanel.setLayout(new MigLayout("", "[][grow][]", "[grow][][][][][][][][][grow]"));
+		{
+			lblAdicionarNovaAtividade = new JLabel("Adicionar nova atividade:");
+			lblAdicionarNovaAtividade.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
+			contentPanel.add(lblAdicionarNovaAtividade, "cell 1 1,alignx center");
+		}
 		{
 			JLabel lblNewLabel = new JLabel("T\u00EDtulo:");
-			contentPanel.add(lblNewLabel, "flowx,cell 1 1");
+			contentPanel.add(lblNewLabel, "flowx,cell 1 2");
 		}
 		{
 			txtTitle = new JTextField();
-			contentPanel.add(txtTitle, "cell 1 1,growx");
+			contentPanel.add(txtTitle, "cell 1 2,growx");
 			txtTitle.setColumns(10);
 		}
 		{
 			JLabel lblNewLabel_1 = new JLabel("Descri\u00E7\u00E3o:");
-			contentPanel.add(lblNewLabel_1, "flowx,cell 1 3");
+			contentPanel.add(lblNewLabel_1, "flowx,cell 1 4");
 		}
 		{
 			txtDescription = new JTextField();
-			contentPanel.add(txtDescription, "cell 1 3,growx");
+			contentPanel.add(txtDescription, "cell 1 4,growx");
 			txtDescription.setColumns(10);
 		}
 		{
 			JLabel lblNewLabel_2 = new JLabel("Data de Entrega:");
-			contentPanel.add(lblNewLabel_2, "flowx,cell 1 5");
+			contentPanel.add(lblNewLabel_2, "flowx,cell 1 6");
 		}
 		{
 			SimpleDateFormat dateFormat = new SimpleDateFormat(
@@ -110,7 +116,7 @@ public class NewActivityUI extends JDialog implements INewActivityUI {
 				throw new RuntimeException("Erro ao construir controle de data do form NewActivityUI");
 			}
 			
-			contentPanel.add(txtDueDate, "cell 1 5,growx");
+			contentPanel.add(txtDueDate, "cell 1 6,growx");
 		}
 		{
 			btnNewActivity = new JButton("Cadastrar");
@@ -119,7 +125,7 @@ public class NewActivityUI extends JDialog implements INewActivityUI {
 					insertActivity();
 				}
 			});
-			contentPanel.add(btnNewActivity, "cell 1 7,alignx right");
+			contentPanel.add(btnNewActivity, "cell 1 8,alignx right");
 		}
 		initDataBindings();
 	}

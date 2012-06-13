@@ -28,6 +28,7 @@ import tecec.dto.Status;
 import tecec.ui.contract.control.IStatusViewerController;
 import tecec.ui.contract.view.IStatusViewerUI;
 import javax.swing.ListSelectionModel;
+import java.awt.Font;
 
 public class StatusViewerUI extends JFrame implements IStatusViewerUI {
 	
@@ -70,21 +71,11 @@ public class StatusViewerUI extends JFrame implements IStatusViewerUI {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[][grow][grow 50][]", "[20px:n][][20px:n][grow][5px:n][20px:n]"));
+		contentPane.setLayout(new MigLayout("", "[53.00,grow][][][][grow 50][]", "[20px:n][][][][][][fill][20px:n][205.00,grow][5px:n][20px:n]"));
 		
 		JLabel lblFilter = new JLabel("Filtro:");
-		contentPane.add(lblFilter, "flowx,cell 1 1");
-		
-		txtFilter = new JTextField();
-		contentPane.add(txtFilter, "cell 1 1 2 1,growx");
-		txtFilter.setColumns(10);
-		
-		scrollPane = new JScrollPane();
-		contentPane.add(scrollPane, "cell 1 3 2 1,grow");
-		
-		table = new JTable();
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		scrollPane.setViewportView(table);
+		lblFilter.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
+		contentPane.add(lblFilter, "flowx,cell 0 4 1 2,alignx center");
 		
 		btnNewStatus = new JButton("Adicionar Novo");
 		btnNewStatus.addActionListener(new ActionListener() {
@@ -92,7 +83,18 @@ public class StatusViewerUI extends JFrame implements IStatusViewerUI {
 				showNewStatusUI();
 			}
 		});
-		contentPane.add(btnNewStatus, "flowx,cell 2 5,alignx right,aligny bottom");
+		
+		txtFilter = new JTextField();
+		contentPane.add(txtFilter, "cell 1 5 4 1,grow");
+		txtFilter.setColumns(10);
+		
+		scrollPane = new JScrollPane();
+		contentPane.add(scrollPane, "cell 0 6 5 3,grow");
+		
+		table = new JTable();
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPane.setViewportView(table);
+		contentPane.add(btnNewStatus, "flowx,cell 4 10,alignx right,aligny bottom");
 		
 		btnUpdateStatus = new JButton("Atualizar Selecionado");
 		btnUpdateStatus.addActionListener(new ActionListener() {
@@ -100,7 +102,7 @@ public class StatusViewerUI extends JFrame implements IStatusViewerUI {
 				showUpdateStatusUI();				
 			}
 		});
-		contentPane.add(btnUpdateStatus, "flowx,cell 2 5,alignx right,aligny bottom");
+		contentPane.add(btnUpdateStatus, "flowx,cell 4 10,alignx right,aligny bottom");
 		
 		btnDeleteStatus = new JButton("Excluir Selecionado");
 		btnDeleteStatus.addActionListener(new ActionListener() {
@@ -108,7 +110,7 @@ public class StatusViewerUI extends JFrame implements IStatusViewerUI {
 				deleteStatus();
 			}
 		});
-		contentPane.add(btnDeleteStatus, "flowx,cell 2 5,alignx right,aligny bottom");
+		contentPane.add(btnDeleteStatus, "flowx,cell 4 10,alignx right,aligny bottom");
 		initDataBindings();
 	}
 	protected void initDataBindings() {

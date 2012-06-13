@@ -25,6 +25,7 @@ import org.jdesktop.swingbinding.SwingBindings;
 import javax.swing.ListSelectionModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 
 public class AdvisorViewerUI extends JDialog implements IAdvisorViewerUI {	
@@ -65,6 +66,7 @@ public class AdvisorViewerUI extends JDialog implements IAdvisorViewerUI {
 		contentPanel.setLayout(new MigLayout("", "[][280.00,grow][]", "[][][][grow][][]"));
 		{
 			JLabel lblNewLabel = new JLabel("Filtro:");
+			lblNewLabel.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
 			contentPanel.add(lblNewLabel, "flowx,cell 1 1");
 		}
 		{

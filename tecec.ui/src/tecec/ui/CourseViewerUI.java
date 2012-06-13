@@ -25,6 +25,7 @@ import java.util.List;
 import tecec.dto.Course;
 import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.SwingBindings;
+import java.awt.Font;
 
 public class CourseViewerUI extends JDialog implements ICourseViewerUI {
 
@@ -70,6 +71,7 @@ public class CourseViewerUI extends JDialog implements ICourseViewerUI {
 		contentPanel.setLayout(new MigLayout("", "[][][grow]", "[][][grow][]"));
 		{
 			JLabel lblFiltro = new JLabel("Filtro:");
+			lblFiltro.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
 			contentPanel.add(lblFiltro, "cell 1 1,alignx trailing");
 		}
 		{
@@ -79,7 +81,7 @@ public class CourseViewerUI extends JDialog implements ICourseViewerUI {
 		}
 		{
 			JScrollPane scrollPane = new JScrollPane();
-			contentPanel.add(scrollPane, "cell 2 2,grow");
+			contentPanel.add(scrollPane, "cell 1 2 2 1,grow");
 			{
 				table = new JTable();
 				scrollPane.setViewportView(table);

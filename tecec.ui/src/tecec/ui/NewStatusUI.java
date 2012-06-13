@@ -70,22 +70,21 @@ public class NewStatusUI extends JDialog implements INewStatusUI {
 		setLocationByPlatform(true);
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		setBounds(100, 100, 436, 245);
+		setBounds(100, 100, 430, 169);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[grow][grow][grow]",
-				"[grow][][56.00][29.00][grow]"));
+		contentPane.setLayout(new MigLayout("", "[grow]", "[][56.00][29.00]"));
 
 		JLabel lblNewLabel = new JLabel("Cadastrar Novo Status");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
-		contentPane.add(lblNewLabel, "cell 1 1,alignx center");
+		contentPane.add(lblNewLabel, "cell 0 0,alignx center");
 
 		JLabel lblNome = new JLabel("Descrição:");
-		contentPane.add(lblNome, "flowx,cell 1 2");
+		contentPane.add(lblNome, "flowx,cell 0 1");
 
 		txtStatusDescription = new JTextField();
-		contentPane.add(txtStatusDescription, "cell 1 2,growx");
+		contentPane.add(txtStatusDescription, "cell 0 1,growx");
 		txtStatusDescription.setColumns(10);
 
 		btnCreateStatus = new JButton("Cadastrar");
@@ -94,7 +93,7 @@ public class NewStatusUI extends JDialog implements INewStatusUI {
 				storeStatus();
 			}
 		});
-		contentPane.add(btnCreateStatus, "cell 1 3,alignx center,growy");
+		contentPane.add(btnCreateStatus, "cell 0 2,alignx right,growy");
 		initDataBindings();
 	}
 

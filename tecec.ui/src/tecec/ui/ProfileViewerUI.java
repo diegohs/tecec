@@ -28,6 +28,7 @@ import tecec.dto.Profile;
 import tecec.ui.contract.control.IProfileViewerController;
 import tecec.ui.contract.view.IProfileViewerUI;
 import javax.swing.ListSelectionModel;
+import java.awt.Font;
 
 public class ProfileViewerUI extends JFrame implements IProfileViewerUI {
 	
@@ -70,17 +71,18 @@ public class ProfileViewerUI extends JFrame implements IProfileViewerUI {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[][grow][grow 50][]", "[20px:n][][20px:n][grow][5px:n][20px:n]"));
+		contentPane.setLayout(new MigLayout("", "[][grow][grow 50][]", "[20px:n][][][20px:n][grow][5px:n][20px:n]"));
 		
 		JLabel lblFilter = new JLabel("Filtro:");
-		contentPane.add(lblFilter, "flowx,cell 1 1");
+		lblFilter.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
+		contentPane.add(lblFilter, "cell 1 2,alignx center");
 		
 		txtFilter = new JTextField();
-		contentPane.add(txtFilter, "cell 1 1 2 1,growx");
+		contentPane.add(txtFilter, "cell 2 2,growx");
 		txtFilter.setColumns(10);
 		
 		scrollPane = new JScrollPane();
-		contentPane.add(scrollPane, "cell 1 3 2 1,grow");
+		contentPane.add(scrollPane, "cell 1 4 2 1,grow");
 		
 		table = new JTable();
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -92,7 +94,7 @@ public class ProfileViewerUI extends JFrame implements IProfileViewerUI {
 				showNewProfileUI();
 			}
 		});
-		contentPane.add(btnNewProfile, "flowx,cell 2 5,alignx right,aligny bottom");
+		contentPane.add(btnNewProfile, "flowx,cell 2 6,alignx right,aligny bottom");
 		
 		btnUpdateProfile = new JButton("Atualizar Selecionado");
 		btnUpdateProfile.addActionListener(new ActionListener() {
@@ -100,7 +102,7 @@ public class ProfileViewerUI extends JFrame implements IProfileViewerUI {
 				showUpdateProfileUI();				
 			}
 		});
-		contentPane.add(btnUpdateProfile, "flowx,cell 2 5,alignx right,aligny bottom");
+		contentPane.add(btnUpdateProfile, "flowx,cell 2 6,alignx right,aligny bottom");
 		
 		btnDeleteProfile = new JButton("Excluir Selecionado");
 		btnDeleteProfile.addActionListener(new ActionListener() {
@@ -108,7 +110,7 @@ public class ProfileViewerUI extends JFrame implements IProfileViewerUI {
 				deleteProfile();
 			}
 		});
-		contentPane.add(btnDeleteProfile, "flowx,cell 2 5,alignx right,aligny bottom");
+		contentPane.add(btnDeleteProfile, "flowx,cell 2 6,alignx right,aligny bottom");
 		initDataBindings();
 	}
 	protected void initDataBindings() {

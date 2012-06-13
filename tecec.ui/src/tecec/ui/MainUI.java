@@ -226,6 +226,21 @@ public class MainUI implements IMainUI {
 		});
 		
 		mnBackup.add(mntmRestaurar);
+		
+		JMenu mnAjuda = new JMenu("Ajuda");
+		menuBar.add(mnAjuda);
+		
+		JMenuItem mntmSobre = new JMenuItem("Sobre");
+		mntmSobre.addActionListener(new ActionListener () {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Tecec: Software para gerenciamento de Tccs");
+				
+			}
+			
+		});
+		mnAjuda.add(mntmSobre);
 
 	}
 

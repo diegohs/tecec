@@ -20,6 +20,7 @@ import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class NewAdvisorUI extends JDialog implements INewAdvisorUI {
 
@@ -72,34 +73,38 @@ public class NewAdvisorUI extends JDialog implements INewAdvisorUI {
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new MigLayout("", "[][grow][]",
-				"[][][][][grow][][]"));
+		contentPanel.setLayout(new MigLayout("", "[][][grow][]", "[][][][][][][]"));
 		{
-			JLabel lblNewLabel = new JLabel("Nome:");
-			contentPanel.add(lblNewLabel, "flowx,cell 1 1");
+			JLabel lblCadastrarOrientador = new JLabel("Cadastrar Orientador");
+			lblCadastrarOrientador.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
+			contentPanel.add(lblCadastrarOrientador, "cell 1 0 2 1,alignx center");
 		}
 		{
-			JLabel lblNewLabel_1 = new JLabel("E-mail:");
-			contentPanel.add(lblNewLabel_1, "flowx,cell 1 3");
+			JLabel lblNewLabel = new JLabel("Nome:");
+			contentPanel.add(lblNewLabel, "flowx,cell 1 2");
 		}
 		{
 			txtName = new JTextField();
-			contentPanel.add(txtName, "cell 1 1,growx");
+			contentPanel.add(txtName, "cell 2 2,growx");
 			txtName.setColumns(10);
 		}
 		{
+			JLabel lblNewLabel_1 = new JLabel("E-mail:");
+			contentPanel.add(lblNewLabel_1, "flowx,cell 2 4");
+		}
+		{
 			txtEmail = new JTextField();
-			contentPanel.add(txtEmail, "cell 1 3,growx");
+			contentPanel.add(txtEmail, "cell 2 4,growx");
 			txtEmail.setColumns(10);
 		}
 		{
-			JButton btnNewCourse = new JButton("Adicionar");
+			JButton btnNewCourse = new JButton("Cadastrar");
 			btnNewCourse.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					createAdvisor();
 				}
 			});
-			contentPanel.add(btnNewCourse, "flowx,cell 1 5,alignx right");
+			contentPanel.add(btnNewCourse, "flowx,cell 2 6,alignx right");
 		}
 		initDataBindings();
 	}

@@ -111,7 +111,7 @@ public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 				
 						JLabel lblTitle = new JLabel("Atualizar Monografia");
 						lblTitle.setFont(new Font("Tahoma", Font.BOLD, 13));
-						contentPane.add(lblTitle, "cell 1 0,grow");
+						contentPane.add(lblTitle, "cell 0 0 2 1,alignx center,growy");
 		
 				JLabel lblMonographTitle = new JLabel("TÃ­tulo:");
 				contentPane.add(lblMonographTitle, "cell 0 2,alignx right");

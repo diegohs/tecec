@@ -20,6 +20,7 @@ import org.jdesktop.beansbinding.BeanProperty;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
+import java.awt.Font;
 
 public class UpdateAdvisorUI extends JDialog implements IUpdateAdvisorUI {
 
@@ -31,6 +32,7 @@ public class UpdateAdvisorUI extends JDialog implements IUpdateAdvisorUI {
 	private JTextField txtName;
 	private JTextField txtEmail;
 	private JButton btnUpdate;
+	private JLabel lblAtualizarOrientador;
 
 	@Override
 	public void setpkAdvisor(String pkAdvisor) {
@@ -67,6 +69,11 @@ public class UpdateAdvisorUI extends JDialog implements IUpdateAdvisorUI {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new MigLayout("", "[][grow][]", "[grow][][][][][][grow]"));
+		{
+			lblAtualizarOrientador = new JLabel("Atualizar Orientador");
+			lblAtualizarOrientador.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
+			contentPanel.add(lblAtualizarOrientador, "cell 1 0,alignx center");
+		}
 		{
 			JLabel lblNewLabel = new JLabel("Nome:");
 			contentPanel.add(lblNewLabel, "flowx,cell 1 1");

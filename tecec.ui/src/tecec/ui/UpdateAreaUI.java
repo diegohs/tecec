@@ -30,6 +30,7 @@ import tecec.contract.RuleViolation;
 import tecec.dto.Area;
 import tecec.ui.contract.control.IUpdateAreaController;
 import tecec.ui.contract.view.IUpdateAreaUI;
+import java.awt.Font;
 
 public class UpdateAreaUI extends JDialog implements IUpdateAreaUI {
 
@@ -79,29 +80,15 @@ public class UpdateAreaUI extends JDialog implements IUpdateAreaUI {
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new MigLayout("", "[][grow][]",
-				"[][][][][][][][][]"));
+		contentPanel.setLayout(new MigLayout("", "[][grow][]", "[][][][][][][][][][]"));
+		{
+			JLabel lblAtualizarrea = new JLabel("Atualizar Área");
+			lblAtualizarrea.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
+			contentPanel.add(lblAtualizarrea, "cell 1 0,alignx center");
+		}
 		{
 			JLabel lblNewLabel = new JLabel("Super \u00C1rea:");
-			contentPanel.add(lblNewLabel, "flowx,cell 1 1");
-		}
-		{
-			JLabel lblNewLabel_1 = new JLabel("Nome:");
-			contentPanel.add(lblNewLabel_1, "flowx,cell 1 3");
-		}
-		{
-			JLabel lblNewLabel_2 = new JLabel("Descri\u00E7\u00E3o:");
-			contentPanel.add(lblNewLabel_2, "flowx,cell 1 5");
-		}
-		{
-			txtName = new JTextField();
-			contentPanel.add(txtName, "cell 1 3,growx");
-			txtName.setColumns(10);
-		}
-		{
-			txtDescription = new JTextField();
-			contentPanel.add(txtDescription, "cell 1 5,growx");
-			txtDescription.setColumns(10);
+			contentPanel.add(lblNewLabel, "flowx,cell 0 2");
 		}
 		{
 			cboMainArea = new JComboBox();
@@ -128,7 +115,25 @@ public class UpdateAreaUI extends JDialog implements IUpdateAreaUI {
 				}
 			});
 			
-			contentPanel.add(cboMainArea, "cell 1 1,growx");
+			contentPanel.add(cboMainArea, "cell 1 2,growx");
+		}
+		{
+			JLabel lblNewLabel_1 = new JLabel("Nome:");
+			contentPanel.add(lblNewLabel_1, "flowx,cell 1 4");
+		}
+		{
+			JLabel lblNewLabel_2 = new JLabel("Descri\u00E7\u00E3o:");
+			contentPanel.add(lblNewLabel_2, "flowx,cell 1 6");
+		}
+		{
+			txtName = new JTextField();
+			contentPanel.add(txtName, "cell 1 4,growx");
+			txtName.setColumns(10);
+		}
+		{
+			txtDescription = new JTextField();
+			contentPanel.add(txtDescription, "cell 1 6,growx");
+			txtDescription.setColumns(10);
 		}
 		{
 			JButton btnUpdate = new JButton("Atualizar");
@@ -137,7 +142,7 @@ public class UpdateAreaUI extends JDialog implements IUpdateAreaUI {
 					updateArea();
 				}
 			});
-			contentPanel.add(btnUpdate, "cell 1 7,alignx right");
+			contentPanel.add(btnUpdate, "cell 1 8,alignx right");
 		}
 		initDataBindings();
 	}

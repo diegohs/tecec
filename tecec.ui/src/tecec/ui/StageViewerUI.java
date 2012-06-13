@@ -27,6 +27,7 @@ import tecec.dto.Stage;
 import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.SwingBindings;
 import javax.swing.ListSelectionModel;
+import java.awt.Font;
 
 public class StageViewerUI extends JDialog implements IStageViewerUI {
 
@@ -70,19 +71,20 @@ public class StageViewerUI extends JDialog implements IStageViewerUI {
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new MigLayout("", "[][grow]", "[][][grow][]"));
+		contentPanel.setLayout(new MigLayout("", "[][][grow]", "[][][grow][]"));
 		{
 			JLabel lblFiltro = new JLabel("Filtro:");
-			contentPanel.add(lblFiltro, "cell 0 1,alignx trailing");
+			lblFiltro.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
+			contentPanel.add(lblFiltro, "cell 1 1,alignx trailing");
 		}
 		{
 			textField = new JTextField();
-			contentPanel.add(textField, "cell 1 1,growx");
+			contentPanel.add(textField, "cell 2 1,growx");
 			textField.setColumns(10);
 		}
 		{
 			JScrollPane scrollPane = new JScrollPane();
-			contentPanel.add(scrollPane, "cell 1 2,grow");
+			contentPanel.add(scrollPane, "cell 1 2 2 1,grow");
 			{
 				table = new JTable();
 				table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -100,7 +102,7 @@ public class StageViewerUI extends JDialog implements IStageViewerUI {
 				}
 				
 			});
-			contentPanel.add(btnNewButton, "flowx,cell 1 3");
+			contentPanel.add(btnNewButton, "flowx,cell 2 3");
 		}
 		{
 			btnNewButton_1 = new JButton("Atualizar Selecionado");
@@ -112,7 +114,7 @@ public class StageViewerUI extends JDialog implements IStageViewerUI {
 				}
 				
 			});
-			contentPanel.add(btnNewButton_1, "cell 1 3");
+			contentPanel.add(btnNewButton_1, "cell 2 3");
 		}
 		{
 			btnNewButton_2 = new JButton("Excluir Selecionado");
@@ -124,7 +126,7 @@ public class StageViewerUI extends JDialog implements IStageViewerUI {
 				}
 				
 			});
-			contentPanel.add(btnNewButton_2, "cell 1 3");
+			contentPanel.add(btnNewButton_2, "cell 2 3");
 		}
 		initDataBindings();
 	}
@@ -138,10 +140,10 @@ public class StageViewerUI extends JDialog implements IStageViewerUI {
 		JTableBinding<Stage, IStageViewerController, JTable> jTableBinding = SwingBindings.createJTableBinding(UpdateStrategy.READ, stageViewerController, iStageViewerControllerBeanProperty_1, table);
 		//
 		BeanProperty<Stage, String> stageBeanProperty = BeanProperty.create("name");
-		jTableBinding.addColumnBinding(stageBeanProperty).setColumnName("Nome").setEditable(false);
+		jTableBinding.addColumnBinding(stageBeanProperty).setColumnName("Nome");
 		//
 		BeanProperty<Stage, String> stageBeanProperty_1 = BeanProperty.create("year");
-		jTableBinding.addColumnBinding(stageBeanProperty_1).setColumnName("Ano").setEditable(false);
+		jTableBinding.addColumnBinding(stageBeanProperty_1).setColumnName("Ano");
 		//
 		jTableBinding.bind();
 		//

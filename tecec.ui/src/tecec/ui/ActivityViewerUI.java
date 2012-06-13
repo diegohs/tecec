@@ -29,6 +29,7 @@ import org.jdesktop.swingbinding.SwingBindings;
 import tecec.contract.RuleViolation;
 import tecec.dto.Activity;
 import tecec.ui.contract.control.IActivityViewerController;
+import java.awt.Font;
 
 public class ActivityViewerUI extends JDialog implements
 		tecec.ui.contract.view.IActivityViewerUI {
@@ -82,9 +83,10 @@ public class ActivityViewerUI extends JDialog implements
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new MigLayout("", "[][grow][]", "[20px:n][][20px:n][grow][20px:n][20px:n]"));
+		contentPanel.setLayout(new MigLayout("", "[][grow][]", "[20px:n][][20px:n][grow][20px:n]"));
 		{
 			JLabel lblNewLabel = new JLabel("Filtro:");
+			lblNewLabel.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
 			contentPanel.add(lblNewLabel, "flowx,cell 1 1");
 		}
 		{

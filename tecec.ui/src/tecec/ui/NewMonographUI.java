@@ -104,15 +104,15 @@ public class NewMonographUI extends JDialog implements INewMonographUI {
 		setLocationByPlatform(true);
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		setBounds(100, 100, 436, 307);
+		setBounds(100, 100, 436, 339);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[grow][grow][grow]", "[grow][][56.00][][29.00][grow][][][][][][][]"));		
+		contentPane.setLayout(new MigLayout("", "[grow][grow][grow]", "[grow][][56.00][][29.00][grow][][][][][][][][][]"));		
 		
 		lblTitulo = new JLabel("Cadastrar Nova Monografia");
 		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 13));
-		contentPane.add(lblTitulo, "cell 1 0,alignx center");
+		contentPane.add(lblTitulo, "cell 0 0 3 1,alignx center");
 
 		lblTituloMonografia = new JLabel("Título:");
 		contentPane.add(lblTituloMonografia, "flowx,cell 0 1,alignx right");
@@ -289,15 +289,15 @@ public class NewMonographUI extends JDialog implements INewMonographUI {
 				return this;
 			}
 		});
-												
-														btnCreateMonograph = new JButton("Cadastrar");
-														btnCreateMonograph.setHorizontalAlignment(SwingConstants.RIGHT);
-														btnCreateMonograph.addActionListener(new ActionListener() {
-															public void actionPerformed(ActionEvent arg0) {
-																storeMonograph();
-															}
-														});
-														contentPane.add(btnCreateMonograph, "cell 1 8,alignx right,growy");
+														
+																btnCreateMonograph = new JButton("Cadastrar");
+																btnCreateMonograph.setHorizontalAlignment(SwingConstants.RIGHT);
+																btnCreateMonograph.addActionListener(new ActionListener() {
+																	public void actionPerformed(ActionEvent arg0) {
+																		storeMonograph();
+																	}
+																});
+																contentPane.add(btnCreateMonograph, "cell 1 9,alignx right,growy");
 		initDataBindings();
 	}
 	protected void initDataBindings() {

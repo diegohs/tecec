@@ -28,6 +28,7 @@ import tecec.ui.contract.view.IMonographViewerUI;
 
 import javax.swing.ListSelectionModel;
 import tecec.ui.contract.record.MonographRecord;
+import java.awt.Font;
 
 
 public class MonographViewerUI extends JFrame implements IMonographViewerUI {
@@ -71,17 +72,18 @@ public class MonographViewerUI extends JFrame implements IMonographViewerUI {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[][grow][grow 50][]", "[20px:n][][20px:n][grow][5px:n][20px:n]"));
+		contentPane.setLayout(new MigLayout("", "[][][grow][][grow 50][]", "[][][][][20px:n][grow][5px:n][20px:n]"));
 		
 		JLabel lblFilter = new JLabel("Filtro:");
-		contentPane.add(lblFilter, "flowx,cell 1 1");
+		lblFilter.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
+		contentPane.add(lblFilter, "flowx,cell 1 2");
 		
 		txtFilter = new JTextField();
-		contentPane.add(txtFilter, "cell 1 1 2 1,growx");
+		contentPane.add(txtFilter, "cell 2 2 3 1,growx,aligny baseline");
 		txtFilter.setColumns(10);
 		
 		scrollPane = new JScrollPane();
-		contentPane.add(scrollPane, "cell 1 3 2 1,grow");
+		contentPane.add(scrollPane, "cell 1 5 4 1,grow");
 		
 		tblMonograph = new JTable();
 		tblMonograph.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -93,7 +95,7 @@ public class MonographViewerUI extends JFrame implements IMonographViewerUI {
 				showNewMonographUI();
 			}
 		});
-		contentPane.add(btnNewMonograph, "flowx,cell 2 5,alignx right,aligny bottom");
+		contentPane.add(btnNewMonograph, "flowx,cell 4 7,alignx right,aligny bottom");
 		
 		btnUpdateMonograph = new JButton("Atualizar Selecionado");
 		btnUpdateMonograph.addActionListener(new ActionListener() {
@@ -101,7 +103,7 @@ public class MonographViewerUI extends JFrame implements IMonographViewerUI {
 				showUpdateMonographUI();				
 			}
 		});
-		contentPane.add(btnUpdateMonograph, "flowx,cell 2 5,alignx right,aligny bottom");
+		contentPane.add(btnUpdateMonograph, "flowx,cell 4 7,alignx right,aligny bottom");
 		
 		btnDeleteMonograph = new JButton("Excluir Selecionado");
 		btnDeleteMonograph.addActionListener(new ActionListener() {
@@ -109,7 +111,7 @@ public class MonographViewerUI extends JFrame implements IMonographViewerUI {
 				deleteMonograph();
 			}
 		});
-		contentPane.add(btnDeleteMonograph, "flowx,cell 2 5,alignx right,aligny bottom");
+		contentPane.add(btnDeleteMonograph, "flowx,cell 4 7,alignx right,aligny bottom");
 		initDataBindings();
 	}
 	protected void initDataBindings() {
