@@ -9,7 +9,7 @@ public interface IDocumentationViewerController {
 	void setNameFilter (String nameFilter);
 	String getNameFilter ();
 	
-	void setSelectedDocumentation (String documentation);
+	void setSelectedDocumentation (Documentation documentation);
 	Documentation getSelectedDocumentation ();
 	List <Documentation> getDocumentations ();
 	
