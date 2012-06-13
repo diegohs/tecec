@@ -1,7 +1,6 @@
 package tecec.ui.control;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import tecec.contract.RuleViolation;
