@@ -182,6 +182,9 @@ public class InjectorFactory {
 		container.addComponent(tecec.ui.contract.view.IUpdateMonographUI.class,
 				tecec.ui.UpdateMonographUI.class);
 		
+		container.addComponent(tecec.ui.contract.view.IMonographStageViewerUI.class,
+				tecec.ui.MonographStageViewerUI.class);
+		
 		/* Course */
 		
 		container.addComponent(tecec.ui.contract.view.INewProfileUI.class,
@@ -323,6 +326,10 @@ public class InjectorFactory {
 		container.addComponent(
 				tecec.ui.contract.control.IUpdateMonographController.class,
 				tecec.ui.control.UpdateMonographController.class);
+		
+		container.addComponent(
+				tecec.ui.contract.control.IMonographStageViewerController.class,
+				tecec.ui.control.MonographStageViewerController.class);
 		
 		/* Profile */
 		container.addComponent(		

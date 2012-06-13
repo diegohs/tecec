@@ -26,4 +26,9 @@ public class StageReader implements IStageReader {
 		return this.stageRepository.getStageByPK(pKStage);
 	}
 
+	@Override
+	public List<Stage> getStagesByMonograph(String pKMonograph) {
+		return this.stageRepository.getStagesByMonograph(pKMonograph);
+	}
+
 }

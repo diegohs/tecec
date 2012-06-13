@@ -70,6 +70,10 @@ public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 					JOptionPane.ERROR_MESSAGE);
 		}
 	}
+	
+	private void showMonographStageViewerUI(){
+		this.updateMonographController.showMonographStageUI();
+	}
 
 	private JPanel contentPane;
 	private JTextField txtMonographTitle;
@@ -86,6 +90,7 @@ public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 	private JComboBox cboAdvisor;
 	private JComboBox cboCoadvisor;
 	private JComboBox cboStatus;
+	private JButton btnUpdateStages;
 
 	/**
 	 * Create the frame.
@@ -108,7 +113,7 @@ public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 						lblTitle.setFont(new Font("Tahoma", Font.BOLD, 13));
 						contentPane.add(lblTitle, "cell 1 0,grow");
 		
-				JLabel lblMonographTitle = new JLabel("Título:");
+				JLabel lblMonographTitle = new JLabel("TÃ­tulo:");
 				contentPane.add(lblMonographTitle, "cell 0 2,alignx right");
 		
 				txtMonographTitle = new JTextField();
@@ -143,7 +148,7 @@ public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 			}
 		});
 		
-		lblArea = new JLabel("Área:");
+		lblArea = new JLabel("Ã�rea:");
 		contentPane.add(lblArea, "cell 0 4,alignx trailing");
 		
 		cboArea = new JComboBox();
@@ -289,6 +294,14 @@ public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 				storeMonograph();
 			}
 		});
+		
+		btnUpdateStages = new JButton("Modificar Etapas");
+		btnUpdateStages.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				showMonographStageViewerUI();
+			}
+		});
+		contentPane.add(btnUpdateStages, "flowx,cell 1 9,alignx right");
 		contentPane.add(btnUpdateMonograph, "cell 1 9,alignx right,growy");
 		initDataBindings();
 	}

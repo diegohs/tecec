@@ -17,5 +17,5 @@ public interface IStageRepository {
 
 	List <Stage> getStages (String nameFilter);
 	
-
+	List<Stage> getStagesByMonograph(String pKMonograph);
 }

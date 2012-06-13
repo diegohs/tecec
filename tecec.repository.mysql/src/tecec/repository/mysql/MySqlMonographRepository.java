@@ -2,6 +2,7 @@ package tecec.repository.mysql;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -155,4 +156,52 @@ public class MySqlMonographRepository extends MySqlRepository implements
 		return result;
 	}
 
+	@Override
+	public void insertMonographStage(String pKMonograph, String pKStage) {
+		String command = " INSERT INTO MonographStage(FKMonograph, FKStage) VALUES (:fKMonograph, :fKStage);";
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("fKMonograph", pKMonograph);
+		map.put("fKStage", pKStage);
+
+		SqlParameterSource parameters = new MapSqlParameterSource(map);
+		
+		jdbcTemplate.update(command, parameters);
+	}
+
+	@Override
+	public void deleteMonographStage(String pKMonograph, String pKStage) {
+		String command = " DELETE FROM MonographStage WHERE FKMonograph = :fKMonograph AND FKStage = :fKStage;";
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("fKMonograph", pKMonograph);
+		map.put("fKStage", pKStage);
+
+		SqlParameterSource parameters = new MapSqlParameterSource(map);
+		
+		jdbcTemplate.update(command, parameters);
+	}
+
+	@Override
+	public boolean doesMonographHaveHandIns(String pKMonograph, String pKStage) {
+		String query = " SELECT COUNT(*) " + 
+					   " FROM Monograph m " + 
+					   " INNER JOIN MonographStage ms ON m.PKMonograph = ms.FKMonograph " + 
+					   " INNER JOIN Stage s ON ms.FKStage = s.PKStage " + 
+					   " INNER JOIN Activity a ON s.PKStage = a.FKStage " + 
+					   " INNER JOIN HandIn h ON a.PKActivity = h.FKActivity AND m.PKMonograph = h.FKMonograph " + 
+					   " WHERE m.PKMonograph = :pKMonograph " + 
+					   "   AND s.PKStage = :pKStage;";
+					   
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("pKMonograph", pKMonograph);
+		map.put("pKStage", pKStage);
+		
+		SqlParameterSource parameters = new MapSqlParameterSource(map);
+		
+		return jdbcTemplate.queryForInt(query, parameters) > 0;
+	}
 }

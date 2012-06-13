@@ -22,6 +22,7 @@ import tecec.dto.Status;
 import tecec.dto.Student;
 
 import tecec.ui.contract.control.IUpdateMonographController;
+import tecec.ui.contract.view.IMonographStageViewerUI;
 
 public class UpdateMonographController extends BaseController implements IUpdateMonographController {
 	
@@ -61,10 +62,12 @@ public class UpdateMonographController extends BaseController implements IUpdate
 	private Status selectedStatus;
 	private int selectedStatusIndex;
 	
+	private IMonographStageViewerUI monographStageUI;
+	
 	/*Constructor*/
 
 	public UpdateMonographController (IMonographReader monographReader, IMonographWriter monographWriter, ICourseReader courseReader, IAreaReader areaReader,
-			IStudentReader studentReader, IAdvisorReader advisorReader, IStatusReader statusReader, IAdvisorReader coadvisorReader) {
+			IStudentReader studentReader, IAdvisorReader advisorReader, IStatusReader statusReader, IAdvisorReader coadvisorReader, IMonographStageViewerUI monographViewerUI) {
 		this.monographWriter = monographWriter;
 		this.monographReader = monographReader;
 		this.courseReader = courseReader;
@@ -73,6 +76,7 @@ public class UpdateMonographController extends BaseController implements IUpdate
 		this.advisorReader = advisorReader;
 		this.statusReader = statusReader;
 		this.coadvisorReader = coadvisorReader;
+		this.monographStageUI = monographViewerUI;
 	}
 	
 
@@ -450,6 +454,12 @@ public class UpdateMonographController extends BaseController implements IUpdate
 	@Override
 	public int getSelectedStatusIndex() {
 		return this.selectedStatusIndex;
+	}
+
+	@Override
+	public void showMonographStageUI() {
+		this.monographStageUI.setPKMonograph(this.pKMonograph);
+		this.monographStageUI.setVisible(true);
 	}
 	
 	/*End of Status*/

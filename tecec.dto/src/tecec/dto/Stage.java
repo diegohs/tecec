@@ -30,4 +30,20 @@ public class Stage {
 		this.year = year;
 	}
 
+	@Override
+	public boolean equals(Object arg0) {
+		if (arg0 == null) {
+			return false;
+		}
+		
+		if (!(arg0 instanceof Stage)) {
+			return false;
+		}
+		
+		Stage stage2 = (Stage)arg0;
+		
+		return this.getName().equals(stage2.getName()) &&
+			   this.getpKStage().equals(stage2.getpKStage()) &&
+			   this.getYear().equals(stage2.getYear());
+	}
 }

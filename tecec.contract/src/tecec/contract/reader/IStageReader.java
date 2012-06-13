@@ -5,9 +5,8 @@ import java.util.List;
 
 import tecec.dto.Stage;
 
-public interface IStageReader {
-	
-	List <Stage> getStages (String nameFilter);
+public interface IStageReader {	
+	List<Stage> getStages (String nameFilter);
 	Stage getStageByPK (String pKStage);
-
+	List<Stage> getStagesByMonograph(String pKMonograph);
 }

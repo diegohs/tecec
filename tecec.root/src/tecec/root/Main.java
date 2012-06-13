@@ -25,10 +25,10 @@ public class Main {
 						frame.setDefaultLookAndFeelDecorated(true);*/
 						
 						// Estilo Mac
-						UIManager.setLookAndFeel("ch.randelshofer.quaqua.QuaquaLookAndFeel");
+						//UIManager.setLookAndFeel("ch.randelshofer.quaqua.QuaquaLookAndFeel");
 						
 						// Default do SO
-						//UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+						UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 						
 						// Cross-platform (Esse é o default)
 						//UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());

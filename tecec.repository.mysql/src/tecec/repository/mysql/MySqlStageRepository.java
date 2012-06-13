@@ -149,5 +149,18 @@ public class MySqlStageRepository extends MySqlRepository implements IStageRepos
 		
 		return stages;
 	}
+
+	@Override
+	public List<Stage> getStagesByMonograph(String pKMonograph) {
+		String query = " SELECT s.* " + 
+					   " FROM Stage s " + 
+					   " INNER JOIN MonographStage ms ON s.PKStage = ms.FKStage " + 
+					   " WHERE ms.FKMonograph = :fKMonograph " + 
+					   " ORDER BY s.Name;";
+		
+		SqlParameterSource parameters = new MapSqlParameterSource("fKMonograph", pKMonograph);
+		
+		return getStages(query, parameters);
+	}
 	
 }

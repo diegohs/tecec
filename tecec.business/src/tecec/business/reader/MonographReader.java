@@ -23,6 +23,11 @@ public class MonographReader implements IMonographReader {
 	public Monograph getMonographByPK(String pKMonograph) {
 		return this.mongraphRepository.getMonographByPK(pKMonograph);
 	}
+
+	@Override
+	public boolean doesMonographHaveHandIns(String pKMonograph, String pkStage) {
+		return this.mongraphRepository.doesMonographHaveHandIns(pKMonograph, pkStage);
+	}
 	
 	
 	

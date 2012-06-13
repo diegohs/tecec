@@ -10,4 +10,8 @@ public interface IMonographRepository {
 	Monograph getMonographByTitle (String title);
 	Monograph getMonographByPK (String pKMonograph);
 	List<Monograph> getMonograph (String nameFilter);
+	boolean doesMonographHaveHandIns(String pKMonograph, String pKStage);
+
+	void insertMonographStage(String pKMonograph, String pKStage);
+	void deleteMonographStage(String pKMonograph, String pKStage);
 }

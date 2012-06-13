@@ -13,5 +13,8 @@ public interface IMonographWriter {
 	
 	void updateMonograph (Monograph newMonograph)	throws RuleViolationException;
 	
+	void insertMonographStage(String pKMonography, String pKStage);
+	void deleteMonographStage(String pKMonography, String pKStage);
+	
 	void deleteMonograph (String pKMonograph);
 }

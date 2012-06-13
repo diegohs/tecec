@@ -61,7 +61,7 @@ public interface IUpdateMonographController {
 	void setMonographTitle(String monographTitle);
 	String getMonographTitle();
 	
-	
+	void showMonographStageUI();
 	void updateMonograph() throws RuleViolationException;
 	RuleViolation getUpdateViolation();
 

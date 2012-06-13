@@ -101,4 +101,14 @@ public class MonographWriter implements IMonographWriter {
 	public void deleteMonograph(String pKMonograph) {
 		this.monograhRepository.deleteMonograph(pKMonograph);
 	}
+
+	@Override
+	public void insertMonographStage(String pKMonography, String pKStage) {
+		this.monograhRepository.insertMonographStage(pKMonography, pKStage);
+	}
+
+	@Override
+	public void deleteMonographStage(String pKMonography, String pKStage) {
+		this.monograhRepository.deleteMonographStage(pKMonography, pKStage);
+	}
 }
