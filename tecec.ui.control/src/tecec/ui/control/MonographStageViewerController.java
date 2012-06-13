@@ -1,6 +1,7 @@
 package tecec.ui.control;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import tecec.contract.RuleViolation;
@@ -72,7 +73,7 @@ public class MonographStageViewerController extends BaseController implements
 
 		if (hasHandIns) {
 			return new RuleViolation(
-					"Não é possível excluir uma etapa de uma monografia que já recebeu atividades.");
+					"Nï¿½o ï¿½ possï¿½vel excluir uma etapa de uma monografia que jï¿½ recebeu atividades.");
 		}
 
 		return null;

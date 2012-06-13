@@ -130,8 +130,6 @@ public class CourseWriter implements tecec.contract.writer.ICourseWriter {
 		course.setPKCourse(pKCourse);
 		
 		this.courseRepository.updateCourse(course);
-		
-		
 	}
 
 }

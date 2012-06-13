@@ -1,7 +1,7 @@
 package tecec.ui;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -30,6 +30,10 @@ import javax.swing.ListSelectionModel;
 
 public class MonographStageViewerUI extends JDialog implements IMonographStageViewerUI {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	IMonographStageViewerController controller;
 
 	@Override
