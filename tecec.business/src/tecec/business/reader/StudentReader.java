@@ -23,4 +23,10 @@ public class StudentReader implements IStudentReader {
 		return studentRepository.getStudentByPk(pkStudent);
 	}
 
+	@Override
+	public boolean doesUserHaveMonographiesInCourse(String pKStudent,
+			String pKCourse) {
+		return this.studentRepository.doesUserHaveMonographiesInCourse(pKStudent, pKCourse);
+	}
+
 }

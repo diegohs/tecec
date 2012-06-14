@@ -73,7 +73,7 @@ public class MonographStageViewerController extends BaseController implements
 
 		if (hasHandIns) {
 			return new RuleViolation(
-					"Nï¿½o ï¿½ possï¿½vel excluir uma etapa de uma monografia que jï¿½ recebeu atividades.");
+					"Não é possível desvincular uma monografia de uma etapa em que já recebeu atividades.");
 		}
 
 		return null;

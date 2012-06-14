@@ -10,7 +10,7 @@ public class InjectorFactory {
 		RegisterModel(container);
 		RegisterUI(container);
 		RegisterConfig(container);
-		RegisterRepositores(container);
+		RegisterRepositories(container);
 		RegisterControllers(container);
 
 		return container;
@@ -160,6 +160,9 @@ public class InjectorFactory {
 		container.addComponent(tecec.ui.contract.view.IUpdateStudentUI.class,
 				tecec.ui.UpdateStudentUI.class);
 		
+		container.addComponent(tecec.ui.contract.view.IStudentCourseViewerUI.class,
+				tecec.ui.StudentCourseViewerUI.class);
+		
 		/* Status */
 		
 		container.addComponent(tecec.ui.contract.view.INewStatusUI.class,
@@ -300,6 +303,10 @@ public class InjectorFactory {
 				tecec.ui.contract.control.IStudentViewerController.class,
 				tecec.ui.control.StudentViewerController.class);
 		
+		container.addComponent(
+				tecec.ui.contract.control.IStudentCourseViewerController.class,
+				tecec.ui.control.StudentCourseViewerController.class);
+		
 		/* Status */
 		container.addComponent(		
 				tecec.ui.contract.control.INewStatusController.class,
@@ -379,7 +386,7 @@ public class InjectorFactory {
 				tecec.root.config.TececMySqlConnectionConfig.class);
 	}
 
-	private void RegisterRepositores(MutablePicoContainer container) {
+	private void RegisterRepositories(MutablePicoContainer container) {
 		/* Course */
 		container.addComponent(
 				tecec.contract.repository.ICourseRepository.class,

@@ -190,4 +190,16 @@ public class MySqlCourseRepository extends MySqlRepository implements
 		
 		return courses;
 	}
+
+	@Override
+	public List<Course> getStudentCourses(String pKStudent) {
+		String query = " SELECT * " + 
+					   " FROM Course c " + 
+					   " INNER JOIN StudentCourse sc ON c.PKCourse = sc.FKCourse " + 
+					   " WHERE sc.FKStudent = :fKStudent;";
+		
+		SqlParameterSource parameters = new MapSqlParameterSource("fKStudent", pKStudent);
+		
+		return getCourses(query, parameters);
+	}
 }

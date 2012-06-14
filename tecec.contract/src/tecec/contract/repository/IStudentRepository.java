@@ -19,4 +19,8 @@ public interface IStudentRepository {
 
 	List<Student> getStudents(String nameFilter);
 
+	void insertStudentCourse(String pKStudent, String pKCourse);
+	void deleteStudentCourse(String pKStudent, String pKCourse);
+	
+	boolean doesUserHaveMonographiesInCourse(String pKStudent, String pKCourse);
 }

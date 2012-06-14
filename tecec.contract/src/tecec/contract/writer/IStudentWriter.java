@@ -1,5 +1,6 @@
 package tecec.contract.writer;
 
+
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
 
@@ -14,6 +15,9 @@ public interface IStudentWriter {
 	void updateStudent(String pkStudent, String newName, String email)
 			throws RuleViolationException;
 	
-	void deleteStudent (String pkStudent);	
+	void deleteStudent (String pkStudent);
+	
+	void insertStudentCourse(String pKStudent, String pKCourse);
+	void deleteStudentCourse(String pKStudent, String pKCourse);
 
 }

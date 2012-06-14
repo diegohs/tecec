@@ -13,4 +13,5 @@ public interface ICourseRepository {
 	Course getCourseByPK(String pKCourse);
 	
 	List<Course> getCourses(String nameFilter);
+	List<Course> getStudentCourses(String pKStudent);
 }

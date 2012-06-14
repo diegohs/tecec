@@ -17,4 +17,5 @@ public interface IUpdateStudentController {
 	void updateStudent () throws RuleViolationException;
 	RuleViolation getUpdateViolation();
 
+	void showStudentCourseUI();
 }

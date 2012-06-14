@@ -1,5 +1,4 @@
 package tecec.business.writer;
-
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
 import tecec.contract.repository.IStudentRepository;
@@ -115,6 +114,16 @@ public class StudentWriter implements IStudentWriter {
 	@Override
 	public void deleteStudent(String pkStudent) {
 		this.studentRepository.deleteStudent(pkStudent);		
+	}
+
+	@Override
+	public void insertStudentCourse(String pKStudent, String pKCourse) {
+		this.studentRepository.insertStudentCourse(pKStudent, pKCourse);
+	}
+
+	@Override
+	public void deleteStudentCourse(String pKStudent, String pKCourse) {
+		this.studentRepository.deleteStudentCourse(pKStudent, pKCourse);		
 	}
 
 }

@@ -33,6 +33,7 @@ public class UpdateStudentUI extends JDialog implements IUpdateStudentUI {
 	private JTextField txtEmail;
 	private JButton btnUpdate;
 	private JLabel lblAtualizarEstudante;
+	private JButton btnCourses;
 
 	@Override
 	public void setpkStudent(String pkStudent) {
@@ -56,6 +57,10 @@ public class UpdateStudentUI extends JDialog implements IUpdateStudentUI {
 		}
 	}
 	
+	private void showStudentCourseViewerUI(){
+		this.updateStudentController.showStudentCourseUI();
+	}
+	
 	/**
 	 * Create the dialog.
 	 */
@@ -70,12 +75,7 @@ public class UpdateStudentUI extends JDialog implements IUpdateStudentUI {
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new MigLayout("", "[][grow][]", "[][][][][][]"));
-		{
-			lblAtualizarEstudante = new JLabel("Atualizar Estudante");
-			lblAtualizarEstudante.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
-			contentPanel.add(lblAtualizarEstudante, "cell 1 0,alignx center");
-		}
+		contentPanel.setLayout(new MigLayout("", "[][grow][]", "[grow][][][][][][grow]"));
 		{
 			JLabel lblNewLabel = new JLabel("Nome:");
 			contentPanel.add(lblNewLabel, "flowx,cell 1 1");
@@ -101,6 +101,15 @@ public class UpdateStudentUI extends JDialog implements IUpdateStudentUI {
 					updateStudent();
 				}
 			});
+			{
+				btnCourses = new JButton("Associar Cursos");
+				btnCourses.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						showStudentCourseViewerUI();
+					}
+				});
+				contentPanel.add(btnCourses, "flowx,cell 1 5,alignx right");
+			}
 			contentPanel.add(btnUpdate, "cell 1 5,alignx right");
 		}
 		initDataBindings();

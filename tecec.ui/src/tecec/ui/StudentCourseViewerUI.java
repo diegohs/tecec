@@ -10,7 +10,9 @@ import javax.swing.border.EmptyBorder;
 
 import tecec.contract.RuleViolation;
 import tecec.ui.contract.control.IMonographStageViewerController;
+import tecec.ui.contract.control.IStudentCourseViewerController;
 import tecec.ui.contract.view.IMonographStageViewerUI;
+import tecec.ui.contract.view.IStudentCourseViewerUI;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -26,19 +28,20 @@ import org.jdesktop.beansbinding.Bindings;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ListSelectionModel;
+import tecec.dto.Course;
 
-public class MonographStageViewerUI extends JDialog implements IMonographStageViewerUI {
+public class StudentCourseViewerUI extends JDialog implements IStudentCourseViewerUI {
 	
 	private static final long serialVersionUID = 4782681832315871391L;
 	
-	IMonographStageViewerController controller;
+	IStudentCourseViewerController controller;
 
 	@Override
-	public void setPKMonograph(String pKMonograph) {
-		this.controller.setMonograph(pKMonograph);
+	public void setPKStudent(String pKStudent) {
+		this.controller.setPKStudent(pKStudent);
 	}
 	
-	private void insertStage(){
+	private void insertCourse(){
 		RuleViolation violation = this.controller.getInsertViolation();
 
 		if (violation != null) {
@@ -46,7 +49,7 @@ public class MonographStageViewerUI extends JDialog implements IMonographStageVi
 					"ERRO", JOptionPane.ERROR_MESSAGE);
 		} else {
 			try {
-				this.controller.insertMonographStage();
+				this.controller.insertCourse();
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(this, e, "ERRO",
 						JOptionPane.ERROR_MESSAGE);
@@ -54,15 +57,15 @@ public class MonographStageViewerUI extends JDialog implements IMonographStageVi
 		}
 	}
 	
-	private void deleteStage(){
-		RuleViolation violation = this.controller.getDeleteViolation();
+	private void deleteCourse(){
+		RuleViolation violation = this.controller.getDeletionViolation();
 
 		if (violation != null) {
 			JOptionPane.showMessageDialog(this, violation.getDescription(),
 					"ERRO", JOptionPane.ERROR_MESSAGE);
 		} else {
 			try {
-				this.controller.deleteMonographStage();
+				this.controller.deleteCourse();
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(this, e, "ERRO",
 						JOptionPane.ERROR_MESSAGE);
@@ -94,7 +97,7 @@ public class MonographStageViewerUI extends JDialog implements IMonographStageVi
 	/**
 	 * Create the dialog.
 	 */
-	public MonographStageViewerUI(IMonographStageViewerController controller) {
+	public StudentCourseViewerUI(IStudentCourseViewerController controller) {
 		this.controller = controller;
 
 		setModal(true);
@@ -119,7 +122,7 @@ public class MonographStageViewerUI extends JDialog implements IMonographStageVi
 			btnInsert = new JButton(">>");
 			btnInsert.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					insertStage();
+					insertCourse();
 				}
 			});
 			contentPanel.add(btnInsert, "flowx,cell 2 1,alignx center,aligny bottom");
@@ -137,7 +140,7 @@ public class MonographStageViewerUI extends JDialog implements IMonographStageVi
 			btnDelete = new JButton("<<");
 			btnDelete.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					deleteStage();
+					deleteCourse();
 				}
 			});
 			contentPanel.add(btnDelete, "cell 2 2,alignx center,aligny top");
@@ -163,39 +166,39 @@ public class MonographStageViewerUI extends JDialog implements IMonographStageVi
 		initDataBindings();
 	}
 	protected void initDataBindings() {
-		BeanProperty<IMonographStageViewerController, List<Stage>> iMonographStageViewerControllerBeanProperty = BeanProperty.create("stages");
-		JTableBinding<Stage, IMonographStageViewerController, JTable> jTableBinding = SwingBindings.createJTableBinding(UpdateStrategy.READ, controller, iMonographStageViewerControllerBeanProperty, tblStages);
+		BeanProperty<IStudentCourseViewerController, List<Course>> iStudentCourseViewerControllerBeanProperty = BeanProperty.create("courses");
+		JTableBinding<Course, IStudentCourseViewerController, JTable> jTableBinding = SwingBindings.createJTableBinding(UpdateStrategy.READ, controller, iStudentCourseViewerControllerBeanProperty, tblStages);
 		//
-		ELProperty<Stage, Object> stageEvalutionProperty = ELProperty.create("${year} ${name}");
-		jTableBinding.addColumnBinding(stageEvalutionProperty).setColumnName("N\u00E3o-Correlacionadas").setEditable(false);
+		ELProperty<Course, Object> courseEvalutionProperty = ELProperty.create("${year} ${turn} ${name}");
+		jTableBinding.addColumnBinding(courseEvalutionProperty).setColumnName("N\u00E3o-Correlacionados").setEditable(false);
 		//
 		jTableBinding.bind();
 		//
-		BeanProperty<IMonographStageViewerController, List<Stage>> iMonographStageViewerControllerBeanProperty_1 = BeanProperty.create("correlatedStages");
-		JTableBinding<Stage, IMonographStageViewerController, JTable> jTableBinding_1 = SwingBindings.createJTableBinding(UpdateStrategy.READ, controller, iMonographStageViewerControllerBeanProperty_1, tblCorrelatedStages);
+		BeanProperty<IStudentCourseViewerController, Course> iStudentCourseViewerControllerBeanProperty_1 = BeanProperty.create("selectedCourse");
+		BeanProperty<JTable, Course> jTableBeanProperty = BeanProperty.create("selectedElement");
+		AutoBinding<IStudentCourseViewerController, Course, JTable, Course> autoBinding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, controller, iStudentCourseViewerControllerBeanProperty_1, tblStages, jTableBeanProperty);
+		autoBinding.bind();
 		//
-		ELProperty<Stage, Object> stageEvalutionProperty_1 = ELProperty.create("${year} ${name}");
-		jTableBinding_1.addColumnBinding(stageEvalutionProperty_1).setColumnName("Correlacionadas").setEditable(false);
+		BeanProperty<IStudentCourseViewerController, List<Course>> iStudentCourseViewerControllerBeanProperty_2 = BeanProperty.create("correlatedCourses");
+		JTableBinding<Course, IStudentCourseViewerController, JTable> jTableBinding_1 = SwingBindings.createJTableBinding(UpdateStrategy.READ, controller, iStudentCourseViewerControllerBeanProperty_2, tblCorrelatedStages);
+		//
+		ELProperty<Course, Object> courseEvalutionProperty_1 = ELProperty.create("${year} ${turn} ${name}");
+		jTableBinding_1.addColumnBinding(courseEvalutionProperty_1).setColumnName("Correlacionados").setEditable(false);
 		//
 		jTableBinding_1.bind();
 		//
-		BeanProperty<IMonographStageViewerController, Boolean> iMonographStageViewerControllerBeanProperty_2 = BeanProperty.create("canInsert");
-		BeanProperty<JButton, Boolean> jButtonBeanProperty = BeanProperty.create("enabled");
-		AutoBinding<IMonographStageViewerController, Boolean, JButton, Boolean> autoBinding = Bindings.createAutoBinding(UpdateStrategy.READ, controller, iMonographStageViewerControllerBeanProperty_2, btnInsert, jButtonBeanProperty);
-		autoBinding.bind();
-		//
-		BeanProperty<IMonographStageViewerController, Boolean> iMonographStageViewerControllerBeanProperty_3 = BeanProperty.create("canDelete");
-		AutoBinding<IMonographStageViewerController, Boolean, JButton, Boolean> autoBinding_1 = Bindings.createAutoBinding(UpdateStrategy.READ, controller, iMonographStageViewerControllerBeanProperty_3, btnDelete, jButtonBeanProperty);
+		BeanProperty<IStudentCourseViewerController, Course> iStudentCourseViewerControllerBeanProperty_3 = BeanProperty.create("selectedCorrelatedCourse");
+		BeanProperty<JTable, Course> jTableBeanProperty_1 = BeanProperty.create("selectedElement");
+		AutoBinding<IStudentCourseViewerController, Course, JTable, Course> autoBinding_1 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, controller, iStudentCourseViewerControllerBeanProperty_3, tblCorrelatedStages, jTableBeanProperty_1);
 		autoBinding_1.bind();
 		//
-		BeanProperty<IMonographStageViewerController, Stage> iMonographStageViewerControllerBeanProperty_4 = BeanProperty.create("selectedStage");
-		BeanProperty<JTable, Stage> jTableBeanProperty = BeanProperty.create("selectedElement");
-		AutoBinding<IMonographStageViewerController, Stage, JTable, Stage> autoBinding_2 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, controller, iMonographStageViewerControllerBeanProperty_4, tblStages, jTableBeanProperty);
+		BeanProperty<IStudentCourseViewerController, Boolean> iStudentCourseViewerControllerBeanProperty_4 = BeanProperty.create("canDelete");
+		BeanProperty<JButton, Boolean> jButtonBeanProperty = BeanProperty.create("enabled");
+		AutoBinding<IStudentCourseViewerController, Boolean, JButton, Boolean> autoBinding_2 = Bindings.createAutoBinding(UpdateStrategy.READ, controller, iStudentCourseViewerControllerBeanProperty_4, btnDelete, jButtonBeanProperty);
 		autoBinding_2.bind();
 		//
-		BeanProperty<IMonographStageViewerController, Stage> iMonographStageViewerControllerBeanProperty_5 = BeanProperty.create("selectedCorrelatedStage");
-		BeanProperty<JTable, Stage> jTableBeanProperty_1 = BeanProperty.create("selectedElement");
-		AutoBinding<IMonographStageViewerController, Stage, JTable, Stage> autoBinding_3 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, controller, iMonographStageViewerControllerBeanProperty_5, tblCorrelatedStages, jTableBeanProperty_1);
+		BeanProperty<IStudentCourseViewerController, Boolean> iStudentCourseViewerControllerBeanProperty_5 = BeanProperty.create("canInsert");
+		AutoBinding<IStudentCourseViewerController, Boolean, JButton, Boolean> autoBinding_3 = Bindings.createAutoBinding(UpdateStrategy.READ, controller, iStudentCourseViewerControllerBeanProperty_5, btnInsert, jButtonBeanProperty);
 		autoBinding_3.bind();
 	}
 }

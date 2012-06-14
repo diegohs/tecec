@@ -2,6 +2,7 @@ package tecec.repository.mysql;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.UUID;
 
@@ -175,6 +176,58 @@ public class MySqlStudentRepository extends MySqlRepository implements
 		String command = " DELETE FROM Student WHERE PKStudent = :pKStudent;";
 		SqlParameterSource namedParameter = new MapSqlParameterSource(
 				"pKStudent", pKStudent);
-		jdbcTemplate.update(command, namedParameter);		
+		jdbcTemplate.update(command, namedParameter);
+	}
+
+	@Override
+	public void insertStudentCourse(String pKStudent, String pKCourse) {
+		String command = " INSERT INTO StudentCourse(FKStudent, FKCourse) "
+				+ " VALUES (:fKStudent, :fKCourse); ";
+
+		Hashtable<String, Object> map = new Hashtable<String, Object>();
+
+		map.put("fKStudent", pKStudent);
+		map.put("fKCourse", pKCourse);
+
+		SqlParameterSource parameters = new MapSqlParameterSource(map);
+
+		jdbcTemplate.update(command, parameters);
+	}
+
+	@Override
+	public void deleteStudentCourse(String pKStudent, String pKCourse) {
+		String command = " DELETE FROM StudentCourse "
+				+ " WHERE FKStudent = :fKStudent "
+				+ "   AND FKCourse = :fKCourse;";
+
+		Hashtable<String, Object> map = new Hashtable<String, Object>();
+
+		map.put("fKStudent", pKStudent);
+		map.put("fKCourse", pKCourse);
+
+		SqlParameterSource parameters = new MapSqlParameterSource(map);
+
+		jdbcTemplate.update(command, parameters);
+
+	}
+
+	@Override
+	public boolean doesUserHaveMonographiesInCourse(String pKStudent,
+			String pKCourse) {
+		String query = " SELECT COUNT(*) " + " FROM Monograph m "
+				+ " INNER JOIN Student s ON m.FKStudent = s.PKStudent "
+				+ " INNER JOIN StudentCourse sc ON s.PKStudent = sc.FKStudent "
+				+ " INNER JOIN Course c ON sc.FKCourse = c.PKCourse AND m.FKCourse = c.PKCourse "
+				+ " WHERE s.PKStudent = :pKStudent "
+				+ "   AND c.PKCourse = :pKCourse";
+
+		Hashtable<String, Object> map = new Hashtable<String, Object>();
+
+		map.put("pKStudent", pKStudent);
+		map.put("pKCourse", pKCourse);
+
+		SqlParameterSource parameters = new MapSqlParameterSource(map);
+
+		return jdbcTemplate.queryForInt(query, parameters) > 0;
 	}
 }
