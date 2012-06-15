@@ -1,7 +1,11 @@
 package tecec.ui.contract.control;
 
+import java.util.List;
+
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
+import tecec.dto.Area;
+import tecec.dto.Stage;
 
 public interface INewActivityController {
 	void setActivityTitle(String title);
@@ -15,6 +19,16 @@ public interface INewActivityController {
 	void setActivityDueDate(String dueDate);
 
 	String getActivityDueDate();
+	
+	List<Stage> getStages();
+
+	Stage getSelectedStage();
+
+	void setSelectedStage(Stage stage);
+
+	void setSelectedStageIndex(int i);
+
+	int getSelectedStageIndex();
 
 	RuleViolation getInsertViolation();
 

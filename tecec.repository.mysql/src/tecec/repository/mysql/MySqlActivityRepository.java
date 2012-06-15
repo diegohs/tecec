@@ -38,14 +38,19 @@ public class MySqlActivityRepository extends MySqlRepository implements
 						"A chave prim√°ria do estudante deve ser um UUID.");
 			}
 		}
+		
+		if (activity.getFKStage() == null || activity.getFKStage().isEmpty()) {
+			throw new IllegalArgumentException(
+					"A atividade deve possuir uma etapa associada.");
+		}
 
 		if (activity.getDueDate() == null) {
 			throw new IllegalArgumentException(
 					"A data de entrega da atividade deve ser uma data v·lida.");
 		}
 
-		String command = " INSERT INTO Activity(PKActivity, Title, Description, DueDate) "
-				+ " VALUES (:pKActivity, :title, :description, :dueDate);";
+		String command = " INSERT INTO Activity(PKActivity, Title, Description, DueDate, FKStage) "
+				+ " VALUES (:pKActivity, :title, :description, :dueDate, :fKStage);";
 
 		SqlParameterSource parameters = new BeanPropertySqlParameterSource(
 				activity);
@@ -97,6 +102,7 @@ public class MySqlActivityRepository extends MySqlRepository implements
 				activity.setTitle(arg0.getString("Title"));
 				activity.setDescription(arg0.getString("Description"));
 				activity.setDueDate(arg0.getDate("DueDate"));
+				activity.setFKStage(arg0.getString("FKStage"));
 
 				return activity;
 			}

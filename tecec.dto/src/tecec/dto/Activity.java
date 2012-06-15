@@ -7,7 +7,14 @@ public class Activity {
 	String title;
 	String description;
 	Date dueDate;
+	String fKStage;
 	
+	public String getFKStage() {
+		return fKStage;
+	}
+	public void setFKStage(String fKStage) {
+		this.fKStage = fKStage;
+	}
 	public String getpKActivity() {
 		return pKActivity;
 	}

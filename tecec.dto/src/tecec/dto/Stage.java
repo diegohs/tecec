@@ -46,4 +46,9 @@ public class Stage {
 			   this.getpKStage().equals(stage2.getpKStage()) &&
 			   this.getYear().equals(stage2.getYear());
 	}
+	
+	@Override
+	public String toString() {
+		return this.getYear() + " " + this.getName();
+	}
 }

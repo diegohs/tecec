@@ -26,6 +26,11 @@ import tecec.ui.contract.view.INewActivityUI;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import javax.swing.JComboBox;
+import java.util.List;
+import tecec.dto.Stage;
+import org.jdesktop.swingbinding.JComboBoxBinding;
+import org.jdesktop.swingbinding.SwingBindings;
 
 public class NewActivityUI extends JDialog implements INewActivityUI {
 
@@ -60,6 +65,8 @@ public class NewActivityUI extends JDialog implements INewActivityUI {
 	private JFormattedTextField txtDueDate;
 	private JButton btnNewActivity;
 	private JLabel lblAdicionarNovaAtividade;
+	private JLabel lblEtapa;
+	private JComboBox cboStage;
 
 	public NewActivityUI(INewActivityController newActivityController) {
 		this.newActivityController = newActivityController;
@@ -72,7 +79,7 @@ public class NewActivityUI extends JDialog implements INewActivityUI {
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new MigLayout("", "[][grow][]", "[grow][][][][][][][][][grow]"));
+		contentPanel.setLayout(new MigLayout("", "[][grow][]", "[grow][][][][][][][][][grow][][]"));
 		{
 			lblAdicionarNovaAtividade = new JLabel("Adicionar nova atividade:");
 			lblAdicionarNovaAtividade.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
@@ -125,53 +132,51 @@ public class NewActivityUI extends JDialog implements INewActivityUI {
 					insertActivity();
 				}
 			});
-			contentPanel.add(btnNewActivity, "cell 1 8,alignx right");
+			{
+				lblEtapa = new JLabel("Etapa:");
+				contentPanel.add(lblEtapa, "flowx,cell 1 8");
+			}
+			contentPanel.add(btnNewActivity, "cell 1 11,alignx right");
+		}
+		{
+			cboStage = new JComboBox();
+			contentPanel.add(cboStage, "cell 1 8,growx");
 		}
 		initDataBindings();
 	}
-
 	protected void initDataBindings() {
-		BeanProperty<INewActivityController, String> iNewActivityControllerBeanProperty = BeanProperty
-				.create("activityTitle");
-		BeanProperty<JTextField, String> jTextFieldBeanProperty = BeanProperty
-				.create("text");
-		AutoBinding<INewActivityController, String, JTextField, String> autoBinding = Bindings
-				.createAutoBinding(UpdateStrategy.READ_WRITE,
-						newActivityController,
-						iNewActivityControllerBeanProperty, txtTitle,
-						jTextFieldBeanProperty);
+		BeanProperty<INewActivityController, String> iNewActivityControllerBeanProperty = BeanProperty.create("activityTitle");
+		BeanProperty<JTextField, String> jTextFieldBeanProperty = BeanProperty.create("text");
+		AutoBinding<INewActivityController, String, JTextField, String> autoBinding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, newActivityController, iNewActivityControllerBeanProperty, txtTitle, jTextFieldBeanProperty);
 		autoBinding.bind();
 		//
-		BeanProperty<INewActivityController, String> iNewActivityControllerBeanProperty_1 = BeanProperty
-				.create("activityDescription");
-		BeanProperty<JTextField, String> jTextFieldBeanProperty_1 = BeanProperty
-				.create("text");
-		AutoBinding<INewActivityController, String, JTextField, String> autoBinding_1 = Bindings
-				.createAutoBinding(UpdateStrategy.READ_WRITE,
-						newActivityController,
-						iNewActivityControllerBeanProperty_1, txtDescription,
-						jTextFieldBeanProperty_1);
+		BeanProperty<INewActivityController, String> iNewActivityControllerBeanProperty_1 = BeanProperty.create("activityDescription");
+		BeanProperty<JTextField, String> jTextFieldBeanProperty_1 = BeanProperty.create("text");
+		AutoBinding<INewActivityController, String, JTextField, String> autoBinding_1 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, newActivityController, iNewActivityControllerBeanProperty_1, txtDescription, jTextFieldBeanProperty_1);
 		autoBinding_1.bind();
 		//
-		BeanProperty<INewActivityController, String> iNewActivityControllerBeanProperty_2 = BeanProperty
-				.create("activityDueDate");
-		BeanProperty<JFormattedTextField, String> jFormattedTextFieldBeanProperty = BeanProperty
-				.create("text");
-		AutoBinding<INewActivityController, String, JFormattedTextField, String> autoBinding_2 = Bindings
-				.createAutoBinding(UpdateStrategy.READ_WRITE,
-						newActivityController,
-						iNewActivityControllerBeanProperty_2, txtDueDate,
-						jFormattedTextFieldBeanProperty);
+		BeanProperty<INewActivityController, String> iNewActivityControllerBeanProperty_2 = BeanProperty.create("activityDueDate");
+		BeanProperty<JFormattedTextField, String> jFormattedTextFieldBeanProperty = BeanProperty.create("text");
+		AutoBinding<INewActivityController, String, JFormattedTextField, String> autoBinding_2 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, newActivityController, iNewActivityControllerBeanProperty_2, txtDueDate, jFormattedTextFieldBeanProperty);
 		autoBinding_2.bind();
 		//
-		BeanProperty<INewActivityController, Boolean> iNewActivityControllerBeanProperty_3 = BeanProperty
-				.create("canInsert");
-		BeanProperty<JButton, Boolean> jButtonBeanProperty = BeanProperty
-				.create("enabled");
-		AutoBinding<INewActivityController, Boolean, JButton, Boolean> autoBinding_3 = Bindings
-				.createAutoBinding(UpdateStrategy.READ, newActivityController,
-						iNewActivityControllerBeanProperty_3, btnNewActivity,
-						jButtonBeanProperty);
+		BeanProperty<INewActivityController, Boolean> iNewActivityControllerBeanProperty_3 = BeanProperty.create("canInsert");
+		BeanProperty<JButton, Boolean> jButtonBeanProperty = BeanProperty.create("enabled");
+		AutoBinding<INewActivityController, Boolean, JButton, Boolean> autoBinding_3 = Bindings.createAutoBinding(UpdateStrategy.READ, newActivityController, iNewActivityControllerBeanProperty_3, btnNewActivity, jButtonBeanProperty);
 		autoBinding_3.bind();
+		//
+		BeanProperty<INewActivityController, List<Stage>> iNewActivityControllerBeanProperty_4 = BeanProperty.create("stages");
+		JComboBoxBinding<Stage, INewActivityController, JComboBox> jComboBinding = SwingBindings.createJComboBoxBinding(UpdateStrategy.READ, newActivityController, iNewActivityControllerBeanProperty_4, cboStage);
+		jComboBinding.bind();
+		//
+		BeanProperty<INewActivityController, Integer> iNewActivityControllerBeanProperty_5 = BeanProperty.create("selectedStageIndex");
+		BeanProperty<JComboBox, Integer> jComboBoxBeanProperty = BeanProperty.create("selectedIndex");
+		AutoBinding<INewActivityController, Integer, JComboBox, Integer> autoBinding_4 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, newActivityController, iNewActivityControllerBeanProperty_5, cboStage, jComboBoxBeanProperty);
+		autoBinding_4.bind();
+		//
+		BeanProperty<INewActivityController, Stage> iNewActivityControllerBeanProperty_6 = BeanProperty.create("selectedStage");
+		BeanProperty<JComboBox, Object> jComboBoxBeanProperty_1 = BeanProperty.create("selectedItem");
+		AutoBinding<INewActivityController, Stage, JComboBox, Object> autoBinding_5 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, newActivityController, iNewActivityControllerBeanProperty_6, cboStage, jComboBoxBeanProperty_1);
+		autoBinding_5.bind();
 	}
 }

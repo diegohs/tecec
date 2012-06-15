@@ -3,11 +3,15 @@ package tecec.ui.control;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
+import tecec.contract.reader.IStageReader;
 import tecec.contract.writer.IActivityWriter;
 import tecec.dto.Activity;
+import tecec.dto.Area;
+import tecec.dto.Stage;
 import tecec.ui.contract.control.INewActivityController;
 
 public class NewActivityController extends BaseController implements
@@ -16,11 +20,16 @@ public class NewActivityController extends BaseController implements
 	private String title;
 	private String description;
 	private String dueDate;
+	
+	private int selectedStageIndex;
+	private Stage selectedStage;
 
-	private tecec.contract.writer.IActivityWriter activityWriter;
+	private IActivityWriter activityWriter;
+	private IStageReader stageReader;
 
-	public NewActivityController(IActivityWriter activityWriter) {
+	public NewActivityController(IActivityWriter activityWriter, IStageReader stageReader) {
 		this.activityWriter = activityWriter;
+		this.stageReader = stageReader;
 	}
 
 	@Override
@@ -63,6 +72,10 @@ public class NewActivityController extends BaseController implements
 
 	@Override
 	public RuleViolation getInsertViolation() {
+		if (this.selectedStage == null) {
+			return new RuleViolation("A atividade deve ser vinculada à uma etapa.");
+		}
+		
 		Activity activity;
 
 		try {
@@ -77,7 +90,11 @@ public class NewActivityController extends BaseController implements
 
 	@Override
 	public boolean getCanInsert() {
-		return this.title != null && !this.title.isEmpty() && this.dueDate != null && !this.dueDate.isEmpty();
+		return this.title != null && 
+			  !this.title.isEmpty() && 
+			   this.dueDate != null && 
+			  !this.dueDate.isEmpty() &&
+			   this.selectedStage != null;
 	}
 
 	@Override
@@ -102,6 +119,7 @@ public class NewActivityController extends BaseController implements
 		this.setActivityDescription("");
 		this.setActivityDueDate("");
 		this.setActivityTitle("");
+		this.setSelectedStageIndex(-1);
 	}
 
 	private Activity getActivity() throws ParseException {
@@ -117,8 +135,39 @@ public class NewActivityController extends BaseController implements
 		Date date = format.parse(this.dueDate);
 
 		activity.setDueDate(date);
+		
+		activity.setFKStage(this.selectedStage.getpKStage());
 
 		return activity;
+	}
+
+	@Override
+	public List<Stage> getStages() {
+		return this.stageReader.getStages("");
+	}
+
+	@Override
+	public Stage getSelectedStage() {
+		return this.selectedStage;
+	}
+
+	@Override
+	public void setSelectedStage(Stage stage) {
+		this.selectedStage = stage;
+		
+		super.notifyOfPropertyChange("canInsert", null, this.getCanInsert());
+	}
+
+	@Override
+	public void setSelectedStageIndex(int i) {
+		this.selectedStageIndex = i;
+		
+		super.notifyOfPropertyChange("selectedStageIndex", null, this.selectedStageIndex);
+	}
+
+	@Override
+	public int getSelectedStageIndex() {
+		return this.selectedStageIndex;
 	}
 
 }
