@@ -94,11 +94,11 @@ public class UpdateAdvisorUI extends JDialog implements IUpdateAdvisorUI {
 			}
 			{
 				btnUpdate = new JButton("Atualizar");
-				btnUpdate.setBounds(329, 136, 75, 23);
+				btnUpdate.setBounds(281, 136, 123, 23);
 				panel.add(btnUpdate);
 				{
 					JLabel lblNewLabel = new JLabel("Nome:");
-					lblNewLabel.setBounds(13, 47, 31, 14);
+					lblNewLabel.setBounds(13, 47, 52, 14);
 					panel.add(lblNewLabel);
 				}
 				{
@@ -109,7 +109,7 @@ public class UpdateAdvisorUI extends JDialog implements IUpdateAdvisorUI {
 				}
 				{
 					JLabel lblNewLabel_1 = new JLabel("E-Mail:");
-					lblNewLabel_1.setBounds(13, 93, 32, 14);
+					lblNewLabel_1.setBounds(13, 93, 52, 14);
 					panel.add(lblNewLabel_1);
 				}
 				btnUpdate.addActionListener(new ActionListener() {

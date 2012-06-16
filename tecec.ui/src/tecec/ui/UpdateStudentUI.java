@@ -93,11 +93,11 @@ public class UpdateStudentUI extends JDialog implements IUpdateStudentUI {
 			contentPanel.add(panel);
 			panel.setLayout(null);
 			btnUpdate = new JButton("Atualizar");
-			btnUpdate.setBounds(320, 135, 81, 23);
+			btnUpdate.setBounds(268, 135, 133, 23);
 			panel.add(btnUpdate);
 			{
 				btnCourses = new JButton("Associar Cursos");
-				btnCourses.setBounds(201, 135, 109, 23);
+				btnCourses.setBounds(109, 135, 147, 23);
 				panel.add(btnCourses);
 				{
 					txtEmail = new JTextField();
@@ -113,12 +113,12 @@ public class UpdateStudentUI extends JDialog implements IUpdateStudentUI {
 				}
 				{
 					JLabel lblNewLabel_1 = new JLabel("E-Mail:");
-					lblNewLabel_1.setBounds(13, 93, 32, 14);
+					lblNewLabel_1.setBounds(13, 93, 58, 14);
 					panel.add(lblNewLabel_1);
 				}
 				{
 					JLabel lblNewLabel = new JLabel("Nome:");
-					lblNewLabel.setBounds(13, 47, 31, 14);
+					lblNewLabel.setBounds(13, 47, 58, 14);
 					panel.add(lblNewLabel);
 				}
 				btnCourses.addActionListener(new ActionListener() {

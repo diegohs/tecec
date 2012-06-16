@@ -93,7 +93,7 @@ public class NewStudentUI extends JDialog implements INewStudentUI {
 			}
 			{
 				JLabel lblNewLabel = new JLabel("Nome:");
-				lblNewLabel.setBounds(13, 47, 31, 14);
+				lblNewLabel.setBounds(13, 47, 57, 14);
 				panel.add(lblNewLabel);
 			}
 			{
@@ -104,12 +104,12 @@ public class NewStudentUI extends JDialog implements INewStudentUI {
 			}
 			{
 				JLabel lblNewLabel_1 = new JLabel("E-mail:");
-				lblNewLabel_1.setBounds(13, 93, 32, 14);
+				lblNewLabel_1.setBounds(13, 93, 57, 14);
 				panel.add(lblNewLabel_1);
 			}
 			{
 				JButton btnNewCourse = new JButton("Cadastrar");
-				btnNewCourse.setBounds(320, 135, 81, 23);
+				btnNewCourse.setBounds(274, 135, 127, 23);
 				panel.add(btnNewCourse);
 				btnNewCourse.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {

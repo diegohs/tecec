@@ -117,7 +117,7 @@ public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 		panel.setLayout(null);
 		
 				JLabel lblMonographTitle = new JLabel("Título:");
-				lblMonographTitle.setBounds(10, 36, 31, 14);
+				lblMonographTitle.setBounds(10, 36, 66, 14);
 				panel.add(lblMonographTitle);
 				
 						txtMonographTitle = new JTextField();
@@ -152,11 +152,11 @@ public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 						});
 						
 						lblCourse = new JLabel("Curso:");
-						lblCourse.setBounds(10, 61, 32, 14);
+						lblCourse.setBounds(10, 61, 66, 23);
 						panel.add(lblCourse);
 						
 						lblArea = new JLabel("Área:");
-						lblArea.setBounds(10, 95, 27, 14);
+						lblArea.setBounds(10, 95, 56, 14);
 						panel.add(lblArea);
 						
 						cboArea = new JComboBox();
@@ -212,15 +212,15 @@ public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 						});
 						
 						lblStudent = new JLabel("Aluno:");
-						lblStudent.setBounds(10, 129, 31, 14);
+						lblStudent.setBounds(10, 129, 56, 14);
 						panel.add(lblStudent);
 						
 						lblAdvisor = new JLabel("Orientador:");
-						lblAdvisor.setBounds(20, 160, 56, 14);
+						lblAdvisor.setBounds(20, 160, 84, 14);
 						panel.add(lblAdvisor);
 						
 						cboAdvisor = new JComboBox();
-						cboAdvisor.setBounds(104, 157, 300, 20);
+						cboAdvisor.setBounds(129, 157, 275, 20);
 						panel.add(cboAdvisor);
 						
 						cboAdvisor.setRenderer(new DefaultListCellRenderer(){
@@ -246,7 +246,7 @@ public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 						});
 						
 						cboCoadvisor = new JComboBox();
-						cboCoadvisor.setBounds(104, 188, 300, 20);
+						cboCoadvisor.setBounds(129, 188, 275, 20);
 						panel.add(cboCoadvisor);
 						
 						cboCoadvisor.setRenderer(new DefaultListCellRenderer(){
@@ -272,11 +272,11 @@ public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 						});
 						
 						lblCoadvisor = new JLabel("Coorientador:");
-						lblCoadvisor.setBounds(10, 191, 67, 14);
+						lblCoadvisor.setBounds(10, 191, 124, 14);
 						panel.add(lblCoadvisor);
 						
 						cboStatus = new JComboBox();
-						cboStatus.setBounds(104, 219, 300, 20);
+						cboStatus.setBounds(129, 219, 275, 20);
 						panel.add(cboStatus);
 						
 						cboStatus.setRenderer(new DefaultListCellRenderer(){
@@ -302,15 +302,15 @@ public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 						});
 						
 						lblStatus = new JLabel("Status:");
-						lblStatus.setBounds(41, 216, 35, 14);
+						lblStatus.setBounds(45, 222, 66, 14);
 						panel.add(lblStatus);
 						
 						btnUpdateStages = new JButton("Modificar Etapas");
-						btnUpdateStages.setBounds(208, 281, 111, 23);
+						btnUpdateStages.setBounds(118, 281, 176, 23);
 						panel.add(btnUpdateStages);
 						
 						btnUpdateMonograph = new JButton("Atualizar");
-						btnUpdateMonograph.setBounds(329, 281, 75, 23);
+						btnUpdateMonograph.setBounds(306, 281, 98, 23);
 						panel.add(btnUpdateMonograph);
 						btnUpdateMonograph.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent arg0) {

@@ -122,12 +122,12 @@ public class NewMonographUI extends JDialog implements INewMonographUI {
 		panel.setLayout(null);
 
 		btnCreateMonograph = new JButton("Cadastrar");
-		btnCreateMonograph.setBounds(323, 281, 81, 23);
+		btnCreateMonograph.setBounds(299, 281, 105, 23);
 		panel.add(btnCreateMonograph);
 		btnCreateMonograph.setHorizontalAlignment(SwingConstants.RIGHT);
 
 		lblTituloMonografia = new JLabel("T\u00EDtulo:");
-		lblTituloMonografia.setBounds(10, 36, 31, 14);
+		lblTituloMonografia.setBounds(10, 36, 66, 14);
 		panel.add(lblTituloMonografia);
 
 		cboCurso = new JComboBox();
@@ -162,7 +162,7 @@ public class NewMonographUI extends JDialog implements INewMonographUI {
 		txtMonographTitle.setColumns(10);
 
 		lblCurso = new JLabel("Curso:");
-		lblCurso.setBounds(10, 67, 32, 14);
+		lblCurso.setBounds(10, 67, 94, 14);
 		panel.add(lblCurso);
 
 		cboArea = new JComboBox();
@@ -222,11 +222,11 @@ public class NewMonographUI extends JDialog implements INewMonographUI {
 		});
 
 		lblAluno = new JLabel("Aluno:");
-		lblAluno.setBounds(10, 129, 31, 14);
+		lblAluno.setBounds(10, 129, 66, 14);
 		panel.add(lblAluno);
 
 		cboOrientador = new JComboBox();
-		cboOrientador.setBounds(104, 157, 300, 20);
+		cboOrientador.setBounds(129, 157, 275, 20);
 		panel.add(cboOrientador);
 
 		cboOrientador.setRenderer(new DefaultListCellRenderer() {
@@ -252,11 +252,11 @@ public class NewMonographUI extends JDialog implements INewMonographUI {
 		});
 
 		lblOrientador = new JLabel("Orientador:");
-		lblOrientador.setBounds(20, 160, 56, 14);
+		lblOrientador.setBounds(20, 160, 84, 14);
 		panel.add(lblOrientador);
 
 		cboCoorientador = new JComboBox();
-		cboCoorientador.setBounds(104, 188, 300, 20);
+		cboCoorientador.setBounds(129, 188, 275, 20);
 		panel.add(cboCoorientador);
 
 		cboCoorientador.setRenderer(new DefaultListCellRenderer() {
@@ -282,11 +282,11 @@ public class NewMonographUI extends JDialog implements INewMonographUI {
 		});
 
 		lblCoorientador = new JLabel("Coorientador:");
-		lblCoorientador.setBounds(10, 185, 94, 14);
+		lblCoorientador.setBounds(10, 191, 121, 14);
 		panel.add(lblCoorientador);
 
 		cboStatus = new JComboBox();
-		cboStatus.setBounds(104, 219, 300, 20);
+		cboStatus.setBounds(129, 219, 275, 20);
 		panel.add(cboStatus);
 
 		cboStatus.setRenderer(new DefaultListCellRenderer() {
@@ -312,7 +312,7 @@ public class NewMonographUI extends JDialog implements INewMonographUI {
 		});
 
 		lblStatus = new JLabel("Status:");
-		lblStatus.setBounds(38, 222, 35, 14);
+		lblStatus.setBounds(45, 222, 66, 14);
 		panel.add(lblStatus);
 		btnCreateMonograph.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

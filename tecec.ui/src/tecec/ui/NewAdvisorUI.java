@@ -83,7 +83,7 @@ public class NewAdvisorUI extends JDialog implements INewAdvisorUI {
 			panel.setLayout(null);
 			{
 				JLabel lblNewLabel = new JLabel("Nome:");
-				lblNewLabel.setBounds(13, 47, 31, 14);
+				lblNewLabel.setBounds(13, 47, 55, 14);
 				panel.add(lblNewLabel);
 			}
 			{
@@ -94,7 +94,7 @@ public class NewAdvisorUI extends JDialog implements INewAdvisorUI {
 			}
 			{
 				JLabel lblNewLabel_1 = new JLabel("E-mail:");
-				lblNewLabel_1.setBounds(13, 93, 32, 14);
+				lblNewLabel_1.setBounds(13, 93, 55, 17);
 				panel.add(lblNewLabel_1);
 			}
 			{
@@ -105,7 +105,7 @@ public class NewAdvisorUI extends JDialog implements INewAdvisorUI {
 			}
 			{
 				JButton btnNewCourse = new JButton("Cadastrar");
-				btnNewCourse.setBounds(320, 135, 81, 23);
+				btnNewCourse.setBounds(274, 135, 127, 23);
 				panel.add(btnNewCourse);
 				btnNewCourse.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
