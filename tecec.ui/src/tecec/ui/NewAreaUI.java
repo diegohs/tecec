@@ -9,7 +9,6 @@ import javax.swing.JOptionPane;
 import tecec.contract.RuleViolation;
 import tecec.ui.contract.control.INewAreaController;
 import tecec.ui.contract.view.INewAreaUI;
-import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import org.jdesktop.beansbinding.BeanProperty;
@@ -25,6 +24,9 @@ import java.util.List;
 import tecec.dto.Area;
 import org.jdesktop.swingbinding.JComboBoxBinding;
 import org.jdesktop.swingbinding.SwingBindings;
+import javax.swing.JPanel;
+import javax.swing.border.TitledBorder;
+import javax.swing.UIManager;
 
 public class NewAreaUI extends JDialog implements INewAreaUI {
 
@@ -67,43 +69,23 @@ public class NewAreaUI extends JDialog implements INewAreaUI {
 
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		setBounds(100, 100, 493, 277);
+		setBounds(100, 100, 450, 298);
+		getContentPane().setLayout(null);
 		
-		getContentPane().setLayout(
-				new MigLayout("", "[][grow][]", "[grow][][][][][][][][grow]"));
+		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Cadastrar Nova \u00C1rea:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBounds(10, 11, 414, 239);
+		getContentPane().add(panel);
+		panel.setLayout(null);
 		{
 			JLabel lblNewLabel = new JLabel("Super \u00C1rea:");
-			getContentPane().add(lblNewLabel, "flowx,cell 1 1");
-		}
-		{
-			JLabel lblNewLabel_1 = new JLabel("Nome:");
-			getContentPane().add(lblNewLabel_1, "flowx,cell 1 3");
-		}
-		{
-			JLabel lblNewLabel_2 = new JLabel("Descri\u00E7\u00E3o:");
-			getContentPane().add(lblNewLabel_2, "flowx,cell 1 5");
-		}
-		{
-			txtAreaName = new JTextField();
-			getContentPane().add(txtAreaName, "cell 1 3,growx");
-			txtAreaName.setColumns(10);
-		}
-		{
-			txtDescription = new JTextField();
-			getContentPane().add(txtDescription, "cell 1 5,growx");
-			txtDescription.setColumns(10);
-		}
-		{
-			btnNewArea = new JButton("Cadastrar");
-			btnNewArea.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					createArea();
-				}
-			});
-			getContentPane().add(btnNewArea, "cell 1 7,alignx right");
+			lblNewLabel.setBounds(13, 44, 76, 14);
+			panel.add(lblNewLabel);
 		}
 		{
 			cboAreas = new JComboBox();
+			cboAreas.setBounds(84, 41, 320, 20);
+			panel.add(cboAreas);
 			
 			cboAreas.setRenderer(new DefaultListCellRenderer(){
 				/**
@@ -126,8 +108,38 @@ public class NewAreaUI extends JDialog implements INewAreaUI {
 					return this;
 				}
 			});
-			
-			getContentPane().add(cboAreas, "cell 1 1,growx");
+		}
+		{
+			JLabel lblNewLabel_1 = new JLabel("Nome:");
+			lblNewLabel_1.setBounds(39, 93, 50, 14);
+			panel.add(lblNewLabel_1);
+		}
+		{
+			txtAreaName = new JTextField();
+			txtAreaName.setBounds(84, 90, 320, 20);
+			panel.add(txtAreaName);
+			txtAreaName.setColumns(10);
+		}
+		{
+			txtDescription = new JTextField();
+			txtDescription.setBounds(84, 140, 320, 20);
+			panel.add(txtDescription);
+			txtDescription.setColumns(10);
+		}
+		{
+			JLabel lblNewLabel_2 = new JLabel("Descri\u00E7\u00E3o:");
+			lblNewLabel_2.setBounds(13, 143, 79, 14);
+			panel.add(lblNewLabel_2);
+		}
+		{
+			btnNewArea = new JButton("Cadastrar");
+			btnNewArea.setBounds(323, 200, 81, 23);
+			panel.add(btnNewArea);
+			btnNewArea.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					createArea();
+				}
+			});
 		}
 		initDataBindings();
 	}

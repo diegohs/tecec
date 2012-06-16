@@ -124,7 +124,6 @@ public class NewMonographUI extends JDialog implements INewMonographUI {
 		btnCreateMonograph = new JButton("Cadastrar");
 		btnCreateMonograph.setBounds(299, 281, 105, 23);
 		panel.add(btnCreateMonograph);
-		btnCreateMonograph.setHorizontalAlignment(SwingConstants.RIGHT);
 
 		lblTituloMonografia = new JLabel("T\u00EDtulo:");
 		lblTituloMonografia.setBounds(10, 36, 66, 14);

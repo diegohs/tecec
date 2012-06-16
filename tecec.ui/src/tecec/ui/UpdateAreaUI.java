@@ -31,6 +31,7 @@ import tecec.dto.Area;
 import tecec.ui.contract.control.IUpdateAreaController;
 import tecec.ui.contract.view.IUpdateAreaUI;
 import java.awt.Font;
+import javax.swing.border.TitledBorder;
 
 public class UpdateAreaUI extends JDialog implements IUpdateAreaUI {
 
@@ -76,73 +77,81 @@ public class UpdateAreaUI extends JDialog implements IUpdateAreaUI {
 
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 298);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new MigLayout("", "[][grow][]", "[][][][][][][][][][]"));
+		contentPanel.setLayout(null);
 		{
-			JLabel lblAtualizarrea = new JLabel("Atualizar Área");
-			lblAtualizarrea.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
-			contentPanel.add(lblAtualizarrea, "cell 1 0,alignx center");
-		}
-		{
-			JLabel lblNewLabel = new JLabel("Super \u00C1rea:");
-			contentPanel.add(lblNewLabel, "flowx,cell 0 2");
-		}
-		{
-			cboMainArea = new JComboBox();
-			
-			cboMainArea.setRenderer(new DefaultListCellRenderer(){
-				/**
-				 * 
-				 */
-				private static final long serialVersionUID = 1L;
+			JPanel panel = new JPanel();
+			panel.setBorder(new TitledBorder(null, "Atualizar \u00C1rea:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			panel.setBounds(10, 11, 414, 239);
+			contentPanel.add(panel);
+			panel.setLayout(null);
+			{
+				JLabel lblNewLabel = new JLabel("Super \u00C1rea:");
+				lblNewLabel.setBounds(13, 44, 76, 14);
+				panel.add(lblNewLabel);
+			}
+			{
+				cboMainArea = new JComboBox();
+				cboMainArea.setBounds(84, 41, 320, 20);
+				panel.add(cboMainArea);
+				
+				cboMainArea.setRenderer(new DefaultListCellRenderer(){
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
 
-				@Override
-				public Component getListCellRendererComponent(JList list,
-						Object value, int index, boolean isSelected,
-						boolean cellHasFocus) {
-					super.getListCellRendererComponent(list, value, index, isSelected,
-							cellHasFocus);
-					
-					if (value instanceof Area) {
-						Area area = (Area)value;
-						setText(area.getName());
+					@Override
+					public Component getListCellRendererComponent(JList list,
+							Object value, int index, boolean isSelected,
+							boolean cellHasFocus) {
+						super.getListCellRendererComponent(list, value, index, isSelected,
+								cellHasFocus);
+						
+						if (value instanceof Area) {
+							Area area = (Area)value;
+							setText(area.getName());
+						}
+						
+						return this;
 					}
-					
-					return this;
-				}
-			});
-			
-			contentPanel.add(cboMainArea, "cell 1 2,growx");
-		}
-		{
-			JLabel lblNewLabel_1 = new JLabel("Nome:");
-			contentPanel.add(lblNewLabel_1, "flowx,cell 1 4");
-		}
-		{
-			JLabel lblNewLabel_2 = new JLabel("Descri\u00E7\u00E3o:");
-			contentPanel.add(lblNewLabel_2, "flowx,cell 1 6");
-		}
-		{
-			txtName = new JTextField();
-			contentPanel.add(txtName, "cell 1 4,growx");
-			txtName.setColumns(10);
-		}
-		{
-			txtDescription = new JTextField();
-			contentPanel.add(txtDescription, "cell 1 6,growx");
-			txtDescription.setColumns(10);
-		}
-		{
-			JButton btnUpdate = new JButton("Atualizar");
-			btnUpdate.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					updateArea();
-				}
-			});
-			contentPanel.add(btnUpdate, "cell 1 8,alignx right");
+				});
+			}
+			{
+				JLabel lblNewLabel_1 = new JLabel("Nome:");
+				lblNewLabel_1.setBounds(39, 93, 50, 14);
+				panel.add(lblNewLabel_1);
+			}
+			{
+				txtName = new JTextField();
+				txtName.setBounds(84, 90, 320, 20);
+				panel.add(txtName);
+				txtName.setColumns(10);
+			}
+			{
+				txtDescription = new JTextField();
+				txtDescription.setBounds(84, 140, 320, 20);
+				panel.add(txtDescription);
+				txtDescription.setColumns(10);
+			}
+			{
+				JLabel lblNewLabel_2 = new JLabel("Descri\u00E7\u00E3o:");
+				lblNewLabel_2.setBounds(13, 143, 79, 14);
+				panel.add(lblNewLabel_2);
+			}
+			{
+				JButton btnUpdate = new JButton("Atualizar");
+				btnUpdate.setBounds(329, 205, 75, 23);
+				panel.add(btnUpdate);
+				btnUpdate.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						updateArea();
+					}
+				});
+			}
 		}
 		initDataBindings();
 	}
