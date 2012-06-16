@@ -22,6 +22,7 @@ import org.jdesktop.beansbinding.Bindings;
 
 import tecec.ui.contract.control.IUpdateProfileController;
 import tecec.ui.contract.view.IUpdateProfileUI;
+import javax.swing.border.TitledBorder;
 
 public class UpdateProfileUI extends JDialog implements IUpdateProfileUI {
 	/**
@@ -63,6 +64,7 @@ public class UpdateProfileUI extends JDialog implements IUpdateProfileUI {
 	private JPanel contentPane;
 	private JTextField txtProfileName;
 	private JButton btnUpdateProfile;
+	private JPanel panel;
 
 	/**
 	 * Create the frame.
@@ -74,30 +76,35 @@ public class UpdateProfileUI extends JDialog implements IUpdateProfileUI {
 
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		setBounds(100, 100, 433, 191);
+		setBounds(100, 100, 450, 198);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[grow]", "[][56.00][29.00]"));
-
-		JLabel lblNewLabel = new JLabel("Atualizar Perfil");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
-		contentPane.add(lblNewLabel, "cell 0 0,alignx center");
-
-		JLabel lblNome = new JLabel("Nome:");
-		contentPane.add(lblNome, "flowx,cell 0 1");
-
-		txtProfileName = new JTextField();
-		contentPane.add(txtProfileName, "cell 0 1,growx");
-		txtProfileName.setColumns(10);
-
-		btnUpdateProfile = new JButton("Atualizar");
-		btnUpdateProfile.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				storeProfile();
-			}
-		});
-		contentPane.add(btnUpdateProfile, "cell 0 2,alignx right,growy");
+		contentPane.setLayout(null);
+		
+		panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "Atualizar Perfil:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBounds(10, 11, 412, 142);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+				JLabel lblNome = new JLabel("Nome:");
+				lblNome.setBounds(10, 45, 81, 14);
+				panel.add(lblNome);
+				
+						txtProfileName = new JTextField();
+						txtProfileName.setBounds(74, 42, 330, 20);
+						panel.add(txtProfileName);
+						txtProfileName.setColumns(10);
+						
+								btnUpdateProfile = new JButton("Atualizar");
+								btnUpdateProfile.setBounds(327, 102, 75, 29);
+								panel.add(btnUpdateProfile);
+								btnUpdateProfile.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent arg0) {
+										storeProfile();
+									}
+								});
 		initDataBindings();
 	}
 	protected void initDataBindings() {

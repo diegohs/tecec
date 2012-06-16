@@ -19,6 +19,7 @@ import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.border.TitledBorder;
 
 public class NewProfileUI extends JDialog implements INewProfileUI {
 	/**
@@ -71,30 +72,35 @@ public class NewProfileUI extends JDialog implements INewProfileUI {
 		setLocationByPlatform(true);
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		setBounds(100, 100, 429, 181);
+		setBounds(100, 100, 450, 198);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[grow]", "[][56.00][29.00]"));
-
-		JLabel lblNewLabel = new JLabel("Cadastrar Novo Perfil");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
-		contentPane.add(lblNewLabel, "cell 0 0,alignx center");
-
-		JLabel lblNome = new JLabel("Nome:");
-		contentPane.add(lblNome, "flowx,cell 0 1");
-
-		txtProfileName = new JTextField();
-		contentPane.add(txtProfileName, "cell 0 1,growx");
-		txtProfileName.setColumns(10);
-
-		btnCreateProfile = new JButton("Cadastrar");
-		btnCreateProfile.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				storeProfile();
-			}
-		});
-		contentPane.add(btnCreateProfile, "cell 0 2,alignx right,growy");
+		contentPane.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "Cadastrar Novo Perfil:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBounds(10, 11, 412, 142);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+				txtProfileName = new JTextField();
+				txtProfileName.setBounds(72, 42, 330, 20);
+				panel.add(txtProfileName);
+				txtProfileName.setColumns(10);
+				
+						btnCreateProfile = new JButton("Cadastrar");
+						btnCreateProfile.setBounds(321, 102, 81, 29);
+						panel.add(btnCreateProfile);
+						
+								JLabel lblNome = new JLabel("Nome:");
+								lblNome.setBounds(10, 45, 81, 14);
+								panel.add(lblNome);
+						btnCreateProfile.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent arg0) {
+								storeProfile();
+							}
+						});
 		initDataBindings();
 	}
 

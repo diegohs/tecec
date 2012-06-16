@@ -22,6 +22,7 @@ import org.jdesktop.beansbinding.Bindings;
 
 import tecec.ui.contract.control.IUpdateStatusController;
 import tecec.ui.contract.view.IUpdateStatusUI;
+import javax.swing.border.TitledBorder;
 
 public class UpdateStatusUI extends JDialog implements IUpdateStatusUI {
 	/**
@@ -67,6 +68,7 @@ public class UpdateStatusUI extends JDialog implements IUpdateStatusUI {
 	private JPanel contentPane;
 	private JTextField txtStatusDescription;
 	private JButton btnUpdateStatus;
+	private JPanel panel;
 
 	/**
 	 * Create the frame.
@@ -78,30 +80,35 @@ public class UpdateStatusUI extends JDialog implements IUpdateStatusUI {
 
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		setBounds(100, 100, 429, 185);
+		setBounds(100, 100, 450, 208);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[grow]", "[][56.00][29.00]"));
-
-		JLabel lblNewLabel = new JLabel("Atualizar Status");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
-		contentPane.add(lblNewLabel, "cell 0 0,alignx center");
-
-		JLabel lblNome = new JLabel("Descrição:");
-		contentPane.add(lblNome, "flowx,cell 0 1");
-
-		txtStatusDescription = new JTextField();
-		contentPane.add(txtStatusDescription, "cell 0 1,growx");
-		txtStatusDescription.setColumns(10);
+		contentPane.setLayout(null);
+		
+		panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "Atualizar Status:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBounds(10, 11, 414, 153);
+		contentPane.add(panel);
+		panel.setLayout(null);
 		
 		btnUpdateStatus = new JButton("Atualizar");
+		btnUpdateStatus.setBounds(329, 113, 75, 29);
+		panel.add(btnUpdateStatus);
+		
+				txtStatusDescription = new JTextField();
+				txtStatusDescription.setBounds(74, 42, 330, 20);
+				panel.add(txtStatusDescription);
+				txtStatusDescription.setColumns(10);
+				
+						JLabel lblNome = new JLabel("Descri\u00E7\u00E3o:");
+						lblNome.setBounds(10, 45, 81, 14);
+						panel.add(lblNome);
 		btnUpdateStatus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				storeStatus();
 			}
 		});
-		contentPane.add(btnUpdateStatus, "cell 0 2,alignx right,growy");
 		initDataBindings();
 	}
 	protected void initDataBindings() {
