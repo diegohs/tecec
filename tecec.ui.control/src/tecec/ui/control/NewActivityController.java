@@ -30,6 +30,8 @@ public class NewActivityController extends BaseController implements
 	public NewActivityController(IActivityWriter activityWriter, IStageReader stageReader) {
 		this.activityWriter = activityWriter;
 		this.stageReader = stageReader;
+		
+		this.selectedStageIndex = -1;
 	}
 
 	@Override
