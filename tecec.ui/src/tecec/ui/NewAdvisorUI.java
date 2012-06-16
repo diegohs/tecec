@@ -7,7 +7,6 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
@@ -20,13 +19,12 @@ import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.Font;
+import javax.swing.border.TitledBorder;
+import java.awt.Dimension;
 
 public class NewAdvisorUI extends JDialog implements INewAdvisorUI {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private INewAdvisorController newAdvisorController;
 
@@ -59,9 +57,6 @@ public class NewAdvisorUI extends JDialog implements INewAdvisorUI {
 	private JTextField txtName;
 	private JTextField txtEmail;
 
-	/**
-	 * Create the dialog.
-	 */
 	public NewAdvisorUI(INewAdvisorController newAdvisorController) {
 		this.newAdvisorController = newAdvisorController;
 		
@@ -69,42 +64,55 @@ public class NewAdvisorUI extends JDialog implements INewAdvisorUI {
 
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 230);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setPreferredSize(new Dimension(450, 230));
+		contentPanel.setMinimumSize(new Dimension(450, 230));
+		contentPanel.setMaximumSize(new Dimension(450, 230));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new MigLayout("", "[][][grow][]", "[][][][][][][]"));
+		contentPanel.setLayout(null);
 		{
-			JLabel lblCadastrarOrientador = new JLabel("Cadastrar Orientador");
-			lblCadastrarOrientador.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
-			contentPanel.add(lblCadastrarOrientador, "cell 1 0 2 1,alignx center");
-		}
-		{
-			JLabel lblNewLabel = new JLabel("Nome:");
-			contentPanel.add(lblNewLabel, "flowx,cell 1 2");
-		}
-		{
-			txtName = new JTextField();
-			contentPanel.add(txtName, "cell 2 2,growx");
-			txtName.setColumns(10);
-		}
-		{
-			JLabel lblNewLabel_1 = new JLabel("E-mail:");
-			contentPanel.add(lblNewLabel_1, "flowx,cell 2 4");
-		}
-		{
-			txtEmail = new JTextField();
-			contentPanel.add(txtEmail, "cell 2 4,growx");
-			txtEmail.setColumns(10);
-		}
-		{
-			JButton btnNewCourse = new JButton("Cadastrar");
-			btnNewCourse.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					createAdvisor();
-				}
-			});
-			contentPanel.add(btnNewCourse, "flowx,cell 2 6,alignx right");
+			JPanel panel = new JPanel();
+			panel.setPreferredSize(new Dimension(440, 220));
+			panel.setMinimumSize(new Dimension(440, 220));
+			panel.setMaximumSize(new Dimension(440, 220));
+			panel.setBorder(new TitledBorder(null, "Cadastrar Novo Orientador:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			panel.setBounds(10, 11, 414, 170);
+			contentPanel.add(panel);
+			panel.setLayout(null);
+			{
+				JLabel lblNewLabel = new JLabel("Nome:");
+				lblNewLabel.setBounds(13, 47, 31, 14);
+				panel.add(lblNewLabel);
+			}
+			{
+				txtName = new JTextField();
+				txtName.setBounds(64, 44, 337, 20);
+				panel.add(txtName);
+				txtName.setColumns(60);
+			}
+			{
+				JLabel lblNewLabel_1 = new JLabel("E-mail:");
+				lblNewLabel_1.setBounds(13, 93, 32, 14);
+				panel.add(lblNewLabel_1);
+			}
+			{
+				txtEmail = new JTextField();
+				txtEmail.setBounds(64, 90, 337, 20);
+				panel.add(txtEmail);
+				txtEmail.setColumns(60);
+			}
+			{
+				JButton btnNewCourse = new JButton("Cadastrar");
+				btnNewCourse.setBounds(320, 135, 81, 23);
+				panel.add(btnNewCourse);
+				btnNewCourse.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						createAdvisor();
+					}
+				});
+			}
 		}
 		initDataBindings();
 	}

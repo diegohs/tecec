@@ -7,7 +7,6 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
@@ -20,7 +19,10 @@ import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.Font;
+import java.awt.Dimension;
+import java.awt.Point;
+import javax.swing.border.TitledBorder;
+import javax.swing.UIManager;
 
 public class NewStudentUI extends JDialog implements INewStudentUI {
 
@@ -69,42 +71,52 @@ public class NewStudentUI extends JDialog implements INewStudentUI {
 
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		setBounds(100, 100, 431, 228);
+		setBounds(100, 100, 450, 230);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setPreferredSize(new Dimension(450, 230));
+		contentPanel.setLocation(new Point(450, 230));
+		contentPanel.setMaximumSize(new Dimension(45, 230));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new MigLayout("", "[][grow][]", "[][][][][][][]"));
+		contentPanel.setLayout(null);
 		{
-			JLabel lblCadastrarNovoEstudante = new JLabel("Cadastrar novo Estudante");
-			lblCadastrarNovoEstudante.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
-			contentPanel.add(lblCadastrarNovoEstudante, "cell 1 1,alignx center");
-		}
-		{
-			JLabel lblNewLabel = new JLabel("Nome:");
-			contentPanel.add(lblNewLabel, "flowx,cell 1 2");
-		}
-		{
-			JLabel lblNewLabel_1 = new JLabel("E-mail:");
-			contentPanel.add(lblNewLabel_1, "flowx,cell 1 4");
-		}
-		{
-			txtName = new JTextField();
-			contentPanel.add(txtName, "cell 1 2,growx");
-			txtName.setColumns(10);
-		}
-		{
-			txtEmail = new JTextField();
-			contentPanel.add(txtEmail, "cell 1 4,growx");
-			txtEmail.setColumns(10);
-		}
-		{
-			JButton btnNewCourse = new JButton("Cadastrar");
-			btnNewCourse.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					createStudent();
-				}
-			});
-			contentPanel.add(btnNewCourse, "flowx,cell 1 5,alignx right");
+			JPanel panel = new JPanel();
+			panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Cadastrar Novo Aluno:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			panel.setBounds(10, 11, 414, 170);
+			contentPanel.add(panel);
+			panel.setLayout(null);
+			{
+				txtName = new JTextField();
+				txtName.setBounds(64, 44, 337, 20);
+				panel.add(txtName);
+				txtName.setColumns(60);
+			}
+			{
+				JLabel lblNewLabel = new JLabel("Nome:");
+				lblNewLabel.setBounds(13, 47, 31, 14);
+				panel.add(lblNewLabel);
+			}
+			{
+				txtEmail = new JTextField();
+				txtEmail.setBounds(64, 90, 337, 20);
+				panel.add(txtEmail);
+				txtEmail.setColumns(60);
+			}
+			{
+				JLabel lblNewLabel_1 = new JLabel("E-mail:");
+				lblNewLabel_1.setBounds(13, 93, 32, 14);
+				panel.add(lblNewLabel_1);
+			}
+			{
+				JButton btnNewCourse = new JButton("Cadastrar");
+				btnNewCourse.setBounds(320, 135, 81, 23);
+				panel.add(btnNewCourse);
+				btnNewCourse.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						createStudent();
+					}
+				});
+			}
 		}
 		initDataBindings();
 	}

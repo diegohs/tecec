@@ -11,7 +11,7 @@ import javax.swing.border.EmptyBorder;
 import tecec.contract.RuleViolation;
 import tecec.ui.contract.control.IUpdateAdvisorController;
 import tecec.ui.contract.view.IUpdateAdvisorUI;
-import net.miginfocom.swing.MigLayout;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
@@ -20,7 +20,9 @@ import org.jdesktop.beansbinding.BeanProperty;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
-import java.awt.Font;
+
+import javax.swing.border.TitledBorder;
+import java.awt.Dimension;
 
 public class UpdateAdvisorUI extends JDialog implements IUpdateAdvisorUI {
 
@@ -32,7 +34,7 @@ public class UpdateAdvisorUI extends JDialog implements IUpdateAdvisorUI {
 	private JTextField txtName;
 	private JTextField txtEmail;
 	private JButton btnUpdate;
-	private JLabel lblAtualizarOrientador;
+	private JPanel panel;
 
 	@Override
 	public void setpkAdvisor(String pkAdvisor) {
@@ -57,6 +59,9 @@ public class UpdateAdvisorUI extends JDialog implements IUpdateAdvisorUI {
 	}	
 
 	public UpdateAdvisorUI(IUpdateAdvisorController updateAdvisorController) {
+		setPreferredSize(new Dimension(450, 230));
+		setMinimumSize(new Dimension(450, 230));
+		setMaximumSize(new Dimension(450, 230));
 		this.updateAdvisorController = updateAdvisorController;
 		
 		setDefaultLookAndFeelDecorated(true);
@@ -64,42 +69,55 @@ public class UpdateAdvisorUI extends JDialog implements IUpdateAdvisorUI {
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 230);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setPreferredSize(new Dimension(450, 230));
+		contentPanel.setMinimumSize(new Dimension(450, 230));
+		contentPanel.setMaximumSize(new Dimension(450, 230));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new MigLayout("", "[][grow][]", "[grow][][][][][][grow]"));
+		contentPanel.setLayout(null);
 		{
-			lblAtualizarOrientador = new JLabel("Atualizar Orientador");
-			lblAtualizarOrientador.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
-			contentPanel.add(lblAtualizarOrientador, "cell 1 0,alignx center");
-		}
-		{
-			JLabel lblNewLabel = new JLabel("Nome:");
-			contentPanel.add(lblNewLabel, "flowx,cell 1 1");
-		}
-		{
-			JLabel lblNewLabel_1 = new JLabel("E-Mail:");
-			contentPanel.add(lblNewLabel_1, "flowx,cell 1 3");
-		}
-		{
-			txtName = new JTextField();
-			contentPanel.add(txtName, "cell 1 1,growx");
-			txtName.setColumns(10);
-		}
-		{
-			txtEmail = new JTextField();
-			contentPanel.add(txtEmail, "cell 1 3,growx");
-			txtEmail.setColumns(10);
-		}
-		{
-			btnUpdate = new JButton("Atualizar");
-			btnUpdate.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					updateAdvisor();
+			panel = new JPanel();
+			panel.setMinimumSize(new Dimension(440, 220));
+			panel.setMaximumSize(new Dimension(440, 220));
+			panel.setPreferredSize(new Dimension(440, 220));
+			panel.setBorder(new TitledBorder(null, "Atualizar Orientador:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			panel.setBounds(10, 11, 414, 170);
+			contentPanel.add(panel);
+			panel.setLayout(null);
+			{
+				txtName = new JTextField();
+				txtName.setBounds(64, 44, 337, 20);
+				panel.add(txtName);
+				txtName.setColumns(60);
+			}
+			{
+				btnUpdate = new JButton("Atualizar");
+				btnUpdate.setBounds(329, 136, 75, 23);
+				panel.add(btnUpdate);
+				{
+					JLabel lblNewLabel = new JLabel("Nome:");
+					lblNewLabel.setBounds(13, 47, 31, 14);
+					panel.add(lblNewLabel);
 				}
-			});
-			contentPanel.add(btnUpdate, "cell 1 5,alignx right");
+				{
+					txtEmail = new JTextField();
+					txtEmail.setBounds(64, 90, 337, 20);
+					panel.add(txtEmail);
+					txtEmail.setColumns(60);
+				}
+				{
+					JLabel lblNewLabel_1 = new JLabel("E-Mail:");
+					lblNewLabel_1.setBounds(13, 93, 32, 14);
+					panel.add(lblNewLabel_1);
+				}
+				btnUpdate.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						updateAdvisor();
+					}
+				});
+			}
 		}
 		initDataBindings();
 	}

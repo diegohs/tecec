@@ -33,7 +33,8 @@ public class MainUI implements IMainUI {
 
 			if (System.getProperty("os.name").toUpperCase().compareTo("LINUX") == 0) {
 				commandDump = "/usr/bin/mysqldump";
-			} else {				
+			} else {			
+				/* Em casa não deu certo assim no Windows só passando o caminho c://program files etc.*/
 				commandDump = "MYSQL_PATH\\bin\\mysqldump.exe";
 			}
 

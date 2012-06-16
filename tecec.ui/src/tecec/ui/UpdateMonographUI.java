@@ -1,7 +1,7 @@
 package tecec.ui;
 
 import java.awt.Component;
-import java.awt.Font;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import tecec.contract.RuleViolation;
-import net.miginfocom.swing.MigLayout;
+
 
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
@@ -34,6 +34,7 @@ import tecec.dto.Area;
 import tecec.dto.Student;
 import tecec.dto.Advisor;
 import tecec.dto.Status;
+import javax.swing.border.TitledBorder;
 
 public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 	/**
@@ -91,6 +92,7 @@ public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 	private JComboBox cboCoadvisor;
 	private JComboBox cboStatus;
 	private JButton btnUpdateStages;
+	private JPanel panel;
 
 	/**
 	 * Create the frame.
@@ -102,207 +104,224 @@ public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		setBounds(100, 100, 400, 350);
+		setBounds(100, 100, 450, 370);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		//contentPane.setLayout(new MigLayout("", "[grow][grow][grow]","[grow][][56.00][29.00][grow]"));
-		contentPane.setLayout(new MigLayout("", "[][grow][]", "[][][][][][][][][][][]"));
+						contentPane.setLayout(null);
+		
+		panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "Atualizar Monografia:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBounds(10, 11, 414, 315);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+				JLabel lblMonographTitle = new JLabel("Título:");
+				lblMonographTitle.setBounds(10, 36, 31, 14);
+				panel.add(lblMonographTitle);
 				
-						JLabel lblTitle = new JLabel("Atualizar Monografia");
-						lblTitle.setFont(new Font("Tahoma", Font.BOLD, 13));
-						contentPane.add(lblTitle, "cell 0 0 2 1,alignx center,growy");
-		
-				JLabel lblMonographTitle = new JLabel("TÃ­tulo:");
-				contentPane.add(lblMonographTitle, "cell 0 2,alignx right");
-		
-				txtMonographTitle = new JTextField();
-				contentPane.add(txtMonographTitle, "cell 1 2,growx");
-				txtMonographTitle.setColumns(10);
-		
-		lblCourse = new JLabel("Curso:");
-		contentPane.add(lblCourse, "cell 0 3,alignx trailing");
-		
-		cboCourse = new JComboBox();
-		contentPane.add(cboCourse, "cell 1 3,growx");
-		
-		cboCourse.setRenderer(new DefaultListCellRenderer(){
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
+						txtMonographTitle = new JTextField();
+						txtMonographTitle.setBounds(67, 33, 337, 20);
+						panel.add(txtMonographTitle);
+						txtMonographTitle.setColumns(10);
+						
+						cboCourse = new JComboBox();
+						cboCourse.setBounds(67, 64, 337, 20);
+						panel.add(cboCourse);
+						
+						cboCourse.setRenderer(new DefaultListCellRenderer(){
+							/**
+							 * 
+							 */
+							private static final long serialVersionUID = 1L;
 
-			@Override
-			public Component getListCellRendererComponent(JList list,
-					Object value, int index, boolean isSelected,
-					boolean cellHasFocus) {
-				super.getListCellRendererComponent(list, value, index, isSelected,
-						cellHasFocus);
-				
-				if (value instanceof Course) {
-					Course course = (Course)value;
-					setText(course.getName());
-				}
-				
-				return this;
-			}
-		});
-		
-		lblArea = new JLabel("Ã�rea:");
-		contentPane.add(lblArea, "cell 0 4,alignx trailing");
-		
-		cboArea = new JComboBox();
-		contentPane.add(cboArea, "cell 1 4,growx");
-		
-		cboArea.setRenderer(new DefaultListCellRenderer(){
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
+							@Override
+							public Component getListCellRendererComponent(JList list,
+									Object value, int index, boolean isSelected,
+									boolean cellHasFocus) {
+								super.getListCellRendererComponent(list, value, index, isSelected,
+										cellHasFocus);
+								
+								if (value instanceof Course) {
+									Course course = (Course)value;
+									setText(course.getName());
+								}
+								
+								return this;
+							}
+						});
+						
+						lblCourse = new JLabel("Curso:");
+						lblCourse.setBounds(10, 61, 32, 14);
+						panel.add(lblCourse);
+						
+						lblArea = new JLabel("Área:");
+						lblArea.setBounds(10, 95, 27, 14);
+						panel.add(lblArea);
+						
+						cboArea = new JComboBox();
+						cboArea.setBounds(67, 95, 337, 20);
+						panel.add(cboArea);
+						
+						cboArea.setRenderer(new DefaultListCellRenderer(){
+							/**
+							 * 
+							 */
+							private static final long serialVersionUID = 1L;
 
-			@Override
-			public Component getListCellRendererComponent(JList list,
-					Object value, int index, boolean isSelected,
-					boolean cellHasFocus) {
-				super.getListCellRendererComponent(list, value, index, isSelected,
-						cellHasFocus);
-				
-				if (value instanceof Area) {
-					Area area = (Area)value;
-					setText(area.getName());
-				}
-				
-				return this;
-			}
-		});
-		
-		lblStudent = new JLabel("Aluno:");
-		contentPane.add(lblStudent, "cell 0 5,alignx trailing");
-		
-		cboStudent = new JComboBox();
-		contentPane.add(cboStudent, "cell 1 5,growx");
-		
-		cboStudent.setRenderer(new DefaultListCellRenderer(){
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
+							@Override
+							public Component getListCellRendererComponent(JList list,
+									Object value, int index, boolean isSelected,
+									boolean cellHasFocus) {
+								super.getListCellRendererComponent(list, value, index, isSelected,
+										cellHasFocus);
+								
+								if (value instanceof Area) {
+									Area area = (Area)value;
+									setText(area.getName());
+								}
+								
+								return this;
+							}
+						});
+						
+						cboStudent = new JComboBox();
+						cboStudent.setBounds(67, 126, 337, 20);
+						panel.add(cboStudent);
+						
+						cboStudent.setRenderer(new DefaultListCellRenderer(){
+							/**
+							 * 
+							 */
+							private static final long serialVersionUID = 1L;
 
-			@Override
-			public Component getListCellRendererComponent(JList list,
-					Object value, int index, boolean isSelected,
-					boolean cellHasFocus) {
-				super.getListCellRendererComponent(list, value, index, isSelected,
-						cellHasFocus);
-				
-				if (value instanceof Student) {
-					Student student = (Student)value;
-					setText(student.getName());
-				}
-				
-				return this;
-			}
-		});
-		
-		lblAdvisor = new JLabel("Orientador:");
-		contentPane.add(lblAdvisor, "cell 0 6,alignx trailing");
-		
-		cboAdvisor = new JComboBox();
-		contentPane.add(cboAdvisor, "cell 1 6,growx");
-		
-		cboAdvisor.setRenderer(new DefaultListCellRenderer(){
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
+							@Override
+							public Component getListCellRendererComponent(JList list,
+									Object value, int index, boolean isSelected,
+									boolean cellHasFocus) {
+								super.getListCellRendererComponent(list, value, index, isSelected,
+										cellHasFocus);
+								
+								if (value instanceof Student) {
+									Student student = (Student)value;
+									setText(student.getName());
+								}
+								
+								return this;
+							}
+						});
+						
+						lblStudent = new JLabel("Aluno:");
+						lblStudent.setBounds(10, 129, 31, 14);
+						panel.add(lblStudent);
+						
+						lblAdvisor = new JLabel("Orientador:");
+						lblAdvisor.setBounds(20, 160, 56, 14);
+						panel.add(lblAdvisor);
+						
+						cboAdvisor = new JComboBox();
+						cboAdvisor.setBounds(104, 157, 300, 20);
+						panel.add(cboAdvisor);
+						
+						cboAdvisor.setRenderer(new DefaultListCellRenderer(){
+							/**
+							 * 
+							 */
+							private static final long serialVersionUID = 1L;
 
-			@Override
-			public Component getListCellRendererComponent(JList list,
-					Object value, int index, boolean isSelected,
-					boolean cellHasFocus) {
-				super.getListCellRendererComponent(list, value, index, isSelected,
-						cellHasFocus);
-				
-				if (value instanceof Advisor) {
-					Advisor advisor = (Advisor)value;
-					setText(advisor.getName());
-				}
-				
-				return this;
-			}
-		});
-		
-		lblCoadvisor = new JLabel("Coorientador:");
-		contentPane.add(lblCoadvisor, "cell 0 7,alignx trailing");
-		
-		cboCoadvisor = new JComboBox();
-		contentPane.add(cboCoadvisor, "cell 1 7,growx");
-		
-		cboCoadvisor.setRenderer(new DefaultListCellRenderer(){
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
+							@Override
+							public Component getListCellRendererComponent(JList list,
+									Object value, int index, boolean isSelected,
+									boolean cellHasFocus) {
+								super.getListCellRendererComponent(list, value, index, isSelected,
+										cellHasFocus);
+								
+								if (value instanceof Advisor) {
+									Advisor advisor = (Advisor)value;
+									setText(advisor.getName());
+								}
+								
+								return this;
+							}
+						});
+						
+						cboCoadvisor = new JComboBox();
+						cboCoadvisor.setBounds(104, 188, 300, 20);
+						panel.add(cboCoadvisor);
+						
+						cboCoadvisor.setRenderer(new DefaultListCellRenderer(){
+							/**
+							 * 
+							 */
+							private static final long serialVersionUID = 1L;
 
-			@Override
-			public Component getListCellRendererComponent(JList list,
-					Object value, int index, boolean isSelected,
-					boolean cellHasFocus) {
-				super.getListCellRendererComponent(list, value, index, isSelected,
-						cellHasFocus);
-				
-				if (value instanceof Advisor) {
-					Advisor advisor = (Advisor)value;
-					setText(advisor.getName());
-				}
-				
-				return this;
-			}
-		});
-		
-		lblStatus = new JLabel("Status:");
-		contentPane.add(lblStatus, "cell 0 8,alignx trailing");
-		
-		cboStatus = new JComboBox();
-		contentPane.add(cboStatus, "cell 1 8,growx");
-		
-		cboStatus.setRenderer(new DefaultListCellRenderer(){
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
+							@Override
+							public Component getListCellRendererComponent(JList list,
+									Object value, int index, boolean isSelected,
+									boolean cellHasFocus) {
+								super.getListCellRendererComponent(list, value, index, isSelected,
+										cellHasFocus);
+								
+								if (value instanceof Advisor) {
+									Advisor advisor = (Advisor)value;
+									setText(advisor.getName());
+								}
+								
+								return this;
+							}
+						});
+						
+						lblCoadvisor = new JLabel("Coorientador:");
+						lblCoadvisor.setBounds(10, 191, 67, 14);
+						panel.add(lblCoadvisor);
+						
+						cboStatus = new JComboBox();
+						cboStatus.setBounds(104, 219, 300, 20);
+						panel.add(cboStatus);
+						
+						cboStatus.setRenderer(new DefaultListCellRenderer(){
+							/**
+							 * 
+							 */
+							private static final long serialVersionUID = 1L;
 
-			@Override
-			public Component getListCellRendererComponent(JList list,
-					Object value, int index, boolean isSelected,
-					boolean cellHasFocus) {
-				super.getListCellRendererComponent(list, value, index, isSelected,
-						cellHasFocus);
-				
-				if (value instanceof Status) {
-					Status status = (Status)value;
-					setText(status.getDescription());
-				}
-				
-				return this;
-			}
-		});
-		
-		btnUpdateMonograph = new JButton("Atualizar");
-		btnUpdateMonograph.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				storeMonograph();
-			}
-		});
-		
-		btnUpdateStages = new JButton("Modificar Etapas");
-		btnUpdateStages.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				showMonographStageViewerUI();
-			}
-		});
-		contentPane.add(btnUpdateStages, "flowx,cell 1 9,alignx right");
-		contentPane.add(btnUpdateMonograph, "cell 1 9,alignx right,growy");
+							@Override
+							public Component getListCellRendererComponent(JList list,
+									Object value, int index, boolean isSelected,
+									boolean cellHasFocus) {
+								super.getListCellRendererComponent(list, value, index, isSelected,
+										cellHasFocus);
+								
+								if (value instanceof Status) {
+									Status status = (Status)value;
+									setText(status.getDescription());
+								}
+								
+								return this;
+							}
+						});
+						
+						lblStatus = new JLabel("Status:");
+						lblStatus.setBounds(41, 216, 35, 14);
+						panel.add(lblStatus);
+						
+						btnUpdateStages = new JButton("Modificar Etapas");
+						btnUpdateStages.setBounds(208, 281, 111, 23);
+						panel.add(btnUpdateStages);
+						
+						btnUpdateMonograph = new JButton("Atualizar");
+						btnUpdateMonograph.setBounds(329, 281, 75, 23);
+						panel.add(btnUpdateMonograph);
+						btnUpdateMonograph.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent arg0) {
+								storeMonograph();
+							}
+						});
+						btnUpdateStages.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								showMonographStageViewerUI();
+							}
+						});
 		initDataBindings();
 	}
 
