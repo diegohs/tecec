@@ -26,23 +26,25 @@ import javax.swing.ListSelectionModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 
 
-public class AdvisorViewerUI extends JDialog implements IAdvisorViewerUI {	
+public class AdvisorViewerUI extends JDialog implements IAdvisorViewerUI {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private IAdvisorViewerController advisorViewerController;
-	
+
 	private void showNewAdvisorUI(){
 		this.advisorViewerController.showNewAdvisorUI();
 	}
-	
+
 	private void showUpdateAdvisorUI(){
 		this.advisorViewerController.showUpdateAdvisorUI();
 	}
-	
+
 	private void deleteAdvisor(){
 		this.advisorViewerController.deleteAdvisor();
 	}
@@ -52,63 +54,98 @@ public class AdvisorViewerUI extends JDialog implements IAdvisorViewerUI {
 	private JTable tblAdvisor;
 	private JButton btnUpdateAdvisor;
 	private JButton btnDeleteAdvisor;
+	private JPanel panelPesquisa;
+	private JPanel panelButtons;
 
 	public AdvisorViewerUI(IAdvisorViewerController advisorViewerController) {
+		setTitle("Orientadores");
+		setPreferredSize(new Dimension(800, 600));
+		setMinimumSize(new Dimension(800, 600));
+		setMaximumSize(new Dimension(800, 600));
 		this.advisorViewerController = advisorViewerController;
-		
+
 		setDefaultLookAndFeelDecorated(true);
 
 		setModal(true);
-		setBounds(100, 100, 687, 345);
-		getContentPane().setLayout(new BorderLayout());
+		setBounds(100, 100, 605, 520);
+		getContentPane().setLayout(new MigLayout("", "[800px]", "[grow]"));
+		contentPanel.setMaximumSize(new Dimension(800, 600));
+		contentPanel.setMinimumSize(new Dimension(800, 600));
+		contentPanel.setPreferredSize(new Dimension(800, 600));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new MigLayout("", "[][280.00,grow][]", "[][][][grow][][]"));
+		getContentPane().add(contentPanel, "cell 0 0,grow");
+		contentPanel.setLayout(new MigLayout("", "[800px]", "[50px][400px][50px]"));
 		{
-			JLabel lblNewLabel = new JLabel("Filtro:");
-			lblNewLabel.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
-			contentPanel.add(lblNewLabel, "flowx,cell 1 1");
-		}
-		{
-			txtFilter = new JTextField();
-			contentPanel.add(txtFilter, "cell 1 1,growx");
-			txtFilter.setColumns(10);
-		}
-		{
-			JScrollPane scrollPane = new JScrollPane();
-			contentPanel.add(scrollPane, "cell 1 3,grow");
+			panelPesquisa = new JPanel();
+			panelPesquisa.setPreferredSize(new Dimension(750, 60));
+			panelPesquisa.setMinimumSize(new Dimension(750, 60));
+			panelPesquisa.setMaximumSize(new Dimension(750, 60));
+			panelPesquisa.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pesquisa:", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 10))); // NOI18N
+			contentPanel.add(panelPesquisa, "cell 0 0,grow");
 			{
-				tblAdvisor = new JTable();
-				tblAdvisor.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-				scrollPane.setViewportView(tblAdvisor);
+				txtFilter = new JTextField();
+				panelPesquisa.add(txtFilter);
+				txtFilter.setColumns(90);
 			}
 		}
 		{
+			{
+				JScrollPane scrollPane = new JScrollPane();
+				scrollPane.setPreferredSize(new Dimension(750, 400));
+				scrollPane.setMinimumSize(new Dimension(750, 400));
+				scrollPane.setMaximumSize(new Dimension(750, 400));
+				contentPanel.add(scrollPane, "cell 0 1,grow");
+				{
+					tblAdvisor = new JTable();
+					tblAdvisor.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+					scrollPane.setViewportView(tblAdvisor);
+				}
+			}
+		}
+		{
+
+			panelButtons = new JPanel();
+			FlowLayout flowLayout = (FlowLayout) panelButtons.getLayout();
+			flowLayout.setAlignment(FlowLayout.RIGHT);
+			panelButtons.setPreferredSize(new Dimension(750, 60));
+			panelButtons.setMinimumSize(new Dimension(750, 60));
+			panelButtons.setMaximumSize(new Dimension(750, 60));
+			panelButtons.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opção:", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 10))); // NOI18N
+			contentPanel.add(panelButtons, "cell 0 2,grow");
 			JButton btnNewAdvisor = new JButton("Adicionar Novo");
+			btnNewAdvisor.setPreferredSize(new Dimension(150, 25));
+			btnNewAdvisor.setMinimumSize(new Dimension(150, 25));
+			btnNewAdvisor.setMaximumSize(new Dimension(150, 25));
+			panelButtons.add(btnNewAdvisor);
+			{
+				btnUpdateAdvisor = new JButton("Atualizar Selecionado");
+				btnUpdateAdvisor.setPreferredSize(new Dimension(150, 25));
+				btnUpdateAdvisor.setMinimumSize(new Dimension(150, 25));
+				btnUpdateAdvisor.setMaximumSize(new Dimension(150, 25));
+				panelButtons.add(btnUpdateAdvisor);
+				{
+					btnDeleteAdvisor = new JButton("Excluir Selecionado");
+					btnDeleteAdvisor.setPreferredSize(new Dimension(150, 25));
+					btnDeleteAdvisor.setMinimumSize(new Dimension(150, 25));
+					btnDeleteAdvisor.setMaximumSize(new Dimension(150, 25));
+					panelButtons.add(btnDeleteAdvisor);
+					btnDeleteAdvisor.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							deleteAdvisor();
+						}
+					});
+				}
+				btnUpdateAdvisor.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						showUpdateAdvisorUI();
+					}
+				});
+			}
 			btnNewAdvisor.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					showNewAdvisorUI();
 				}
 			});
-			contentPanel.add(btnNewAdvisor, "flowx,cell 1 4,alignx right");
-		}
-		{
-			btnUpdateAdvisor = new JButton("Atualizar Selecionado");
-			btnUpdateAdvisor.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					showUpdateAdvisorUI();
-				}
-			});
-			contentPanel.add(btnUpdateAdvisor, "cell 1 4,alignx right");
-		}
-		{
-			btnDeleteAdvisor = new JButton("Excluir Selecionado");
-			btnDeleteAdvisor.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					deleteAdvisor();
-				}
-			});
-			contentPanel.add(btnDeleteAdvisor, "cell 1 4,alignx right");
 		}
 		initDataBindings();
 	}

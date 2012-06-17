@@ -30,11 +30,14 @@ import tecec.ui.contract.control.IAreaViewerController;
 import tecec.ui.contract.record.AreaRecord;
 import tecec.ui.contract.view.IAreaViewerUI;
 import java.awt.Font;
+import java.awt.Dimension;
+import javax.swing.SwingConstants;
+import java.awt.FlowLayout;
 
 public class AreaViewerUI extends JDialog implements IAreaViewerUI {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private tecec.ui.contract.control.IAreaViewerController areaViewerController;
@@ -70,36 +73,47 @@ public class AreaViewerUI extends JDialog implements IAreaViewerUI {
 	private JTable tblArea;
 	private JButton btnUpdateArea;
 	private JButton btnDeleteArea;
+	private JPanel panelPesquisa;
+	private JPanel panelButtons;
 
 	/**
 	 * Create the dialog.
 	 */
 	public AreaViewerUI(IAreaViewerController areViewerController) {
+		setTitle("\u00C1reas");
+		setPreferredSize(new Dimension(800, 600));
+		setMinimumSize(new Dimension(800, 600));
+		setMaximumSize(new Dimension(800, 600));
 		this.areaViewerController = areViewerController;
-		
+
 		setDefaultLookAndFeelDecorated(true);
 
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		setBounds(100, 100, 579, 339);
-		getContentPane().setLayout(new BorderLayout());
+		getContentPane().setLayout(new MigLayout("", "[800px]", "[600px]"));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new MigLayout("", "[][grow][]",
-				"[][][][grow][][]"));
+		getContentPane().add(contentPanel, "cell 0 0,grow");
+		contentPanel.setLayout(new MigLayout("", "[800px]", "[50px][400px][50px]"));
 		{
-			JLabel lblNewLabel = new JLabel("Filtro");
-			lblNewLabel.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
-			contentPanel.add(lblNewLabel, "flowx,cell 1 1");
-		}
-		{
-			txtNameFilter = new JTextField();
-			contentPanel.add(txtNameFilter, "cell 1 1,growx");
-			txtNameFilter.setColumns(10);
+			panelPesquisa = new JPanel();
+			panelPesquisa.setPreferredSize(new Dimension(750, 60));
+			panelPesquisa.setMinimumSize(new Dimension(750, 60));
+			panelPesquisa.setMaximumSize(new Dimension(750, 60));
+			panelPesquisa.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pesquisa:", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 10))); // NOI18N
+			contentPanel.add(panelPesquisa, "cell 0 0,alignx center,aligny center");
+			{
+				txtNameFilter = new JTextField();
+				panelPesquisa.add(txtNameFilter);
+				txtNameFilter.setColumns(90);
+			}
 		}
 		{
 			JScrollPane scrollPane = new JScrollPane();
-			contentPanel.add(scrollPane, "cell 1 3,grow");
+			scrollPane.setPreferredSize(new Dimension(750, 400));
+			scrollPane.setMinimumSize(new Dimension(750, 400));
+			scrollPane.setMaximumSize(new Dimension(750, 400));
+			contentPanel.add(scrollPane, "cell 0 1,grow");
 			{
 				tblArea = new JTable();
 				tblArea.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -107,31 +121,44 @@ public class AreaViewerUI extends JDialog implements IAreaViewerUI {
 			}
 		}
 		{
-			JButton btnNewArea = new JButton("Adicionar \u00C1rea");
-			btnNewArea.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					createArea();
+			{
+				panelButtons = new JPanel();
+				FlowLayout flowLayout = (FlowLayout) panelButtons.getLayout();
+				flowLayout.setAlignment(FlowLayout.RIGHT);
+				panelButtons.setPreferredSize(new Dimension(750, 60));
+				panelButtons.setMinimumSize(new Dimension(750, 60));
+				panelButtons.setMaximumSize(new Dimension(750, 60));
+				panelButtons.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opção:", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 10))); // NOI18N
+				contentPanel.add(panelButtons, "flowx,cell 0 2");
+				JButton btnNewArea = new JButton("Adicionar \u00C1rea");
+				btnNewArea.setPreferredSize(new Dimension(150, 25));
+				panelButtons.add(btnNewArea);
+				{
+					btnUpdateArea = new JButton("Atualizar \u00C1rea");
+					btnUpdateArea.setPreferredSize(new Dimension(150, 25));
+					panelButtons.add(btnUpdateArea);
+					{
+						btnDeleteArea = new JButton("Excluir \u00C1rea");
+						btnDeleteArea.setPreferredSize(new Dimension(150, 25));
+						panelButtons.add(btnDeleteArea);
+						btnDeleteArea.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								deleteArea();
+							}
+						});
+					}
+					btnUpdateArea.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							updateArea();
+						}
+					});
 				}
-			});
-			contentPanel.add(btnNewArea, "flowx,cell 1 4,alignx right");
-		}
-		{
-			btnUpdateArea = new JButton("Atualizar \u00C1rea");
-			btnUpdateArea.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					updateArea();
-				}
-			});
-			contentPanel.add(btnUpdateArea, "cell 1 4,alignx right");
-		}
-		{
-			btnDeleteArea = new JButton("Excluir \u00C1rea");
-			btnDeleteArea.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					deleteArea();
-				}
-			});
-			contentPanel.add(btnDeleteArea, "cell 1 4,alignx right");
+				btnNewArea.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						createArea();
+					}
+				});
+			}
 		}
 		initDataBindings();
 	}

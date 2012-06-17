@@ -29,23 +29,25 @@ import tecec.ui.contract.control.IStatusViewerController;
 import tecec.ui.contract.view.IStatusViewerUI;
 import javax.swing.ListSelectionModel;
 import java.awt.Font;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 
 public class StatusViewerUI extends JFrame implements IStatusViewerUI {
-	
+
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private IStatusViewerController statusViewerController;
-	
+
 	private void showUpdateStatusUI(){
 		this.statusViewerController.showUpdateStatusUI();
 	}
-	
+
 	private void showNewStatusUI(){
 		this.statusViewerController.showNewStatusUI();
 	}
-	
+
 	private void deleteStatus(){
 		this.statusViewerController.deleteStatus();
 	}
@@ -57,60 +59,93 @@ public class StatusViewerUI extends JFrame implements IStatusViewerUI {
 	private JButton btnNewStatus;
 	private JButton btnUpdateStatus;
 	private JButton btnDeleteStatus;
+	private JPanel panelPesquisa;
+	private JPanel panelButtons;
 
 	/**
 	 * Create the frame.
 	 */
 	public StatusViewerUI(IStatusViewerController statusViewerController) {
-		this.statusViewerController = statusViewerController;	
-		
+		setTitle("Status");
+		setPreferredSize(new Dimension(800, 600));
+		setMinimumSize(new Dimension(800, 600));
+		setMaximumSize(new Dimension(800, 600));
+		this.statusViewerController = statusViewerController;
+
 		setDefaultLookAndFeelDecorated(true);
-		
+
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 726, 441);
 		contentPane = new JPanel();
+		contentPane.setPreferredSize(new Dimension(800, 600));
+		contentPane.setMinimumSize(new Dimension(800, 600));
+		contentPane.setMaximumSize(new Dimension(800, 600));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[53.00,grow][][][][grow 50][]", "[20px:n][][][][][][fill][20px:n][205.00,grow][5px:n][20px:n]"));
-		
-		JLabel lblFilter = new JLabel("Filtro:");
-		lblFilter.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
-		contentPane.add(lblFilter, "flowx,cell 0 4 1 2,alignx center");
-		
-		btnNewStatus = new JButton("Adicionar Novo");
-		btnNewStatus.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				showNewStatusUI();
-			}
-		});
-		
+		contentPane.setLayout(new MigLayout("", "[grow]", "[grow][grow][grow]"));
+
+		panelPesquisa = new JPanel();
+		panelPesquisa.setPreferredSize(new Dimension(750, 60));
+		panelPesquisa.setMinimumSize(new Dimension(750, 60));
+		panelPesquisa.setMaximumSize(new Dimension(750, 60));
+		panelPesquisa.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pesquisa:", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 10))); // NOI18N
+		contentPane.add(panelPesquisa, "cell 0 0,grow");
+
 		txtFilter = new JTextField();
-		contentPane.add(txtFilter, "cell 1 5 4 1,grow");
-		txtFilter.setColumns(10);
-		
+		panelPesquisa.add(txtFilter);
+		txtFilter.setColumns(90);
+
 		scrollPane = new JScrollPane();
-		contentPane.add(scrollPane, "cell 0 6 5 3,grow");
-		
+		scrollPane.setPreferredSize(new Dimension(750, 400));
+		scrollPane.setMinimumSize(new Dimension(750, 400));
+		scrollPane.setMaximumSize(new Dimension(750, 400));
+		contentPane.add(scrollPane, "cell 0 1,grow");
+
 		table = new JTable();
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(table);
-		contentPane.add(btnNewStatus, "flowx,cell 4 10,alignx right,aligny bottom");
-		
+
+		panelButtons = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panelButtons.getLayout();
+		flowLayout.setAlignment(FlowLayout.RIGHT);
+		panelButtons.setPreferredSize(new Dimension(750, 60));
+		panelButtons.setMinimumSize(new Dimension(750, 60));
+		panelButtons.setMaximumSize(new Dimension(750, 60));
+		panelButtons.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opção:", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 10))); // NOI18N
+		contentPane.add(panelButtons, "cell 0 2,grow");
+
+		btnNewStatus = new JButton("Adicionar Novo");
+		btnNewStatus.setPreferredSize(new Dimension(150, 25));
+		btnNewStatus.setMinimumSize(new Dimension(150, 25));
+		btnNewStatus.setMaximumSize(new Dimension(150, 25));
+		panelButtons.add(btnNewStatus);
+
 		btnUpdateStatus = new JButton("Atualizar Selecionado");
-		btnUpdateStatus.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				showUpdateStatusUI();				
-			}
-		});
-		contentPane.add(btnUpdateStatus, "flowx,cell 4 10,alignx right,aligny bottom");
-		
+		btnUpdateStatus.setPreferredSize(new Dimension(150, 25));
+		btnUpdateStatus.setMinimumSize(new Dimension(150, 25));
+		btnUpdateStatus.setMaximumSize(new Dimension(150, 25));
+		panelButtons.add(btnUpdateStatus);
+
 		btnDeleteStatus = new JButton("Excluir Selecionado");
+		btnDeleteStatus.setPreferredSize(new Dimension(150, 25));
+		btnDeleteStatus.setMinimumSize(new Dimension(150, 25));
+		btnDeleteStatus.setMaximumSize(new Dimension(150, 25));
+		panelButtons.add(btnDeleteStatus);
 		btnDeleteStatus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				deleteStatus();
 			}
 		});
-		contentPane.add(btnDeleteStatus, "flowx,cell 4 10,alignx right,aligny bottom");
+		btnUpdateStatus.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				showUpdateStatusUI();
+			}
+		});
+		btnNewStatus.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				showNewStatusUI();
+			}
+		});
 		initDataBindings();
 	}
 	protected void initDataBindings() {

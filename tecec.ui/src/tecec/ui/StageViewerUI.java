@@ -28,105 +28,144 @@ import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.SwingBindings;
 import javax.swing.ListSelectionModel;
 import java.awt.Font;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 
 public class StageViewerUI extends JDialog implements IStageViewerUI {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private IStageViewerController stageViewerController;
-	
+
 	private void showNewStageUI () {
 		stageViewerController.showNewStageUI();
 	}
-	
+
 	private void showUpdateStageUI () {
 		stageViewerController.newUpdateStageUI();
 	}
-	
+
 	private void deleteStage () {
 		stageViewerController.deleteStage();
-	}	
+	}
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textField;
 	private JTable table;
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
 	private JButton btnNewButton_2;
+	private JPanel panelPesquisa;
+	private JPanel panelButtons;
 
 	/**
 	 * Create the dialog.
 	 */
 	public StageViewerUI(IStageViewerController stageViewerController) {
+		setTitle("Est\u00E1gio");
+		getContentPane().setPreferredSize(new Dimension(800, 600));
+		setPreferredSize(new Dimension(800, 600));
+		getContentPane().setMinimumSize(new Dimension(800, 600));
+		setMinimumSize(new Dimension(800, 600));
+		getContentPane().setMaximumSize(new Dimension(800, 600));
+		setMaximumSize(new Dimension(800, 600));
 		if (stageViewerController == null)
 			throw new IllegalArgumentException ("stageViewerController");
 		this.stageViewerController = stageViewerController;
-		
+
 		setDefaultLookAndFeelDecorated(true);
 		setModal(true);
-		
-		
+
+
 		setBounds(100, 100, 519, 300);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setPreferredSize(new Dimension(800, 600));
+		contentPanel.setMinimumSize(new Dimension(800, 600));
+		contentPanel.setMaximumSize(new Dimension(800, 600));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new MigLayout("", "[][][grow]", "[][][grow][]"));
+		contentPanel.setLayout(new MigLayout("", "[grow]", "[grow][grow][grow]"));
 		{
-			JLabel lblFiltro = new JLabel("Filtro:");
-			lblFiltro.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
-			contentPanel.add(lblFiltro, "cell 1 1,alignx trailing");
-		}
-		{
-			textField = new JTextField();
-			contentPanel.add(textField, "cell 2 1,growx");
-			textField.setColumns(10);
-		}
-		{
-			JScrollPane scrollPane = new JScrollPane();
-			contentPanel.add(scrollPane, "cell 1 2 2 1,grow");
+			panelPesquisa = new JPanel();
+			panelPesquisa.setPreferredSize(new Dimension(750, 60));
+			panelPesquisa.setMinimumSize(new Dimension(750, 60));
+			panelPesquisa.setMaximumSize(new Dimension(750, 60));
+			panelPesquisa.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pesquisa:", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 10))); // NOI18N
+			contentPanel.add(panelPesquisa, "cell 0 0,grow");
 			{
-				table = new JTable();
-				table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-				scrollPane.setRowHeaderView(table);
+				textField = new JTextField();
+				panelPesquisa.add(textField);
+				textField.setColumns(90);
 			}
 		}
 		{
-			btnNewButton = new JButton("Adicionar Novo");
-			btnNewButton.addActionListener(new ActionListener () {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					showNewStageUI();
-					
+			{
+				JScrollPane scrollPane = new JScrollPane();
+				scrollPane.setPreferredSize(new Dimension(750, 400));
+				scrollPane.setMinimumSize(new Dimension(750, 400));
+				scrollPane.setMaximumSize(new Dimension(750, 400));
+				contentPanel.add(scrollPane, "cell 0 1,grow");
+				{
+					table = new JTable();
+					table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+					scrollPane.setRowHeaderView(table);
 				}
-				
-			});
-			contentPanel.add(btnNewButton, "flowx,cell 2 3");
-		}
-		{
-			btnNewButton_1 = new JButton("Atualizar Selecionado");
-			btnNewButton_1.addActionListener(new ActionListener () {
+			}
+			{
+				panelButtons = new JPanel();
+				FlowLayout flowLayout = (FlowLayout) panelButtons.getLayout();
+				flowLayout.setAlignment(FlowLayout.RIGHT);
+				panelButtons.setPreferredSize(new Dimension(750, 60));
+				panelButtons.setMinimumSize(new Dimension(750, 60));
+				panelButtons.setMaximumSize(new Dimension(750, 60));
+				panelButtons.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opção:", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 10))); // NOI18N
+				contentPanel.add(panelButtons, "cell 0 2,grow");
+				btnNewButton = new JButton("Adicionar Novo");
+				btnNewButton.setPreferredSize(new Dimension(150, 25));
+				btnNewButton.setMinimumSize(new Dimension(150, 25));
+				btnNewButton.setMaximumSize(new Dimension(150, 25));
+				panelButtons.add(btnNewButton);
+				{
+					btnNewButton_1 = new JButton("Atualizar Selecionado");
+					btnNewButton_1.setPreferredSize(new Dimension(150, 25));
+					btnNewButton_1.setMinimumSize(new Dimension(150, 25));
+					btnNewButton_1.setMaximumSize(new Dimension(150, 25));
+					panelButtons.add(btnNewButton_1);
+					{
+						btnNewButton_2 = new JButton("Excluir Selecionado");
+						btnNewButton_2.setPreferredSize(new Dimension(150, 25));
+						btnNewButton_2.setMinimumSize(new Dimension(150, 25));
+						btnNewButton_2.setMaximumSize(new Dimension(150, 25));
+						panelButtons.add(btnNewButton_2);
+						btnNewButton_2.addActionListener(new ActionListener () {
 
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					showUpdateStageUI();
-				}
-				
-			});
-			contentPanel.add(btnNewButton_1, "cell 2 3");
-		}
-		{
-			btnNewButton_2 = new JButton("Excluir Selecionado");
-			btnNewButton_2.addActionListener(new ActionListener () {
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								deleteStage();
+							}
 
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					deleteStage();
+						});
+					}
+					btnNewButton_1.addActionListener(new ActionListener () {
+
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							showUpdateStageUI();
+						}
+
+					});
 				}
-				
-			});
-			contentPanel.add(btnNewButton_2, "cell 2 3");
+				btnNewButton.addActionListener(new ActionListener () {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						showNewStageUI();
+
+					}
+
+				});
+			}
 		}
 		initDataBindings();
 	}

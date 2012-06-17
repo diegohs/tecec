@@ -30,12 +30,14 @@ import tecec.contract.RuleViolation;
 import tecec.dto.Activity;
 import tecec.ui.contract.control.IActivityViewerController;
 import java.awt.Font;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 
 public class ActivityViewerUI extends JDialog implements
 		tecec.ui.contract.view.IActivityViewerUI {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private tecec.ui.contract.control.IActivityViewerController activityViewerController;
@@ -71,64 +73,98 @@ public class ActivityViewerUI extends JDialog implements
 	private JButton btnNewActivity;
 	private JButton btnUpdateActivity;
 	private JButton btnDeleteActivity;
+	private JPanel panelPesquisa;
+	private JPanel panelButtons;
 
 	public ActivityViewerUI(IActivityViewerController activityViewerController) {
+		setTitle("Atividades");
+		getContentPane().setPreferredSize(new Dimension(800, 600));
+		getContentPane().setMinimumSize(new Dimension(800, 600));
+		getContentPane().setMaximumSize(new Dimension(800, 600));
+		setPreferredSize(new Dimension(800, 600));
+		setMinimumSize(new Dimension(800, 600));
+		setMaximumSize(new Dimension(800, 600));
 		this.activityViewerController = activityViewerController;
-		
+
 		setDefaultLookAndFeelDecorated(true);
 
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		setBounds(100, 100, 600, 335);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setPreferredSize(new Dimension(800, 600));
+		contentPanel.setMinimumSize(new Dimension(800, 600));
+		contentPanel.setMaximumSize(new Dimension(800, 600));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new MigLayout("", "[][grow][]", "[20px:n][][20px:n][grow][20px:n]"));
+		contentPanel.setLayout(new MigLayout("", "[grow]", "[grow][grow][grow]"));
 		{
-			JLabel lblNewLabel = new JLabel("Filtro:");
-			lblNewLabel.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
-			contentPanel.add(lblNewLabel, "flowx,cell 1 1");
-		}
-		{
-			txtFilter = new JTextField();
-			contentPanel.add(txtFilter, "cell 1 1,growx");
-			txtFilter.setColumns(10);
-		}
-		{
-			JScrollPane scrollPane = new JScrollPane();
-			contentPanel.add(scrollPane, "cell 1 3,grow");
+			panelPesquisa = new JPanel();
+			panelPesquisa.setPreferredSize(new Dimension(750, 60));
+			panelPesquisa.setMinimumSize(new Dimension(750, 60));
+			panelPesquisa.setMaximumSize(new Dimension(750, 60));
+			panelPesquisa.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pesquisa:", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 10))); // NOI18N
+			contentPanel.add(panelPesquisa, "cell 0 0,grow");
 			{
-				tblActivities = new JTable();
-				tblActivities.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-				scrollPane.setViewportView(tblActivities);
+				txtFilter = new JTextField();
+				panelPesquisa.add(txtFilter);
+				txtFilter.setColumns(90);
 			}
 		}
 		{
-			btnNewActivity = new JButton("Cadastrar Atividade");
-			btnNewActivity.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					showNewActivityUI();
+			{
+				JScrollPane scrollPane = new JScrollPane();
+				contentPanel.add(scrollPane, "cell 0 1,grow");
+				{
+					tblActivities = new JTable();
+					tblActivities.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+					scrollPane.setViewportView(tblActivities);
 				}
-			});
-			contentPanel.add(btnNewActivity, "flowx,cell 1 4,alignx right");
-		}
-		{
-			btnUpdateActivity = new JButton("Atualizar Atividade");
-			btnUpdateActivity.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					showUpdateActivityUI();
+			}
+			{
+				panelButtons = new JPanel();
+				FlowLayout flowLayout = (FlowLayout) panelButtons.getLayout();
+				flowLayout.setAlignment(FlowLayout.RIGHT);
+				panelButtons.setPreferredSize(new Dimension(750, 60));
+				panelButtons.setMinimumSize(new Dimension(750, 60));
+				panelButtons.setMaximumSize(new Dimension(750, 60));
+				panelButtons.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opção:", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 10))); // NOI18N
+				contentPanel.add(panelButtons, "cell 0 2,grow");
+				btnNewActivity = new JButton("Cadastrar Atividade");
+				btnNewActivity.setPreferredSize(new Dimension(150, 25));
+				btnNewActivity.setMinimumSize(new Dimension(150, 25));
+				btnNewActivity.setMaximumSize(new Dimension(150, 25));
+				panelButtons.add(btnNewActivity);
+				{
+					btnUpdateActivity = new JButton("Atualizar Atividade");
+					btnUpdateActivity.setPreferredSize(new Dimension(150, 25));
+					btnUpdateActivity.setMinimumSize(new Dimension(150, 25));
+					btnUpdateActivity.setMaximumSize(new Dimension(150, 25));
+					panelButtons.add(btnUpdateActivity);
+					{
+						btnDeleteActivity = new JButton("Excluir Atividade");
+						btnDeleteActivity.setPreferredSize(new Dimension(150, 25));
+						btnDeleteActivity.setMinimumSize(new Dimension(150, 25));
+						btnDeleteActivity.setMaximumSize(new Dimension(150, 25));
+						panelButtons.add(btnDeleteActivity);
+						btnDeleteActivity.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								deleteActivity();
+							}
+						});
+					}
+					btnUpdateActivity.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							showUpdateActivityUI();
+						}
+					});
 				}
-			});
-			contentPanel.add(btnUpdateActivity, "cell 1 4,alignx right");
-		}
-		{
-			btnDeleteActivity = new JButton("Excluir Atividade");
-			btnDeleteActivity.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					deleteActivity();
-				}
-			});
-			contentPanel.add(btnDeleteActivity, "cell 1 4,alignx right");
+				btnNewActivity.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						showNewActivityUI();
+					}
+				});
+			}
 		}
 		initDataBindings();
 	}

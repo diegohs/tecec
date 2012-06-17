@@ -29,23 +29,25 @@ import tecec.ui.contract.control.IProfileViewerController;
 import tecec.ui.contract.view.IProfileViewerUI;
 import javax.swing.ListSelectionModel;
 import java.awt.Font;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 
 public class ProfileViewerUI extends JFrame implements IProfileViewerUI {
-	
+
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private IProfileViewerController profileViewerController;
-	
+
 	private void showUpdateProfileUI(){
 		this.profileViewerController.showUpdateProfileUI();
 	}
-	
+
 	private void showNewProfileUI(){
 		this.profileViewerController.showNewProfileUI();
 	}
-	
+
 	private void deleteProfile(){
 		this.profileViewerController.deleteProfile();
 	}
@@ -57,60 +59,92 @@ public class ProfileViewerUI extends JFrame implements IProfileViewerUI {
 	private JButton btnNewProfile;
 	private JButton btnUpdateProfile;
 	private JButton btnDeleteProfile;
+	private JPanel panelPesquisa;
+	private JPanel panelButtons;
 
 	/**
 	 * Create the frame.
 	 */
 	public ProfileViewerUI(IProfileViewerController profileViewerController) {
-		this.profileViewerController = profileViewerController;	
-		
+		setPreferredSize(new Dimension(800, 600));
+		setMinimumSize(new Dimension(800, 600));
+		setMaximumSize(new Dimension(800, 600));
+		this.profileViewerController = profileViewerController;
+
 		setDefaultLookAndFeelDecorated(true);
-		
+
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 726, 441);
 		contentPane = new JPanel();
+		contentPane.setPreferredSize(new Dimension(800, 600));
+		contentPane.setMinimumSize(new Dimension(800, 600));
+		contentPane.setMaximumSize(new Dimension(800, 600));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[][grow][grow 50][]", "[20px:n][][][20px:n][grow][5px:n][20px:n]"));
-		
-		JLabel lblFilter = new JLabel("Filtro:");
-		lblFilter.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
-		contentPane.add(lblFilter, "cell 1 2,alignx center");
-		
+		contentPane.setLayout(new MigLayout("", "[800px]", "[60px][400px][60px]"));
+
+		panelPesquisa = new JPanel();
+		panelPesquisa.setPreferredSize(new Dimension(750, 60));
+		panelPesquisa.setMinimumSize(new Dimension(750, 60));
+		panelPesquisa.setMaximumSize(new Dimension(750, 60));
+		panelPesquisa.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pesquisa:", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 10))); // NOI18N
+		contentPane.add(panelPesquisa, "cell 0 0,grow");
+
 		txtFilter = new JTextField();
-		contentPane.add(txtFilter, "cell 2 2,growx");
-		txtFilter.setColumns(10);
-		
+		panelPesquisa.add(txtFilter);
+		txtFilter.setColumns(90);
+
 		scrollPane = new JScrollPane();
-		contentPane.add(scrollPane, "cell 1 4 2 1,grow");
-		
+		scrollPane.setPreferredSize(new Dimension(750, 400));
+		scrollPane.setMinimumSize(new Dimension(750, 400));
+		scrollPane.setMaximumSize(new Dimension(750, 400));
+		contentPane.add(scrollPane, "cell 0 1,grow");
+
 		table = new JTable();
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(table);
-		
+
+		panelButtons = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panelButtons.getLayout();
+		flowLayout.setAlignment(FlowLayout.RIGHT);
+		panelButtons.setPreferredSize(new Dimension(750, 60));
+		panelButtons.setMinimumSize(new Dimension(750, 60));
+		panelButtons.setMaximumSize(new Dimension(750, 60));
+		panelButtons.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opção:", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 10))); // NOI18N
+		contentPane.add(panelButtons, "cell 0 2,grow");
+
 		btnNewProfile = new JButton("Adicionar Novo");
-		btnNewProfile.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				showNewProfileUI();
-			}
-		});
-		contentPane.add(btnNewProfile, "flowx,cell 2 6,alignx right,aligny bottom");
-		
+		btnNewProfile.setPreferredSize(new Dimension(150, 25));
+		btnNewProfile.setMinimumSize(new Dimension(150, 25));
+		btnNewProfile.setMaximumSize(new Dimension(150, 25));
+		panelButtons.add(btnNewProfile);
+
 		btnUpdateProfile = new JButton("Atualizar Selecionado");
-		btnUpdateProfile.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				showUpdateProfileUI();				
-			}
-		});
-		contentPane.add(btnUpdateProfile, "flowx,cell 2 6,alignx right,aligny bottom");
-		
+		btnUpdateProfile.setPreferredSize(new Dimension(150, 25));
+		btnUpdateProfile.setMinimumSize(new Dimension(150, 25));
+		btnUpdateProfile.setMaximumSize(new Dimension(150, 25));
+		panelButtons.add(btnUpdateProfile);
+
 		btnDeleteProfile = new JButton("Excluir Selecionado");
+		btnDeleteProfile.setPreferredSize(new Dimension(150, 25));
+		btnDeleteProfile.setMinimumSize(new Dimension(150, 25));
+		btnDeleteProfile.setMaximumSize(new Dimension(150, 25));
+		panelButtons.add(btnDeleteProfile);
 		btnDeleteProfile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				deleteProfile();
 			}
 		});
-		contentPane.add(btnDeleteProfile, "flowx,cell 2 6,alignx right,aligny bottom");
+		btnUpdateProfile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				showUpdateProfileUI();
+			}
+		});
+		btnNewProfile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				showNewProfileUI();
+			}
+		});
 		initDataBindings();
 	}
 	protected void initDataBindings() {

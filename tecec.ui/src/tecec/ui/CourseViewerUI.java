@@ -26,110 +26,148 @@ import tecec.dto.Course;
 import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.SwingBindings;
 import java.awt.Font;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 
 public class CourseViewerUI extends JDialog implements ICourseViewerUI {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private final JPanel contentPanel = new JPanel();
-	
-	
+
+
 	private ICourseViewerController courseViewerController;
 	private JTextField textField;
 	private JTable table;
 	private JButton btnAtualizar;
 	private JButton btnRemover;
-	
+	private JPanel panelPesquisa;
+	private JPanel panelButtons;
+
 	private void showNewCourseUI () {
 		courseViewerController.showNewCourseUI();
 	}
-	
+
 	private void showUpdateCourseUI () {
 		courseViewerController.showUpdateCourseUI();
 	}
-	
+
 	private void deleteCourseUI () {
 		this.courseViewerController.deleteCourse();
 	}
 
 	public CourseViewerUI(ICourseViewerController courseViewerController) {
+		setTitle("Cursos");
+		setPreferredSize(new Dimension(800, 600));
+		setMinimumSize(new Dimension(800, 600));
+		setMaximumSize(new Dimension(800, 600));
+		getContentPane().setPreferredSize(new Dimension(800, 600));
+		getContentPane().setMinimumSize(new Dimension(800, 600));
+		getContentPane().setMaximumSize(new Dimension(800, 600));
 		if (courseViewerController == null)
 			throw new IllegalArgumentException ("courseViewerController");
-		
+
 		this.courseViewerController = courseViewerController;
-		
+
 		setDefaultLookAndFeelDecorated(true);
 		setModal(true);
-		
+
 		setBounds(100, 100, 568, 300);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setPreferredSize(new Dimension(800, 600));
+		contentPanel.setMinimumSize(new Dimension(800, 600));
+		contentPanel.setMaximumSize(new Dimension(800, 600));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new MigLayout("", "[][][grow]", "[][][grow][]"));
+		contentPanel.setLayout(new MigLayout("", "[800px]", "[50px][400px][50px]"));
 		{
-			JLabel lblFiltro = new JLabel("Filtro:");
-			lblFiltro.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
-			contentPanel.add(lblFiltro, "cell 1 1,alignx trailing");
-		}
-		{
-			textField = new JTextField();
-			contentPanel.add(textField, "cell 2 1,growx");
-			textField.setColumns(10);
+			panelPesquisa = new JPanel();
+			panelPesquisa.setPreferredSize(new Dimension(750, 60));
+			panelPesquisa.setMinimumSize(new Dimension(750, 60));
+			panelPesquisa.setMaximumSize(new Dimension(750, 60));
+			panelPesquisa.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pesquisa:", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 10))); // NOI18N
+			contentPanel.add(panelPesquisa, "cell 0 0,grow");
+			{
+				textField = new JTextField();
+				panelPesquisa.add(textField);
+				textField.setColumns(90);
+			}
 		}
 		{
 			JScrollPane scrollPane = new JScrollPane();
-			contentPanel.add(scrollPane, "cell 1 2 2 1,grow");
+			scrollPane.setPreferredSize(new Dimension(750, 400));
+			scrollPane.setMinimumSize(new Dimension(750, 400));
+			scrollPane.setMaximumSize(new Dimension(750, 400));
+			contentPanel.add(scrollPane, "cell 0 1,grow");
 			{
 				table = new JTable();
 				scrollPane.setViewportView(table);
 			}
 		}
 		{
-			JButton btnNovo = new JButton("Cadastrar Novo");
-			btnNovo.addActionListener(new ActionListener () {
+			{
+				panelButtons = new JPanel();
+				FlowLayout flowLayout = (FlowLayout) panelButtons.getLayout();
+				flowLayout.setAlignment(FlowLayout.RIGHT);
+				panelButtons.setPreferredSize(new Dimension(750, 60));
+				panelButtons.setMinimumSize(new Dimension(750, 60));
+				panelButtons.setMaximumSize(new Dimension(750, 60));
+				panelButtons.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opção:", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 10))); // NOI18N
+				contentPanel.add(panelButtons, "cell 0 2,grow");
+				JButton btnNovo = new JButton("Cadastrar Novo");
+				btnNovo.setPreferredSize(new Dimension(150, 25));
+				btnNovo.setMinimumSize(new Dimension(150, 25));
+				btnNovo.setMaximumSize(new Dimension(150, 25));
+				panelButtons.add(btnNovo);
+				{
+					btnAtualizar = new JButton("Atualizar Selecionado");
+					btnAtualizar.setPreferredSize(new Dimension(150, 25));
+					btnAtualizar.setMinimumSize(new Dimension(150, 25));
+					btnAtualizar.setMaximumSize(new Dimension(150, 25));
+					panelButtons.add(btnAtualizar);
+					{
+						btnRemover = new JButton("Remover Selecionado");
+						btnRemover.setPreferredSize(new Dimension(150, 25));
+						btnRemover.setMinimumSize(new Dimension(150, 25));
+						btnRemover.setMaximumSize(new Dimension(150, 25));
+						panelButtons.add(btnRemover);
+						btnRemover.addActionListener(new ActionListener () {
 
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					showNewCourseUI();
-				}
-				
-			});
-			contentPanel.add(btnNovo, "flowx,cell 2 3,alignx left");
-		}
-		{
-			btnAtualizar = new JButton("Atualizar Selecionado");
-			btnAtualizar.addActionListener(new ActionListener () {
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								deleteCourseUI();
+							}
 
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					showUpdateCourseUI();
-					
-				}
-				
-			});
-			
-			contentPanel.add(btnAtualizar, "cell 2 3");
-		}
-		{
-			btnRemover = new JButton("Remover Selecionado");
-			btnRemover.addActionListener(new ActionListener () {
+						});
+					}
+					btnAtualizar.addActionListener(new ActionListener () {
 
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					deleteCourseUI();
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							showUpdateCourseUI();
+
+						}
+
+					});
 				}
-				
-			});
-			contentPanel.add(btnRemover, "cell 2 3");
+				btnNovo.addActionListener(new ActionListener () {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						showNewCourseUI();
+					}
+
+				});
+			}
 		}
 		initDataBindings();
 	}
-	
-	
-	
+
+
+
 	protected void initDataBindings() {
 		BeanProperty<ICourseViewerController, String> iCourseViewerControllerBeanProperty = BeanProperty.create("nameFilter");
 		BeanProperty<JTextField, String> jTextFieldBeanProperty = BeanProperty.create("text");

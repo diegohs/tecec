@@ -26,6 +26,8 @@ import javax.swing.ListSelectionModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 
 
 public class StudentViewerUI extends JDialog implements IStudentViewerUI {	
@@ -52,8 +54,17 @@ public class StudentViewerUI extends JDialog implements IStudentViewerUI {
 	private JTable tblStudent;
 	private JButton btnUpdateStudent;
 	private JButton btnDeleteStudent;
+	private JPanel panelPesquisa;
+	private JPanel panelButtons;
 
 	public StudentViewerUI(IStudentViewerController studentViewerController) {
+		setTitle("Alunos");
+		getContentPane().setPreferredSize(new Dimension(800, 600));
+		setPreferredSize(new Dimension(800, 600));
+		getContentPane().setMinimumSize(new Dimension(800, 600));
+		setMinimumSize(new Dimension(800, 600));
+		getContentPane().setMaximumSize(new Dimension(800, 600));
+		setMaximumSize(new Dimension(800, 600));
 		this.studentViewerController = studentViewerController;
 		
 		setDefaultLookAndFeelDecorated(true);
@@ -61,54 +72,82 @@ public class StudentViewerUI extends JDialog implements IStudentViewerUI {
 		setModal(true);
 		setBounds(100, 100, 687, 345);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setPreferredSize(new Dimension(800, 600));
+		contentPanel.setMinimumSize(new Dimension(800, 600));
+		contentPanel.setMaximumSize(new Dimension(800, 600));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new MigLayout("", "[][280.00,grow][]", "[][][][grow][][]"));
+		contentPanel.setLayout(new MigLayout("", "[grow]", "[grow][grow][grow]"));
 		{
-			JLabel lblNewLabel = new JLabel("Filtro:");
-			lblNewLabel.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
-			contentPanel.add(lblNewLabel, "flowx,cell 1 1");
-		}
-		{
-			txtFilter = new JTextField();
-			contentPanel.add(txtFilter, "cell 1 1,growx");
-			txtFilter.setColumns(10);
-		}
-		{
-			JScrollPane scrollPane = new JScrollPane();
-			contentPanel.add(scrollPane, "cell 1 3,grow");
+			panelPesquisa = new JPanel();
+			panelPesquisa.setPreferredSize(new Dimension(750, 60));
+			panelPesquisa.setMinimumSize(new Dimension(750, 60));
+			panelPesquisa.setMaximumSize(new Dimension(750, 60));
+			panelPesquisa.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pesquisa:", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 10))); // NOI18N
+			contentPanel.add(panelPesquisa, "cell 0 0,grow");
 			{
-				tblStudent = new JTable();
-				tblStudent.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-				scrollPane.setViewportView(tblStudent);
+				txtFilter = new JTextField();
+				panelPesquisa.add(txtFilter);
+				txtFilter.setColumns(90);
 			}
 		}
 		{
-			JButton btnNewStudent = new JButton("Adicionar Novo");
-			btnNewStudent.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					showNewStudentUI();
+			{
+				JScrollPane scrollPane = new JScrollPane();
+				scrollPane.setPreferredSize(new Dimension(750, 400));
+				scrollPane.setMinimumSize(new Dimension(750, 400));
+				scrollPane.setMaximumSize(new Dimension(750, 400));
+				contentPanel.add(scrollPane, "cell 0 1,grow");
+				{
+					tblStudent = new JTable();
+					tblStudent.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+					scrollPane.setViewportView(tblStudent);
 				}
-			});
-			contentPanel.add(btnNewStudent, "flowx,cell 1 4,alignx right");
-		}
-		{
-			btnUpdateStudent = new JButton("Atualizar Selecionado");
-			btnUpdateStudent.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					showUpdateStudentUI();
+			}
+			{
+				panelButtons = new JPanel();
+				FlowLayout flowLayout = (FlowLayout) panelButtons.getLayout();
+				flowLayout.setAlignment(FlowLayout.RIGHT);
+				panelButtons.setPreferredSize(new Dimension(750, 60));
+				panelButtons.setMinimumSize(new Dimension(750, 60));
+				panelButtons.setMaximumSize(new Dimension(750, 60));
+				panelButtons.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opção:", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 10))); // NOI18N
+				contentPanel.add(panelButtons, "cell 0 2,grow");
+				JButton btnNewStudent = new JButton("Adicionar Novo");
+				btnNewStudent.setPreferredSize(new Dimension(150, 25));
+				btnNewStudent.setMinimumSize(new Dimension(150, 25));
+				btnNewStudent.setMaximumSize(new Dimension(150, 25));
+				panelButtons.add(btnNewStudent);
+				{
+					btnUpdateStudent = new JButton("Atualizar Selecionado");
+					btnUpdateStudent.setPreferredSize(new Dimension(150, 25));
+					btnUpdateStudent.setMinimumSize(new Dimension(150, 25));
+					btnUpdateStudent.setMaximumSize(new Dimension(150, 25));
+					panelButtons.add(btnUpdateStudent);
+					{
+						btnDeleteStudent = new JButton("Excluir Selecionado");
+						btnDeleteStudent.setPreferredSize(new Dimension(150, 25));
+						btnDeleteStudent.setMinimumSize(new Dimension(150, 25));
+						btnDeleteStudent.setMaximumSize(new Dimension(150, 25));
+						panelButtons.add(btnDeleteStudent);
+						btnDeleteStudent.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								deleteStudent();
+							}
+						});
+					}
+					btnUpdateStudent.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							showUpdateStudentUI();
+						}
+					});
 				}
-			});
-			contentPanel.add(btnUpdateStudent, "cell 1 4,alignx right");
-		}
-		{
-			btnDeleteStudent = new JButton("Excluir Selecionado");
-			btnDeleteStudent.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					deleteStudent();
-				}
-			});
-			contentPanel.add(btnDeleteStudent, "cell 1 4,alignx right");
+				btnNewStudent.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						showNewStudentUI();
+					}
+				});
+			}
 		}
 		initDataBindings();
 	}

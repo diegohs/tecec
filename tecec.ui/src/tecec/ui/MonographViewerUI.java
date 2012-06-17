@@ -29,28 +29,30 @@ import tecec.ui.contract.view.IMonographViewerUI;
 import javax.swing.ListSelectionModel;
 import tecec.ui.contract.record.MonographRecord;
 import java.awt.Font;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 
 
 public class MonographViewerUI extends JFrame implements IMonographViewerUI {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private IMonographViewerController monographViewerController;
-	
+
 	private void showUpdateMonographUI(){
 		this.monographViewerController.showUpdateMonographUI();
 	}
-	
+
 	private void showNewMonographUI(){
 		this.monographViewerController.showNewMonographUI();
 	}
-	
+
 	private void deleteMonograph(){
 		this.monographViewerController.deleteMonograph();
 	}
-	
+
 	private JPanel contentPane;
 	private JTextField txtFilter;
 	private JScrollPane scrollPane;
@@ -58,60 +60,89 @@ public class MonographViewerUI extends JFrame implements IMonographViewerUI {
 	private JButton btnNewMonograph;
 	private JButton btnUpdateMonograph;
 	private JButton btnDeleteMonograph;
-	
+	private JPanel panelPesquisa;
+	private JPanel panelButtons;
+
 	/**
 	 * Create the frame.
 	 */
 	public MonographViewerUI(IMonographViewerController monographViewerController) {
-		this.monographViewerController = monographViewerController;	
-		
+		setMaximumSize(new Dimension(800, 600));
+		setMinimumSize(new Dimension(800, 600));
+		setPreferredSize(new Dimension(800, 600));
+		this.monographViewerController = monographViewerController;
+
 		setDefaultLookAndFeelDecorated(true);
-		
+
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 726, 441);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[][][grow][][grow 50][]", "[][][][][20px:n][grow][5px:n][20px:n]"));
-		
-		JLabel lblFilter = new JLabel("Filtro:");
-		lblFilter.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
-		contentPane.add(lblFilter, "flowx,cell 1 2");
-		
+		contentPane.setLayout(new MigLayout("", "[grow]", "[][][]"));
+
+		panelPesquisa = new JPanel();
+		panelPesquisa.setPreferredSize(new Dimension(750, 60));
+		panelPesquisa.setMinimumSize(new Dimension(750, 60));
+		panelPesquisa.setMaximumSize(new Dimension(750, 60));
+		panelPesquisa.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pesquisa:", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 10))); // NOI18N
+		contentPane.add(panelPesquisa, "cell 0 0,grow");
+
 		txtFilter = new JTextField();
-		contentPane.add(txtFilter, "cell 2 2 3 1,growx,aligny baseline");
-		txtFilter.setColumns(10);
-		
+		panelPesquisa.add(txtFilter);
+		txtFilter.setColumns(90);
+
 		scrollPane = new JScrollPane();
-		contentPane.add(scrollPane, "cell 1 5 4 1,grow");
-		
+		scrollPane.setPreferredSize(new Dimension(750, 400));
+		scrollPane.setMinimumSize(new Dimension(750, 400));
+		scrollPane.setMaximumSize(new Dimension(750, 400));
+		contentPane.add(scrollPane, "cell 0 1,grow");
+
 		tblMonograph = new JTable();
 		tblMonograph.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(tblMonograph);
-		
+
+		panelButtons = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panelButtons.getLayout();
+		flowLayout.setAlignment(FlowLayout.RIGHT);
+		panelButtons.setPreferredSize(new Dimension(750, 60));
+		panelButtons.setMinimumSize(new Dimension(750, 60));
+		panelButtons.setMaximumSize(new Dimension(750, 60));
+		panelButtons.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opções:", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 10))); // NOI18N
+		contentPane.add(panelButtons, "cell 0 2,grow");
+
 		btnNewMonograph = new JButton("Adicionar Novo");
-		btnNewMonograph.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				showNewMonographUI();
-			}
-		});
-		contentPane.add(btnNewMonograph, "flowx,cell 4 7,alignx right,aligny bottom");
-		
+		btnNewMonograph.setPreferredSize(new Dimension(150, 25));
+		btnNewMonograph.setMinimumSize(new Dimension(150, 25));
+		btnNewMonograph.setMaximumSize(new Dimension(150, 25));
+		panelButtons.add(btnNewMonograph);
+
 		btnUpdateMonograph = new JButton("Atualizar Selecionado");
-		btnUpdateMonograph.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				showUpdateMonographUI();				
-			}
-		});
-		contentPane.add(btnUpdateMonograph, "flowx,cell 4 7,alignx right,aligny bottom");
-		
+		btnUpdateMonograph.setPreferredSize(new Dimension(150, 25));
+		btnUpdateMonograph.setMinimumSize(new Dimension(150, 25));
+		btnUpdateMonograph.setMaximumSize(new Dimension(150, 25));
+		panelButtons.add(btnUpdateMonograph);
+
 		btnDeleteMonograph = new JButton("Excluir Selecionado");
+		btnDeleteMonograph.setPreferredSize(new Dimension(150, 25));
+		btnDeleteMonograph.setMinimumSize(new Dimension(150, 25));
+		btnDeleteMonograph.setMaximumSize(new Dimension(150, 25));
+		panelButtons.add(btnDeleteMonograph);
 		btnDeleteMonograph.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				deleteMonograph();
 			}
 		});
-		contentPane.add(btnDeleteMonograph, "flowx,cell 4 7,alignx right,aligny bottom");
+		btnUpdateMonograph.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				showUpdateMonographUI();
+			}
+		});
+		btnNewMonograph.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				showNewMonographUI();
+			}
+		});
 		initDataBindings();
 	}
 	protected void initDataBindings() {
