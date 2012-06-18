@@ -12,11 +12,13 @@ import tecec.ui.contract.view.IMainUI;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class MainUI implements IMainUI {
 
-	private JFrame frame;	
+	private JFrame frame;
 
 	private void backupImmediate() {
 
@@ -31,12 +33,14 @@ public class MainUI implements IMainUI {
 
 			String commandDump = "";
 
-			if (System.getProperty("os.name").toUpperCase().compareTo("LINUX") == 0) {
+			/*if (System.getProperty("os.name").toUpperCase().compareTo("LINUX") == 0) {
 				commandDump = "/usr/bin/mysqldump";
-			} else {			
-				/* Em casa não deu certo assim no Windows só passando o caminho c://program files etc.*/
+			} else {
+				 Em casa não deu certo assim no Windows só passando o caminho c://program files etc.
 				commandDump = "MYSQL_PATH\\bin\\mysqldump.exe";
-			}
+			}*/
+
+			commandDump = "mysqldump";
 
 			String location = fileChooser.getSelectedFile() + ".sql";
 			ProcessBuilder pb = new ProcessBuilder(commandDump, "--user=root",
@@ -50,11 +54,36 @@ public class MainUI implements IMainUI {
 			}
 		}
 	}
-	
-	private void restoreBackup () {
-		// implementar nao consegui: Bruno
+
+	private void restoreBackup () throws IOException {
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setDialogTitle("Selecionar arquivo de backup");
+
+		int variableChooser = fileChooser.showOpenDialog(null);
+
+		if(variableChooser == JFileChooser.APPROVE_OPTION){
+
+			String cmd = null;
+
+			if (System.getProperty("os.name").toUpperCase().contains("LINUX")) {
+				cmd = "/bin/sh -c mysql --user=root --password=lester --host=localhost tecec < \"" + fileChooser.getSelectedFile().getAbsolutePath() + "\"";
+			} else {
+				if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")) {
+					cmd = "cmd.exe /c mysql --user=root --password=lester --host=localhost tecec < \"" + fileChooser.getSelectedFile().getAbsolutePath() + "\"";
+				}
+			}
+
+			try {
+				Runtime.getRuntime().exec(cmd);
+				JOptionPane.showMessageDialog(null, "Backup restaurado com sucesso! Aplicação será encerrada...");
+				System.exit(0);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				JOptionPane.showMessageDialog(null, e.toString(), "Erro", JOptionPane.ERROR_MESSAGE);
+			}
+		}
 	}
-	
+
 	@Override
 	public void setVisible(boolean visible) {
 		frame.setVisible(visible);
@@ -217,29 +246,34 @@ public class MainUI implements IMainUI {
 		});
 		mnBackup.add(mntmEfetuar);
 
-		
+
 		JMenuItem mntmRestaurar = new JMenuItem("Restaurar");
 		mntmRestaurar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				/* Restaurar aqui */
-				restoreBackup();
+				try {
+					restoreBackup();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
-		
+
 		mnBackup.add(mntmRestaurar);
-		
+
 		JMenu mnAjuda = new JMenu("Ajuda");
 		menuBar.add(mnAjuda);
-		
+
 		JMenuItem mntmSobre = new JMenuItem("Sobre");
 		mntmSobre.addActionListener(new ActionListener () {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Tecec: Software para gerenciamento de Tccs");
-				
+
 			}
-			
+
 		});
 		mnAjuda.add(mntmSobre);
 
