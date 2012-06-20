@@ -54,6 +54,8 @@ public class StudentPageController extends BaseController implements
 		super.notifyOfPropertyChange("canHandIn", null, this.getCanHandIn());
 		super.notifyOfPropertyChange("selectedActivityDescription", null,
 				this.getSelectedActivityDescription());
+		super.notifyOfPropertyChange("selectedHandInRemark", null,
+				this.getSelectedActivityRecord());
 	}
 
 	@Override

@@ -18,6 +18,8 @@ public class UpdateAreaController extends BaseController implements
 	public UpdateAreaController(IAreaWriter areaWriter, IAreaReader areaReader) {
 		this.areaWriter = areaWriter;
 		this.areaReader = areaReader;
+		
+		setSelectedAreaIndex(-1);
 	}
 
 	private String pKArea;
@@ -37,12 +39,12 @@ public class UpdateAreaController extends BaseController implements
 
 		List<Area> areas = getAreas();
 
-		super.notifyOfPropertyChange("areas", null, areas);
-		
-		setSelectedAreaIndex(-1);
+		super.notifyOfPropertyChange("areas", null, areas);		
 
 		if (area.getfKMainArea() != null && !area.getfKMainArea().isEmpty()) {
-
+			setSelectedArea(null);
+			setSelectedAreaIndex(-1);
+			
 			for (int i = 0; i < areas.size(); i++) {
 				if (area.getfKMainArea().equals(areas.get(i).getpKArea())) {
 					setSelectedAreaIndex(i);

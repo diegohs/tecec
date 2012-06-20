@@ -105,31 +105,6 @@ public class UpdateAreaUI extends JDialog implements IUpdateAreaUI {
 				contentPanel.add(lblNewLabel, "flowx,cell 1 2");
 			}
 			{
-				cboMainArea = new JComboBox();
-
-				cboMainArea.setRenderer(new DefaultListCellRenderer() {
-					/**
-				 * 
-				 */
-					private static final long serialVersionUID = 1L;
-
-					@Override
-					public Component getListCellRendererComponent(JList list,
-							Object value, int index, boolean isSelected,
-							boolean cellHasFocus) {
-						super.getListCellRendererComponent(list, value, index,
-								isSelected, cellHasFocus);
-
-						if (value instanceof Area) {
-							Area area = (Area) value;
-							setText(area.getName());
-						}
-
-						return this;
-					}
-				});
-			}
-			{
 				JLabel lblNewLabel_1 = new JLabel("Nome:");
 				lblNewLabel_1.setBounds(39, 93, 50, 14);
 				panel.add(lblNewLabel_1);
@@ -169,58 +144,29 @@ public class UpdateAreaUI extends JDialog implements IUpdateAreaUI {
 	public void refresh() {
 		updateAreaController.refresh();
 	}
-
 	protected void initDataBindings() {
-		BeanProperty<IUpdateAreaController, String> iUpdateAreaControllerBeanProperty = BeanProperty
-				.create("areaName");
-		BeanProperty<JTextField, String> jTextFieldBeanProperty = BeanProperty
-				.create("text");
-		AutoBinding<IUpdateAreaController, String, JTextField, String> autoBinding = Bindings
-				.createAutoBinding(UpdateStrategy.READ_WRITE,
-						updateAreaController,
-						iUpdateAreaControllerBeanProperty, txtName,
-						jTextFieldBeanProperty);
+		BeanProperty<IUpdateAreaController, String> iUpdateAreaControllerBeanProperty = BeanProperty.create("areaName");
+		BeanProperty<JTextField, String> jTextFieldBeanProperty = BeanProperty.create("text");
+		AutoBinding<IUpdateAreaController, String, JTextField, String> autoBinding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, updateAreaController, iUpdateAreaControllerBeanProperty, txtName, jTextFieldBeanProperty);
 		autoBinding.bind();
 		//
-		BeanProperty<IUpdateAreaController, String> iUpdateAreaControllerBeanProperty_1 = BeanProperty
-				.create("areaDescription");
-		BeanProperty<JTextField, String> jTextFieldBeanProperty_1 = BeanProperty
-				.create("text");
-		AutoBinding<IUpdateAreaController, String, JTextField, String> autoBinding_1 = Bindings
-				.createAutoBinding(UpdateStrategy.READ_WRITE,
-						updateAreaController,
-						iUpdateAreaControllerBeanProperty_1, txtDescription,
-						jTextFieldBeanProperty_1);
+		BeanProperty<IUpdateAreaController, String> iUpdateAreaControllerBeanProperty_1 = BeanProperty.create("areaDescription");
+		BeanProperty<JTextField, String> jTextFieldBeanProperty_1 = BeanProperty.create("text");
+		AutoBinding<IUpdateAreaController, String, JTextField, String> autoBinding_1 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, updateAreaController, iUpdateAreaControllerBeanProperty_1, txtDescription, jTextFieldBeanProperty_1);
 		autoBinding_1.bind();
 		//
-		BeanProperty<IUpdateAreaController, List<Area>> iUpdateAreaControllerBeanProperty_2 = BeanProperty
-				.create("areas");
-		JComboBoxBinding<Area, IUpdateAreaController, JComboBox> jComboBinding = SwingBindings
-				.createJComboBoxBinding(UpdateStrategy.READ,
-						updateAreaController,
-						iUpdateAreaControllerBeanProperty_2, cboMainArea);
+		BeanProperty<IUpdateAreaController, List<Area>> iUpdateAreaControllerBeanProperty_2 = BeanProperty.create("areas");
+		JComboBoxBinding<Area, IUpdateAreaController, JComboBox> jComboBinding = SwingBindings.createJComboBoxBinding(UpdateStrategy.READ, updateAreaController, iUpdateAreaControllerBeanProperty_2, cboMainArea);
 		jComboBinding.bind();
 		//
-		BeanProperty<IUpdateAreaController, Area> iUpdateAreaControllerBeanProperty_3 = BeanProperty
-				.create("selectedArea");
-		BeanProperty<JComboBox, Object> jComboBoxBeanProperty = BeanProperty
-				.create("selectedItem");
-		AutoBinding<IUpdateAreaController, Area, JComboBox, Object> autoBinding_2 = Bindings
-				.createAutoBinding(UpdateStrategy.READ_WRITE,
-						updateAreaController,
-						iUpdateAreaControllerBeanProperty_3, cboMainArea,
-						jComboBoxBeanProperty);
+		BeanProperty<IUpdateAreaController, Area> iUpdateAreaControllerBeanProperty_3 = BeanProperty.create("selectedArea");
+		BeanProperty<JComboBox, Area> jComboBoxBeanProperty = BeanProperty.create("selectedItem");
+		AutoBinding<IUpdateAreaController, Area, JComboBox, Area> autoBinding_2 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, updateAreaController, iUpdateAreaControllerBeanProperty_3, cboMainArea, jComboBoxBeanProperty);
 		autoBinding_2.bind();
 		//
-		BeanProperty<IUpdateAreaController, Integer> iUpdateAreaControllerBeanProperty_4 = BeanProperty
-				.create("selectedAreaIndex");
-		BeanProperty<JComboBox, Integer> jComboBoxBeanProperty_1 = BeanProperty
-				.create("selectedIndex");
-		AutoBinding<IUpdateAreaController, Integer, JComboBox, Integer> autoBinding_3 = Bindings
-				.createAutoBinding(UpdateStrategy.READ_WRITE,
-						updateAreaController,
-						iUpdateAreaControllerBeanProperty_4, cboMainArea,
-						jComboBoxBeanProperty_1);
+		BeanProperty<IUpdateAreaController, Integer> iUpdateAreaControllerBeanProperty_4 = BeanProperty.create("selectedAreaIndex");
+		BeanProperty<JComboBox, Integer> jComboBoxBeanProperty_1 = BeanProperty.create("selectedIndex");
+		AutoBinding<IUpdateAreaController, Integer, JComboBox, Integer> autoBinding_3 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, updateAreaController, iUpdateAreaControllerBeanProperty_4, cboMainArea, jComboBoxBeanProperty_1);
 		autoBinding_3.bind();
 	}
 }

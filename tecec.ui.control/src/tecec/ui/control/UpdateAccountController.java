@@ -4,6 +4,7 @@ import java.util.List;
 
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
+import tecec.contract.encryption.IPasswordHasher;
 import tecec.contract.reader.IAccountReader;
 import tecec.contract.reader.IProfileReader;
 import tecec.contract.writer.IAccountWriter;
@@ -23,22 +24,24 @@ public class UpdateAccountController extends BaseController implements
 	IProfileReader profileReader;
 	IAccountWriter accountWriter;
 	IAccountReader accountReader;
+	IPasswordHasher passwordHasher;
 
-	public UpdateAccountController(IProfileReader profileReader,
+	public UpdateAccountController(IProfileReader profileReader, IPasswordHasher hasher,
 			IAccountWriter accountWriter, IAccountReader accountReader) {
 		this.profileReader = profileReader;
 		this.accountWriter = accountWriter;
 		this.accountReader = accountReader;
-		
+		this.passwordHasher = hasher;
+
 		setSelectedProfileIndex(-1);
 	}
 
 	@Override
 	public void setAccountID(String id) {
 		this.id = id;
-		
+
 		super.notifyOfPropertyChange("ID", null, id);
-		
+
 		refresh();
 	}
 
@@ -50,7 +53,7 @@ public class UpdateAccountController extends BaseController implements
 	@Override
 	public void setUserName(String userName) {
 		this.userName = userName;
-		
+
 		super.notifyOfPropertyChange("userName", null, userName);
 	}
 
@@ -62,7 +65,7 @@ public class UpdateAccountController extends BaseController implements
 	@Override
 	public void setResetPassword(boolean reset) {
 		this.resetPassword = reset;
-		
+
 		super.notifyOfPropertyChange("resetPassword", null, reset);
 	}
 
@@ -84,7 +87,7 @@ public class UpdateAccountController extends BaseController implements
 	@Override
 	public void setSelectedProfile(Profile profile) {
 		this.selectedProfile = profile;
-		
+
 		super.notifyOfPropertyChange("selectedProfile", null, selectedProfile);
 	}
 
@@ -107,7 +110,7 @@ public class UpdateAccountController extends BaseController implements
 	@Override
 	public void setSelectedProfileIndex(int i) {
 		this.selectedProfileIndex = i;
-		
+
 		super.notifyOfPropertyChange("selectedProfileIndex", null, i);
 	}
 
@@ -120,24 +123,33 @@ public class UpdateAccountController extends BaseController implements
 		Account account = this.accountReader.getAccount(id);
 
 		account.setUserName(userName);
-		account.setfKProfile(this.selectedProfile.getpKProfile());
+
+		if (this.selectedProfile != null) {
+			account.setfKProfile(this.selectedProfile.getpKProfile());
+		} else {
+			account.setfKProfile(null);
+		}
 
 		if (resetPassword) {
-			account.setPassword(account.getId());
+			try {
+				account.setPassword(passwordHasher.hash(account.getId()));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 		return account;
 	}
 
 	@Override
-	public void refresh() {		
+	public void refresh() {
 		Account account = this.accountReader.getAccount(this.id);
-		
+
 		setUserName(account.getUserName());
-		setResetPassword(false);			
+		setResetPassword(false);
 
 		List<Profile> profiles = getProfiles();
-		
+
 		super.notifyOfPropertyChange("profiles", null, profiles);
 
 		setSelectedProfile(null);

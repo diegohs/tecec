@@ -48,6 +48,7 @@ public class CourseViewerUI extends JDialog implements ICourseViewerUI {
 	private JButton btnRemover;
 	private JPanel panelPesquisa;
 	private JPanel panelButtons;
+	private JButton btnNewCourse;
 
 	private void showNewCourseUI() {
 		courseViewerController.showNewCourseUI();
@@ -148,13 +149,22 @@ public class CourseViewerUI extends JDialog implements ICourseViewerUI {
 											new java.awt.Font("Comic Sans MS",
 													1, 10))); // NOI18N
 					contentPanel.add(panelButtons, "cell 0 2,grow");
-					JButton btnNovo = new JButton("Cadastrar Novo");
-					btnNovo.setPreferredSize(new Dimension(150, 25));
-					btnNovo.setMinimumSize(new Dimension(150, 25));
-					btnNovo.setMaximumSize(new Dimension(150, 25));
-					panelButtons.add(btnNovo);
+					{
+						btnNewCourse = new JButton("Cadastrar Novo");
+						btnNewCourse.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent arg0) {
+								showNewCourseUI();
+							}
+						});
+						panelButtons.add(btnNewCourse);
+					}
 					{
 						btnAtualizar = new JButton("Atualizar Selecionado");
+						btnAtualizar.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								showUpdateCourseUI();
+							}
+						});
 						btnAtualizar.setPreferredSize(new Dimension(150, 25));
 						btnAtualizar.setMinimumSize(new Dimension(150, 25));
 						btnAtualizar.setMaximumSize(new Dimension(150, 25));
@@ -172,16 +182,7 @@ public class CourseViewerUI extends JDialog implements ICourseViewerUI {
 								}
 							});
 
-							btnNovo.addActionListener(new ActionListener() {
-								@Override
-								public void actionPerformed(ActionEvent e) {
-									showNewCourseUI();
-								}
-							});
-
 						}
-						contentPanel
-								.add(btnNovo, "flowx,cell 2 3,alignx right");
 					}
 					btnAtualizar = new JButton("Atualizar Selecionado");
 					btnAtualizar.addActionListener(new ActionListener() {
@@ -189,15 +190,6 @@ public class CourseViewerUI extends JDialog implements ICourseViewerUI {
 						public void actionPerformed(ActionEvent e) {
 							showUpdateCourseUI();
 						}
-					});
-					
-					btnNovo.addActionListener(new ActionListener() {
-
-						@Override
-						public void actionPerformed(ActionEvent e) {
-							showNewCourseUI();
-						}
-
 					});
 
 					contentPanel.add(btnAtualizar, "cell 2 3,alignx right");

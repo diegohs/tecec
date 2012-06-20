@@ -128,5 +128,8 @@ public class NewAreaController extends BaseController implements
 		this.setDescription("");
 		
 		super.notifyOfPropertyChange("areas", null, getAreas());
+		
+		setSelectedArea(null);
+		setSelectedAreaIndex(-1);
 	}
 }
