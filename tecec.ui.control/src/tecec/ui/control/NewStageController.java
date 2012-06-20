@@ -1,5 +1,8 @@
 package tecec.ui.control;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
 
@@ -51,14 +54,18 @@ public class NewStageController extends BaseController implements INewStageContr
 		
 		stageWriter.createStage(this.stageName, this.stageYear);
 		
-		setStageName ("");
-		setStageYear ("2007");
-		
+		refresh();
 	}
 
 	@Override
 	public RuleViolation getCreationViolation() {
 		return stageWriter.getCreationViolation(this.getStageName(), this.getStageYear());
+	}
+
+	@Override
+	public void refresh() {
+		setStageName("");
+		setStageYear((new SimpleDateFormat("yyyy")).format(Calendar.getInstance().getTime()));
 	}
 	
 

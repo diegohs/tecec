@@ -202,4 +202,16 @@ public class MySqlCourseRepository extends MySqlRepository implements
 		
 		return getCourses(query, parameters);
 	}
+
+	@Override
+	public boolean doesCourseHaveStudents(String pKCourse) {
+		String query = " SELECT COUNT(*) " + 
+					   " FROM Course c " + 
+					   " INNER JOIN StudentCourse sc ON c.PKCourse = sc.FKCourse " + 
+					   " WHERE c.PKCourse = :pKCourse; ";
+		
+		SqlParameterSource parameters = new MapSqlParameterSource("pKCourse", pKCourse);
+		
+		return jdbcTemplate.queryForInt(query, parameters) > 0;
+	}
 }

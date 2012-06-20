@@ -6,10 +6,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.support.AbstractLobCreatingPreparedStatementCallback;
+import org.springframework.jdbc.support.lob.DefaultLobHandler;
+import org.springframework.jdbc.support.lob.LobCreator;
 
 import tecec.contract.repository.IDocumentationRepository;
 
@@ -29,7 +32,8 @@ public class MySqlDocumentationRepository extends MySqlRepository implements
 	private void validateDocumentation(Documentation documentation) {
 		if (documentation.getFileName() == null
 				|| documentation.getFileName().trim().isEmpty())
-			throw new IllegalArgumentException("O nome do arquivo é inválido.");
+			throw new IllegalArgumentException(
+					"O nome do arquivo é inválido.");
 
 		if (documentation.getData() == null
 				|| documentation.getData().length <= 0) {
@@ -50,18 +54,25 @@ public class MySqlDocumentationRepository extends MySqlRepository implements
 
 	private List<Documentation> getDocumentations(String query,
 			SqlParameterSource parameters) {
+
+		final DefaultLobHandler lobHandler = new DefaultLobHandler();
+
 		List<Documentation> docs = jdbcTemplate.query(query, parameters,
 				new RowMapper<Documentation>() {
+
 					@Override
 					public Documentation mapRow(ResultSet arg0, int arg1)
 							throws SQLException {
-						Documentation documentation = new Documentation();
-						documentation.setpKDocumentation(arg0
-								.getString("PKDocumentation"));
-						documentation.setFileName(arg0.getString("FileName"));
-						documentation.setData(arg0.getBytes("Data"));
 
-						return documentation;
+						Documentation doc = new Documentation();
+
+						doc.setFileName(arg0.getString("FileName"));
+						doc.setpKDocumentation(arg0
+								.getString("PKDocumentation"));
+
+						doc.setData(lobHandler.getBlobAsBytes(arg0, "Data"));
+
+						return doc;
 					}
 
 				});
@@ -73,56 +84,76 @@ public class MySqlDocumentationRepository extends MySqlRepository implements
 	public void insertDocumentation(Documentation documentation) {
 		validateDocumentation(documentation);
 
-		String command = "INSERT INTO Documentation (PKDocumentation, FileName, Data) VALUES (:pKDocumentation, :fileName, :data);";
-		SqlParameterSource namedParameter = new BeanPropertySqlParameterSource(
-				documentation);
+		String command = " INSERT INTO Documentation (PKDocumentation, FileName, Data) "
+				+ " VALUES (?, ?, ?);";
 
-		jdbcTemplate.update(command, namedParameter);
+		final Documentation persistentDoc = documentation;
 
+		jdbcTemplate.getJdbcOperations().execute(
+				command,
+				new AbstractLobCreatingPreparedStatementCallback(
+						new DefaultLobHandler()) {
+					@Override
+					protected void setValues(
+							java.sql.PreparedStatement preparedStatement,
+							LobCreator lobCreator) throws SQLException,
+							DataAccessException {
+						preparedStatement.setString(1,
+								persistentDoc.getpKDocumentation());
+						preparedStatement.setString(2,
+								persistentDoc.getFileName());
+						lobCreator.setBlobAsBytes(preparedStatement, 3,
+								persistentDoc.getData());
+					}
+				});
 	}
 
 	@Override
 	public void updateDocumentation(Documentation documentation) {
-		String query = "UPDATE Documentation SET FileName = :fileName, Data = :data WHERE PKDocumentation =:pKDocumentation;";
-		SqlParameterSource parameters = new BeanPropertySqlParameterSource(
-				documentation);
-		jdbcTemplate.update(query, parameters);
+		String command = " UPDATE Documentation SET FileName = ?, Data = ? "
+				+ " WHERE PKDocumentation =?; ";
+
+		final Documentation persistentDoc = documentation;
+
+		jdbcTemplate.getJdbcOperations().execute(
+				command,
+				new AbstractLobCreatingPreparedStatementCallback(
+						new DefaultLobHandler()) {
+					@Override
+					protected void setValues(
+							java.sql.PreparedStatement preparedStatement,
+							LobCreator lobCreator) throws SQLException,
+							DataAccessException {
+						preparedStatement.setString(3,
+								persistentDoc.getpKDocumentation());
+						preparedStatement.setString(1,
+								persistentDoc.getFileName());
+						lobCreator.setBlobAsBytes(preparedStatement, 2,
+								persistentDoc.getData());
+					}
+				});
 	}
 
 	@Override
 	public void deleteDocumentation(String pKDocumentation) {
 
 		String command = "DELETE FROM Documentation PKDocumentation = :pKDocumentation;";
+
 		SqlParameterSource namedParameter = new MapSqlParameterSource(
 				"pKDocumentation", pKDocumentation);
+
 		jdbcTemplate.update(command, namedParameter);
 
 	}
 
-
-
 	@Override
 	public Documentation getDocumentationByPK(String pKDocumentation) {
 		String query = "SELECT * FROM Documentation WHERE PKDocumentation = :pKDocumentation;";
+
 		SqlParameterSource parameters = new MapSqlParameterSource(
 				"pKDocumentation", pKDocumentation);
 
-		List<Documentation> result = jdbcTemplate.query(query, parameters,
-				new RowMapper<Documentation>() {
-
-					@Override
-					public Documentation mapRow(ResultSet arg0, int arg1)
-							throws SQLException {
-						Documentation doc = new Documentation();
-						doc.setData(arg0.getBytes("Data"));
-						doc.setFileName(arg0.getString("FileName"));
-						doc.setpKDocumentation(arg0
-								.getString("PKDocumentation"));
-
-						return doc;
-					}
-
-				});
+		List<Documentation> result = getDocumentations(query, parameters);
 
 		if (result.isEmpty())
 			return null;
@@ -169,15 +200,16 @@ public class MySqlDocumentationRepository extends MySqlRepository implements
 					@Override
 					public Documentation mapRow(ResultSet arg0, int arg1)
 							throws SQLException {
-						Documentation doc = new Documentation ();
+						Documentation doc = new Documentation();
 						doc.setData(arg0.getBytes("Data"));
 						doc.setFileName(arg0.getString("FileName"));
-						doc.setpKDocumentation(arg0.getString("PKDocumentation"));
-						
+						doc.setpKDocumentation(arg0
+								.getString("PKDocumentation"));
+
 						return doc;
 					}
 				});
-		
+
 		return result;
 	}
 

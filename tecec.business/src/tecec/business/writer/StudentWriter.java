@@ -1,18 +1,21 @@
 package tecec.business.writer;
+import java.util.UUID;
+
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
 import tecec.contract.repository.IStudentRepository;
+import tecec.contract.writer.IAccountWriter;
 import tecec.contract.writer.IStudentWriter;
 import tecec.dto.Student;
 
 public class StudentWriter implements IStudentWriter {
 
 	private IStudentRepository studentRepository;
+	private IAccountWriter accountWriter;
 
-	public StudentWriter(IStudentRepository studentRepository) {
-		if (studentRepository == null)
-			throw new IllegalArgumentException("studentRepository");
+	public StudentWriter(IStudentRepository studentRepository, IAccountWriter accountWriter) {		
 		this.studentRepository = studentRepository;
+		this.accountWriter = accountWriter;
 	}
 
 	@Override
@@ -64,10 +67,14 @@ public class StudentWriter implements IStudentWriter {
 
 		if (violation != null)
 			throw new RuleViolationException(violation);
+		
 		Student student = new Student();
+		student.setPKStudent(UUID.randomUUID().toString());
 		student.setName(name);
 		student.setEmail(email);
+		
 		this.studentRepository.insertStudent(student);
+		this.accountWriter.insertAccount(email, email, name, null, student.getPKStudent());
 	}
 
 	@Override
@@ -124,6 +131,17 @@ public class StudentWriter implements IStudentWriter {
 	@Override
 	public void deleteStudentCourse(String pKStudent, String pKCourse) {
 		this.studentRepository.deleteStudentCourse(pKStudent, pKCourse);		
+	}
+
+	@Override
+	public RuleViolation getDeletionViolation(String pKStudent) {
+		boolean hasMonographies = this.studentRepository.doesStudentHaveMonographies(pKStudent);
+		
+		if (hasMonographies) {
+			return new RuleViolation("Não é possível excluir um estudante que já possui monografias cadastradas.");
+		}
+		
+		return null;
 	}
 
 }

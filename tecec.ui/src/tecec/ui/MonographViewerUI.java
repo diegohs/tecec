@@ -191,4 +191,9 @@ public class MonographViewerUI extends JFrame implements IMonographViewerUI {
 		AutoBinding<IMonographViewerController, MonographRecord, JTable, MonographRecord> autoBinding_3 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, monographViewerController, iMonographViewerControllerBeanProperty_4, tblMonograph, jTableBeanProperty);
 		autoBinding_3.bind();
 	}
+
+	@Override
+	public void refresh() {
+		monographViewerController.refresh();
+	}
 }

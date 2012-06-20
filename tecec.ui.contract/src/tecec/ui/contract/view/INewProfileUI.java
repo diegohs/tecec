@@ -1,6 +1,4 @@
 package tecec.ui.contract.view;
 
-public interface INewProfileUI {
-	void setVisible(boolean visible);
-
+public interface INewProfileUI extends IRefreshableView {
 }

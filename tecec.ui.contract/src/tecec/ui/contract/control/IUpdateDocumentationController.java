@@ -3,7 +3,7 @@ package tecec.ui.contract.control;
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
 
-public interface IUpdateDocumentationController {
+public interface IUpdateDocumentationController extends IRefreshable  {
 	
 	void setPKDocumentation (String pKDocumentation);
 	void setDocumentationFileName (String fileName);

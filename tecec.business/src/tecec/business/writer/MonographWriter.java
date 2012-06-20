@@ -27,6 +27,26 @@ public class MonographWriter implements IMonographWriter {
 				return new RuleViolation ("O t√≠tulo da monografia deve ser menor que 512 caracteres.");			
 		}
 		
+		if (newMonograph.getfKAdvisor() == null) {
+			return new RuleViolation("Um orientador deve ser selecionado para a monografia.");
+		}
+
+		if (newMonograph.getfKArea() == null) {
+			return new RuleViolation("Uma ·rea deve ser selecionada para a monografia.");
+		}
+
+		if (newMonograph.getfKCourse() == null) {
+			return new RuleViolation("Um curso deve ser selecionado para a monografia.");
+		}
+		
+		if (newMonograph.getfKStudent() == null) {
+			return new RuleViolation("Um aluno deve ser selecionado para a monografia.");
+		}
+		
+		if (newMonograph.getfKStatus() == null) {
+			return new RuleViolation("Um status deve ser selecionado para a monografia.");
+		}
+		
 		Monograph monograph = monograhRepository.getMonographByTitle(newMonograph.getTitle());
 		
 		if (monograph != null)

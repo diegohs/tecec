@@ -196,4 +196,9 @@ public class AreaViewerUI extends JDialog implements IAreaViewerUI {
 		AutoBinding<IAreaViewerController, AreaRecord, JTable, AreaRecord> autoBinding_4 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, areaViewerController, iAreaViewerControllerBeanProperty_5, tblArea, jTableBeanProperty);
 		autoBinding_4.bind();
 	}
+
+	@Override
+	public void refresh() {
+		areaViewerController.refresh();
+	}
 }

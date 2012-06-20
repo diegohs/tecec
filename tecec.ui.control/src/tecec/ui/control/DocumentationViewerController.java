@@ -39,7 +39,9 @@ public class DocumentationViewerController extends BaseController implements IDo
 	@Override
 	public void setNameFilter(String nameFilter) {
 		this.nameFilter = nameFilter;
-		super.notifyOfPropertyChange("documentations",null, getDocumentations());
+
+		super.notifyOfPropertyChange("nameFilter", null, nameFilter);
+		super.notifyOfPropertyChange("documentations", null, getDocumentations());
 	}
 
 	@Override
@@ -97,6 +99,12 @@ public class DocumentationViewerController extends BaseController implements IDo
 		this.updateDocumentationUI.setPKDocumentation(this.selectedDocumentation.getpKDocumentation());
 		this.updateDocumentationUI.setVisible(true);		
 		super.notifyOfPropertyChange("documentations", null, getDocumentations());		
+	}
+
+
+	@Override
+	public void refresh() {
+		setNameFilter("");
 	}
 
 }

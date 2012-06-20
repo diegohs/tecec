@@ -18,9 +18,11 @@ public interface IStudentRepository {
 	Student getStudentByEmail(String email);
 
 	List<Student> getStudents(String nameFilter);
+	List<Student> getStudentByCourse(String pKCourse);
 
 	void insertStudentCourse(String pKStudent, String pKCourse);
 	void deleteStudentCourse(String pKStudent, String pKCourse);
 	
-	boolean doesUserHaveMonographiesInCourse(String pKStudent, String pKCourse);
+	boolean doesStudentHaveMonographies(String pKStudent);	
+	boolean doesStudentHaveMonographiesInCourse(String pKStudent, String pKCourse);
 }

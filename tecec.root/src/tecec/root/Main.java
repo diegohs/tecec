@@ -6,6 +6,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import org.picocontainer.MutablePicoContainer;
+
 import tecec.ui.contract.view.*;
 
 public class Main {
@@ -24,7 +25,11 @@ public class Main {
 						tem que setar em cada ui no objeto frame o metodo
 						frame.setDefaultLookAndFeelDecorated(true);*/
 						
+<<<<<<< OURS
 						// Estilo Mac
+=======
+						//Estilo Mac
+>>>>>>> THEIRS
 						//UIManager.setLookAndFeel("ch.randelshofer.quaqua.QuaquaLookAndFeel");
 						
 						// Default do SO
@@ -44,9 +49,9 @@ public class Main {
 	                     ex.printStackTrace();  
 	                }
 					
-					IMainUI window = container.getComponent(IMainUI.class);
-					//IProfileViewerUI window = container.getComponent(IProfileViewerUI.class);
-					window.setVisible(true);
+					ILoginUI loginUI = container.getComponent(ILoginUI.class);
+					
+					loginUI.setVisible(true);
 					
 				} catch (Exception e) {
 					e.printStackTrace();

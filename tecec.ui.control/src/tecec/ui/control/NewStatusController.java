@@ -43,11 +43,16 @@ public class NewStatusController extends BaseController implements INewStatusCon
 		
 		statusWriter.createStatus(this.statusDescription);
 		
-		setStatusDescription ("");
+		refresh();
 	}
 
 	@Override
 	public RuleViolation getCreationViolation() {
 		return statusWriter.getCreationViolation(this.getStatusDescription());	
+	}
+
+	@Override
+	public void refresh() {
+		this.setStatusDescription("");
 	}	
 }

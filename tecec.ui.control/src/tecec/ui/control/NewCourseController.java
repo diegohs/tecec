@@ -68,15 +68,20 @@ public class NewCourseController extends BaseController implements
 			throw new RuleViolationException (violation);
 		
 		courseWriter.createCourse(this.courseName, this.courseTurn, this.courseYear);
-		
-		setCourseName ("");
-		setCourseYear ("2007");
-		setCourseTurn ("Noturno");		
+			
+		refresh();
 	}
 
 	@Override
 	public RuleViolation getCreationViolation() {
 		return courseWriter.getCreationViolation(this.courseName, this.courseTurn, this.courseYear);
+	}
+
+	@Override
+	public void refresh() {
+		setCourseName ("");
+		setCourseYear ("");
+		setCourseTurn ("");	
 	}
 	
 }

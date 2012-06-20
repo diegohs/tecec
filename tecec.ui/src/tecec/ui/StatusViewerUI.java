@@ -33,10 +33,14 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 public class StatusViewerUI extends JFrame implements IStatusViewerUI {
+<<<<<<< OURS
 
 	/**
 	 *
 	 */
+=======
+	
+>>>>>>> THEIRS
 	private static final long serialVersionUID = 1L;
 	private IStatusViewerController statusViewerController;
 
@@ -175,5 +179,10 @@ public class StatusViewerUI extends JFrame implements IStatusViewerUI {
 		BeanProperty<IStatusViewerController, Boolean> iStatusViewerControllerBeanProperty_4 = BeanProperty.create("canDeleteStatus");
 		AutoBinding<IStatusViewerController, Boolean, JButton, Boolean> autoBinding_3 = Bindings.createAutoBinding(UpdateStrategy.READ, statusViewerController, iStatusViewerControllerBeanProperty_4, btnDeleteStatus, jButtonBeanProperty);
 		autoBinding_3.bind();
+	}
+
+	@Override
+	public void refresh() {
+		statusViewerController.refresh();
 	}
 }

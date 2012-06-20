@@ -147,4 +147,8 @@ public class NewDocumentationUI extends JDialog implements INewDocumentationUI {
 		});
 	}
 
+	@Override
+	public void refresh() {
+	}
+
 }

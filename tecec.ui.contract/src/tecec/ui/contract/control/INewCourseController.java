@@ -3,7 +3,7 @@ package tecec.ui.contract.control;
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
 
-public interface INewCourseController {	
+public interface INewCourseController extends IRefreshable  {	
 	String getCourseName();
 	void setCourseName(String name);
 	

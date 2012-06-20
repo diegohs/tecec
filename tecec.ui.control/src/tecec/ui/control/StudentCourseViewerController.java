@@ -204,4 +204,10 @@ public class StudentCourseViewerController extends BaseController implements
 		}
 	}
 
+	@Override
+	public void refresh() {
+		loadCorrelatedCourses();
+		loadCourses();
+	}
+
 }

@@ -1,15 +1,11 @@
 package tecec.ui.control;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
-import tecec.contract.reader.IAdvisorReader;
-import tecec.contract.reader.IAreaReader;
-import tecec.contract.reader.ICourseReader;
-import tecec.contract.reader.IMonographReader;
-import tecec.contract.reader.IStatusReader;
-import tecec.contract.reader.IStudentReader;
+import tecec.contract.reader.*;
 import tecec.contract.writer.IMonographWriter;
 import tecec.dto.Advisor;
 import tecec.dto.Area;
@@ -20,49 +16,49 @@ import tecec.dto.Student;
 
 import tecec.ui.contract.control.INewMonographController;
 
-public class NewMonographController extends BaseController implements INewMonographController{
-	
-	/*Monograph*/
+public class NewMonographController extends BaseController implements
+		INewMonographController {
+
+	/* Monograph */
 	private IMonographWriter monographWriter;
-	private IMonographReader monographReader;
 	private String title;
-	
-	/*Course*/
+
+	/* Course */
 	private ICourseReader courseReader;
 	private Course selectedCourse;
 	private int selectedCourseIndex;
-	
-	/*Area*/
+
+	/* Area */
 	private IAreaReader areaReader;
 	private Area selectedArea;
 	private int selectedAreaIndex;
-	
-	/*Student*/
+
+	/* Student */
 	private IStudentReader studentReader;
 	private Student selectedStudent;
 	private int selectedStudentIndex;
-	
-	/*Advisor*/
+
+	/* Advisor */
 	private IAdvisorReader advisorReader;
 	private Advisor selectedAdvisor;
 	private int selectedAdvisorIndex;
-	
-	/*Coadvisor*/
-	private IAdvisorReader coadvisorReader;
+
+	/* Coadvisor */
 	private Advisor selectedCoadvisor;
 	private int selectedCoadvisorIndex;
-	
-	/*Status*/
+
+	/* Status */
 	private IStatusReader statusReader;
 	private Status selectedStatus;
 	private int selectedStatusIndex;
-	
-	/*Constructor*/
-	
-	public NewMonographController(IMonographWriter monographWriter, ICourseReader courseReader, IAreaReader areaReader,
-			IStudentReader studentReader, IAdvisorReader advisorReader, IStatusReader statusReader,
-			IAdvisorReader coadvisorReader, IMonographReader monographReader){
-		if(monographWriter == null)
+
+	/* Constructor */
+
+	public NewMonographController(IMonographWriter monographWriter,
+			ICourseReader courseReader, IAreaReader areaReader,
+			IStudentReader studentReader, IAdvisorReader advisorReader,
+			IStatusReader statusReader) {
+		if (monographWriter == null)
 			throw new IllegalArgumentException("monographWriter");
 		this.monographWriter = monographWriter;
 		this.courseReader = courseReader;
@@ -70,40 +66,45 @@ public class NewMonographController extends BaseController implements INewMonogr
 		this.studentReader = studentReader;
 		this.advisorReader = advisorReader;
 		this.statusReader = statusReader;
-		this.coadvisorReader = coadvisorReader;
-		this.monographReader = monographReader;
+		
+		setSelectecAreaIndex(-1);
+		setSelectedAdvisorIndex(-1);
+		setSelectedCoadvisorIndex(-1);
+		setSelectedCourseIndex(-1);
+		setSelectedStatusIndex(-1);
+		setSelectedStudentIndex(-1);		
 	}
-	
+
 	@Override
 	public RuleViolation getCreationViolation() {
 		return this.monographWriter.getCreationViolation(getMonograph());
 	}
-	
-	/*Monograph*/
-	
-	private Monograph getMonograph(){
+
+	/* Monograph */
+
+	private Monograph getMonograph() {
 		Monograph newMonograph = new Monograph();
-		
+
 		newMonograph.setTitle(this.title);
-		
-		if(this.selectedCourse != null)
+
+		if (this.selectedCourse != null)
 			newMonograph.setfKCourse(this.selectedCourse.getPKCourse());
-		
-		if(this.selectedArea != null)
+
+		if (this.selectedArea != null)
 			newMonograph.setfKArea(this.selectedArea.getpKArea());
-		
-		if(this.selectedAdvisor != null)
+
+		if (this.selectedAdvisor != null)
 			newMonograph.setfKAdvisor(this.selectedAdvisor.getPKAdvisor());
-		
-		if(this.selectedCoadvisor != null)
+
+		if (this.selectedCoadvisor != null)
 			newMonograph.setfKCoadvisor(this.selectedCoadvisor.getPKAdvisor());
-		
-		if(this.selectedStatus != null)
+
+		if (this.selectedStatus != null)
 			newMonograph.setfKStatus(this.selectedStatus.getpKStatus());
-		
-		if(this.selectedStudent != null)
+
+		if (this.selectedStudent != null)
 			newMonograph.setfKStudent(this.selectedStudent.getPKStudent());
-		
+
 		return newMonograph;
 	}
 
@@ -114,58 +115,33 @@ public class NewMonographController extends BaseController implements INewMonogr
 
 	@Override
 	public void setMonographTitle(String title) {
-				
+
 		this.title = title;
-		
+
 		super.notifyOfPropertyChange("monographTitle", null, title);
 	}
 
 	@Override
 	public void createMonograph() throws RuleViolationException {
-		RuleViolation violation = getCreationViolation ();
-		
+		RuleViolation violation = getCreationViolation();
+
 		if (violation != null)
-			throw new RuleViolationException (violation);
-		
+			throw new RuleViolationException(violation);
+
 		Monograph monograph = getMonograph();
-		
+
 		monographWriter.createMonograph(monograph);
-		
-		this.setSelectedAdvisor(null);
-		this.setSelectedArea(null);
-		this.setSelectedCoadvisor(null);
-		this.setSelectedCourse(null);
-		this.setSelectedStatus(null);
-		this.setSelectedStudent(null);
-		
-		this.setMonographTitle("");
-		
-		super.notifyOfPropertyChange("monographs", null, getMonographs());
-	}
-	
-	@Override
-	public List<Monograph> getMonographs() {
-		List<Monograph> monographs = this.monographReader.getMonograph("");
-		Monograph emptyMonograph = new Monograph();
-		
-		emptyMonograph.setTitle(" ");
-		monographs.add(0, emptyMonograph);
-		
-		return monographs;
+
+		refresh();
 	}
 
-	
-	/*End of Monograph*/
-	
-	/*Course*/
+	/* End of Monograph */
+
+	/* Course */
 
 	@Override
 	public List<Course> getCourses() {
 		List<Course> courses = this.courseReader.getCourses("");
-		Course emptyCourse = new Course();
-		
-		emptyCourse.setName(" ");
-		courses.add(0,emptyCourse);
 		
 		return courses;
 	}
@@ -178,29 +154,34 @@ public class NewMonographController extends BaseController implements INewMonogr
 	@Override
 	public void setSelectedCourse(Course course) {
 		this.selectedCourse = course;
+
+		super.notifyOfPropertyChange("selectedCourse", null, course);
+		super.notifyOfPropertyChange("canSelectStudent", null,
+				getCanSelectStudent());
+		super.notifyOfPropertyChange("students", null,
+				getStudents());
 	}
 
 	@Override
 	public void setSelectedCourseIndex(int i) {
 		this.selectedCourseIndex = i;
+
+		super.notifyOfPropertyChange("selectedCourseIndex", null, i);
 	}
 
 	@Override
 	public int getSelecteCourseIndex() {
 		return this.selectedCourseIndex;
 	}
-	/*End of Course*/
-	
-	/*Area*/
+
+	/* End of Course */
+
+	/* Area */
 
 	@Override
 	public List<Area> getAreas() {
 		List<Area> areas = this.areaReader.getAreas("");
-		Area emptyArea = new Area();
-		
-		emptyArea.setName(" ");
-		areas.add(0, emptyArea);
-		
+
 		return areas;
 	}
 
@@ -212,30 +193,36 @@ public class NewMonographController extends BaseController implements INewMonogr
 	@Override
 	public void setSelectedArea(Area area) {
 		this.selectedArea = area;
+		
+		super.notifyOfPropertyChange("selectedArea", null, area);
 	}
 
 	@Override
 	public void setSelectecAreaIndex(int i) {
 		this.selectedAreaIndex = i;
+		super.notifyOfPropertyChange("selectedAreaIndex", null, i);
 	}
 
 	@Override
 	public int getSelectedAreaIndex() {
 		return this.selectedAreaIndex;
 	}
-	/*End of Area*/
-	
-	/*Student*/
+
+	/* End of Area */
+
+	/* Student */
 
 	@Override
 	public List<Student> getStudents() {
-		List<Student> students = this.studentReader.getStudents("");
-		Student emptyStudent = new Student();
-		
-		emptyStudent.setName(" ");
-		students.add(0, emptyStudent);
-		
-		return students;
+		if (this.selectedCourse != null) {
+			List<Student> students = this.studentReader.getStudentsByCourse(this.selectedCourse.getPKCourse());
+
+			return students;
+		}
+		else
+		{
+			return new ArrayList<Student>();
+		}
 	}
 
 	@Override
@@ -246,30 +233,29 @@ public class NewMonographController extends BaseController implements INewMonogr
 	@Override
 	public void setSelectedStudent(Student student) {
 		this.selectedStudent = student;
+		
+		super.notifyOfPropertyChange("selectedStudent", null, student);
 	}
 
 	@Override
 	public void setSelectedStudentIndex(int i) {
 		this.selectedStudentIndex = i;
+		super.notifyOfPropertyChange("selectedStudentIndex", null, i);
 	}
 
 	@Override
 	public int getSelectedStudentIndex() {
 		return this.selectedStudentIndex;
 	}
-	
-	/*End of Student*/
-	
-	/*Advisor*/
+
+	/* End of Student */
+
+	/* Advisor */
 
 	@Override
 	public List<Advisor> getAdvisors() {
 		List<Advisor> advisors = this.advisorReader.getAdvisors("");
-		Advisor emptyAdvisor = new Advisor();
-		
-		emptyAdvisor.setName(" ");
-		advisors.add(0, emptyAdvisor);
-		
+
 		return advisors;
 	}
 
@@ -281,30 +267,29 @@ public class NewMonographController extends BaseController implements INewMonogr
 	@Override
 	public void setSelectedAdvisor(Advisor advisor) {
 		this.selectedAdvisor = advisor;
+		
+		super.notifyOfPropertyChange("selectedAdvisor", null, advisor);
 	}
 
 	@Override
 	public void setSelectedAdvisorIndex(int i) {
 		this.selectedAdvisorIndex = i;
+		super.notifyOfPropertyChange("selectedAdvisorIndex", null, i);
 	}
 
 	@Override
 	public int getSelectedAdvisorIndex() {
 		return this.selectedAdvisorIndex;
 	}
-	
-	/*End of Advisor*/
-	
-	/*Status*/
+
+	/* End of Advisor */
+
+	/* Status */
 
 	@Override
 	public List<Status> getStatus() {
 		List<Status> statuses = this.statusReader.getStatus("");
-		Status emptyStatus = new Status();
-		
-		emptyStatus.setDescription(" ");
-		statuses.add(0, emptyStatus);
-		
+
 		return statuses;
 	}
 
@@ -316,30 +301,29 @@ public class NewMonographController extends BaseController implements INewMonogr
 	@Override
 	public void setSelectedStatus(Status status) {
 		this.selectedStatus = status;
+		
+		super.notifyOfPropertyChange("selectedStatus", null, status);
 	}
 
 	@Override
 	public void setSelectedStatusIndex(int i) {
 		this.selectedStatusIndex = i;
+		super.notifyOfPropertyChange("selectedStatusIndex", null, i);
 	}
 
 	@Override
 	public int getSelectedStatusIndex() {
 		return this.selectedStatusIndex;
 	}
-	
-	/*End of Status*/
 
-	/*Coadvisor*/
-	
+	/* End of Status */
+
+	/* Coadvisor */
+
 	@Override
 	public List<Advisor> getCoadvisors() {
-		List<Advisor> coadvisors = this.coadvisorReader.getAdvisors("");
-		Advisor emptyCoadvisor = new Advisor();
-		
-		emptyCoadvisor.setName(" ");
-		coadvisors.add(0, emptyCoadvisor);
-		
+		List<Advisor> coadvisors = this.advisorReader.getAdvisors("");
+
 		return coadvisors;
 	}
 
@@ -350,18 +334,57 @@ public class NewMonographController extends BaseController implements INewMonogr
 
 	@Override
 	public void setSelectedCoadvisor(Advisor coadvisor) {
-		this.selectedCoadvisor = coadvisor;		
+		this.selectedCoadvisor = coadvisor;
+		
+		super.notifyOfPropertyChange("selectedCoadvisor", null, coadvisor);
 	}
 
 	@Override
 	public void setSelectedCoadvisorIndex(int i) {
 		this.selectedCoadvisorIndex = i;
+
+		super.notifyOfPropertyChange("selectedCoadvisorIndex", null, i);
 	}
 
 	@Override
 	public int getSelectedCoadvisorIndex() {
 		return this.selectedCoadvisorIndex;
 	}
-	
-	/*End of Coadvisor*/
+
+	@Override
+	public boolean getCanSelectStudent() {
+		if (this.selectedCourse != null) {
+			return this.studentReader.getStudentsByCourse(
+					this.selectedCourse.getPKCourse()).size() > 0;
+		}
+
+		return false;
+	}
+
+	/* End of Coadvisor */
+
+	@Override
+	public void refresh() {
+		setMonographTitle("");
+
+		super.notifyOfPropertyChange("areas", null, getAreas());
+		super.notifyOfPropertyChange("advisors", null, getAdvisors());
+		super.notifyOfPropertyChange("coadvisors", null, getCoadvisors());
+		super.notifyOfPropertyChange("courses", null, getCourses());
+		super.notifyOfPropertyChange("status", null, getStatus());
+		
+		setSelectedArea(null);
+		setSelectedAdvisor(null);
+		setSelectedCoadvisor(null);
+		setSelectedCourse(null);
+		setSelectedStatus(null);
+		setSelectedStudent(null);
+		
+		setSelectecAreaIndex(-1);
+		setSelectedAdvisorIndex(-1);
+		setSelectedCoadvisorIndex(-1);
+		setSelectedCourseIndex(-1);
+		setSelectedStatusIndex(-1);
+		setSelectedStudentIndex(-1);
+	}
 }

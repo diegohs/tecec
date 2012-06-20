@@ -29,9 +29,6 @@ import java.awt.Font;
 
 public class UpdateActivityUI extends JDialog implements IUpdateActivityUI {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private tecec.ui.contract.control.IUpdateActivityController updateActivityController;
 
@@ -179,5 +176,10 @@ public class UpdateActivityUI extends JDialog implements IUpdateActivityUI {
 						iUpdateActivityControllerBeanProperty_3,
 						btnUpdateActivity, jButtonBeanProperty);
 		autoBinding_3.bind();
+	}
+
+	@Override
+	public void refresh() {
+		updateActivityController.refresh();
 	}
 }

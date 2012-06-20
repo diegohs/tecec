@@ -1,6 +1,5 @@
 package tecec.ui.contract.view;
 
-public interface IUpdateAdvisorUI {
+public interface IUpdateAdvisorUI extends IRefreshableView {
 	void setpkAdvisor (String pkAdvisor);
-	void setVisible (boolean visible);
 }

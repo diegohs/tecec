@@ -36,7 +36,8 @@ public class AreaViewerController extends BaseController implements
 	@Override
 	public void setNameFilter(String nameFilter) {
 		this.nameFilter = nameFilter;
-
+		
+		super.notifyOfPropertyChange("nameFilter", null, nameFilter);
 		super.notifyOfPropertyChange("areas", null, getAreas());
 	}
 
@@ -47,6 +48,7 @@ public class AreaViewerController extends BaseController implements
 
 	@Override
 	public void showNewAreaUI() {
+		this.newAreaUI.refresh();
 		this.newAreaUI.setVisible(true);
 
 		super.notifyOfPropertyChange("areas", null, getAreas());
@@ -54,6 +56,7 @@ public class AreaViewerController extends BaseController implements
 
 	@Override
 	public void showNewSubAreaUI() {
+		this.newAreaUI.refresh();
 		this.newAreaUI.setVisible(true);
 
 		super.notifyOfPropertyChange("areas", null, getAreas());
@@ -134,5 +137,10 @@ public class AreaViewerController extends BaseController implements
 		}
 
 		return areaRecords;
+	}
+
+	@Override
+	public void refresh() {
+		setNameFilter("");
 	}
 }

@@ -6,7 +6,7 @@ import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
 import tecec.dto.Area;
 
-public interface INewAreaController {
+public interface INewAreaController extends IRefreshable  {
 	void setAreaName(String name);
 	String getAreaName();
 	

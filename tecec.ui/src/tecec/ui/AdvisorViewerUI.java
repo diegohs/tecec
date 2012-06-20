@@ -180,4 +180,9 @@ public class AdvisorViewerUI extends JDialog implements IAdvisorViewerUI {
 		AutoBinding<IAdvisorViewerController, Boolean, JButton, Boolean> autoBinding_3 = Bindings.createAutoBinding(UpdateStrategy.READ, advisorViewerController, iAdvisorViewerControllerBeanProperty_4, btnDeleteAdvisor, jButtonBeanProperty);
 		autoBinding_3.bind();
 	}
+
+	@Override
+	public void refresh() {
+		advisorViewerController.refresh();
+	}
 }

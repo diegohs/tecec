@@ -6,7 +6,7 @@ import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
 import tecec.dto.Activity;
 
-public interface IActivityViewerController {
+public interface IActivityViewerController extends IRefreshable {
 	void setTitleFilter(String filter);
 	String getTitleFilter();
 	

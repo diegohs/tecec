@@ -7,11 +7,10 @@ import tecec.contract.RuleViolationException;
 import tecec.dto.Advisor;
 import tecec.dto.Area;
 import tecec.dto.Course;
-import tecec.dto.Monograph;
 import tecec.dto.Status;
 import tecec.dto.Student;
 
-public interface IUpdateMonographController {
+public interface IUpdateMonographController extends IRefreshable  {
 	
 	/*Course*/
 	List<Course> getCourses();
@@ -56,7 +55,6 @@ public interface IUpdateMonographController {
 	int getSelectedStatusIndex();
 	
 	/*Monograph*/
-	List<Monograph> getMonographs();
 	void setPKMonograph(String pKMonograph);
 	void setMonographTitle(String monographTitle);
 	String getMonographTitle();
@@ -64,5 +62,5 @@ public interface IUpdateMonographController {
 	void showMonographStageUI();
 	void updateMonograph() throws RuleViolationException;
 	RuleViolation getUpdateViolation();
-
+	boolean getCanSelectStudent();
 }

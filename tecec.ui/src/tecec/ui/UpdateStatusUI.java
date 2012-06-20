@@ -25,14 +25,7 @@ import tecec.ui.contract.view.IUpdateStatusUI;
 import javax.swing.border.TitledBorder;
 
 public class UpdateStatusUI extends JDialog implements IUpdateStatusUI {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	/**
-	 * 
-	 */
-	
+	private static final long serialVersionUID = 1L;	
 	private IUpdateStatusController updateStatusController;
 
 	@Override
@@ -116,5 +109,10 @@ public class UpdateStatusUI extends JDialog implements IUpdateStatusUI {
 		BeanProperty<JTextField, String> jTextFieldBeanProperty = BeanProperty.create("text");
 		AutoBinding<IUpdateStatusController, String, JTextField, String> autoBinding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, updateStatusController, iUpdateStatusControllerBeanProperty, txtStatusDescription, jTextFieldBeanProperty);
 		autoBinding.bind();
+	}
+
+	@Override
+	public void refresh() {
+		updateStatusController.refresh();
 	}
 }

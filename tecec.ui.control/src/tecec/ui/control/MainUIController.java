@@ -14,7 +14,7 @@ public class MainUIController extends BaseController implements IMainUIControlle
 	private IMonographViewerUI monographViewerUI;
 	private IProfileViewerUI profileViewerUI;	
 	private IStageViewerUI stageViewerUI;
-	private IPermissionViewerUI permissionViewerUI;
+	private IAccountViewerUI accountViewerUI;
 
 	public MainUIController(IAreaViewerUI areaViewerUI,
 			IAdvisorViewerUI advisorViewerUI, IStudentViewerUI studentViewerUI,
@@ -22,8 +22,7 @@ public class MainUIController extends BaseController implements IMainUIControlle
 			IStatusViewerUI statusViewerUI,
 			IMonographViewerUI monographViewerUI,
 			IProfileViewerUI profileViewerUI, IStageViewerUI stageViewerUI,
-			IPermissionViewerUI permissionViewerUI) {
-		super();
+			IAccountViewerUI accountViewerUI) {
 		this.areaViewerUI = areaViewerUI;
 		this.advisorViewerUI = advisorViewerUI;
 		this.studentViewerUI = studentViewerUI;
@@ -33,56 +32,72 @@ public class MainUIController extends BaseController implements IMainUIControlle
 		this.monographViewerUI = monographViewerUI;
 		this.profileViewerUI = profileViewerUI;
 		this.stageViewerUI = stageViewerUI;
-		this.permissionViewerUI = permissionViewerUI;
+		this.accountViewerUI = accountViewerUI;
 	}
 
 	@Override
 	public void showStudentViewerUI() {
+		this.studentViewerUI.refresh();
 		this.studentViewerUI.setVisible(true);
 	}
 
 	@Override
 	public void showCouseViewerUI() {
+		this.courseViewerUI.refresh();
 		this.courseViewerUI.setVisible(true);
 	}
 
 	@Override
 	public void showAdvisorViewerUI() {
+		this.advisorViewerUI.refresh();
 		this.advisorViewerUI.setVisible(true);
 	}
 
 	@Override
 	public void showAreaViewerUI() {
+		this.areaViewerUI.refresh();
 		this.areaViewerUI.setVisible(true);
 	}
 
 	@Override
 	public void showActivityViewerUI() {
+		this.activityViewerUI.refresh();
 		this.activityViewerUI.setVisible(true);
 	}
 
 	@Override
 	public void showStatusViewerUI(){
+		this.statusViewerUI.refresh();
 		this.statusViewerUI.setVisible(true);
 	}
 
 	@Override
 	public void showMonographViewerUI() {
+		this.monographViewerUI.refresh();
 		this.monographViewerUI.setVisible(true);		
 	}
 
 	@Override
 	public void showProfileViewerUI() {
+		this.profileViewerUI.refresh();
 		this.profileViewerUI.setVisible(true);		
 	}
 	
 	@Override
 	public void showStageViewerUI () {
+		this.stageViewerUI.refresh();
 		this.stageViewerUI.setVisible(true);
 	}
 
 	@Override
-	public void showPermissionViewerUI() {
-		this.permissionViewerUI.setVisible(true);
+	public void showAccountViewerUI() {
+		this.accountViewerUI.refresh();
+		this.accountViewerUI.setVisible(true);
+	}
+
+	@Override
+	public void refresh() {
+		// TODO Auto-generated method stub
+		
 	}
 }

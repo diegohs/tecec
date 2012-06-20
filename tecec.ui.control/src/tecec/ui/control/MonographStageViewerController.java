@@ -202,4 +202,10 @@ public class MonographStageViewerController extends BaseController implements
 		}
 	}
 
+	@Override
+	public void refresh() {
+		this.loadCorrelatedStages();
+		this.loadStages();
+	}
+
 }

@@ -68,6 +68,7 @@ public class ProfileViewerController extends BaseController implements IProfileV
 
 	@Override
 	public void showNewProfileUI() {
+		this.newProfileUI.refresh();
 		this.newProfileUI.setVisible(true);
 		
 		super.notifyOfPropertyChange("profiles", null, getProfiles());
@@ -96,5 +97,10 @@ public class ProfileViewerController extends BaseController implements IProfileV
 		this.profileWriter.deleteProfile(this.selectedProfile.getpKProfile());
 		
 		super.notifyOfPropertyChange("profiles", null, getProfiles());
+	}
+
+	@Override
+	public void refresh() {
+		setNameFilter("");
 	}
 }

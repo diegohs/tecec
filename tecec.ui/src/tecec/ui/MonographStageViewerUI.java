@@ -234,4 +234,9 @@ public class MonographStageViewerUI extends JDialog implements IMonographStageVi
 		AutoBinding<IMonographStageViewerController, Stage, JTable, Stage> autoBinding_3 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, controller, iMonographStageViewerControllerBeanProperty_5, tblCorrelatedStages, jTableBeanProperty_1);
 		autoBinding_3.bind();
 	}
+
+	@Override
+	public void refresh() {
+		controller.refresh();
+	}
 }

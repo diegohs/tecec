@@ -2,9 +2,11 @@ package tecec.ui.contract.control;
 
 import java.util.List;
 
+import tecec.contract.RuleViolation;
+import tecec.contract.RuleViolationException;
 import tecec.dto.Student;
 
-public interface IStudentViewerController {
+public interface IStudentViewerController extends IRefreshable  {
 	void setNameFilter (String nameFilter);
 	String getNameFilter ();
 	
@@ -12,7 +14,8 @@ public interface IStudentViewerController {
 	Student getSelectedStudent ();
 	List <Student> getStudents();
 	
-	void deleteStudent();
+	RuleViolation getDeletionViolation();
+	void deleteStudent() throws RuleViolationException;
 	
 	boolean getCanUpdateStudent(); 
 	boolean getCanDeleteStudent();

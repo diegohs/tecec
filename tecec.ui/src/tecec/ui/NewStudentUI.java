@@ -144,4 +144,9 @@ public class NewStudentUI extends JDialog implements INewStudentUI {
 						jTextFieldBeanProperty_1);
 		autoBinding_1.bind();
 	}
+
+	@Override
+	public void refresh() {
+		newStudentController.refresh();
+	}
 }

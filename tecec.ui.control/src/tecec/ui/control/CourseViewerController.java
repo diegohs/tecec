@@ -2,6 +2,8 @@ package tecec.ui.control;
 
 import java.util.List;
 
+import tecec.contract.RuleViolation;
+import tecec.contract.RuleViolationException;
 import tecec.contract.reader.ICourseReader;
 import tecec.contract.writer.ICourseWriter;
 import tecec.dto.Course;
@@ -27,12 +29,10 @@ public class CourseViewerController extends BaseController implements ICourseVie
 	}
 	
 	@Override
-	public void setNameFilter(String nameFilter) {
-		String old = this.nameFilter;
-		
+	public void setNameFilter(String nameFilter) {		
 		this.nameFilter = nameFilter;
 		
-		super.notifyOfPropertyChange("nameFilter", old, nameFilter);
+		super.notifyOfPropertyChange("nameFilter", null, nameFilter);
 		super.notifyOfPropertyChange("courses", null, getCourses());
 	}
 
@@ -66,6 +66,7 @@ public class CourseViewerController extends BaseController implements ICourseVie
 
 	@Override
 	public void showNewCourseUI() {
+		this.newCourseUI.refresh();
 		this.newCourseUI.setVisible(true);
 		
 		super.notifyOfPropertyChange("courses", null, getCourses());
@@ -90,9 +91,31 @@ public class CourseViewerController extends BaseController implements ICourseVie
 	}
 
 	@Override
-	public void deleteCourse() {
+	public void deleteCourse() throws RuleViolationException {
+		RuleViolation violation = getDeletionViolation();
+		
+		if (violation != null) {
+			throw new RuleViolationException(violation);
+		}
+		
 		this.courseWriter.deleteCourse(this.selectedCourse.getPKCourse());
 		
 		super.notifyOfPropertyChange("courses", null, getCourses());
+	}
+
+	@Override
+	public void refresh() {
+		setNameFilter("");
+	}
+
+	@Override
+	public RuleViolation getDeletionViolation() {
+		boolean hasStudents = courseReader.doesCourseHaveStudents(this.selectedCourse.getPKCourse());
+		
+		if (hasStudents) {
+			return new RuleViolation("Não é possível excluir um curso que possui estudantes cadastrados.");
+		}
+		
+		return null;
 	}
 }

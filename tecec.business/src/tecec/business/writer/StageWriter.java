@@ -47,7 +47,7 @@ public class StageWriter implements IStageWriter {
 
 		return null;
 	}
-	
+
 	@Override
 	public RuleViolation getUpdateViolation(Stage newStage) {
 
@@ -97,22 +97,40 @@ public class StageWriter implements IStageWriter {
 	public void updateStage(String pKStage, String newName, String newYear)
 			throws RuleViolationException {
 
-		RuleViolation violation = getCreationViolation(newName, newYear);
-		if (violation != null)
-			throw new RuleViolationException(violation);
-
-
-		Stage stage = new Stage ();
+		Stage stage = new Stage();
+		
 		stage.setpKStage(pKStage);
 		stage.setName(newName);
 		stage.setYear(newYear);
-		
+
+		RuleViolation violation = getUpdateViolation(stage);
+
+		if (violation != null)
+			throw new RuleViolationException(violation);
+
 		this.stageRepository.updateStage(stage);
 	}
 
 	@Override
-	public void deleteStage(String pKStage) {
+	public void deleteStage(String pKStage) throws RuleViolationException {
+		RuleViolation violation = getDeletionViolation(pKStage);
+		
+		if (violation != null) {
+			throw new RuleViolationException(violation);
+		}
+		
 		this.stageRepository.deleteStage(pKStage);
+	}
+
+	@Override
+	public RuleViolation getDeletionViolation(String pKStage) {
+		boolean hasMonographies = this.stageRepository.doesStageHaveMonographies(pKStage);
+		
+		if (hasMonographies) {
+			return new RuleViolation("Não é possível excluir uma etapa que possui monografias associadas.");
+		}
+		
+		return null;
 	}
 
 }

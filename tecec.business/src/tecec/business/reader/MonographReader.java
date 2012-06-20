@@ -8,25 +8,36 @@ import tecec.dto.Monograph;
 
 public class MonographReader implements IMonographReader {
 	
-	private IMonographRepository mongraphRepository;
+	private IMonographRepository monographRepository;
 	
 	public MonographReader(IMonographRepository monographRepository){
-		this.mongraphRepository = monographRepository;
+		this.monographRepository = monographRepository;
 	}
 
 	@Override
 	public List<Monograph> getMonograph(String nameFilter) {
-		return this.mongraphRepository.getMonograph(nameFilter);
+		return this.monographRepository.getMonograph(nameFilter);
 	}
 
 	@Override
 	public Monograph getMonographByPK(String pKMonograph) {
-		return this.mongraphRepository.getMonographByPK(pKMonograph);
+		return this.monographRepository.getMonographByPK(pKMonograph);
 	}
 
 	@Override
 	public boolean doesMonographHaveHandIns(String pKMonograph, String pkStage) {
-		return this.mongraphRepository.doesMonographHaveHandIns(pKMonograph, pkStage);
+		return this.monographRepository.doesMonographHaveHandIns(pKMonograph, pkStage);
+	}
+
+	@Override
+	public Monograph getMonographByStudentAndCourse(String pKStudent,
+			String pKCourse) {
+		return this.monographRepository.getMonographByStudentAndCourse(pKStudent, pKCourse);
+	}
+
+	@Override
+	public List<Monograph> getMonographiesByCourse(String pKCourse) {
+		return this.monographRepository.getMonographiesByCourse(pKCourse);
 	}
 	
 	

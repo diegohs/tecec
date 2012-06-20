@@ -28,13 +28,7 @@ import javax.swing.border.TitledBorder;
 
 public class UpdateStageUI extends JDialog implements IUpdateStageUI {
 	
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-
-
 	private IUpdateStageController updateStageController;
 	
 
@@ -135,5 +129,11 @@ public class UpdateStageUI extends JDialog implements IUpdateStageUI {
 		BeanProperty<JComboBox, Object> jComboBoxBeanProperty = BeanProperty.create("selectedItem");
 		AutoBinding<IUpdateStageController, String, JComboBox, Object> autoBinding_1 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, updateStageController, iUpdateStageControllerBeanProperty_1, comboBox, jComboBoxBeanProperty);
 		autoBinding_1.bind();
+	}
+
+
+	@Override
+	public void refresh() {
+		updateStageController.refresh();
 	}
 }

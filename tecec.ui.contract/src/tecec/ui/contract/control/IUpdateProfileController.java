@@ -3,7 +3,7 @@ package tecec.ui.contract.control;
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
 
-public interface IUpdateProfileController {
+public interface IUpdateProfileController extends IRefreshable  {
 	void setPKProfile(String pKProfile);
 	void setProfileName(String name);
 	String getProfileName();

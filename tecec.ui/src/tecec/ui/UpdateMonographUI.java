@@ -37,13 +37,8 @@ import tecec.dto.Status;
 import javax.swing.border.TitledBorder;
 
 public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
-	/**
-	 * 
-	 */
 	
 	private IUpdateMonographController updateMonographController;
 
@@ -329,6 +324,11 @@ public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 	public void setPKMonograph(String pKMonograph) {
 		this.updateMonographController.setPKMonograph(pKMonograph);
 	}
+
+	@Override
+	public void refresh() {
+		updateMonographController.refresh();
+	}
 	protected void initDataBindings() {
 		BeanProperty<IUpdateMonographController, List<Course>> iUpdateMonographControllerBeanProperty_1 = BeanProperty.create("courses");
 		JComboBoxBinding<Course, IUpdateMonographController, JComboBox> jComboBinding = SwingBindings.createJComboBoxBinding(UpdateStrategy.READ, updateMonographController, iUpdateMonographControllerBeanProperty_1, cboCourse);
@@ -408,5 +408,10 @@ public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 		BeanProperty<JTextField, String> jTextFieldBeanProperty = BeanProperty.create("text");
 		AutoBinding<IUpdateMonographController, String, JTextField, String> autoBinding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, updateMonographController, iUpdateMonographControllerBeanProperty, txtMonographTitle, jTextFieldBeanProperty);
 		autoBinding.bind();
+		//
+		BeanProperty<IUpdateMonographController, Boolean> iUpdateMonographControllerBeanProperty_19 = BeanProperty.create("canSelectStudent");
+		BeanProperty<JComboBox, Boolean> jComboBoxBeanProperty_2 = BeanProperty.create("enabled");
+		AutoBinding<IUpdateMonographController, Boolean, JComboBox, Boolean> autoBinding_13 = Bindings.createAutoBinding(UpdateStrategy.READ, updateMonographController, iUpdateMonographControllerBeanProperty_19, cboStudent, jComboBoxBeanProperty_2);
+		autoBinding_13.bind();
 	}
 }

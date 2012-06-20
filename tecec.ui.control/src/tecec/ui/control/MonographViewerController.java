@@ -63,6 +63,7 @@ public class MonographViewerController extends BaseController implements IMonogr
 	public void setNameFilter(String nameFilter) {
 		this.nameFilter = nameFilter;
 
+		super.notifyOfPropertyChange("nameFilter", null, nameFilter);
 		super.notifyOfPropertyChange("monographs", null, getMonographs());
 	}
 
@@ -73,6 +74,7 @@ public class MonographViewerController extends BaseController implements IMonogr
 	
 	@Override
 	public void showNewMonographUI() {
+		this.newMonographUI.refresh();
 		this.newMonographUI.setVisible(true);
 		
 		super.notifyOfPropertyChange("monographs", null, getMonographs());
@@ -164,5 +166,10 @@ public class MonographViewerController extends BaseController implements IMonogr
 			monographRecords.add(record);
 		}
 		return monographRecords;
+	}
+
+	@Override
+	public void refresh() {
+		setNameFilter("");
 	}
 }

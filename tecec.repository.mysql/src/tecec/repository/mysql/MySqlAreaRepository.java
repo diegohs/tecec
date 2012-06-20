@@ -161,4 +161,16 @@ public class MySqlAreaRepository extends MySqlRepository implements
 		return getAreas(query, parameters);
 	}
 
+	@Override
+	public boolean doesAreaHaveMonographies(String pKArea) {
+		String query = " SELECT COUNT(*) " + 
+					   " FROM Area a " + 
+					   " INNER JOIN Monograph m ON a.PKArea = m.FKArea " + 
+					   " WHERE a.PKArea = :pKArea";
+		
+		SqlParameterSource parameters = new MapSqlParameterSource("pKArea", pKArea);
+		
+		return jdbcTemplate.queryForInt(query, parameters) > 0;
+	}
+
 }

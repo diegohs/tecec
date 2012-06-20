@@ -9,13 +9,15 @@ public interface IStudentWriter {
 
 	RuleViolation getUpdateViolation(String pkStudent, String newName,
 			String email);
+	
+	RuleViolation getDeletionViolation(String pKStudent);
 
 	void createStudent(String name, String email) throws RuleViolationException;
 
 	void updateStudent(String pkStudent, String newName, String email)
 			throws RuleViolationException;
 	
-	void deleteStudent (String pkStudent);
+	void deleteStudent (String pkStudent) throws RuleViolationException;
 	
 	void insertStudentCourse(String pKStudent, String pKCourse);
 	void deleteStudentCourse(String pKStudent, String pKCourse);

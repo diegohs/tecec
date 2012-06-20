@@ -1,6 +1,5 @@
 package tecec.ui.contract.view;
 
-public interface IUpdateStudentUI {
+public interface IUpdateStudentUI extends IRefreshableView {
 	void setpkStudent (String pkStudent);
-	void setVisible (boolean visible);
 }

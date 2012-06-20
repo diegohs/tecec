@@ -132,10 +132,10 @@ public class MySqlMonographRepository extends MySqlRepository implements
 		SqlParameterSource parameters = new MapSqlParameterSource("nameFilter",
 				"%" + nameFilter + "%");
 
-		return getMonograph(query, parameters);		
+		return getMonographies(query, parameters);		
 	}
 	
-	private List<Monograph> getMonograph(String query, SqlParameterSource parameters){
+	private List<Monograph> getMonographies(String query, SqlParameterSource parameters){
 		List<Monograph> result = jdbcTemplate.query(query, parameters,
 				new RowMapper<Monograph>() {
 			@Override
@@ -203,5 +203,35 @@ public class MySqlMonographRepository extends MySqlRepository implements
 		SqlParameterSource parameters = new MapSqlParameterSource(map);
 		
 		return jdbcTemplate.queryForInt(query, parameters) > 0;
+	}
+
+	@Override
+	public Monograph getMonographByStudentAndCourse(String pKStudent,
+			String pKCourse) {
+		String query = " SELECT * FROM Monograph WHERE FKStudent = :fKStudent AND FKCourse = :fKCourse";
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("fKStudent", pKStudent);
+		map.put("fKCourse", pKCourse);
+		
+		SqlParameterSource parameters = new MapSqlParameterSource(map);
+		
+		List<Monograph> monographies = getMonographies(query, parameters);
+		
+		if (monographies.size() > 0) {
+			return monographies.get(0);
+		}
+		
+		return null;
+	}
+
+	@Override
+	public List<Monograph> getMonographiesByCourse(String pKCourse) {
+		String query = " SELECT * FROM Monograph WHERE FKCourse = :fKCourse;";
+		
+		SqlParameterSource parameters = new MapSqlParameterSource("fKCourse", pKCourse);
+		
+		return getMonographies(query, parameters);
 	}
 }

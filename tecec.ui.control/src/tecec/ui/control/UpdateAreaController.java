@@ -27,7 +27,7 @@ public class UpdateAreaController extends BaseController implements
 	private int selectedAreaIndex;
 
 	@Override
-	public void setPKArea(String pKArea) {
+	public void setPKArea(String pKArea) {		
 		this.pKArea = pKArea;
 
 		Area area = this.areaReader.getAreaByPK(this.pKArea);
@@ -37,25 +37,27 @@ public class UpdateAreaController extends BaseController implements
 
 		List<Area> areas = getAreas();
 
+		super.notifyOfPropertyChange("areas", null, areas);
+		
+		setSelectedAreaIndex(-1);
+
 		if (area.getfKMainArea() != null && !area.getfKMainArea().isEmpty()) {
 
 			for (int i = 0; i < areas.size(); i++) {
 				if (area.getfKMainArea().equals(areas.get(i).getpKArea())) {
-					this.selectedAreaIndex = i;
+					setSelectedAreaIndex(i);
 
 					break;
 				}
 			}
 		}
-
-		super.notifyOfPropertyChange("areas", null, areas);
-		super.notifyOfPropertyChange("selectedAreaIndex", null,
-				this.selectedAreaIndex);
 	}
 
 	@Override
 	public void setSelectedAreaIndex(int i) {
 		this.selectedAreaIndex = i;
+		
+		super.notifyOfPropertyChange("selectedAreaIndex", null, i);
 	}
 
 	@Override
@@ -139,6 +141,8 @@ public class UpdateAreaController extends BaseController implements
 	@Override
 	public void setSelectedArea(Area area) {
 		this.selectedArea = area;
+		
+		super.notifyOfPropertyChange("selectedArea", null, area);
 	}
 
 	@Override
@@ -146,11 +150,11 @@ public class UpdateAreaController extends BaseController implements
 		Area area = getArea();
 
 		this.areaWriter.updateArea(area);
+	}
 
-		this.setSelectedArea(null);
-		this.setAreaName("");
-		this.setAreaDescription("");
-
+	@Override
+	public void refresh() {
+		setPKArea(this.pKArea);
 	}
 
 }

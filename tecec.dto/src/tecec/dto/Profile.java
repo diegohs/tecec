@@ -20,4 +20,8 @@ public class Profile {
 		this.pKProfile = pKProfile;
 	}
 
+	@Override
+	public String toString() {
+		return this.getName();
+	}
 }

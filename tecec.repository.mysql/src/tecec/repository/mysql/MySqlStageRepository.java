@@ -33,9 +33,8 @@ public class MySqlStageRepository extends MySqlRepository implements IStageRepos
 		
 		Stage search = this.getStageByNameAndYear(stage.getName(), stage.getYear());
 		
-		if (search != null)
-			throw new IllegalArgumentException ("Já existe outro estágio cadastrado com estas descrições.");
-		
+		if (search != null && !stage.getpKStage().equals(search.getpKStage()))
+			throw new IllegalArgumentException ("Já existe outro estágio cadastrado com estas descrições.");		
 		
 		if (stage.getpKStage() == null || stage.getpKStage().trim().isEmpty()) {
 			stage.setpKStage(UUID.randomUUID().toString());
@@ -64,10 +63,7 @@ public class MySqlStageRepository extends MySqlRepository implements IStageRepos
 
 	@Override
 	public void updateStage(Stage stage) {
-		Stage search = this.getStageByNameAndYear(stage.getName(), stage.getYear());
-		
-		if (search != null)
-			throw new IllegalArgumentException ("Já existe outro estágio cadastrado com estas descrições.");
+		validateStage(stage);
 
 		String query = "UPDATE Stage Set Name = :name, Year = :year WHERE PKStage = :pKStage;";
 		SqlParameterSource parameters = new BeanPropertySqlParameterSource (stage);
@@ -161,6 +157,18 @@ public class MySqlStageRepository extends MySqlRepository implements IStageRepos
 		SqlParameterSource parameters = new MapSqlParameterSource("fKMonograph", pKMonograph);
 		
 		return getStages(query, parameters);
+	}
+
+	@Override
+	public boolean doesStageHaveMonographies(String pKStage) {
+		String query = " SELECT COUNT(*) " + 
+					   " FROM Stage s " + 
+					   " INNER JOIN MonographStage ms ON s.PKStage = ms.FKStage " + 
+					   " WHERE s.PKStage = :pKStage;";
+		
+		SqlParameterSource parameters = new MapSqlParameterSource("pKStage", pKStage);
+		
+		return jdbcTemplate.queryForInt(query, parameters) > 0;
 	}
 	
 }

@@ -35,9 +35,6 @@ import javax.swing.border.TitledBorder;
 
 public class UpdateAreaUI extends JDialog implements IUpdateAreaUI {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private final JPanel contentPanel = new JPanel();
@@ -83,6 +80,7 @@ public class UpdateAreaUI extends JDialog implements IUpdateAreaUI {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		{
+<<<<<<< OURS
 			JPanel panel = new JPanel();
 			panel.setBorder(new TitledBorder(null, "Atualizar \u00C1rea:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			panel.setBounds(10, 11, 414, 239);
@@ -103,6 +101,24 @@ public class UpdateAreaUI extends JDialog implements IUpdateAreaUI {
 					 * 
 					 */
 					private static final long serialVersionUID = 1L;
+=======
+			JLabel lblAtualizarrea = new JLabel("Atualizar Ã�rea");
+			lblAtualizarrea.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
+			contentPanel.add(lblAtualizarrea, "cell 1 0,alignx center");
+		}
+		{
+			JLabel lblNewLabel = new JLabel("Super \u00C1rea:");
+			contentPanel.add(lblNewLabel, "flowx,cell 1 2");
+		}
+		{
+			cboMainArea = new JComboBox();
+			
+			cboMainArea.setRenderer(new DefaultListCellRenderer(){
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+>>>>>>> THEIRS
 
 					@Override
 					public Component getListCellRendererComponent(JList list,
@@ -154,6 +170,11 @@ public class UpdateAreaUI extends JDialog implements IUpdateAreaUI {
 			}
 		}
 		initDataBindings();
+	}
+
+	@Override
+	public void refresh() {
+		updateAreaController.refresh();
 	}
 	protected void initDataBindings() {
 		BeanProperty<IUpdateAreaController, String> iUpdateAreaControllerBeanProperty = BeanProperty.create("areaName");

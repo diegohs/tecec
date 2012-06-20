@@ -10,4 +10,5 @@ public interface IAreaRepository {
 	tecec.dto.Area getAreaByPK(String pKArea);
 	List<tecec.dto.Area> getAreas(String nameFilter);
 	List<tecec.dto.Area> getSubAreas(String pKArea);
+	boolean doesAreaHaveMonographies(String pKArea);
 }

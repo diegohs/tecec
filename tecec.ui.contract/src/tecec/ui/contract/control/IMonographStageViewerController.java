@@ -6,7 +6,7 @@ import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
 import tecec.dto.Stage;
 
-public interface IMonographStageViewerController {
+public interface IMonographStageViewerController extends IRefreshable  {
 	void setMonograph(String pKMonograph);
 		
 	List<Stage> getCorrelatedStages();

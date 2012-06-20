@@ -36,9 +36,12 @@ import java.awt.FlowLayout;
 public class ActivityViewerUI extends JDialog implements
 		tecec.ui.contract.view.IActivityViewerUI {
 
+<<<<<<< OURS
 	/**
 	 *
 	 */
+=======
+>>>>>>> THEIRS
 	private static final long serialVersionUID = 1L;
 	private tecec.ui.contract.control.IActivityViewerController activityViewerController;
 
@@ -201,5 +204,10 @@ public class ActivityViewerUI extends JDialog implements
 		BeanProperty<JTable, Activity> jTableBeanProperty = BeanProperty.create("selectedElement");
 		AutoBinding<IActivityViewerController, Activity, JTable, Activity> autoBinding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, activityViewerController, iActivityViewerControllerBeanProperty, tblActivities, jTableBeanProperty);
 		autoBinding.bind();
+	}
+
+	@Override
+	public void refresh() {
+		activityViewerController.refresh();
 	}
 }

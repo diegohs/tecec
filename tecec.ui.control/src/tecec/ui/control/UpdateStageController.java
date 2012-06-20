@@ -80,6 +80,7 @@ public class UpdateStageController extends BaseController implements IUpdateStag
 		
 		this.stageWriter.updateStage(this.pKStage, this.stageName, this.stageYear);
 		
+		refresh();
 	}
 
 	@Override
@@ -89,6 +90,11 @@ public class UpdateStageController extends BaseController implements IUpdateStag
 		stage.setName(this.stageName);
 		stage.setYear (this.stageYear);
 		return this.stageWriter.getUpdateViolation(stage);
+	}
+
+	@Override
+	public void refresh() {
+		setPKStage(this.pKStage);
 	}
 	
 	

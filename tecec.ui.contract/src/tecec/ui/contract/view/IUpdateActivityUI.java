@@ -1,6 +1,5 @@
 package tecec.ui.contract.view;
 
-public interface IUpdateActivityUI {
+public interface IUpdateActivityUI extends IRefreshableView {
 	void setPKActivity(String pKActivity);
-	void setVisible(boolean visible);
 }

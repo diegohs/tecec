@@ -1,6 +1,5 @@
 package tecec.ui.contract.view;
 
-public interface IMonographStageViewerUI {
+public interface IMonographStageViewerUI extends IRefreshableView {
 	void setPKMonograph(String pKMonograph);
-	void setVisible(boolean visible);
 }

@@ -11,16 +11,17 @@ import tecec.dto.Status;
 
 import tecec.ui.contract.control.IUpdateStatusController;
 
-public class UpdateStatusController extends BaseController implements 
-	IUpdateStatusController {
-	
+public class UpdateStatusController extends BaseController implements
+		IUpdateStatusController {
+
 	private String pKStatus;
 	private String statusDescription;
 	private IStatusWriter statusWriter;
-	private IStatusReader statusReader;	
-	
+	private IStatusReader statusReader;
+
 	/* Construtor */
-	public UpdateStatusController (IStatusWriter statusWriter, IStatusReader statusReader) {
+	public UpdateStatusController(IStatusWriter statusWriter,
+			IStatusReader statusReader) {
 		this.statusWriter = statusWriter;
 		this.statusReader = statusReader;
 	}
@@ -28,19 +29,18 @@ public class UpdateStatusController extends BaseController implements
 	@Override
 	public void setPKStatus(String pKStatus) {
 		this.pKStatus = pKStatus;
-		
+
 		Status status = this.statusReader.getStatusByPK(pKStatus);
-		
-		if (status != null)
-			this.setStatusDescription(status.getDescription());
+
+		this.setStatusDescription(status.getDescription());
 	}
 
 	@Override
 	public void setStatusDescription(String description) {
 		String old = this.statusDescription;
-		this.statusDescription = description;		
+		this.statusDescription = description;
 		super.notifyOfPropertyChange("statusDescription", old, description);
-		
+
 	}
 
 	@Override
@@ -55,11 +55,18 @@ public class UpdateStatusController extends BaseController implements
 			throw new RuleViolationException(violation);
 		}
 		this.statusWriter.updateStatus(this.pKStatus, this.statusDescription);
-				
+
+		refresh();
 	}
 
 	@Override
 	public RuleViolation getUpdateViolation() {
-		return this.statusWriter.getUpdateViolation(this.pKStatus,this.statusDescription);
+		return this.statusWriter.getUpdateViolation(this.pKStatus,
+				this.statusDescription);
+	}
+
+	@Override
+	public void refresh() {
+		setPKStatus(this.pKStatus);
 	}
 }

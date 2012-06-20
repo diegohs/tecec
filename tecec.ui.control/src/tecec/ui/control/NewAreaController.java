@@ -63,10 +63,7 @@ public class NewAreaController extends BaseController implements
 	public void createArea() throws RuleViolationException {
 		this.areaWriter.createArea(getArea());
 
-		this.setAreaName("");
-		this.setDescription("");
-		
-		super.notifyOfPropertyChange("areas", null, getAreas());
+		refresh();
 	}
 
 	private Area getArea() {
@@ -123,5 +120,13 @@ public class NewAreaController extends BaseController implements
 	@Override
 	public int getSelectedAreaIndex() {
 		return this.selectedAreaIndex;
+	}
+
+	@Override
+	public void refresh() {		
+		this.setAreaName("");
+		this.setDescription("");
+		
+		super.notifyOfPropertyChange("areas", null, getAreas());
 	}
 }

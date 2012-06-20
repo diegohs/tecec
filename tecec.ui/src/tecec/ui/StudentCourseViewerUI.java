@@ -9,16 +9,13 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import tecec.contract.RuleViolation;
-import tecec.ui.contract.control.IMonographStageViewerController;
 import tecec.ui.contract.control.IStudentCourseViewerController;
-import tecec.ui.contract.view.IMonographStageViewerUI;
 import tecec.ui.contract.view.IStudentCourseViewerUI;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import org.jdesktop.beansbinding.BeanProperty;
 import java.util.List;
-import tecec.dto.Stage;
 import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.SwingBindings;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
@@ -236,5 +233,10 @@ public class StudentCourseViewerUI extends JDialog implements IStudentCourseView
 		BeanProperty<IStudentCourseViewerController, Boolean> iStudentCourseViewerControllerBeanProperty_5 = BeanProperty.create("canInsert");
 		AutoBinding<IStudentCourseViewerController, Boolean, JButton, Boolean> autoBinding_3 = Bindings.createAutoBinding(UpdateStrategy.READ, controller, iStudentCourseViewerControllerBeanProperty_5, btnInsert, jButtonBeanProperty);
 		autoBinding_3.bind();
+	}
+
+	@Override
+	public void refresh() {
+		controller.refresh();
 	}
 }

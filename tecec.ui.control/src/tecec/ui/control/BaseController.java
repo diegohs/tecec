@@ -3,7 +3,7 @@ package tecec.ui.control;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public abstract class BaseController {
+public abstract class BaseController  {
 	private final PropertyChangeSupport propertyChanger;
 
 	public BaseController() {

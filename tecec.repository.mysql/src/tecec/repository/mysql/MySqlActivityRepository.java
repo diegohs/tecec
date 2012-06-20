@@ -125,4 +125,13 @@ public class MySqlActivityRepository extends MySqlRepository implements
 		return null;
 	}
 
+	@Override
+	public List<Activity> getActivitiesByStage(String pKStage) {
+		String query = " SELECT * FROM Activity WHERE FKStage = :fKStage";
+
+		SqlParameterSource parameters = new MapSqlParameterSource("fKStage", pKStage);
+
+		return getActivites(query, parameters);
+	}
+
 }

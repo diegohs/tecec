@@ -33,10 +33,14 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 public class ProfileViewerUI extends JFrame implements IProfileViewerUI {
+<<<<<<< OURS
 
 	/**
 	 *
 	 */
+=======
+	
+>>>>>>> THEIRS
 	private static final long serialVersionUID = 1L;
 	private IProfileViewerController profileViewerController;
 
@@ -174,5 +178,10 @@ public class ProfileViewerUI extends JFrame implements IProfileViewerUI {
 		BeanProperty<IProfileViewerController, Boolean> iProfileViewerControllerBeanProperty_4 = BeanProperty.create("canDeleteProfile");
 		AutoBinding<IProfileViewerController, Boolean, JButton, Boolean> autoBinding_3 = Bindings.createAutoBinding(UpdateStrategy.READ, profileViewerController, iProfileViewerControllerBeanProperty_4, btnDeleteProfile, jButtonBeanProperty);
 		autoBinding_3.bind();
+	}
+
+	@Override
+	public void refresh() {
+		profileViewerController.refresh();	
 	}
 }

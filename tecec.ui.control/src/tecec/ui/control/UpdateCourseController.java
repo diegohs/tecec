@@ -8,7 +8,8 @@ import tecec.dto.Course;
 
 import tecec.ui.contract.control.IUpdateCourseController;
 
-public class UpdateCourseController extends BaseController implements IUpdateCourseController {
+public class UpdateCourseController extends BaseController implements
+		IUpdateCourseController {
 
 	private String pKCourse;
 	private String courseName;
@@ -16,31 +17,30 @@ public class UpdateCourseController extends BaseController implements IUpdateCou
 	private String courseTurn;
 	private ICourseWriter courseWriter;
 	private ICourseReader courseReader;
-	
-	public UpdateCourseController(ICourseWriter courseWriter, ICourseReader courseReader) {
+
+	public UpdateCourseController(ICourseWriter courseWriter,
+			ICourseReader courseReader) {
 		this.courseWriter = courseWriter;
 		this.courseReader = courseReader;
 	}
-	
+
 	@Override
 	public void setPKCourse(String pKCourse) {
 		this.pKCourse = pKCourse;
-		
+
 		Course course = this.courseReader.getCourseByPK(pKCourse);
-		
-		if (course != null) {
-			this.setCourseName(course.getName());
-			this.setCourseTurn(course.getTurn());
-			this.setCourseYear(course.getYear());
-		}
+
+		this.setCourseName(course.getName());
+		this.setCourseTurn(course.getTurn());
+		this.setCourseYear(course.getYear());
 	}
 
 	@Override
 	public void setCourseName(String name) {
 		String old = this.courseName;
-		
+
 		this.courseName = name;
-		
+
 		super.notifyOfPropertyChange("courseName", old, name);
 	}
 
@@ -52,32 +52,35 @@ public class UpdateCourseController extends BaseController implements IUpdateCou
 	@Override
 	public void updateCourse() throws RuleViolationException {
 		RuleViolation violation = getUpdateViolation();
-		
+
 		if (violation != null) {
 			throw new RuleViolationException(violation);
 		}
+
+		this.courseWriter.updateCourse(this.pKCourse, this.courseName,
+				this.courseTurn, this.courseYear);
 		
-		this.courseWriter.updateCourse(this.pKCourse, this.courseName, this.courseTurn, this.courseYear);
+		refresh();
 	}
 
 	@Override
 	public void setCourseTurn(String turn) {
 		String old = this.courseTurn;
 		this.courseTurn = turn;
-		
+
 		super.notifyOfPropertyChange("courseTurn", old, turn);
-		super.notifyOfPropertyChange("canUpdate", null, getCanUpdate());		
-		
+		super.notifyOfPropertyChange("canUpdate", null, getCanUpdate());
+
 	}
 
 	@Override
 	public void setCourseYear(String year) {
 		String old = this.courseYear;
 		this.courseYear = year;
-		
+
 		super.notifyOfPropertyChange("courseYear", old, year);
-		super.notifyOfPropertyChange("canUpdate", null, getCanUpdate());	
-		
+		super.notifyOfPropertyChange("canUpdate", null, getCanUpdate());
+
 	}
 
 	@Override
@@ -92,7 +95,7 @@ public class UpdateCourseController extends BaseController implements IUpdateCou
 
 	@Override
 	public RuleViolation getUpdateViolation() {
-		Course course = new Course ();
+		Course course = new Course();
 		course.setPKCourse(this.pKCourse);
 		course.setName(this.courseName);
 		course.setTurn(this.courseTurn);
@@ -102,10 +105,15 @@ public class UpdateCourseController extends BaseController implements IUpdateCou
 
 	@Override
 	public boolean getCanUpdate() {
-		return this.courseName!= null && this.courseYear != null && this.courseTurn != null
-				&& !this.courseName.trim().isEmpty() && !this.courseTurn.trim().isEmpty() &&
-				!this.courseYear.trim().isEmpty();
+		return this.courseName != null && this.courseYear != null
+				&& this.courseTurn != null && !this.courseName.trim().isEmpty()
+				&& !this.courseTurn.trim().isEmpty()
+				&& !this.courseYear.trim().isEmpty();
 	}
-	
-	
+
+	@Override
+	public void refresh() {
+		setPKCourse(this.pKCourse);
+	}
+
 }

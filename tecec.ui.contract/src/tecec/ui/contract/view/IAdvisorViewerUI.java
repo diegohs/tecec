@@ -1,5 +1,4 @@
 package tecec.ui.contract.view;
 
-public interface IAdvisorViewerUI {
-	void setVisible(boolean visible);
+public interface IAdvisorViewerUI extends IRefreshableView {
 }

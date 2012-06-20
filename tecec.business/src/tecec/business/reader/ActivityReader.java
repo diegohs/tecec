@@ -24,4 +24,9 @@ public class ActivityReader implements IActivityReader {
 		return this.activityRepository.getActivityByPK(pKActivity);
 	}
 
+	@Override
+	public List<Activity> getActivitiesByStage(String pKStage) {
+		return this.activityRepository.getActivitiesByStage(pKStage);
+	}
+
 }

@@ -173,4 +173,8 @@ public class NewAreaUI extends JDialog implements INewAreaUI {
 		AutoBinding<INewAreaController, Area, JComboBox, Object> autoBinding_4 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, newAreaController, iNewAreaControllerBeanProperty_5, cboAreas, jComboBoxBeanProperty_1);
 		autoBinding_4.bind();
 	}
+	@Override
+	public void refresh() {
+		newAreaController.refresh();
+	}
 }

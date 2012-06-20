@@ -9,11 +9,13 @@ public interface IStageWriter {
 	RuleViolation getCreationViolation(String name, String year);
 
 	RuleViolation getUpdateViolation(Stage newStage);
+	
+	RuleViolation getDeletionViolation(String pKStage);
 
 	void createStage(String name, String year) throws RuleViolationException;
 
 	void updateStage(String pKStage, String newName, String newYear)
 			throws RuleViolationException;
 	
-	void deleteStage(String pKStage);	
+	void deleteStage(String pKStage) throws RuleViolationException;	
 }

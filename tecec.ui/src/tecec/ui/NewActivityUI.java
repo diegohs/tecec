@@ -179,4 +179,8 @@ public class NewActivityUI extends JDialog implements INewActivityUI {
 		AutoBinding<INewActivityController, Stage, JComboBox, Object> autoBinding_5 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, newActivityController, iNewActivityControllerBeanProperty_6, cboStage, jComboBoxBeanProperty_1);
 		autoBinding_5.bind();
 	}
+	@Override
+	public void refresh() {
+		newActivityController.refresh();
+	}
 }

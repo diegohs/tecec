@@ -20,9 +20,12 @@ import org.jdesktop.beansbinding.BeanProperty;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
+<<<<<<< OURS
 
 import javax.swing.border.TitledBorder;
 import java.awt.Dimension;
+=======
+>>>>>>> THEIRS
 
 public class UpdateStudentUI extends JDialog implements IUpdateStudentUI {
 
@@ -150,5 +153,10 @@ public class UpdateStudentUI extends JDialog implements IUpdateStudentUI {
 		BeanProperty<JButton, Boolean> jButtonBeanProperty = BeanProperty.create("enabled");
 		AutoBinding<IUpdateStudentController, Boolean, JButton, Boolean> autoBinding_2 = Bindings.createAutoBinding(UpdateStrategy.READ, updateStudentController, iUpdateStudentControllerBeanProperty_2, btnUpdate, jButtonBeanProperty);
 		autoBinding_2.bind();
+	}
+
+	@Override
+	public void refresh() {
+		updateStudentController.refresh();
 	}
 }

@@ -18,5 +18,6 @@ public interface IAdvisorRepository {
 	Advisor getAdvisorByEmail(String email);
 
 	List<Advisor> getAdvisors(String nameFilter);
-
+	
+	boolean doesAdviseAnyMonograph(String pKAdvisor);
 }

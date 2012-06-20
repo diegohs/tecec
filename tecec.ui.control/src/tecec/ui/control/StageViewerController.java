@@ -3,6 +3,8 @@ package tecec.ui.control;
 import java.util.List;
 
 
+import tecec.contract.RuleViolation;
+import tecec.contract.RuleViolationException;
 import tecec.contract.reader.IStageReader;
 
 import tecec.contract.writer.IStageWriter;
@@ -75,7 +77,7 @@ public class StageViewerController extends BaseController implements IStageViewe
 	}
 
 	@Override
-	public void deleteStage() {
+	public void deleteStage() throws RuleViolationException {
 		this.stageWriter.deleteStage(this.selectedStage.getpKStage());
 		super.notifyOfPropertyChange("stages", null, getStages());
 
@@ -94,6 +96,7 @@ public class StageViewerController extends BaseController implements IStageViewe
 
 	@Override
 	public void showNewStageUI() {
+		this.newStageUI.refresh();
 		this.newStageUI.setVisible(true);
 		super.notifyOfPropertyChange("stages", null, getStages());		
 		
@@ -104,5 +107,15 @@ public class StageViewerController extends BaseController implements IStageViewe
 		this.updateStageUI.setpKStage(this.selectedStage.getpKStage());
 		this.updateStageUI.setVisible(true);
 		super.notifyOfPropertyChange("stages", null, getStages());
+	}
+
+	@Override
+	public void refresh() {
+		setNameFilter("");
+	}
+
+	@Override
+	public RuleViolation getDeletionViolation() {
+		return this.stageWriter.getDeletionViolation(this.selectedStage.getpKStage());
 	}
 }

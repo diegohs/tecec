@@ -6,7 +6,7 @@ import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
 import tecec.dto.Course;
 
-public interface IStudentCourseViewerController {
+public interface IStudentCourseViewerController extends IRefreshable  {
 	void setPKStudent(String pKStudent);
 	
 	RuleViolation getInsertViolation();

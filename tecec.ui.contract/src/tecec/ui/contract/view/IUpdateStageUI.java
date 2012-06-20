@@ -1,7 +1,5 @@
 package tecec.ui.contract.view;
 
-public interface IUpdateStageUI {
+public interface IUpdateStageUI extends IRefreshableView {
 	void setpKStage(String pKStage);
-	void setVisible(boolean visible);
-
 }

@@ -75,6 +75,7 @@ public class UpdateStudentController extends BaseController implements
 		this.studentWriter.updateStudent(this.pkStudent, this.studentName,
 				this.studentEmail);
 
+		refresh();
 	}
 
 	@Override
@@ -92,5 +93,10 @@ public class UpdateStudentController extends BaseController implements
 	public void showStudentCourseUI() {
 		this.studentCourseViewerUI.setPKStudent(this.pkStudent);
 		this.studentCourseViewerUI.setVisible(true);
+	}
+
+	@Override
+	public void refresh() {
+		setPKStudent(this.pkStudent);
 	}
 }

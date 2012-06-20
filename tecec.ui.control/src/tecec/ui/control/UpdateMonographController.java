@@ -1,5 +1,6 @@
 package tecec.ui.control;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import tecec.contract.RuleViolation;
@@ -53,7 +54,6 @@ public class UpdateMonographController extends BaseController implements IUpdate
 	private int selectedAdvisorIndex;
 	
 	/*Coadvisor*/
-	private IAdvisorReader coadvisorReader;
 	private Advisor selectedCoadvisor;
 	private int selectedCoadvisorIndex;
 	
@@ -67,7 +67,7 @@ public class UpdateMonographController extends BaseController implements IUpdate
 	/*Constructor*/
 
 	public UpdateMonographController (IMonographReader monographReader, IMonographWriter monographWriter, ICourseReader courseReader, IAreaReader areaReader,
-			IStudentReader studentReader, IAdvisorReader advisorReader, IStatusReader statusReader, IAdvisorReader coadvisorReader, IMonographStageViewerUI monographViewerUI) {
+			IStudentReader studentReader, IAdvisorReader advisorReader, IStatusReader statusReader, IMonographStageViewerUI monographViewerUI) {
 		this.monographWriter = monographWriter;
 		this.monographReader = monographReader;
 		this.courseReader = courseReader;
@@ -75,8 +75,14 @@ public class UpdateMonographController extends BaseController implements IUpdate
 		this.studentReader = studentReader;
 		this.advisorReader = advisorReader;
 		this.statusReader = statusReader;
-		this.coadvisorReader = coadvisorReader;
 		this.monographStageUI = monographViewerUI;
+		
+		setSelectedAdvisorIndex(-1);
+		setSelectedAreaIndex(-1);
+		setSelectedCoadvisorIndex(-1);
+		setSelectedCourseIndex(-1);
+		setSelectedStatusIndex(-1);
+		setSelectedStudentIndex(-1);
 	}
 	
 
@@ -111,84 +117,86 @@ public class UpdateMonographController extends BaseController implements IUpdate
 		this.setMonographTitle(monograph.getTitle());
 		
 		List<Advisor> advisors = getAdvisors();
-		
-		if(monograph.getfKAdvisor() != null && !monograph.getfKAdvisor().isEmpty()){
-			for(int i=0;i<advisors.size();i++){
-				if(monograph.getfKAdvisor().equals(advisors.get(i).getPKAdvisor())){
-					this.selectedAdvisorIndex = i;
-					break;
-				}
-			}
-		}
-		
 		List<Area> areas = getAreas();
-		
-		if(monograph.getfKArea() != null && !monograph.getfKArea().isEmpty()){
-			for(int i=0;i<areas.size();i++){
-				if(monograph.getfKArea().equals(areas.get(i).getpKArea())){
-					this.selectedAreaIndex = i;
-					break;
-				}
-			}
-		}
-		
-		List<Advisor> coadvisors = getAdvisors();
-		
-		if(monograph.getfKCoadvisor() != null && !monograph.getfKCoadvisor().isEmpty()){
-			for(int i=0;i<coadvisors.size();i++){
-				if(monograph.getfKCoadvisor().equals(coadvisors.get(i).getPKAdvisor())){
-					this.selectedCoadvisorIndex = i;
-					break;
-				}
-			}
-		}
-		
+		List<Advisor> coadvisors = getCoadvisors();		
 		List<Course> courses = getCourses();
-		
-		if(monograph.getfKCourse() != null && !monograph.getfKCourse().isEmpty()){
-			for(int i=0;i<courses.size();i++){
-				if(monograph.getfKCourse().equals(courses.get(i).getPKCourse())){
-					this.selectedCourseIndex = i;
-					break;
-				}
-			}
-		}
-		
-		List<Status> statuses = getStatus();
-		
-		if(monograph.getfKStatus() != null && !monograph.getfKStatus().isEmpty()){
-			for(int i=0;i<statuses.size();i++){
-				if(monograph.getfKStatus().equals(statuses.get(i).getpKStatus())){
-					this.selectedStatusIndex = i;
-					break;
-				}
-			}
-		}
-		
+		List<Status> statuses = getStatus();		
 		List<Student> students = getStudents();
-		
-		if(monograph.getfKStudent() != null && !monograph.getfKStudent().isEmpty()){
-			for(int i=0;i<students.size();i++){
-				if(monograph.getfKStudent().equals(students.get(i).getPKStudent())){
-					this.selectedStudentIndex = i;
-					break;
-				}
-			}
-		}
 		
 		super.notifyOfPropertyChange("areas", null, areas);
 		super.notifyOfPropertyChange("advisors", null, advisors);
 		super.notifyOfPropertyChange("coadvisors", null, coadvisors);
 		super.notifyOfPropertyChange("statuses", null, statuses);
 		super.notifyOfPropertyChange("students", null, students);
-		super.notifyOfPropertyChange("courses", null, courses);
-		super.notifyOfPropertyChange("selectedAdvisorIndex", null,	this.selectedAdvisorIndex);
-		super.notifyOfPropertyChange("selectedAreaIndex", null,	this.selectedAreaIndex);
-		super.notifyOfPropertyChange("selectedCoadvisorIndex", null,	this.selectedCoadvisorIndex);
-		super.notifyOfPropertyChange("selectedCourseIndex", null,	this.selectedCourseIndex);
-		super.notifyOfPropertyChange("selectedStatusIndex", null,	this.selectedStatusIndex);
-		super.notifyOfPropertyChange("selectedStudentIndex", null,	this.selectedStudentIndex);
+		super.notifyOfPropertyChange("courses", null, courses);	
 		
+		setSelectedAdvisor(null);
+		setSelectedArea(null);
+		setSelectedCoadvisor(null);
+		setSelectedCourse(null);
+		setSelectedStatus(null);
+		setSelectedStudent(null);
+
+		setSelectedAdvisorIndex(-1);
+		setSelectedAreaIndex(-1);
+		setSelectedCoadvisorIndex(-1);
+		setSelectedCourseIndex(-1);
+		setSelectedStatusIndex(-1);
+		setSelectedStudentIndex(-1);
+		
+		if(monograph.getfKAdvisor() != null && !monograph.getfKAdvisor().isEmpty()){
+			for(int i=0;i<advisors.size();i++){
+				if(monograph.getfKAdvisor().equals(advisors.get(i).getPKAdvisor())){
+					setSelectedAdvisorIndex(i);
+					break;
+				}
+			}
+		}		
+		
+		if(monograph.getfKArea() != null && !monograph.getfKArea().isEmpty()){
+			for(int i=0;i<areas.size();i++){
+				if(monograph.getfKArea().equals(areas.get(i).getpKArea())){
+					setSelectedAreaIndex(i);
+					break;
+				}
+			}
+		}		
+		
+		if(monograph.getfKCoadvisor() != null && !monograph.getfKCoadvisor().isEmpty()){
+			for(int i=0;i<coadvisors.size();i++){
+				if(monograph.getfKCoadvisor().equals(coadvisors.get(i).getPKAdvisor())){
+					setSelectedCoadvisorIndex(i);
+					break;
+				}
+			}
+		}
+		
+		if(monograph.getfKCourse() != null && !monograph.getfKCourse().isEmpty()){
+			for(int i=0;i<courses.size();i++){
+				if(monograph.getfKCourse().equals(courses.get(i).getPKCourse())){
+					setSelectedCourseIndex(i);
+					break;
+				}
+			}
+		}		
+		
+		if(monograph.getfKStatus() != null && !monograph.getfKStatus().isEmpty()){
+			for(int i=0;i<statuses.size();i++){
+				if(monograph.getfKStatus().equals(statuses.get(i).getpKStatus())){
+					setSelectedStatusIndex(i);
+					break;
+				}
+			}
+		}
+		
+		if(monograph.getfKStudent() != null && !monograph.getfKStudent().isEmpty()){
+			for(int i=0;i<students.size();i++){
+				if(monograph.getfKStudent().equals(students.get(i).getPKStudent())){
+					this.setSelectedStudentIndex(i);
+					break;
+				}
+			}
+		}
 	}
 	
 	private Monograph getMonograph(){
@@ -203,7 +211,7 @@ public class UpdateMonographController extends BaseController implements IUpdate
 		if(this.selectedArea != null)
 			monograph.setfKArea(this.selectedArea.getpKArea());
 		
-		if(this.selectedCoadvisor != null)
+		if(this.selectedCoadvisor != null && this.selectedAdvisor.getPKAdvisor() != null)
 			monograph.setfKCoadvisor(this.selectedCoadvisor.getPKAdvisor());
 		
 		if(this.selectedCourse != null)
@@ -225,25 +233,7 @@ public class UpdateMonographController extends BaseController implements IUpdate
 		
 		this.monographWriter.updateMonograph(monograph);
 		
-		this.setSelectedAdvisor(null);
-		this.setSelectedArea(null);
-		this.setSelectedCoadvisor(null);
-		this.setSelectedCourse(null);
-		this.setSelectedStatus(null);
-		this.setSelectedStudent(null);
-		
-		this.setMonographTitle("");
-	}
-	
-	@Override
-	public List<Monograph> getMonographs() {
-		List<Monograph> monographs = this.monographReader.getMonograph("");
-		Monograph emptyMonograph = new Monograph();
-		
-		emptyMonograph.setTitle(" ");
-		monographs.add(0, emptyMonograph);
-		
-		return monographs;
+		refresh();
 	}
 	
 	/*End of Monograph*/
@@ -253,10 +243,6 @@ public class UpdateMonographController extends BaseController implements IUpdate
 	@Override
 	public List<Course> getCourses() {
 		List<Course> courses = this.courseReader.getCourses("");
-		Course emptyCourse = new Course();
-		
-		emptyCourse.setName(" ");
-		courses.add(0, emptyCourse);
 		
 		return courses;
 	}
@@ -269,11 +255,19 @@ public class UpdateMonographController extends BaseController implements IUpdate
 	@Override
 	public void setSelectedCourse(Course course) {
 		this.selectedCourse = course;
+
+		super.notifyOfPropertyChange("selectedCourse", null, course);
+		super.notifyOfPropertyChange("canSelectStudent", null,
+				getCanSelectStudent());
+		super.notifyOfPropertyChange("students", null,
+				getStudents());
 	}
 
 	@Override
 	public void setSelectedCourseIndex(int i) {
 		this.selectedCourseIndex = i;
+		
+		super.notifyOfPropertyChange("selectedCourseIndex", null, i);
 	}
 
 	@Override
@@ -288,10 +282,6 @@ public class UpdateMonographController extends BaseController implements IUpdate
 	@Override
 	public List<Area> getAreas() {
 		List<Area> areas = this.areaReader.getAreas("");
-		Area emptyArea = new Area();
-		
-		emptyArea.setDescription(" ");
-		areas.add(0, emptyArea);
 		
 		return areas;
 	}
@@ -304,11 +294,15 @@ public class UpdateMonographController extends BaseController implements IUpdate
 	@Override
 	public void setSelectedArea(Area area) {
 		this.selectedArea = area;
+		
+		super.notifyOfPropertyChange("selectedArea", null, area);
 	}
 
 	@Override
 	public void setSelectedAreaIndex(int i) {
 		this.selectedAreaIndex = i;
+		
+		super.notifyOfPropertyChange("selectedAreaIndex", null, i);
 	}
 
 	@Override
@@ -322,13 +316,15 @@ public class UpdateMonographController extends BaseController implements IUpdate
 
 	@Override
 	public List<Student> getStudents() {
-		List<Student> students = this.studentReader.getStudents("");
-		Student emptyStudent = new Student();
-		
-		emptyStudent.setName(" ");
-		students.add(0, emptyStudent);
-		
-		return students;
+		if (this.selectedCourse != null) {
+			List<Student> students = this.studentReader.getStudentsByCourse(this.selectedCourse.getPKCourse());
+
+			return students;
+		}
+		else
+		{
+			return new ArrayList<Student>();
+		}
 	}
 
 	@Override
@@ -339,11 +335,15 @@ public class UpdateMonographController extends BaseController implements IUpdate
 	@Override
 	public void setSelectedStudent(Student student) {
 		this.selectedStudent = student;
+		
+		super.notifyOfPropertyChange("selectedStudent", null, student);
 	}
 
 	@Override
 	public void setSelectedStudentIndex(int i) {
 		this.selectedStudentIndex = i;
+		
+		super.notifyOfPropertyChange("selectedStudentIndex", null, i);
 	}
 
 	@Override
@@ -358,10 +358,6 @@ public class UpdateMonographController extends BaseController implements IUpdate
 	@Override
 	public List<Advisor> getAdvisors() {
 		List<Advisor> advisors = this.advisorReader.getAdvisors("");
-		Advisor emptyAdvisor = new Advisor();
-		
-		emptyAdvisor.setName(" ");
-		advisors.add(0, emptyAdvisor);
 		
 		return advisors;
 	}
@@ -374,11 +370,15 @@ public class UpdateMonographController extends BaseController implements IUpdate
 	@Override
 	public void setSelectedAdvisor(Advisor advisor) {
 		this.selectedAdvisor = advisor;
+		
+		super.notifyOfPropertyChange("selectedAdvisor", null, advisor);
 	}
 
 	@Override
 	public void setSelectedAdvisorIndex(int i) {
 		this.selectedAdvisorIndex = i;
+		
+		super.notifyOfPropertyChange("selectedAdvisorIndex", null, i);
 	}
 
 	@Override
@@ -392,11 +392,13 @@ public class UpdateMonographController extends BaseController implements IUpdate
 
 	@Override
 	public List<Advisor> getCoadvisors() {
-		List<Advisor> coadvisors = this.coadvisorReader.getAdvisors("");
-		Advisor emptyCoadvisor = new Advisor();
+		List<Advisor> coadvisors = this.advisorReader.getAdvisors("");
 		
-		emptyCoadvisor.setName(" ");
-		coadvisors.add(0, emptyCoadvisor);
+		Advisor emptyAdvisor = new Advisor();
+		
+		emptyAdvisor.setName(" ");
+		
+		coadvisors.add(0, emptyAdvisor);
 		
 		return coadvisors;
 	}
@@ -409,11 +411,15 @@ public class UpdateMonographController extends BaseController implements IUpdate
 	@Override
 	public void setSelectedCoadvisor(Advisor coadvisor) {
 		this.selectedCoadvisor = coadvisor;
+		
+		super.notifyOfPropertyChange("selectedCoadvisor", null, coadvisor);
 	}
 
 	@Override
 	public void setSelectedCoadvisorIndex(int i) {
 		this.selectedCoadvisorIndex = i;
+
+		super.notifyOfPropertyChange("selectedCoadvisorIndex", null, i);
 	}
 
 	@Override
@@ -428,10 +434,6 @@ public class UpdateMonographController extends BaseController implements IUpdate
 	@Override
 	public List<Status> getStatus() {
 		List<Status> statuses = this.statusReader.getStatus("");
-		Status emptyStatus = new Status();
-		
-		emptyStatus.setDescription(" ");
-		statuses.add(0, emptyStatus);
 		
 		return statuses;
 	}
@@ -444,11 +446,15 @@ public class UpdateMonographController extends BaseController implements IUpdate
 	@Override
 	public void setSelectedStatus(Status status) {
 		this.selectedStatus = status;
+		
+		super.notifyOfPropertyChange("selectedStatus", null, status);
 	}
 
 	@Override
 	public void setSelectedStatusIndex(int i) {
 		this.selectedStatusIndex = i;
+
+		super.notifyOfPropertyChange("selectedStatusIndex", null, i);
 	}
 
 	@Override
@@ -461,6 +467,21 @@ public class UpdateMonographController extends BaseController implements IUpdate
 		this.monographStageUI.setPKMonograph(this.pKMonograph);
 		this.monographStageUI.setVisible(true);
 	}
+
+	@Override
+	public boolean getCanSelectStudent() {
+		if (this.selectedCourse != null) {
+			return this.studentReader.getStudentsByCourse(
+					this.selectedCourse.getPKCourse()).size() > 0;
+		}
+
+		return false;
+	}
 	
 	/*End of Status*/
+	
+	@Override
+	public void refresh(){
+		setPKMonograph(this.pKMonograph);
+	}
 }

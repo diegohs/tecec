@@ -113,9 +113,7 @@ public class UpdateActivityController extends BaseController implements IUpdateA
 		
 		this.activityWriter.updateActivity(activity);
 		
-		this.setActivityDescription("");
-		this.setActivityDueDate("");
-		this.setActivityTitle("");
+		refresh();
 	}
 	
 	private Activity getActivity() throws ParseException {
@@ -132,6 +130,11 @@ public class UpdateActivityController extends BaseController implements IUpdateA
 		activity.setDueDate(format.parse(this.dueDate));
 		
 		return activity;
+	}
+
+	@Override
+	public void refresh() {
+		this.setPKActivity(this.pKActivity);
 	}
 
 }

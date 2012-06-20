@@ -6,6 +6,7 @@ import tecec.dto.Student;
 
 public interface IStudentReader {
 	List<Student> getStudents(String nameFilter);
+	List<Student> getStudentsByCourse(String pKCourse);
 
 	Student getStudentByPk(String pkStudent);
 

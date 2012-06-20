@@ -23,4 +23,9 @@ public class AreaReader implements tecec.contract.reader.IAreaReader {
 		return this.areaRepository.getAreaByPK(pKArea); 
 	}
 
+	@Override
+	public boolean doesAreaHaveMonographies(String pKArea) {
+		return this.areaRepository.doesAreaHaveMonographies(pKArea);
+	}
+
 }

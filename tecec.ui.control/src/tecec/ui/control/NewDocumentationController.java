@@ -57,5 +57,11 @@ public class NewDocumentationController extends BaseController implements INewDo
 	public RuleViolation getCreationViolation() {
 		return this.documentationWriter.getCreationViolation(this.fileName, this.data);
 	}
+
+	@Override
+	public void refresh() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

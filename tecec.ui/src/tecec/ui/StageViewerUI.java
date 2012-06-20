@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -23,6 +24,8 @@ import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 import java.util.List;
+
+import tecec.contract.RuleViolation;
 import tecec.dto.Stage;
 import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.SwingBindings;
@@ -33,9 +36,12 @@ import java.awt.FlowLayout;
 
 public class StageViewerUI extends JDialog implements IStageViewerUI {
 
+<<<<<<< OURS
 	/**
 	 *
 	 */
+=======
+>>>>>>> THEIRS
 	private static final long serialVersionUID = 1L;
 	private IStageViewerController stageViewerController;
 
@@ -48,8 +54,26 @@ public class StageViewerUI extends JDialog implements IStageViewerUI {
 	}
 
 	private void deleteStage () {
+<<<<<<< OURS
 		stageViewerController.deleteStage();
 	}
+=======
+		RuleViolation violation = stageViewerController.getDeletionViolation();
+		
+		if (violation != null) {
+			JOptionPane.showMessageDialog(this, violation.getDescription(),
+					"ERRO", JOptionPane.ERROR_MESSAGE);
+		} else {
+			try {
+				stageViewerController.deleteStage();
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(this, e, "ERRO",
+						JOptionPane.ERROR_MESSAGE);
+			}
+		}		
+	}	
+	
+>>>>>>> THEIRS
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textField;
 	private JTable table;
@@ -199,5 +223,10 @@ public class StageViewerUI extends JDialog implements IStageViewerUI {
 		BeanProperty<IStageViewerController, Boolean> iStageViewerControllerBeanProperty_4 = BeanProperty.create("canDeleteStage");
 		AutoBinding<IStageViewerController, Boolean, JButton, Boolean> autoBinding_3 = Bindings.createAutoBinding(UpdateStrategy.READ, stageViewerController, iStageViewerControllerBeanProperty_4, btnNewButton_2, jButtonBeanProperty);
 		autoBinding_3.bind();
+	}
+
+	@Override
+	public void refresh() {
+		stageViewerController.refresh();
 	}
 }

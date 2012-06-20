@@ -1,6 +1,6 @@
 package tecec.ui.contract.control;
 
-public interface IMainUIController {
+public interface IMainUIController extends IRefreshable  {
 	void showStudentViewerUI();
 	void showCouseViewerUI();
 	void showAdvisorViewerUI();
@@ -10,5 +10,5 @@ public interface IMainUIController {
 	void showMonographViewerUI();
 	void showProfileViewerUI();
 	void showStageViewerUI();
-	void showPermissionViewerUI();
+	void showAccountViewerUI();
 }

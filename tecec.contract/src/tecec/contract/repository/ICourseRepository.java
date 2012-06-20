@@ -14,4 +14,6 @@ public interface ICourseRepository {
 	
 	List<Course> getCourses(String nameFilter);
 	List<Course> getStudentCourses(String pKStudent);
+	
+	boolean doesCourseHaveStudents(String pKCourse);
 }

@@ -117,4 +117,15 @@ public class AdvisorWriter implements IAdvisorWriter {
 		this.advisorRepository.deleteAdvisor(pkAdvisor);		
 	}
 
+	@Override
+	public RuleViolation getDeletionViolation(String pKAdvisor) {
+		boolean doesAdvise = this.advisorRepository.doesAdviseAnyMonograph(pKAdvisor);
+		
+		if (doesAdvise) {
+			return new RuleViolation("Não é possível excluir um orientador que já está associado a monografias.");
+		}
+		
+		return null;
+	}
+
 }

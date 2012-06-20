@@ -3,7 +3,7 @@ package tecec.ui.contract.control;
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
 
-public interface IUpdateAdvisorController {
+public interface IUpdateAdvisorController extends IRefreshable  {
 	
 	void setPKAdvisor (String pkAdvisor);
 	void setAdvisorName (String name);

@@ -54,14 +54,18 @@ public class NewStudentController extends BaseController implements
 
 		studentWriter.createStudent(this.studentName, this.studentEmail);
 
-		setStudentName("");
-		setStudentEmail("");
-		
+		refresh();
 	}
 
 	@Override
 	public RuleViolation getCreationViolation() {
 		return studentWriter.getCreationViolation(this.getStudentName(), this.getStudentEmail());
+	}
+
+	@Override
+	public void refresh() {
+		setStudentEmail("");
+		setStudentName("");
 	}
 
 }

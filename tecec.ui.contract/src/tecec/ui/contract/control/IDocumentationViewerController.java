@@ -4,7 +4,7 @@ import java.util.List;
 
 import tecec.dto.Documentation;
 
-public interface IDocumentationViewerController {
+public interface IDocumentationViewerController extends IRefreshable  {
 	
 	void setNameFilter (String nameFilter);
 	String getNameFilter ();

@@ -1,5 +1,4 @@
 package tecec.ui.contract.view;
 
-public interface IMonographViewerUI {
-	void setVisible(boolean visible);
+public interface IMonographViewerUI extends IRefreshableView {
 }

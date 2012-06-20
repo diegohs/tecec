@@ -34,6 +34,7 @@ public class ActivityViewerController extends BaseController implements
 	public void setTitleFilter(String filter) {
 		this.title = filter;
 
+		super.notifyOfPropertyChange("titleFilter", null, filter);
 		super.notifyOfPropertyChange("activities", null, getActivities());
 	}
 
@@ -54,6 +55,7 @@ public class ActivityViewerController extends BaseController implements
 
 	@Override
 	public void showNewActivityUI() {
+		this.newActivityUI.refresh();
 		this.newActivityUI.setVisible(true);
 
 		super.notifyOfPropertyChange("activities", null, getActivities());
@@ -105,6 +107,11 @@ public class ActivityViewerController extends BaseController implements
 	@Override
 	public Activity getSelectedActivity() {
 		return this.selectedActivity;
+	}
+
+	@Override
+	public void refresh() {		
+		setTitleFilter("");
 	}
 
 }

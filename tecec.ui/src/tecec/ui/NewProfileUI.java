@@ -115,4 +115,9 @@ public class NewProfileUI extends JDialog implements INewProfileUI {
 						txtProfileName, jTextFieldBeanProperty);
 		autoBinding.bind();
 	}
+
+	@Override
+	public void refresh() {
+		newProfileController.refresh();
+	}
 }

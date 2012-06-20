@@ -146,4 +146,9 @@ public class NewStageUI extends JDialog implements INewStageUI {
 		AutoBinding<INewStageController, String, JComboBox, Object> autoBinding_1 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, newStageController, iNewStageControllerBeanProperty_1, comboBox, jComboBoxBeanProperty);
 		autoBinding_1.bind();
 	}
+
+	@Override
+	public void refresh() {
+		newStageController.refresh();
+	}
 }

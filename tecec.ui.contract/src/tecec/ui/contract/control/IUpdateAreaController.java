@@ -6,7 +6,7 @@ import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
 import tecec.dto.*;
 
-public interface IUpdateAreaController {
+public interface IUpdateAreaController extends IRefreshable  {
 	void setPKArea(String pKArea);
 
 	void setAreaName(String name);

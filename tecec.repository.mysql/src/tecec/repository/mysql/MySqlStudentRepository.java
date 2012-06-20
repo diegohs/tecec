@@ -143,17 +143,8 @@ public class MySqlStudentRepository extends MySqlRepository implements
 			return result.get(0);
 		}
 	}
-
-	@Override
-	public List<Student> getStudents(String nameFilter) {
-		String query = "SELECT * FROM Student WHERE Name Like :nameFilter;";
-
-		if (nameFilter == null)
-			nameFilter = "";
-
-		SqlParameterSource parameters = new MapSqlParameterSource("nameFilter",
-				"%" + nameFilter + "%");
-
+	
+	private List<Student> getStudents(String query, SqlParameterSource parameters){
 		List<Student> result = jdbcTemplate.query(query, parameters,
 				new RowMapper<Student>() {
 					@Override
@@ -169,6 +160,19 @@ public class MySqlStudentRepository extends MySqlRepository implements
 					}
 				});
 		return result;
+	}
+
+	@Override
+	public List<Student> getStudents(String nameFilter) {
+		String query = "SELECT * FROM Student WHERE Name Like :nameFilter;";
+
+		if (nameFilter == null)
+			nameFilter = "";
+
+		SqlParameterSource parameters = new MapSqlParameterSource("nameFilter",
+				"%" + nameFilter + "%");
+
+		return getStudents(query, parameters);
 	}
 
 	@Override
@@ -212,7 +216,7 @@ public class MySqlStudentRepository extends MySqlRepository implements
 	}
 
 	@Override
-	public boolean doesUserHaveMonographiesInCourse(String pKStudent,
+	public boolean doesStudentHaveMonographiesInCourse(String pKStudent,
 			String pKCourse) {
 		String query = " SELECT COUNT(*) " + " FROM Monograph m "
 				+ " INNER JOIN Student s ON m.FKStudent = s.PKStudent "
@@ -227,6 +231,30 @@ public class MySqlStudentRepository extends MySqlRepository implements
 		map.put("pKCourse", pKCourse);
 
 		SqlParameterSource parameters = new MapSqlParameterSource(map);
+
+		return jdbcTemplate.queryForInt(query, parameters) > 0;
+	}
+
+	@Override
+	public List<Student> getStudentByCourse(String pKCourse) {
+		String query = " SELECT * FROM Student " + 
+					   " WHERE PKStudent IN (SELECT FKStudent " + 
+					   " 					 FROM StudentCourse " + 
+					   " 					 WHERE FKCourse = :fKCourse);";
+		
+		SqlParameterSource parameters = new MapSqlParameterSource("fKCourse", pKCourse);
+		
+		return getStudents(query, parameters);
+	}
+
+	@Override
+	public boolean doesStudentHaveMonographies(String pKStudent) {
+		String query = " SELECT COUNT(*) " + 
+					   " FROM Monograph m " +
+					   " INNER JOIN Student s ON m.FKStudent = s.PKStudent " +
+					   " WHERE s.PKStudent = :pKStudent ";
+
+		SqlParameterSource parameters = new MapSqlParameterSource("pKStudent", pKStudent);
 
 		return jdbcTemplate.queryForInt(query, parameters) > 0;
 	}

@@ -14,6 +14,7 @@ import tecec.ui.contract.control.ICourseViewerController;
 import tecec.ui.contract.view.ICourseViewerUI;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -22,6 +23,8 @@ import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 import java.util.List;
+
+import tecec.contract.RuleViolation;
 import tecec.dto.Course;
 import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.SwingBindings;
@@ -38,25 +41,55 @@ public class CourseViewerUI extends JDialog implements ICourseViewerUI {
 
 	private final JPanel contentPanel = new JPanel();
 
+<<<<<<< OURS
 
+=======
+>>>>>>> THEIRS
 	private ICourseViewerController courseViewerController;
 	private JTextField textField;
 	private JTable table;
 	private JButton btnAtualizar;
 	private JButton btnRemover;
+<<<<<<< OURS
 	private JPanel panelPesquisa;
 	private JPanel panelButtons;
 
 	private void showNewCourseUI () {
+=======
+
+	private void showNewCourseUI() {
+>>>>>>> THEIRS
 		courseViewerController.showNewCourseUI();
 	}
 
+<<<<<<< OURS
 	private void showUpdateCourseUI () {
+=======
+	private void showUpdateCourseUI() {
+>>>>>>> THEIRS
 		courseViewerController.showUpdateCourseUI();
 	}
 
+<<<<<<< OURS
 	private void deleteCourseUI () {
 		this.courseViewerController.deleteCourse();
+=======
+	private void deleteCourseUI() {
+		RuleViolation violation = this.courseViewerController
+				.getDeletionViolation();
+
+		if (violation != null) {
+			JOptionPane.showMessageDialog(this, violation.getDescription(),
+					"ERRO", JOptionPane.ERROR_MESSAGE);
+		} else {
+			try {
+				this.courseViewerController.deleteCourse();
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(this, e, "ERRO",
+						JOptionPane.ERROR_MESSAGE);
+			}
+		}
+>>>>>>> THEIRS
 	}
 
 	public CourseViewerUI(ICourseViewerController courseViewerController) {
@@ -68,7 +101,11 @@ public class CourseViewerUI extends JDialog implements ICourseViewerUI {
 		getContentPane().setMinimumSize(new Dimension(800, 600));
 		getContentPane().setMaximumSize(new Dimension(800, 600));
 		if (courseViewerController == null)
+<<<<<<< OURS
 			throw new IllegalArgumentException ("courseViewerController");
+=======
+			throw new IllegalArgumentException("courseViewerController");
+>>>>>>> THEIRS
 
 		this.courseViewerController = courseViewerController;
 
@@ -108,6 +145,7 @@ public class CourseViewerUI extends JDialog implements ICourseViewerUI {
 			}
 		}
 		{
+<<<<<<< OURS
 			{
 				panelButtons = new JPanel();
 				FlowLayout flowLayout = (FlowLayout) panelButtons.getLayout();
@@ -135,15 +173,49 @@ public class CourseViewerUI extends JDialog implements ICourseViewerUI {
 						btnRemover.setMaximumSize(new Dimension(150, 25));
 						panelButtons.add(btnRemover);
 						btnRemover.addActionListener(new ActionListener () {
+=======
+			JButton btnNovo = new JButton("Cadastrar Novo");
+			btnNovo.addActionListener(new ActionListener() {
+>>>>>>> THEIRS
 
+<<<<<<< OURS
 							@Override
 							public void actionPerformed(ActionEvent e) {
 								deleteCourseUI();
 							}
+=======
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					showNewCourseUI();
+				}
 
+			});
+			contentPanel.add(btnNovo, "flowx,cell 2 3,alignx right");
+		}
+		{
+			btnAtualizar = new JButton("Atualizar Selecionado");
+			btnAtualizar.addActionListener(new ActionListener() {
+>>>>>>> THEIRS
+
+<<<<<<< OURS
 						});
 					}
 					btnAtualizar.addActionListener(new ActionListener () {
+=======
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					showUpdateCourseUI();
+
+				}
+
+			});
+
+			contentPanel.add(btnAtualizar, "cell 2 3,alignx right");
+		}
+		{
+			btnRemover = new JButton("Remover Selecionado");
+			btnRemover.addActionListener(new ActionListener() {
+>>>>>>> THEIRS
 
 						@Override
 						public void actionPerformed(ActionEvent e) {
@@ -153,6 +225,7 @@ public class CourseViewerUI extends JDialog implements ICourseViewerUI {
 
 					});
 				}
+<<<<<<< OURS
 				btnNovo.addActionListener(new ActionListener () {
 
 					@Override
@@ -162,44 +235,88 @@ public class CourseViewerUI extends JDialog implements ICourseViewerUI {
 
 				});
 			}
+=======
+
+			});
+			contentPanel.add(btnRemover, "cell 2 3,alignx right");
+>>>>>>> THEIRS
 		}
 		initDataBindings();
 	}
 
+<<<<<<< OURS
 
 
+=======
+>>>>>>> THEIRS
 	protected void initDataBindings() {
-		BeanProperty<ICourseViewerController, String> iCourseViewerControllerBeanProperty = BeanProperty.create("nameFilter");
-		BeanProperty<JTextField, String> jTextFieldBeanProperty = BeanProperty.create("text");
-		AutoBinding<ICourseViewerController, String, JTextField, String> autoBinding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, courseViewerController, iCourseViewerControllerBeanProperty, textField, jTextFieldBeanProperty);
+		BeanProperty<ICourseViewerController, String> iCourseViewerControllerBeanProperty = BeanProperty
+				.create("nameFilter");
+		BeanProperty<JTextField, String> jTextFieldBeanProperty = BeanProperty
+				.create("text");
+		AutoBinding<ICourseViewerController, String, JTextField, String> autoBinding = Bindings
+				.createAutoBinding(UpdateStrategy.READ_WRITE,
+						courseViewerController,
+						iCourseViewerControllerBeanProperty, textField,
+						jTextFieldBeanProperty);
 		autoBinding.bind();
 		//
-		BeanProperty<ICourseViewerController, List<Course>> iCourseViewerControllerBeanProperty_1 = BeanProperty.create("courses");
-		JTableBinding<Course, ICourseViewerController, JTable> jTableBinding = SwingBindings.createJTableBinding(UpdateStrategy.READ, courseViewerController, iCourseViewerControllerBeanProperty_1, table);
+		BeanProperty<ICourseViewerController, List<Course>> iCourseViewerControllerBeanProperty_1 = BeanProperty
+				.create("courses");
+		JTableBinding<Course, ICourseViewerController, JTable> jTableBinding = SwingBindings
+				.createJTableBinding(UpdateStrategy.READ,
+						courseViewerController,
+						iCourseViewerControllerBeanProperty_1, table);
 		//
-		BeanProperty<Course, String> courseBeanProperty = BeanProperty.create("name");
-		jTableBinding.addColumnBinding(courseBeanProperty).setColumnName("Nome");
+		BeanProperty<Course, String> courseBeanProperty = BeanProperty
+				.create("name");
+		jTableBinding.addColumnBinding(courseBeanProperty)
+				.setColumnName("Nome");
 		//
-		BeanProperty<Course, String> courseBeanProperty_1 = BeanProperty.create("turn");
-		jTableBinding.addColumnBinding(courseBeanProperty_1).setColumnName("Turno");
+		BeanProperty<Course, String> courseBeanProperty_1 = BeanProperty
+				.create("turn");
+		jTableBinding.addColumnBinding(courseBeanProperty_1).setColumnName(
+				"Turno");
 		//
-		BeanProperty<Course, String> courseBeanProperty_2 = BeanProperty.create("year");
-		jTableBinding.addColumnBinding(courseBeanProperty_2).setColumnName("Ano");
+		BeanProperty<Course, String> courseBeanProperty_2 = BeanProperty
+				.create("year");
+		jTableBinding.addColumnBinding(courseBeanProperty_2).setColumnName(
+				"Ano");
 		//
 		jTableBinding.bind();
 		//
-		BeanProperty<ICourseViewerController, Course> iCourseViewerControllerBeanProperty_2 = BeanProperty.create("selectedCourse");
-		BeanProperty<JTable, Course> jTableBeanProperty = BeanProperty.create("selectedElement");
-		AutoBinding<ICourseViewerController, Course, JTable, Course> autoBinding_1 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, courseViewerController, iCourseViewerControllerBeanProperty_2, table, jTableBeanProperty);
+		BeanProperty<ICourseViewerController, Course> iCourseViewerControllerBeanProperty_2 = BeanProperty
+				.create("selectedCourse");
+		BeanProperty<JTable, Course> jTableBeanProperty = BeanProperty
+				.create("selectedElement");
+		AutoBinding<ICourseViewerController, Course, JTable, Course> autoBinding_1 = Bindings
+				.createAutoBinding(UpdateStrategy.READ_WRITE,
+						courseViewerController,
+						iCourseViewerControllerBeanProperty_2, table,
+						jTableBeanProperty);
 		autoBinding_1.bind();
 		//
-		BeanProperty<ICourseViewerController, Boolean> iCourseViewerControllerBeanProperty_3 = BeanProperty.create("canUpdateCourse");
-		BeanProperty<JButton, Boolean> jButtonBeanProperty = BeanProperty.create("enabled");
-		AutoBinding<ICourseViewerController, Boolean, JButton, Boolean> autoBinding_2 = Bindings.createAutoBinding(UpdateStrategy.READ, courseViewerController, iCourseViewerControllerBeanProperty_3, btnAtualizar, jButtonBeanProperty);
+		BeanProperty<ICourseViewerController, Boolean> iCourseViewerControllerBeanProperty_3 = BeanProperty
+				.create("canUpdateCourse");
+		BeanProperty<JButton, Boolean> jButtonBeanProperty = BeanProperty
+				.create("enabled");
+		AutoBinding<ICourseViewerController, Boolean, JButton, Boolean> autoBinding_2 = Bindings
+				.createAutoBinding(UpdateStrategy.READ, courseViewerController,
+						iCourseViewerControllerBeanProperty_3, btnAtualizar,
+						jButtonBeanProperty);
 		autoBinding_2.bind();
 		//
-		BeanProperty<ICourseViewerController, Boolean> iCourseViewerControllerBeanProperty_4 = BeanProperty.create("canDeleteCourse");
-		AutoBinding<ICourseViewerController, Boolean, JButton, Boolean> autoBinding_3 = Bindings.createAutoBinding(UpdateStrategy.READ, courseViewerController, iCourseViewerControllerBeanProperty_4, btnRemover, jButtonBeanProperty);
+		BeanProperty<ICourseViewerController, Boolean> iCourseViewerControllerBeanProperty_4 = BeanProperty
+				.create("canDeleteCourse");
+		AutoBinding<ICourseViewerController, Boolean, JButton, Boolean> autoBinding_3 = Bindings
+				.createAutoBinding(UpdateStrategy.READ, courseViewerController,
+						iCourseViewerControllerBeanProperty_4, btnRemover,
+						jButtonBeanProperty);
 		autoBinding_3.bind();
+	}
+
+	@Override
+	public void refresh() {
+		courseViewerController.refresh();
 	}
 }

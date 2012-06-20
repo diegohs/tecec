@@ -142,4 +142,9 @@ public class NewCourseUI extends JDialog implements INewCourseUI {
 		AutoBinding<INewCourseController, String, JComboBox, Object> autoBinding_2 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, newCourseController, iNewCourseControllerBeanProperty_2, comboYear, jComboBoxBeanProperty);
 		autoBinding_2.bind();
 	}
+
+	@Override
+	public void refresh() {
+		newCourseController.refresh();
+	}
 }

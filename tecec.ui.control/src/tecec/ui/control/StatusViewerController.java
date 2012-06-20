@@ -87,7 +87,9 @@ public class StatusViewerController extends BaseController implements
 
 	@Override
 	public void showNewStatusUI() {
+		this.newStatusUI.refresh();
 		this.newStatusUI.setVisible(true);
+		
 		super.notifyOfPropertyChange("status", null, getStatus());
 	}	
 
@@ -96,5 +98,10 @@ public class StatusViewerController extends BaseController implements
 		this.updateStatusUI.setpKStatus(this.selectedStatus.getpKStatus());
 		this.updateStatusUI.setVisible(true);		
 		super.notifyOfPropertyChange("status", null, getStatus());
+	}
+
+	@Override
+	public void refresh() {
+		this.setNameFilter("");
 	}
 }

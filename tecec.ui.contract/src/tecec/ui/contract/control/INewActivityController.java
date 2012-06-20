@@ -4,10 +4,9 @@ import java.util.List;
 
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
-import tecec.dto.Area;
 import tecec.dto.Stage;
 
-public interface INewActivityController {
+public interface INewActivityController extends IRefreshable  {
 	void setActivityTitle(String title);
 
 	String getActivityTitle();

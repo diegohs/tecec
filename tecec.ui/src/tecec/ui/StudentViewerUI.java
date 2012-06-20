@@ -11,6 +11,7 @@ import tecec.ui.contract.control.IStudentViewerController;
 import tecec.ui.contract.view.IStudentViewerUI;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -19,6 +20,8 @@ import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 import java.util.List;
+
+import tecec.contract.RuleViolation;
 import tecec.dto.Student;
 import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.SwingBindings;
@@ -31,9 +34,7 @@ import java.awt.FlowLayout;
 
 
 public class StudentViewerUI extends JDialog implements IStudentViewerUI {	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private IStudentViewerController studentViewerController;
 	
@@ -46,7 +47,19 @@ public class StudentViewerUI extends JDialog implements IStudentViewerUI {
 	}
 	
 	private void deleteStudent(){
-		this.studentViewerController.deleteStudent();
+		RuleViolation violation = this.studentViewerController.getDeletionViolation();
+		
+		if (violation != null) {
+			JOptionPane.showMessageDialog(this, violation.getDescription(),
+					"ERRO", JOptionPane.ERROR_MESSAGE);
+		} else {
+			try {
+				this.studentViewerController.deleteStudent();
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(this, e, "ERRO",
+						JOptionPane.ERROR_MESSAGE);
+			}
+		}
 	}
 
 	private final JPanel contentPanel = new JPanel();
@@ -181,5 +194,10 @@ public class StudentViewerUI extends JDialog implements IStudentViewerUI {
 		BeanProperty<IStudentViewerController, Boolean> iStudentViewerControllerBeanProperty_4 = BeanProperty.create("canDeleteStudent");
 		AutoBinding<IStudentViewerController, Boolean, JButton, Boolean> autoBinding_3 = Bindings.createAutoBinding(UpdateStrategy.READ, studentViewerController, iStudentViewerControllerBeanProperty_4, btnDeleteStudent, jButtonBeanProperty);
 		autoBinding_3.bind();
+	}
+
+	@Override
+	public void refresh() {
+		studentViewerController.refresh();
 	}
 }

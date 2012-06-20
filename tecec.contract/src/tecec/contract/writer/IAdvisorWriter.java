@@ -8,6 +8,8 @@ public interface IAdvisorWriter {
 
 	RuleViolation getUpdateViolation(String pkAdvisor, String newName,
 			String email);
+	
+	RuleViolation getDeletionViolation(String pKAdvisor);
 
 	void createAdvisor(String name, String email) throws RuleViolationException;
 

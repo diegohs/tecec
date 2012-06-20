@@ -2,6 +2,8 @@ package tecec.ui.control;
 
 import java.util.List;
 
+import tecec.contract.RuleViolation;
+import tecec.contract.RuleViolationException;
 import tecec.contract.reader.IStudentReader;
 import tecec.contract.writer.IStudentWriter;
 import tecec.dto.Student;
@@ -59,9 +61,11 @@ public class StudentViewerController  extends BaseController implements IStudent
 		List<Student> students = this.studentReader.getStudents(this.nameFilter);		
 		return students;
 	}
+	
+	
 
 	@Override
-	public void deleteStudent() {
+	public void deleteStudent() throws RuleViolationException {
 		this.studentWriter.deleteStudent(this.selectedStudent.getPKStudent());			
 		super.notifyOfPropertyChange("students", null, getStudents());
 		
@@ -79,6 +83,7 @@ public class StudentViewerController  extends BaseController implements IStudent
 
 	@Override
 	public void showNewStudentUI() {
+		this.newStudentUI.refresh();
 		this.newStudentUI.setVisible(true);		
 		super.notifyOfPropertyChange("students", null, getStudents());			
 	}
@@ -88,6 +93,16 @@ public class StudentViewerController  extends BaseController implements IStudent
 		this.updateStudentUI.setpkStudent(this.selectedStudent.getPKStudent());
 		this.updateStudentUI.setVisible(true);		
 		super.notifyOfPropertyChange("students", null, getStudents());		
+	}
+
+	@Override
+	public void refresh() {
+		setNameFilter("");
+	}
+
+	@Override
+	public RuleViolation getDeletionViolation() {
+		return this.studentWriter.getDeletionViolation(this.selectedStudent.getPKStudent());
 	}
 
 }

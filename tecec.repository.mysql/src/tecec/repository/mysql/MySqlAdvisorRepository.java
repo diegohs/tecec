@@ -177,4 +177,30 @@ public class MySqlAdvisorRepository extends MySqlRepository implements
 				"pKAdvisor", pKAdvisor);
 		jdbcTemplate.update(command, namedParameter);		
 	}
+
+	@Override
+	public boolean doesAdviseAnyMonograph(String pKAdvisor) {
+		String query = " SELECT COUNT(*) " + 
+					   " FROM Advisor a " + 
+					   " INNER JOIN Monograph m ON a.PKAdvisor = m.FKAdvisor " + 
+					   " WHERE a.PKAdvisor = :pKAdvisor";
+		
+		SqlParameterSource parameters = new MapSqlParameterSource("pKAdvisor", pKAdvisor);
+		
+		if (jdbcTemplate.queryForInt(query, parameters) > 0) {
+			return true;
+		}
+		
+		query = " SELECT COUNT(*) " + 
+			    " FROM Advisor a " + 
+			    " INNER JOIN Monograph m ON a.PKAdvisor = m.FKCoadvisor " + 
+			    " WHERE a.PKAdvisor = :pKAdvisor";
+		
+
+		if (jdbcTemplate.queryForInt(query, parameters) > 0) {
+			return true;
+		}
+		
+		return false;
+	}
 }

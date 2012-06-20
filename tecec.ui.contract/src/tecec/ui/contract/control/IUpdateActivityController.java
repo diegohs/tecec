@@ -3,7 +3,7 @@ package tecec.ui.contract.control;
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
 
-public interface IUpdateActivityController {
+public interface IUpdateActivityController extends IRefreshable  {
 	void setPKActivity(String pKActivity);
 	
 	void setActivityTitle(String title);

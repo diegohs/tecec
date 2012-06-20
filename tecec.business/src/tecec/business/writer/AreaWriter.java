@@ -108,6 +108,12 @@ public class AreaWriter implements tecec.contract.writer.IAreaWriter {
 			return new RuleViolation("Não é possível excluir uma área que possui subáreas cadastradas.");
 		}
 		
+		boolean doesAreHaveMonographies = this.areaRepository.doesAreaHaveMonographies(pKArea);
+		
+		if (doesAreHaveMonographies) {
+			return new RuleViolation("Não é possível excluir uma área que possui monografias associadas.");
+		}
+		
 		return null;
 	}
 

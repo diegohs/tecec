@@ -137,4 +137,9 @@ public class UpdateAdvisorUI extends JDialog implements IUpdateAdvisorUI {
 		AutoBinding<IUpdateAdvisorController, Boolean, JButton, Boolean> autoBinding_2 = Bindings.createAutoBinding(UpdateStrategy.READ, updateAdvisorController, iUpdateAdvisorControllerBeanProperty_2, btnUpdate, jButtonBeanProperty);
 		autoBinding_2.bind();
 	}
+
+	@Override
+	public void refresh() {
+		updateAdvisorController.refresh();
+	}
 }

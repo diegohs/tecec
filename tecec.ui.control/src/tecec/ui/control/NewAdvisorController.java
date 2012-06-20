@@ -54,13 +54,18 @@ public class NewAdvisorController extends BaseController implements
 
 		advisorWriter.createAdvisor(this.advisorName, this.advisorEmail);
 
-		setAdvisorName("");
-		setAdvisorEmail("");
+		refresh();
 	}
 
 	@Override
 	public RuleViolation getCreationViolation() {
 		return advisorWriter.getCreationViolation(this.getAdvisorName(), this.getAdvisorEmail());
+	}
+
+	@Override
+	public void refresh() {
+		setAdvisorEmail("");
+		setAdvisorName("");
 	}
 
 }

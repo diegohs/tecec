@@ -27,4 +27,9 @@ public class CourseReader implements tecec.contract.reader.ICourseReader {
 		return this.courseRepository.getStudentCourses(pKStudent);
 	}
 
+	@Override
+	public boolean doesCourseHaveStudents(String pKCourse) {
+		return this.courseRepository.doesCourseHaveStudents(pKCourse);
+	}
+
 }

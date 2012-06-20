@@ -7,16 +7,13 @@ import tecec.contract.RuleViolationException;
 import tecec.dto.Advisor;
 import tecec.dto.Area;
 import tecec.dto.Course;
-import tecec.dto.Monograph;
 import tecec.dto.Status;
 import tecec.dto.Student;
 
-public interface INewMonographController {
+public interface INewMonographController extends IRefreshable  {
 	
 	RuleViolation getCreationViolation();
 	
-	/*Monograph*/
-	List<Monograph> getMonographs();
 	String getMonographTitle ();
 	void setMonographTitle (String title);
 	void createMonograph () throws RuleViolationException;
@@ -41,6 +38,7 @@ public interface INewMonographController {
 	void setSelectedStudent(Student student);
 	void setSelectedStudentIndex(int i);
 	int getSelectedStudentIndex();
+	boolean getCanSelectStudent();
 	
 	/*Advisor*/
 	List<Advisor> getAdvisors();

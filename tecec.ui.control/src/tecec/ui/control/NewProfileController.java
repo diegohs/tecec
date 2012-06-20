@@ -28,7 +28,7 @@ public class NewProfileController extends BaseController implements
 
 		profileWriter.createProfile(this.profileName);
 
-		setProfileName("");
+		refresh();
 	}
 
 	@Override
@@ -48,6 +48,11 @@ public class NewProfileController extends BaseController implements
 	@Override
 	public RuleViolation getCreationViolation() {
 		return profileWriter.getCreationViolation(this.getProfileName());
+	}
+
+	@Override
+	public void refresh() {
+		setProfileName("");
 	}
 
 }

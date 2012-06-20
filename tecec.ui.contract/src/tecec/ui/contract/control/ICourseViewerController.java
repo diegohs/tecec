@@ -2,9 +2,11 @@ package tecec.ui.contract.control;
 
 import java.util.List;
 
+import tecec.contract.RuleViolation;
+import tecec.contract.RuleViolationException;
 import tecec.dto.Course;
 
-public interface ICourseViewerController {
+public interface ICourseViewerController extends IRefreshable  {
 	void setNameFilter(String nameFilter);
 	String getNameFilter();
 	
@@ -12,7 +14,9 @@ public interface ICourseViewerController {
 	Course getSelectedCourse();
 	List<Course> getCourses();
 	
-	void deleteCourse();
+	RuleViolation getDeletionViolation();
+	
+	void deleteCourse() throws RuleViolationException;
 	
 	boolean getCanUpdateCourse();
 	boolean getCanDeleteCourse();

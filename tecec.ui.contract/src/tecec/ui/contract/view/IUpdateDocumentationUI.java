@@ -1,6 +1,5 @@
 package tecec.ui.contract.view;
 
-public interface IUpdateDocumentationUI {
-	void setVisible(boolean visible);
+public interface IUpdateDocumentationUI extends IRefreshableView {
 	void setPKDocumentation (String pKDocumentation);
 }

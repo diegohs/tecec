@@ -115,4 +115,9 @@ public class NewStatusUI extends JDialog implements INewStatusUI {
 						txtStatusDescription, jTextFieldBeanProperty);
 		autoBinding.bind();
 	}
+
+	@Override
+	public void refresh() {
+		newStatusController.refresh();
+	}
 }

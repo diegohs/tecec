@@ -71,6 +71,8 @@ public class UpdateAdvisorController extends BaseController implements
 		}
 		this.advisorWriter.updateAdvisor(this.pkAdvisor, this.advisorName,
 				this.advisorEmail);
+		
+		refresh();
 
 	}
 
@@ -83,5 +85,10 @@ public class UpdateAdvisorController extends BaseController implements
 	@Override
 	public boolean getCanUpdate() {
 		return this.advisorEmail != null && this.advisorName != null && !this.advisorEmail.isEmpty() && !this.advisorName.isEmpty();
+	}
+
+	@Override
+	public void refresh() {
+		setPKAdvisor(this.pkAdvisor);
 	}
 }

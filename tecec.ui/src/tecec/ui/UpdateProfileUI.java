@@ -25,9 +25,6 @@ import tecec.ui.contract.view.IUpdateProfileUI;
 import javax.swing.border.TitledBorder;
 
 public class UpdateProfileUI extends JDialog implements IUpdateProfileUI {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private IUpdateProfileController updateProfileController;
 
@@ -112,5 +109,10 @@ public class UpdateProfileUI extends JDialog implements IUpdateProfileUI {
 		BeanProperty<JTextField, String> jTextFieldBeanProperty = BeanProperty.create("text");
 		AutoBinding<IUpdateProfileController, String, JTextField, String> autoBinding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, updateProfileController, iUpdateProfileControllerBeanProperty, txtProfileName, jTextFieldBeanProperty);
 		autoBinding.bind();
+	}
+
+	@Override
+	public void refresh() {
+		updateProfileController.refresh();
 	}
 }
