@@ -1,31 +1,21 @@
 package tecec.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.event.*;
 
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
+
+import org.jdesktop.beansbinding.AutoBinding;
+import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
+import org.jdesktop.beansbinding.BeanProperty;
+import org.jdesktop.beansbinding.Bindings;
 
 import tecec.contract.RuleViolation;
 import tecec.ui.contract.control.IUpdateStudentController;
 import tecec.ui.contract.view.IUpdateStudentUI;
-
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import org.jdesktop.beansbinding.BeanProperty;
-import org.jdesktop.beansbinding.AutoBinding;
-import org.jdesktop.beansbinding.Bindings;
-import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
-<<<<<<< OURS
-
-import javax.swing.border.TitledBorder;
-import java.awt.Dimension;
-=======
->>>>>>> THEIRS
 
 public class UpdateStudentUI extends JDialog implements IUpdateStudentUI {
 

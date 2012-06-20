@@ -24,12 +24,8 @@ public class Main {
 						Problemas: para as bordas das janelas ficarem as do tema
 						tem que setar em cada ui no objeto frame o metodo
 						frame.setDefaultLookAndFeelDecorated(true);*/
-						
-<<<<<<< OURS
-						// Estilo Mac
-=======
+			
 						//Estilo Mac
->>>>>>> THEIRS
 						//UIManager.setLookAndFeel("ch.randelshofer.quaqua.QuaquaLookAndFeel");
 						
 						// Default do SO

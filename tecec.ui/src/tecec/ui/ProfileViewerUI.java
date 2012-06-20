@@ -33,14 +33,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 public class ProfileViewerUI extends JFrame implements IProfileViewerUI {
-<<<<<<< OURS
 
-	/**
-	 *
-	 */
-=======
-	
->>>>>>> THEIRS
 	private static final long serialVersionUID = 1L;
 	private IProfileViewerController profileViewerController;
 

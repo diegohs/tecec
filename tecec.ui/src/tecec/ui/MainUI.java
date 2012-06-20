@@ -19,22 +19,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.BufferedInputStream;
 import java.io.IOException;
-<<<<<<< OURS
 import java.io.InputStream;
-=======
 import java.beans.PropertyVetoException;
->>>>>>> THEIRS
 
 public class MainUI extends JFrame implements IMainUI {
-
-<<<<<<< OURS
 	private JFrame frame;
-=======
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 6660132350079500798L;
->>>>>>> THEIRS
 
 	private void backupImmediate() {
 
@@ -49,16 +39,6 @@ public class MainUI extends JFrame implements IMainUI {
 		} else {
 
 			String commandDump = "";
-
-			/*if (System.getProperty("os.name").toUpperCase().compareTo("LINUX") == 0) {
-				commandDump = "/usr/bin/mysqldump";
-			} else {
-<<<<<<< OURS
-				 Em casa não deu certo assim no Windows só passando o caminho c://program files etc.
-=======
->>>>>>> THEIRS
-				commandDump = "MYSQL_PATH\\bin\\mysqldump.exe";
-			}*/
 
 			commandDump = "mysqldump";
 
@@ -77,7 +57,6 @@ public class MainUI extends JFrame implements IMainUI {
 		}
 	}
 
-<<<<<<< OURS
 	private void restoreBackup () throws IOException {
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setDialogTitle("Selecionar arquivo de backup");
@@ -104,12 +83,7 @@ public class MainUI extends JFrame implements IMainUI {
 				// TODO Auto-generated catch block
 				JOptionPane.showMessageDialog(null, e.toString(), "Erro", JOptionPane.ERROR_MESSAGE);
 			}
-		}
-=======
-	private void restoreBackup() {
-		// implementar nao consegui: Bruno
->>>>>>> THEIRS
-	}
+		}}
 
 	@Override
 	public void setVisible(boolean visible) {
@@ -331,10 +305,6 @@ public class MainUI extends JFrame implements IMainUI {
 		});
 		mnBackup.add(mntmEfetuar);
 
-<<<<<<< OURS
-
-=======
->>>>>>> THEIRS
 		JMenuItem mntmRestaurar = new JMenuItem("Restaurar");
 		mntmRestaurar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -358,13 +328,7 @@ public class MainUI extends JFrame implements IMainUI {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-<<<<<<< OURS
 				JOptionPane.showMessageDialog(null, "Tecec: Software para gerenciamento de Tccs");
-=======
-				JOptionPane.showMessageDialog(null,
-						"Tecec: Software para gerenciamento de Tccs");
->>>>>>> THEIRS
-
 			}
 
 		});

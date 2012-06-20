@@ -36,12 +36,9 @@ import java.awt.FlowLayout;
 public class ActivityViewerUI extends JDialog implements
 		tecec.ui.contract.view.IActivityViewerUI {
 
-<<<<<<< OURS
 	/**
 	 *
 	 */
-=======
->>>>>>> THEIRS
 	private static final long serialVersionUID = 1L;
 	private tecec.ui.contract.control.IActivityViewerController activityViewerController;
 
@@ -208,6 +205,6 @@ public class ActivityViewerUI extends JDialog implements
 
 	@Override
 	public void refresh() {
-		activityViewerController.refresh();
+		this.activityViewerController.refresh();
 	}
 }

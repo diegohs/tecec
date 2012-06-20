@@ -111,7 +111,6 @@ public class NewMonographUI extends JDialog implements INewMonographUI {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-<<<<<<< OURS
 		panel = new JPanel();
 		panel.setPreferredSize(new Dimension(440, 360));
 		panel.setMinimumSize(new Dimension(440, 360));
@@ -121,10 +120,8 @@ public class NewMonographUI extends JDialog implements INewMonographUI {
 		panel.setBounds(10, 11, 414, 315);
 		contentPane.add(panel);
 		panel.setLayout(null);
-=======
 		lblTituloMonografia = new JLabel("TÃ­tulo:");
 		contentPane.add(lblTituloMonografia, "flowx,cell 0 1,alignx right");
->>>>>>> THEIRS
 
 		btnCreateMonograph = new JButton("Cadastrar");
 		btnCreateMonograph.setBounds(299, 281, 105, 23);
@@ -139,9 +136,6 @@ public class NewMonographUI extends JDialog implements INewMonographUI {
 		panel.add(cboCurso);
 
 		cboCurso.setRenderer(new DefaultListCellRenderer() {
-			/**
-																							 * 
-																							 */
 			private static final long serialVersionUID = 1L;
 
 			@Override
@@ -160,7 +154,6 @@ public class NewMonographUI extends JDialog implements INewMonographUI {
 			}
 		});
 
-<<<<<<< OURS
 		txtMonographTitle = new JTextField();
 		txtMonographTitle.setBounds(67, 33, 337, 20);
 		panel.add(txtMonographTitle);
@@ -169,10 +162,8 @@ public class NewMonographUI extends JDialog implements INewMonographUI {
 		lblCurso = new JLabel("Curso:");
 		lblCurso.setBounds(10, 67, 94, 14);
 		panel.add(lblCurso);
-=======
 		lblArea = new JLabel("Ã�rea:");
 		contentPane.add(lblArea, "cell 0 3,alignx trailing");
->>>>>>> THEIRS
 
 		cboArea = new JComboBox();
 		cboArea.setBounds(67, 95, 337, 20);
@@ -503,9 +494,14 @@ public class NewMonographUI extends JDialog implements INewMonographUI {
 						cboCoorientador, jComboBoxBeanProperty_1);
 		autoBinding_10.bind();
 		//
-		BeanProperty<INewMonographController, Boolean> iNewMonographControllerBeanProperty_19 = BeanProperty.create("canSelectStudent");
-		BeanProperty<JComboBox, Boolean> jComboBoxBeanProperty_2 = BeanProperty.create("enabled");
-		AutoBinding<INewMonographController, Boolean, JComboBox, Boolean> autoBinding_13 = Bindings.createAutoBinding(UpdateStrategy.READ, newMonographController, iNewMonographControllerBeanProperty_19, cboAluno, jComboBoxBeanProperty_2);
+		BeanProperty<INewMonographController, Boolean> iNewMonographControllerBeanProperty_19 = BeanProperty
+				.create("canSelectStudent");
+		BeanProperty<JComboBox, Boolean> jComboBoxBeanProperty_2 = BeanProperty
+				.create("enabled");
+		AutoBinding<INewMonographController, Boolean, JComboBox, Boolean> autoBinding_13 = Bindings
+				.createAutoBinding(UpdateStrategy.READ, newMonographController,
+						iNewMonographControllerBeanProperty_19, cboAluno,
+						jComboBoxBeanProperty_2);
 		autoBinding_13.bind();
 	}
 

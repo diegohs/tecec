@@ -41,39 +41,22 @@ public class CourseViewerUI extends JDialog implements ICourseViewerUI {
 
 	private final JPanel contentPanel = new JPanel();
 
-<<<<<<< OURS
-
-=======
->>>>>>> THEIRS
 	private ICourseViewerController courseViewerController;
 	private JTextField textField;
 	private JTable table;
 	private JButton btnAtualizar;
 	private JButton btnRemover;
-<<<<<<< OURS
 	private JPanel panelPesquisa;
 	private JPanel panelButtons;
 
-	private void showNewCourseUI () {
-=======
-
 	private void showNewCourseUI() {
->>>>>>> THEIRS
 		courseViewerController.showNewCourseUI();
 	}
 
-<<<<<<< OURS
-	private void showUpdateCourseUI () {
-=======
 	private void showUpdateCourseUI() {
->>>>>>> THEIRS
 		courseViewerController.showUpdateCourseUI();
 	}
 
-<<<<<<< OURS
-	private void deleteCourseUI () {
-		this.courseViewerController.deleteCourse();
-=======
 	private void deleteCourseUI() {
 		RuleViolation violation = this.courseViewerController
 				.getDeletionViolation();
@@ -89,7 +72,6 @@ public class CourseViewerUI extends JDialog implements ICourseViewerUI {
 						JOptionPane.ERROR_MESSAGE);
 			}
 		}
->>>>>>> THEIRS
 	}
 
 	public CourseViewerUI(ICourseViewerController courseViewerController) {
@@ -100,12 +82,9 @@ public class CourseViewerUI extends JDialog implements ICourseViewerUI {
 		getContentPane().setPreferredSize(new Dimension(800, 600));
 		getContentPane().setMinimumSize(new Dimension(800, 600));
 		getContentPane().setMaximumSize(new Dimension(800, 600));
+
 		if (courseViewerController == null)
-<<<<<<< OURS
-			throw new IllegalArgumentException ("courseViewerController");
-=======
 			throw new IllegalArgumentException("courseViewerController");
->>>>>>> THEIRS
 
 		this.courseViewerController = courseViewerController;
 
@@ -119,13 +98,18 @@ public class CourseViewerUI extends JDialog implements ICourseViewerUI {
 		contentPanel.setMaximumSize(new Dimension(800, 600));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new MigLayout("", "[800px]", "[50px][400px][50px]"));
+		contentPanel.setLayout(new MigLayout("", "[800px]",
+				"[50px][400px][50px]"));
 		{
 			panelPesquisa = new JPanel();
 			panelPesquisa.setPreferredSize(new Dimension(750, 60));
 			panelPesquisa.setMinimumSize(new Dimension(750, 60));
 			panelPesquisa.setMaximumSize(new Dimension(750, 60));
-			panelPesquisa.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pesquisa:", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 10))); // NOI18N
+			panelPesquisa.setBorder(javax.swing.BorderFactory
+					.createTitledBorder(null, "Pesquisa:",
+							javax.swing.border.TitledBorder.LEFT,
+							javax.swing.border.TitledBorder.DEFAULT_POSITION,
+							new java.awt.Font("Comic Sans MS", 1, 10))); // NOI18N
 			contentPanel.add(panelPesquisa, "cell 0 0,grow");
 			{
 				textField = new JTextField();
@@ -145,77 +129,82 @@ public class CourseViewerUI extends JDialog implements ICourseViewerUI {
 			}
 		}
 		{
-<<<<<<< OURS
 			{
-				panelButtons = new JPanel();
-				FlowLayout flowLayout = (FlowLayout) panelButtons.getLayout();
-				flowLayout.setAlignment(FlowLayout.RIGHT);
-				panelButtons.setPreferredSize(new Dimension(750, 60));
-				panelButtons.setMinimumSize(new Dimension(750, 60));
-				panelButtons.setMaximumSize(new Dimension(750, 60));
-				panelButtons.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opção:", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 10))); // NOI18N
-				contentPanel.add(panelButtons, "cell 0 2,grow");
-				JButton btnNovo = new JButton("Cadastrar Novo");
-				btnNovo.setPreferredSize(new Dimension(150, 25));
-				btnNovo.setMinimumSize(new Dimension(150, 25));
-				btnNovo.setMaximumSize(new Dimension(150, 25));
-				panelButtons.add(btnNovo);
 				{
-					btnAtualizar = new JButton("Atualizar Selecionado");
-					btnAtualizar.setPreferredSize(new Dimension(150, 25));
-					btnAtualizar.setMinimumSize(new Dimension(150, 25));
-					btnAtualizar.setMaximumSize(new Dimension(150, 25));
-					panelButtons.add(btnAtualizar);
+					panelButtons = new JPanel();
+					FlowLayout flowLayout = (FlowLayout) panelButtons
+							.getLayout();
+					flowLayout.setAlignment(FlowLayout.RIGHT);
+					panelButtons.setPreferredSize(new Dimension(750, 60));
+					panelButtons.setMinimumSize(new Dimension(750, 60));
+					panelButtons.setMaximumSize(new Dimension(750, 60));
+					panelButtons
+							.setBorder(javax.swing.BorderFactory
+									.createTitledBorder(
+											null,
+											"Opção:",
+											javax.swing.border.TitledBorder.LEFT,
+											javax.swing.border.TitledBorder.DEFAULT_POSITION,
+											new java.awt.Font("Comic Sans MS",
+													1, 10))); // NOI18N
+					contentPanel.add(panelButtons, "cell 0 2,grow");
+					JButton btnNovo = new JButton("Cadastrar Novo");
+					btnNovo.setPreferredSize(new Dimension(150, 25));
+					btnNovo.setMinimumSize(new Dimension(150, 25));
+					btnNovo.setMaximumSize(new Dimension(150, 25));
+					panelButtons.add(btnNovo);
 					{
-						btnRemover = new JButton("Remover Selecionado");
-						btnRemover.setPreferredSize(new Dimension(150, 25));
-						btnRemover.setMinimumSize(new Dimension(150, 25));
-						btnRemover.setMaximumSize(new Dimension(150, 25));
-						panelButtons.add(btnRemover);
-						btnRemover.addActionListener(new ActionListener () {
-=======
-			JButton btnNovo = new JButton("Cadastrar Novo");
-			btnNovo.addActionListener(new ActionListener() {
->>>>>>> THEIRS
+						btnAtualizar = new JButton("Atualizar Selecionado");
+						btnAtualizar.setPreferredSize(new Dimension(150, 25));
+						btnAtualizar.setMinimumSize(new Dimension(150, 25));
+						btnAtualizar.setMaximumSize(new Dimension(150, 25));
+						panelButtons.add(btnAtualizar);
+						{
+							btnRemover = new JButton("Remover Selecionado");
+							btnRemover.setPreferredSize(new Dimension(150, 25));
+							btnRemover.setMinimumSize(new Dimension(150, 25));
+							btnRemover.setMaximumSize(new Dimension(150, 25));
+							panelButtons.add(btnRemover);
+							btnRemover.addActionListener(new ActionListener() {
 
-<<<<<<< OURS
-							@Override
-							public void actionPerformed(ActionEvent e) {
-								deleteCourseUI();
-							}
-=======
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					showNewCourseUI();
-				}
+								public void actionPerformed(ActionEvent e) {
+									deleteCourseUI();
+								}
+							});
 
-			});
-			contentPanel.add(btnNovo, "flowx,cell 2 3,alignx right");
-		}
-		{
-			btnAtualizar = new JButton("Atualizar Selecionado");
-			btnAtualizar.addActionListener(new ActionListener() {
->>>>>>> THEIRS
+							btnNovo.addActionListener(new ActionListener() {
+								@Override
+								public void actionPerformed(ActionEvent e) {
+									showNewCourseUI();
+								}
+							});
 
-<<<<<<< OURS
-						});
+						}
+						contentPanel
+								.add(btnNovo, "flowx,cell 2 3,alignx right");
 					}
-					btnAtualizar.addActionListener(new ActionListener () {
-=======
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					showUpdateCourseUI();
+					btnAtualizar = new JButton("Atualizar Selecionado");
+					btnAtualizar.addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							showUpdateCourseUI();
+						}
+					});
+					
+					btnNovo.addActionListener(new ActionListener() {
 
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							showNewCourseUI();
+						}
+
+					});
+
+					contentPanel.add(btnAtualizar, "cell 2 3,alignx right");
 				}
-
-			});
-
-			contentPanel.add(btnAtualizar, "cell 2 3,alignx right");
-		}
-		{
-			btnRemover = new JButton("Remover Selecionado");
-			btnRemover.addActionListener(new ActionListener() {
->>>>>>> THEIRS
+				{
+					btnRemover = new JButton("Remover Selecionado");
+					btnRemover.addActionListener(new ActionListener() {
 
 						@Override
 						public void actionPerformed(ActionEvent e) {
@@ -225,30 +214,12 @@ public class CourseViewerUI extends JDialog implements ICourseViewerUI {
 
 					});
 				}
-<<<<<<< OURS
-				btnNovo.addActionListener(new ActionListener () {
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						showNewCourseUI();
-					}
-
-				});
 			}
-=======
-
-			});
 			contentPanel.add(btnRemover, "cell 2 3,alignx right");
->>>>>>> THEIRS
 		}
 		initDataBindings();
 	}
 
-<<<<<<< OURS
-
-
-=======
->>>>>>> THEIRS
 	protected void initDataBindings() {
 		BeanProperty<ICourseViewerController, String> iCourseViewerControllerBeanProperty = BeanProperty
 				.create("nameFilter");

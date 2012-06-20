@@ -33,14 +33,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 public class StatusViewerUI extends JFrame implements IStatusViewerUI {
-<<<<<<< OURS
 
-	/**
-	 *
-	 */
-=======
-	
->>>>>>> THEIRS
 	private static final long serialVersionUID = 1L;
 	private IStatusViewerController statusViewerController;
 
