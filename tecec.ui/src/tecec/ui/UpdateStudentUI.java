@@ -2,6 +2,7 @@ package tecec.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.*;
 
 import javax.swing.*;
@@ -20,7 +21,7 @@ import tecec.ui.contract.view.IUpdateStudentUI;
 public class UpdateStudentUI extends JDialog implements IUpdateStudentUI {
 
 	private tecec.ui.contract.control.IUpdateStudentController updateStudentController;
-	
+
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -34,36 +35,37 @@ public class UpdateStudentUI extends JDialog implements IUpdateStudentUI {
 	public void setpkStudent(String pkStudent) {
 		this.updateStudentController.setPKStudent(pkStudent);
 	}
-	
+
 	private void updateStudent(){
 		RuleViolation violation = this.updateStudentController.getUpdateViolation();
-		
+
 		if (violation != null) {
 			JOptionPane.showMessageDialog(this, violation.getDescription(), "ERRO", JOptionPane.ERROR_MESSAGE);
 		}
 		else{
 			try {
 				this.updateStudentController.updateStudent();
-				
+
 				this.setVisible(false);
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(this, e, "ERRO", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}
-	
+
 	private void showStudentCourseViewerUI(){
 		this.updateStudentController.showStudentCourseUI();
 	}
-	
+
 	/**
 	 * Create the dialog.
 	 */
 	public UpdateStudentUI(IUpdateStudentController updateStudentController) {
 		this.updateStudentController = updateStudentController;
-		
+
 		setDefaultLookAndFeelDecorated(true);
-		
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainUI.class.getResource("/tecec/ui/files/icone_tecec.png")));
+
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		setBounds(100, 100, 450, 230);

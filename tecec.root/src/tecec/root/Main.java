@@ -20,35 +20,26 @@ public class Main {
 			public void run() {
 				try {
 					try {
-						/*Seguem alguns look and feel
-						Problemas: para as bordas das janelas ficarem as do tema
-						tem que setar em cada ui no objeto frame o metodo
-						frame.setDefaultLookAndFeelDecorated(true);*/
-			
-						//Estilo Mac
-						//UIManager.setLookAndFeel("ch.randelshofer.quaqua.QuaquaLookAndFeel");
-						
-						// Default do SO
+						// Usar tema Default do SO
 						UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-						
-						// Cross-platform (Esse Ã© o default)
+
+						// Cross-platform (Esse é o default)
 						//UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-											
-						
-	                } catch (UnsupportedLookAndFeelException ex) {  
-	                     ex.printStackTrace();  
-	                } catch (IllegalAccessException ex) {  
-	                     ex.printStackTrace();  
-	                } catch (InstantiationException ex) {  
-	                     ex.printStackTrace();  
-	                } catch (ClassNotFoundException ex) {  
-	                     ex.printStackTrace();  
+
+
+	                } catch (UnsupportedLookAndFeelException ex) {
+	                     ex.printStackTrace();
+	                } catch (IllegalAccessException ex) {
+	                     ex.printStackTrace();
+	                } catch (InstantiationException ex) {
+	                     ex.printStackTrace();
+	                } catch (ClassNotFoundException ex) {
+	                     ex.printStackTrace();
 	                }
-					
+
 					ILoginUI loginUI = container.getComponent(ILoginUI.class);
-					
 					loginUI.setVisible(true);
-					
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

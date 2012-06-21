@@ -13,7 +13,6 @@ import javax.swing.border.EmptyBorder;
 import tecec.ui.contract.control.ICourseViewerController;
 import tecec.ui.contract.view.ICourseViewerUI;
 import net.miginfocom.swing.MigLayout;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
@@ -28,9 +27,9 @@ import tecec.contract.RuleViolation;
 import tecec.dto.Course;
 import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.SwingBindings;
-import java.awt.Font;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Toolkit;
 
 public class CourseViewerUI extends JDialog implements ICourseViewerUI {
 
@@ -90,6 +89,7 @@ public class CourseViewerUI extends JDialog implements ICourseViewerUI {
 		this.courseViewerController = courseViewerController;
 
 		setDefaultLookAndFeelDecorated(true);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainUI.class.getResource("/tecec/ui/files/icone_tecec.png")));
 		setModal(true);
 
 		setBounds(100, 100, 568, 300);

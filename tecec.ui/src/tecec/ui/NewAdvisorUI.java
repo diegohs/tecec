@@ -1,6 +1,7 @@
 package tecec.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Toolkit;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -59,8 +60,9 @@ public class NewAdvisorUI extends JDialog implements INewAdvisorUI {
 
 	public NewAdvisorUI(INewAdvisorController newAdvisorController) {
 		this.newAdvisorController = newAdvisorController;
-		
+
 		setDefaultLookAndFeelDecorated(true);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainUI.class.getResource("/tecec/ui/files/icone_tecec.png")));
 
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);

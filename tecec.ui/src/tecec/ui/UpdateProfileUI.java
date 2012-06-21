@@ -1,6 +1,6 @@
 package tecec.ui;
 
-import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -13,7 +13,6 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import tecec.contract.RuleViolation;
-import net.miginfocom.swing.MigLayout;
 
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
@@ -32,12 +31,12 @@ public class UpdateProfileUI extends JDialog implements IUpdateProfileUI {
 	public void setpKProfile(String pKProfile) {
 		this.updateProfileController.setPKProfile(pKProfile);
 	}
-	
+
 	@Override
 	public void setVisible(boolean visible){
 		super.setVisible(visible);
 	}
-	
+
 	private void storeProfile() {
 		try {
 			RuleViolation violation = this.updateProfileController
@@ -48,7 +47,7 @@ public class UpdateProfileUI extends JDialog implements IUpdateProfileUI {
 						"Erro", JOptionPane.ERROR_MESSAGE);
 			} else {
 				this.updateProfileController.updateProfile();
-				
+
 				this.setVisible(false);
 			}
 		} catch (Exception e) {
@@ -68,8 +67,9 @@ public class UpdateProfileUI extends JDialog implements IUpdateProfileUI {
 	 */
 	public UpdateProfileUI(IUpdateProfileController updateProfileController) {
 		this.updateProfileController = updateProfileController;
-		
+
 		setDefaultLookAndFeelDecorated(true);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainUI.class.getResource("/tecec/ui/files/icone_tecec.png")));
 
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
@@ -78,22 +78,22 @@ public class UpdateProfileUI extends JDialog implements IUpdateProfileUI {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Atualizar Perfil:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(10, 11, 412, 142);
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
+
 				JLabel lblNome = new JLabel("Nome:");
 				lblNome.setBounds(10, 45, 81, 14);
 				panel.add(lblNome);
-				
+
 						txtProfileName = new JTextField();
 						txtProfileName.setBounds(74, 42, 330, 20);
 						panel.add(txtProfileName);
 						txtProfileName.setColumns(10);
-						
+
 								btnUpdateProfile = new JButton("Atualizar");
 								btnUpdateProfile.setBounds(327, 102, 75, 29);
 								panel.add(btnUpdateProfile);

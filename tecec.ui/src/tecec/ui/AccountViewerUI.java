@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import tecec.contract.RuleViolation;
 import tecec.ui.contract.control.IAccountViewerController;
 
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import org.jdesktop.beansbinding.BeanProperty;
@@ -30,12 +31,12 @@ import javax.swing.ListSelectionModel;
 
 public class AccountViewerUI extends JDialog implements IAccountViewerUI {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 2621342283614897745L;
 	private JTable table;
 	private JTextField txtFilter;
-	
+
 	IAccountViewerController controller;
 	private JButton btnUpdateAccount;
 	private JButton btnDeleteAccount;
@@ -43,14 +44,14 @@ public class AccountViewerUI extends JDialog implements IAccountViewerUI {
 	private void showNewAccountUI(){
 		controller.showNewAccountUI();
 	}
-	
+
 	private void showUpdateAccountUI(){
 		controller.showUpdateAccountUI();
 	}
-	
+
 	private void deleteAccount(){
 		RuleViolation violation = this.controller.getDeletionViolation();
-		
+
 		if (violation != null) {
 			JOptionPane.showMessageDialog(this, violation.getDescription(),
 					"ERRO", JOptionPane.ERROR_MESSAGE);
@@ -66,21 +67,24 @@ public class AccountViewerUI extends JDialog implements IAccountViewerUI {
 
 	public AccountViewerUI(IAccountViewerController controller) {
 		this.controller = controller;
-		
+
+		setDefaultLookAndFeelDecorated(true);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainUI.class.getResource("/tecec/ui/files/icone_tecec.png")));
+
 		setModal(true);
 		setBounds(100, 100, 601, 352);
 		getContentPane().setLayout(new MigLayout("", "[20px:n][grow][20px:n]", "[20px:n][20px:n][][20px:n][][20px:n]"));
-		
+
 		JLabel lblNewLabel = new JLabel("Filtro:");
 		getContentPane().add(lblNewLabel, "flowx,cell 1 1");
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		getContentPane().add(scrollPane, "cell 1 2,grow");
-		
+
 		table = new JTable();
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(table);
-		
+
 		JButton btnNewAccount = new JButton("Cadastrar Novo");
 		btnNewAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -88,7 +92,7 @@ public class AccountViewerUI extends JDialog implements IAccountViewerUI {
 			}
 		});
 		getContentPane().add(btnNewAccount, "flowx,cell 1 4,alignx right");
-		
+
 		btnUpdateAccount = new JButton("Atualizar Selecionado");
 		btnUpdateAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -96,7 +100,7 @@ public class AccountViewerUI extends JDialog implements IAccountViewerUI {
 			}
 		});
 		getContentPane().add(btnUpdateAccount, "cell 1 4,alignx right");
-		
+
 		btnDeleteAccount = new JButton("Excluir Selecionado");
 		btnDeleteAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -104,7 +108,7 @@ public class AccountViewerUI extends JDialog implements IAccountViewerUI {
 			}
 		});
 		getContentPane().add(btnDeleteAccount, "cell 1 4,alignx right");
-		
+
 		txtFilter = new JTextField();
 		getContentPane().add(txtFilter, "cell 1 1,growx");
 		txtFilter.setColumns(10);
@@ -124,7 +128,7 @@ public class AccountViewerUI extends JDialog implements IAccountViewerUI {
 		jTableBinding.addColumnBinding(accountRecordBeanProperty).setColumnName("ID").setEditable(false);
 		//
 		BeanProperty<AccountRecord, String> accountRecordBeanProperty_1 = BeanProperty.create("userName");
-		jTableBinding.addColumnBinding(accountRecordBeanProperty_1).setColumnName("Usu\u00E1rio");
+		jTableBinding.addColumnBinding(accountRecordBeanProperty_1).setColumnName("Usuário");
 		//
 		BeanProperty<AccountRecord, String> accountRecordBeanProperty_2 = BeanProperty.create("profileName");
 		jTableBinding.addColumnBinding(accountRecordBeanProperty_2).setColumnName("Perfil").setEditable(false);

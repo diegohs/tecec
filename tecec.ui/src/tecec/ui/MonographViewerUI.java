@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -28,9 +27,9 @@ import tecec.ui.contract.view.IMonographViewerUI;
 
 import javax.swing.ListSelectionModel;
 import tecec.ui.contract.record.MonographRecord;
-import java.awt.Font;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Toolkit;
 
 
 public class MonographViewerUI extends JFrame implements IMonographViewerUI {
@@ -73,6 +72,7 @@ public class MonographViewerUI extends JFrame implements IMonographViewerUI {
 		this.monographViewerController = monographViewerController;
 
 		setDefaultLookAndFeelDecorated(true);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainUI.class.getResource("/tecec/ui/files/icone_tecec.png")));
 
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 726, 441);

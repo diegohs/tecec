@@ -6,6 +6,7 @@ import java.awt.Frame;
 import javax.swing.JInternalFrame;
 import net.miginfocom.swing.MigLayout;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -40,7 +41,7 @@ import org.jdesktop.beansbinding.Bindings;
 
 public class CoordinatorPageUI extends JInternalFrame implements ICoordinatorPageUI {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 6753800487941687072L;
 	private JTable table;
@@ -51,10 +52,10 @@ public class CoordinatorPageUI extends JInternalFrame implements ICoordinatorPag
 	private JButton btnUpdate;
 	private JButton btnDownload;
 	private JButton btnDelete;
-	
+
 	private void delete(){
 		RuleViolation violation = this.controller.getDeletionViolation();
-		
+
 		if (violation != null) {
 			JOptionPane.showMessageDialog(this, violation.getDescription(),
 					"ERRO", JOptionPane.ERROR_MESSAGE);
@@ -66,12 +67,12 @@ public class CoordinatorPageUI extends JInternalFrame implements ICoordinatorPag
 						JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		
+
 	}
-	
+
 	private void update(){
 		RuleViolation violation = this.controller.getUpdateViolation();
-		
+
 		if (violation != null) {
 			JOptionPane.showMessageDialog(this, violation.getDescription(),
 					"ERRO", JOptionPane.ERROR_MESSAGE);
@@ -84,23 +85,23 @@ public class CoordinatorPageUI extends JInternalFrame implements ICoordinatorPag
 			}
 		}
 	}
-	
+
 	private void downloadFile(){
 		Documentation doc = this.controller.getSelectedHandInFile();
-		
+
 		FileDialog dialog = new FileDialog((Frame)null, "Salvar", FileDialog.SAVE);
-		
+
 		dialog.setFile(doc.getFileName());
-		
+
 		dialog.setVisible(true);
-		
+
 		String fileName = dialog.getDirectory() + dialog.getFile();
-		
+
 		File file = new File(fileName);
-		
+
 		try {
 			FileOutputStream stream = new FileOutputStream(file);
-			
+
 			stream.write(doc.getData());
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(this, e, "ERRO",
@@ -110,29 +111,31 @@ public class CoordinatorPageUI extends JInternalFrame implements ICoordinatorPag
 
 	public CoordinatorPageUI(ICoordinatorPageController controller) {
 		this.controller = controller;
-		
+
+		setFrameIcon(new ImageIcon(this.getClass().getResource("/tecec/ui/files/icone_tecec.png")));
+
 		setBounds(100, 100, 642, 461);
 		getContentPane().setLayout(new MigLayout("", "[][][88.00px:n][grow][20px:n]", "[20px:n][grow][20px:n][20px:n:30px,grow][20px:n][20px:n][20px:n][20px:n][20px:n]"));
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		getContentPane().add(scrollPane, "cell 1 1 3 1,grow");
-		
+
 		table = new JTable();
 		scrollPane.setViewportView(table);
-		
+
 		JLabel lblNota = new JLabel("Nota:");
 		getContentPane().add(lblNota, "flowx,cell 1 2 3 1");
-		
+
 		txtGrade = new JTextField();
 		getContentPane().add(txtGrade, "cell 1 3 2 1,growx");
 		txtGrade.setColumns(10);
-		
+
 		JLabel lblComentrio = new JLabel("Coment\u00E1rio:");
 		getContentPane().add(lblComentrio, "cell 3 2");
-		
+
 		txtRemark = new JTextArea();
 		getContentPane().add(txtRemark, "cell 3 3 1 3,grow");
-		
+
 		btnUpdate = new JButton("Atualizar Entrega");
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -140,7 +143,7 @@ public class CoordinatorPageUI extends JInternalFrame implements ICoordinatorPag
 			}
 		});
 		getContentPane().add(btnUpdate, "flowx,cell 3 7,alignx right");
-		
+
 		btnDownload = new JButton("Baixar Arquivo");
 		btnDownload.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -148,7 +151,7 @@ public class CoordinatorPageUI extends JInternalFrame implements ICoordinatorPag
 			}
 		});
 		getContentPane().add(btnDownload, "cell 3 7,alignx right");
-		
+
 		btnDelete = new JButton("Excluir Entrega");
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

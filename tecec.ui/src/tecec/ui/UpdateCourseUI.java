@@ -1,6 +1,7 @@
 package tecec.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Toolkit;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,7 +15,6 @@ import javax.swing.border.EmptyBorder;
 import tecec.contract.RuleViolation;
 import tecec.ui.contract.control.IUpdateCourseController;
 import tecec.ui.contract.view.IUpdateCourseUI;
-import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -23,49 +23,49 @@ import org.jdesktop.beansbinding.BeanProperty;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
-import java.awt.Font;
 import javax.swing.border.TitledBorder;
 
 public class UpdateCourseUI extends JDialog implements IUpdateCourseUI {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-	
+
 	private IUpdateCourseController updateCourseController;
 	private JTextField textField;
 	private JComboBox comboTurn;
 	private JComboBox comboYear;
-	
+
 	private void updateCourse(){
 		RuleViolation violation = this.updateCourseController.getUpdateViolation();
-		
+
 		if (violation != null) {
 			JOptionPane.showMessageDialog(this, violation.getDescription(), "ERRO", JOptionPane.ERROR_MESSAGE);
 		}
 		else{
 			try {
-				this.updateCourseController.updateCourse();				
+				this.updateCourseController.updateCourse();
 				this.setVisible(false);
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(this, e, "ERRO", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-	}	
-	
-	
+	}
+
+
 	public UpdateCourseUI(IUpdateCourseController updateCourseController) {
 		if (updateCourseController == null)
 			throw new IllegalArgumentException ("updateCourseController");
-		
+
 		this.updateCourseController = updateCourseController;
 		setDefaultLookAndFeelDecorated(true);
-		
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainUI.class.getResource("/tecec/ui/files/icone_tecec.png")));
+
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		
+
 		setBounds(100, 100, 450, 298);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -121,7 +121,7 @@ public class UpdateCourseUI extends JDialog implements IUpdateCourseUI {
 					public void actionPerformed(ActionEvent arg0) {
 						updateCourse();
 					}
-					
+
 				});
 			}
 		initDataBindings();
@@ -130,7 +130,7 @@ public class UpdateCourseUI extends JDialog implements IUpdateCourseUI {
 	@Override
 	public void setpKCourse(String pKCourse) {
 		this.updateCourseController.setPKCourse(pKCourse);
-		
+
 	}
 	protected void initDataBindings() {
 		BeanProperty<IUpdateCourseController, String> iUpdateCourseControllerBeanProperty = BeanProperty.create("courseName");

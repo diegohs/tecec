@@ -1,6 +1,7 @@
 package tecec.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,7 +15,6 @@ import tecec.contract.RuleViolation;
 
 import tecec.ui.contract.control.INewStageController;
 import tecec.ui.contract.view.INewStageUI;
-import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -23,15 +23,14 @@ import org.jdesktop.beansbinding.BeanProperty;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
-import java.awt.Font;
 import javax.swing.border.TitledBorder;
 
 public class NewStageUI extends JDialog implements INewStageUI {
-	
-	
-	
+
+
+
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private INewStageController newStageController;
@@ -69,23 +68,24 @@ public class NewStageUI extends JDialog implements INewStageUI {
 	private JButton btnCadastrar;
 	private JPanel panel;
 
-	
+
 	/**
 	 * Create the dialog.
 	 */
 	public NewStageUI(INewStageController newStageController) {
-		
+
 		if (newStageController == null)
 			throw new IllegalArgumentException ("newStageController");
-		
+
 		this.newStageController = newStageController;
-		
+
 		setDefaultLookAndFeelDecorated(true);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainUI.class.getResource("/tecec/ui/files/icone_tecec.png")));
 
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		
-		
+
+
 		setBounds(100, 100, 450, 230);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -129,7 +129,7 @@ public class NewStageUI extends JDialog implements INewStageUI {
 					public void actionPerformed(ActionEvent arg0) {
 						createStage();
 					}
-					
+
 				});
 			}
 		}

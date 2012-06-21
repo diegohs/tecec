@@ -1,6 +1,8 @@
 package tecec.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Toolkit;
+
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -30,28 +32,28 @@ import org.jdesktop.beansbinding.Bindings;
 public class UpdateAccountUI extends JDialog implements IUpdateAccountUI {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -8048654131713852396L;
 
 	private final JPanel contentPanel = new JPanel();
-	
+
 	IUpdateAccountController controller;
 	private JTextField txtId;
 	private JTextField txtUserName;
 	private JComboBox cboProfile;
 	private JCheckBox chckbxNewCheckBox;
-	
+
 	private void update(){
 		RuleViolation violation = this.controller.getUpdateViolation();
-		
+
 		if (violation != null) {
 			JOptionPane.showMessageDialog(this, violation.getDescription(),
 					"ERRO", JOptionPane.ERROR_MESSAGE);
 		} else {
 			try {
 				this.controller.update();
-				
+
 				this.setVisible(false);
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(this, e, "ERRO",
@@ -62,7 +64,10 @@ public class UpdateAccountUI extends JDialog implements IUpdateAccountUI {
 
 	public UpdateAccountUI(IUpdateAccountController controller) {
 		this.controller = controller;
-		
+
+		setDefaultLookAndFeelDecorated(true);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainUI.class.getResource("/tecec/ui/files/icone_tecec.png")));
+
 		setModal(true);
 		setBounds(100, 100, 457, 240);
 		getContentPane().setLayout(new BorderLayout());

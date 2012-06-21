@@ -1,6 +1,7 @@
 package tecec.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
@@ -35,7 +36,7 @@ import org.jdesktop.swingbinding.SwingBindings;
 public class NewActivityUI extends JDialog implements INewActivityUI {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private tecec.ui.contract.control.INewActivityController newActivityController;
@@ -50,7 +51,7 @@ public class NewActivityUI extends JDialog implements INewActivityUI {
 		} else {
 			try {
 				this.newActivityController.insertActivity();
-				
+
 				this.setVisible(false);
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(this, e, "ERRO",
@@ -70,8 +71,9 @@ public class NewActivityUI extends JDialog implements INewActivityUI {
 
 	public NewActivityUI(INewActivityController newActivityController) {
 		this.newActivityController = newActivityController;
-		
+
 		setDefaultLookAndFeelDecorated(true);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainUI.class.getResource("/tecec/ui/files/icone_tecec.png")));
 
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
@@ -114,15 +116,15 @@ public class NewActivityUI extends JDialog implements INewActivityUI {
 			txtDueDate = new JFormattedTextField(dateFormat);
 			txtDueDate.setColumns(10);
 			txtDueDate.setFocusLostBehavior(JFormattedTextField.COMMIT);
-			
+
 			try {
 				MaskFormatter mask = new MaskFormatter("##/##/####");
-				
+
 				mask.install(txtDueDate);
 			} catch (Exception e) {
 				throw new RuntimeException("Erro ao construir controle de data do form NewActivityUI");
 			}
-			
+
 			contentPanel.add(txtDueDate, "cell 1 6,growx");
 		}
 		{

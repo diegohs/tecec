@@ -15,23 +15,35 @@ import tecec.ui.contract.view.ICoordinatorPageUI;
 import tecec.ui.contract.view.IMainUI;
 import tecec.ui.contract.view.IStudentPageUI;
 
+import java.awt.Component;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.beans.PropertyVetoException;
 
 public class MainUI extends JFrame implements IMainUI {
-	private JFrame frame;
+
 	private static final long serialVersionUID = 6660132350079500798L;
 
 	private void backupImmediate() {
 
-		JFileChooser fileChooser = new JFileChooser();
+		JFileChooser fileChooser = new JFileChooser(){
+			/**
+			 *
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+		    protected JDialog createDialog( Component parent ) {
+				JDialog dialog = super.createDialog( parent );
+				dialog.setIconImage(Toolkit.getDefaultToolkit().getImage(MainUI.class.getResource("/tecec/ui/files/icone_tecec.png")));
+		        return dialog;
+		    }
+		};
 		fileChooser.setDialogTitle("Efetuar backup da base de dados");
 
-		int variableChooser = fileChooser.showSaveDialog(null);
+		int variableChooser = fileChooser.showSaveDialog(getParent());
 
 		if (variableChooser != JFileChooser.APPROVE_OPTION) {
 			JOptionPane.showMessageDialog(null, "Backup nÃ£o realizado",
@@ -50,7 +62,6 @@ public class MainUI extends JFrame implements IMainUI {
 				JOptionPane.showMessageDialog(null,
 						"Backup efetuado com sucesso");
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				JOptionPane.showMessageDialog(null, e.toString(), "Erro",
 						JOptionPane.ERROR_MESSAGE);
 			}
@@ -58,7 +69,19 @@ public class MainUI extends JFrame implements IMainUI {
 	}
 
 	private void restoreBackup () throws IOException {
-		JFileChooser fileChooser = new JFileChooser();
+		JFileChooser fileChooser = new JFileChooser(){
+			/**
+			 *
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+		    protected JDialog createDialog( Component parent ) {
+				JDialog dialog = super.createDialog( parent );
+				dialog.setIconImage(Toolkit.getDefaultToolkit().getImage(MainUI.class.getResource("/tecec/ui/files/icone_tecec.png")));
+		        return dialog;
+		    }
+		};
 		fileChooser.setDialogTitle("Selecionar arquivo de backup");
 
 		int variableChooser = fileChooser.showOpenDialog(null);
@@ -80,7 +103,6 @@ public class MainUI extends JFrame implements IMainUI {
 				JOptionPane.showMessageDialog(null, "Backup restaurado com sucesso! Aplicação será encerrada...");
 				System.exit(0);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				JOptionPane.showMessageDialog(null, e.toString(), "Erro", JOptionPane.ERROR_MESSAGE);
 			}
 		}}
@@ -89,28 +111,28 @@ public class MainUI extends JFrame implements IMainUI {
 	public void setVisible(boolean visible) {
 		super.setVisible(true);
 		this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
-		
+
 		JInternalFrame internalFrame;
-		
+
 		if (this.sessionPool.getLoggedAccount().getFKStudent() != null) {
 			mnBackup.setVisible(false);
 			mnCadastro.setVisible(false);
-			
+
 			this.studentPageUI.setPKStudent(this.sessionPool.getLoggedAccount()
 					.getFKStudent());
-			
+
 			internalFrame = (JInternalFrame)studentPageUI;
 		}
 		else{
 			internalFrame = (JInternalFrame)coordinatorPageUI;
 		}
-		
+
 		internalFrame.setBorder(null);
-		
+
 		this.getContentPane().add(internalFrame);
 
 		internalFrame.setVisible(true);
-		
+
 		try {
 			internalFrame.setMaximum(true);
 		} catch (PropertyVetoException e) {
@@ -129,8 +151,8 @@ public class MainUI extends JFrame implements IMainUI {
 		this.mainUIController = mainUIController;
 		this.studentPageUI = studentPageUI;
 		this.coordinatorPageUI = coordinatorPageUI;
-		this.sessionPool = sessionPool;	
-		
+		this.sessionPool = sessionPool;
+
 
 		initialize();
 	}
@@ -179,7 +201,7 @@ public class MainUI extends JFrame implements IMainUI {
 		mainUIController.showStageViewerUI();
 		refresh();
 	}
-	
+
 	private void showAccountViewerUI(){
 		mainUIController.showAccountViewerUI();
 	}
@@ -187,22 +209,23 @@ public class MainUI extends JFrame implements IMainUI {
 	@Override
 	public void refresh() {
 		mainUIController.refresh();
-		
-		if (this.sessionPool.getLoggedAccount().getFKStudent() != null) {			
+
+		if (this.sessionPool.getLoggedAccount().getFKStudent() != null) {
 			studentPageUI.refresh();
 		}
 		else{
 			coordinatorPageUI.refresh();
 		}
 	}
-	
+
 	final JMenuBar menuBar = new JMenuBar();;
 	final JMenu mnCadastro = new JMenu("Cadastro");
 	final JMenu mnBackup = new JMenu("Backup");
 
 	private void initialize() {
 		JDialog.setDefaultLookAndFeelDecorated(true);
-		
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(MainUI.class.getResource("/tecec/ui/files/icone_tecec.png")));
+
 		this.setBounds(100, 100, 558, 352);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setJMenuBar(menuBar);
@@ -283,7 +306,7 @@ public class MainUI extends JFrame implements IMainUI {
 		});
 
 		mnCadastro.add(mntmStage);
-		
+
 		JMenuItem mntmConta = new JMenuItem("Conta");
 		mntmConta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -335,5 +358,4 @@ public class MainUI extends JFrame implements IMainUI {
 		mnAjuda.add(mntmSobre);
 
 	}
-
 }

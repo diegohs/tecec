@@ -10,7 +10,6 @@ import javax.swing.border.EmptyBorder;
 import tecec.ui.contract.control.IStudentViewerController;
 import tecec.ui.contract.view.IStudentViewerUI;
 import net.miginfocom.swing.MigLayout;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
@@ -28,27 +27,27 @@ import org.jdesktop.swingbinding.SwingBindings;
 import javax.swing.ListSelectionModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.Font;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Toolkit;
 
 
-public class StudentViewerUI extends JDialog implements IStudentViewerUI {	
+public class StudentViewerUI extends JDialog implements IStudentViewerUI {
 
 	private static final long serialVersionUID = 1L;
 	private IStudentViewerController studentViewerController;
-	
+
 	private void showNewStudentUI(){
 		this.studentViewerController.showNewStudentUI();
 	}
-	
+
 	private void showUpdateStudentUI(){
 		this.studentViewerController.showUpdateStudentUI();
 	}
-	
+
 	private void deleteStudent(){
 		RuleViolation violation = this.studentViewerController.getDeletionViolation();
-		
+
 		if (violation != null) {
 			JOptionPane.showMessageDialog(this, violation.getDescription(),
 					"ERRO", JOptionPane.ERROR_MESSAGE);
@@ -79,8 +78,9 @@ public class StudentViewerUI extends JDialog implements IStudentViewerUI {
 		getContentPane().setMaximumSize(new Dimension(800, 600));
 		setMaximumSize(new Dimension(800, 600));
 		this.studentViewerController = studentViewerController;
-		
+
 		setDefaultLookAndFeelDecorated(true);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainUI.class.getResource("/tecec/ui/files/icone_tecec.png")));
 
 		setModal(true);
 		setBounds(100, 100, 687, 345);

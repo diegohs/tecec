@@ -8,10 +8,10 @@ import javax.swing.border.EmptyBorder;
 import tecec.ui.contract.control.INewProfileController;
 import tecec.ui.contract.view.INewProfileUI;
 import tecec.contract.RuleViolation;
-import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 
-import java.awt.Font;
+import java.awt.Toolkit;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import org.jdesktop.beansbinding.*;
@@ -23,16 +23,16 @@ import javax.swing.border.TitledBorder;
 
 public class NewProfileUI extends JDialog implements INewProfileUI {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private tecec.ui.contract.control.INewProfileController newProfileController;
-		
+
 	@Override
 	public void setVisible(boolean visible){
 		super.setVisible(visible);
 	}
-	
+
 	private void storeProfile() {
 		try {
 			RuleViolation violation = this.newProfileController
@@ -42,7 +42,7 @@ public class NewProfileUI extends JDialog implements INewProfileUI {
 						"Erro", JOptionPane.ERROR_MESSAGE);
 			} else {
 				this.newProfileController.createProfile();
-				
+
 				this.setVisible(false);
 			}
 		} catch (Exception e) {
@@ -66,8 +66,9 @@ public class NewProfileUI extends JDialog implements INewProfileUI {
 		}
 
 		this.newProfileController = newProfileController;
-		
+
 		setDefaultLookAndFeelDecorated(true);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainUI.class.getResource("/tecec/ui/files/icone_tecec.png")));
 
 		setLocationByPlatform(true);
 		setModal(true);
@@ -77,22 +78,22 @@ public class NewProfileUI extends JDialog implements INewProfileUI {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Cadastrar Novo Perfil:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(10, 11, 412, 142);
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
+
 				txtProfileName = new JTextField();
 				txtProfileName.setBounds(72, 42, 330, 20);
 				panel.add(txtProfileName);
 				txtProfileName.setColumns(10);
-				
+
 						btnCreateProfile = new JButton("Cadastrar");
 						btnCreateProfile.setBounds(321, 102, 81, 29);
 						panel.add(btnCreateProfile);
-						
+
 								JLabel lblNome = new JLabel("Nome:");
 								lblNome.setBounds(10, 45, 81, 14);
 								panel.add(lblNome);

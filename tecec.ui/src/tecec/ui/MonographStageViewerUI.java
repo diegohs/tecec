@@ -1,6 +1,7 @@
 package tecec.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Toolkit;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -106,6 +107,7 @@ public class MonographStageViewerUI extends JDialog implements IMonographStageVi
 
 		setModal(true);
 		setDefaultLookAndFeelDecorated(true);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainUI.class.getResource("/tecec/ui/files/icone_tecec.png")));
 		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
 
 		setBounds(100, 100, 531, 368);

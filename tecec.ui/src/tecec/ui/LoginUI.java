@@ -1,6 +1,8 @@
 package tecec.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Toolkit;
+
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -25,7 +27,7 @@ import java.awt.event.ActionEvent;
 public class LoginUI extends JDialog implements ILoginUI {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	ILoginController controller;
@@ -65,6 +67,9 @@ public class LoginUI extends JDialog implements ILoginUI {
 
 	public LoginUI(ILoginController controller) {
 		this.controller = controller;
+
+		setDefaultLookAndFeelDecorated(true);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainUI.class.getResource("/tecec/ui/files/icone_tecec.png")));
 
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 458, 229);

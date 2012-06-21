@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -29,9 +28,9 @@ import org.jdesktop.swingbinding.SwingBindings;
 import tecec.contract.RuleViolation;
 import tecec.dto.Activity;
 import tecec.ui.contract.control.IActivityViewerController;
-import java.awt.Font;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Toolkit;
 
 public class ActivityViewerUI extends JDialog implements
 		tecec.ui.contract.view.IActivityViewerUI {
@@ -87,6 +86,7 @@ public class ActivityViewerUI extends JDialog implements
 		this.activityViewerController = activityViewerController;
 
 		setDefaultLookAndFeelDecorated(true);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainUI.class.getResource("/tecec/ui/files/icone_tecec.png")));
 
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
@@ -128,7 +128,7 @@ public class ActivityViewerUI extends JDialog implements
 				panelButtons.setPreferredSize(new Dimension(750, 60));
 				panelButtons.setMinimumSize(new Dimension(750, 60));
 				panelButtons.setMaximumSize(new Dimension(750, 60));
-				panelButtons.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Op��o:", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 10))); // NOI18N
+				panelButtons.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opção:", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 10)));
 				contentPanel.add(panelButtons, "cell 0 2,grow");
 				btnNewActivity = new JButton("Cadastrar Atividade");
 				btnNewActivity.setPreferredSize(new Dimension(150, 25));
@@ -190,10 +190,10 @@ public class ActivityViewerUI extends JDialog implements
 		jTableBinding.addColumnBinding(activityEvalutionProperty).setColumnName("Data").setEditable(false);
 		//
 		BeanProperty<Activity, String> activityBeanProperty_1 = BeanProperty.create("title");
-		jTableBinding.addColumnBinding(activityBeanProperty_1).setColumnName("T\u00EDtulo").setEditable(false);
+		jTableBinding.addColumnBinding(activityBeanProperty_1).setColumnName("Título").setEditable(false);
 		//
 		BeanProperty<Activity, String> activityBeanProperty_2 = BeanProperty.create("description");
-		jTableBinding.addColumnBinding(activityBeanProperty_2).setColumnName("Descri\u00E7\u00E3o");
+		jTableBinding.addColumnBinding(activityBeanProperty_2).setColumnName("Descrição");
 		//
 		jTableBinding.bind();
 		//

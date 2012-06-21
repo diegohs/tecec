@@ -1,6 +1,7 @@
 package tecec.ui;
 
 import java.awt.Component;
+import java.awt.Toolkit;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,16 +38,16 @@ import tecec.dto.Status;
 import javax.swing.border.TitledBorder;
 
 public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private IUpdateMonographController updateMonographController;
 
 	@Override
 	public void setVisible(boolean visible){
 		super.setVisible(visible);
 	}
-	
+
 	private void storeMonograph() {
 		try {
 			RuleViolation violation = this.updateMonographController
@@ -57,7 +58,7 @@ public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 						"Erro", JOptionPane.ERROR_MESSAGE);
 			} else {
 				this.updateMonographController.updateMonograph();
-				
+
 				this.setVisible(false);
 			}
 		} catch (Exception e) {
@@ -66,7 +67,7 @@ public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 					JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+
 	private void showMonographStageViewerUI(){
 		this.updateMonographController.showMonographStageUI();
 	}
@@ -94,8 +95,9 @@ public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 	 */
 	public UpdateMonographUI(IUpdateMonographController updateMonographController) {
 		this.updateMonographController = updateMonographController;
-		
+
 		setDefaultLookAndFeelDecorated(true);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainUI.class.getResource("/tecec/ui/files/icone_tecec.png")));
 
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
@@ -104,29 +106,29 @@ public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 						contentPane.setLayout(null);
-		
+
 		panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Atualizar Monografia:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(10, 11, 414, 315);
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
+
 				JLabel lblMonographTitle = new JLabel("Título:");
 				lblMonographTitle.setBounds(10, 36, 66, 14);
 				panel.add(lblMonographTitle);
-				
+
 						txtMonographTitle = new JTextField();
 						txtMonographTitle.setBounds(67, 33, 337, 20);
 						panel.add(txtMonographTitle);
 						txtMonographTitle.setColumns(10);
-						
+
 						cboCourse = new JComboBox();
 						cboCourse.setBounds(67, 64, 337, 20);
 						panel.add(cboCourse);
-						
+
 						cboCourse.setRenderer(new DefaultListCellRenderer(){
 							/**
-							 * 
+							 *
 							 */
 							private static final long serialVersionUID = 1L;
 
@@ -136,31 +138,31 @@ public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 									boolean cellHasFocus) {
 								super.getListCellRendererComponent(list, value, index, isSelected,
 										cellHasFocus);
-								
+
 								if (value instanceof Course) {
 									Course course = (Course)value;
 									setText(course.getName());
 								}
-								
+
 								return this;
 							}
 						});
-						
+
 						lblCourse = new JLabel("Curso:");
 						lblCourse.setBounds(10, 61, 66, 23);
 						panel.add(lblCourse);
-						
+
 						lblArea = new JLabel("Área:");
 						lblArea.setBounds(10, 95, 56, 14);
 						panel.add(lblArea);
-						
+
 						cboArea = new JComboBox();
 						cboArea.setBounds(67, 95, 337, 20);
 						panel.add(cboArea);
-						
+
 						cboArea.setRenderer(new DefaultListCellRenderer(){
 							/**
-							 * 
+							 *
 							 */
 							private static final long serialVersionUID = 1L;
 
@@ -170,23 +172,23 @@ public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 									boolean cellHasFocus) {
 								super.getListCellRendererComponent(list, value, index, isSelected,
 										cellHasFocus);
-								
+
 								if (value instanceof Area) {
 									Area area = (Area)value;
 									setText(area.getName());
 								}
-								
+
 								return this;
 							}
 						});
-						
+
 						cboStudent = new JComboBox();
 						cboStudent.setBounds(67, 126, 337, 20);
 						panel.add(cboStudent);
-						
+
 						cboStudent.setRenderer(new DefaultListCellRenderer(){
 							/**
-							 * 
+							 *
 							 */
 							private static final long serialVersionUID = 1L;
 
@@ -196,31 +198,31 @@ public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 									boolean cellHasFocus) {
 								super.getListCellRendererComponent(list, value, index, isSelected,
 										cellHasFocus);
-								
+
 								if (value instanceof Student) {
 									Student student = (Student)value;
 									setText(student.getName());
 								}
-								
+
 								return this;
 							}
 						});
-						
+
 						lblStudent = new JLabel("Aluno:");
 						lblStudent.setBounds(10, 129, 56, 14);
 						panel.add(lblStudent);
-						
+
 						lblAdvisor = new JLabel("Orientador:");
 						lblAdvisor.setBounds(20, 160, 84, 14);
 						panel.add(lblAdvisor);
-						
+
 						cboAdvisor = new JComboBox();
 						cboAdvisor.setBounds(129, 157, 275, 20);
 						panel.add(cboAdvisor);
-						
+
 						cboAdvisor.setRenderer(new DefaultListCellRenderer(){
 							/**
-							 * 
+							 *
 							 */
 							private static final long serialVersionUID = 1L;
 
@@ -230,23 +232,23 @@ public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 									boolean cellHasFocus) {
 								super.getListCellRendererComponent(list, value, index, isSelected,
 										cellHasFocus);
-								
+
 								if (value instanceof Advisor) {
 									Advisor advisor = (Advisor)value;
 									setText(advisor.getName());
 								}
-								
+
 								return this;
 							}
 						});
-						
+
 						cboCoadvisor = new JComboBox();
 						cboCoadvisor.setBounds(129, 188, 275, 20);
 						panel.add(cboCoadvisor);
-						
+
 						cboCoadvisor.setRenderer(new DefaultListCellRenderer(){
 							/**
-							 * 
+							 *
 							 */
 							private static final long serialVersionUID = 1L;
 
@@ -256,27 +258,27 @@ public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 									boolean cellHasFocus) {
 								super.getListCellRendererComponent(list, value, index, isSelected,
 										cellHasFocus);
-								
+
 								if (value instanceof Advisor) {
 									Advisor advisor = (Advisor)value;
 									setText(advisor.getName());
 								}
-								
+
 								return this;
 							}
 						});
-						
+
 						lblCoadvisor = new JLabel("Coorientador:");
 						lblCoadvisor.setBounds(10, 191, 124, 14);
 						panel.add(lblCoadvisor);
-						
+
 						cboStatus = new JComboBox();
 						cboStatus.setBounds(129, 219, 275, 20);
 						panel.add(cboStatus);
-						
+
 						cboStatus.setRenderer(new DefaultListCellRenderer(){
 							/**
-							 * 
+							 *
 							 */
 							private static final long serialVersionUID = 1L;
 
@@ -286,24 +288,24 @@ public class UpdateMonographUI extends JDialog implements IUpdateMonographUI {
 									boolean cellHasFocus) {
 								super.getListCellRendererComponent(list, value, index, isSelected,
 										cellHasFocus);
-								
+
 								if (value instanceof Status) {
 									Status status = (Status)value;
 									setText(status.getDescription());
 								}
-								
+
 								return this;
 							}
 						});
-						
+
 						lblStatus = new JLabel("Status:");
 						lblStatus.setBounds(45, 222, 66, 14);
 						panel.add(lblStatus);
-						
+
 						btnUpdateStages = new JButton("Modificar Etapas");
 						btnUpdateStages.setBounds(118, 281, 176, 23);
 						panel.add(btnUpdateStages);
-						
+
 						btnUpdateMonograph = new JButton("Atualizar");
 						btnUpdateMonograph.setBounds(306, 281, 98, 23);
 						panel.add(btnUpdateMonograph);

@@ -16,7 +16,6 @@ import javax.swing.border.EmptyBorder;
 import tecec.ui.contract.control.IStageViewerController;
 import tecec.ui.contract.view.IStageViewerUI;
 import net.miginfocom.swing.MigLayout;
-import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import org.jdesktop.beansbinding.BeanProperty;
 import org.jdesktop.beansbinding.AutoBinding;
@@ -29,9 +28,9 @@ import tecec.dto.Stage;
 import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.SwingBindings;
 import javax.swing.ListSelectionModel;
-import java.awt.Font;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Toolkit;
 
 public class StageViewerUI extends JDialog implements IStageViewerUI {
 
@@ -87,6 +86,7 @@ public class StageViewerUI extends JDialog implements IStageViewerUI {
 		this.stageViewerController = stageViewerController;
 
 		setDefaultLookAndFeelDecorated(true);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainUI.class.getResource("/tecec/ui/files/icone_tecec.png")));
 		setModal(true);
 
 		setBounds(100, 100, 519, 300);

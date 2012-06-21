@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -28,9 +27,9 @@ import tecec.dto.Status;
 import tecec.ui.contract.control.IStatusViewerController;
 import tecec.ui.contract.view.IStatusViewerUI;
 import javax.swing.ListSelectionModel;
-import java.awt.Font;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Toolkit;
 
 public class StatusViewerUI extends JFrame implements IStatusViewerUI {
 
@@ -70,6 +69,7 @@ public class StatusViewerUI extends JFrame implements IStatusViewerUI {
 		this.statusViewerController = statusViewerController;
 
 		setDefaultLookAndFeelDecorated(true);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainUI.class.getResource("/tecec/ui/files/icone_tecec.png")));
 
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 726, 441);

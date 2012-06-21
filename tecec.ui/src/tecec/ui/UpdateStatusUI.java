@@ -1,6 +1,6 @@
 package tecec.ui;
 
-import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -13,7 +13,6 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import tecec.contract.RuleViolation;
-import net.miginfocom.swing.MigLayout;
 
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
@@ -25,19 +24,19 @@ import tecec.ui.contract.view.IUpdateStatusUI;
 import javax.swing.border.TitledBorder;
 
 public class UpdateStatusUI extends JDialog implements IUpdateStatusUI {
-	private static final long serialVersionUID = 1L;	
+	private static final long serialVersionUID = 1L;
 	private IUpdateStatusController updateStatusController;
 
 	@Override
-	public void setpKStatus(String pKStatus) {		
+	public void setpKStatus(String pKStatus) {
 		this.updateStatusController.setPKStatus(pKStatus);
 	}
-	
+
 	@Override
 	public void setVisible(boolean visible){
 		super.setVisible(visible);
 	}
-	
+
 	private void storeStatus() {
 		try {
 			RuleViolation violation = this.updateStatusController
@@ -48,7 +47,7 @@ public class UpdateStatusUI extends JDialog implements IUpdateStatusUI {
 						"Erro", JOptionPane.ERROR_MESSAGE);
 			} else {
 				this.updateStatusController.updateStatus();
-				
+
 				this.setVisible(false);
 			}
 		} catch (Exception e) {
@@ -68,8 +67,9 @@ public class UpdateStatusUI extends JDialog implements IUpdateStatusUI {
 	 */
 	public UpdateStatusUI(IUpdateStatusController updateStatusController) {
 		this.updateStatusController = updateStatusController;
-		
+
 		setDefaultLookAndFeelDecorated(true);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainUI.class.getResource("/tecec/ui/files/icone_tecec.png")));
 
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
@@ -78,22 +78,22 @@ public class UpdateStatusUI extends JDialog implements IUpdateStatusUI {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Atualizar Status:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(10, 11, 414, 153);
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
+
 		btnUpdateStatus = new JButton("Atualizar");
 		btnUpdateStatus.setBounds(329, 113, 75, 29);
 		panel.add(btnUpdateStatus);
-		
+
 				txtStatusDescription = new JTextField();
 				txtStatusDescription.setBounds(74, 42, 330, 20);
 				panel.add(txtStatusDescription);
 				txtStatusDescription.setColumns(10);
-				
+
 						JLabel lblNome = new JLabel("Descri\u00E7\u00E3o:");
 						lblNome.setBounds(10, 45, 81, 14);
 						panel.add(lblNome);

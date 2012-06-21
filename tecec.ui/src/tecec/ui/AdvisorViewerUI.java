@@ -1,7 +1,5 @@
 package tecec.ui;
 
-import java.awt.BorderLayout;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -10,7 +8,6 @@ import javax.swing.border.EmptyBorder;
 import tecec.ui.contract.control.IAdvisorViewerController;
 import tecec.ui.contract.view.IAdvisorViewerUI;
 import net.miginfocom.swing.MigLayout;
-import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -25,9 +22,9 @@ import org.jdesktop.swingbinding.SwingBindings;
 import javax.swing.ListSelectionModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.Font;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Toolkit;
 
 
 public class AdvisorViewerUI extends JDialog implements IAdvisorViewerUI {
@@ -65,6 +62,7 @@ public class AdvisorViewerUI extends JDialog implements IAdvisorViewerUI {
 		this.advisorViewerController = advisorViewerController;
 
 		setDefaultLookAndFeelDecorated(true);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainUI.class.getResource("/tecec/ui/files/icone_tecec.png")));
 
 		setModal(true);
 		setBounds(100, 100, 605, 520);

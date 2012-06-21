@@ -1,6 +1,7 @@
 package tecec.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Toolkit;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -25,7 +26,7 @@ import java.io.InputStream;
 public class NewDocumentationUI extends JDialog implements INewDocumentationUI {
 
 	/**
-	 * 
+	 *
 	 */
 
 	private static final long serialVersionUID = 1L;
@@ -47,7 +48,7 @@ public class NewDocumentationUI extends JDialog implements INewDocumentationUI {
 		} else {
 			localization = fileChooser.getSelectedFile();
 			fileTextField.setText(localization.getPath());
-			btnUplod.setEnabled(true);			
+			btnUplod.setEnabled(true);
 		}
 	}
 
@@ -59,7 +60,7 @@ public class NewDocumentationUI extends JDialog implements INewDocumentationUI {
 			//System.out.println ("Deu erro");
 			return null;
 		}
-		
+
 
 		byte[] array = new byte[((int) input.length())];
 		try {
@@ -94,6 +95,7 @@ public class NewDocumentationUI extends JDialog implements INewDocumentationUI {
 		/* Aplica o look and feel utilizado no main */
 
 		setDefaultLookAndFeelDecorated(true);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainUI.class.getResource("/tecec/ui/files/icone_tecec.png")));
 		setLocationByPlatform(true);
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
@@ -118,7 +120,7 @@ public class NewDocumentationUI extends JDialog implements INewDocumentationUI {
 		fileTextField.setEditable(false);
 		contentPanel.add(fileTextField, "cell 1 3,growx");
 		fileTextField.setColumns(10);
-		
+
 		JLabel lblArquivosDeNo = new JLabel("Arquivos de no máximo 2 MB.");
 		lblArquivosDeNo.setFont(new Font("DejaVu Sans", Font.PLAIN, 9));
 		contentPanel.add(lblArquivosDeNo, "cell 1 4,alignx right");
@@ -127,7 +129,7 @@ public class NewDocumentationUI extends JDialog implements INewDocumentationUI {
 
 		contentPanel.add(btnLocalizarArquivo, "flowx,cell 1 5,alignx right");
 
-		final JButton btnCarregarArquivo = new JButton("Carregar arquivo");		
+		final JButton btnCarregarArquivo = new JButton("Carregar arquivo");
 		btnCarregarArquivo.setEnabled(false);
 		contentPanel.add(btnCarregarArquivo, "cell 1 5");
 
@@ -136,7 +138,7 @@ public class NewDocumentationUI extends JDialog implements INewDocumentationUI {
 				selectedFile(btnCarregarArquivo);
 			}
 		});
-		
+
 		btnCarregarArquivo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (localization != null && localization.length()>0) {

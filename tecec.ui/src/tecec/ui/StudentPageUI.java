@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import net.miginfocom.swing.MigLayout;
 
+import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -46,8 +47,8 @@ public class StudentPageUI extends JInternalFrame implements IStudentPageUI {
 
 			dialog.setVisible(true);
 
-			this.controller.handIn(dialog.getDirectory() + dialog.getFile());		
-			
+			this.controller.handIn(dialog.getDirectory() + dialog.getFile());
+
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, e, "ERRO",
 					JOptionPane.ERROR_MESSAGE);
@@ -68,6 +69,9 @@ public class StudentPageUI extends JInternalFrame implements IStudentPageUI {
 	 * Create the frame.
 	 */
 	public StudentPageUI(IStudentPageController controller) {
+
+		setFrameIcon(new ImageIcon(this.getClass().getResource("/tecec/ui/files/icone_tecec.png")));
+
 		this.controller = controller;
 
 		contentPane = new JPanel();

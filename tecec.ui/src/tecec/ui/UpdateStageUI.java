@@ -1,6 +1,7 @@
 package tecec.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Toolkit;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,7 +15,6 @@ import javax.swing.border.EmptyBorder;
 import tecec.contract.RuleViolation;
 import tecec.ui.contract.control.IUpdateStageController;
 import tecec.ui.contract.view.IUpdateStageUI;
-import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -23,46 +23,46 @@ import org.jdesktop.beansbinding.BeanProperty;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
-import java.awt.Font;
 import javax.swing.border.TitledBorder;
 
 public class UpdateStageUI extends JDialog implements IUpdateStageUI {
-	
+
 	private static final long serialVersionUID = 1L;
 	private IUpdateStageController updateStageController;
-	
+
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textField;
 	private JComboBox comboBox;
-	
+
 	private void updateStage(){
 		RuleViolation violation = this.updateStageController.getUpdateViolation();
-		
+
 		if (violation != null) {
 			JOptionPane.showMessageDialog(this, violation.getDescription(), "ERRO", JOptionPane.ERROR_MESSAGE);
 		}
 		else{
 			try {
-				this.updateStageController.updateStage();				
+				this.updateStageController.updateStage();
 				this.setVisible(false);
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(this, e, "ERRO", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-	}	
+	}
 
 
 	public UpdateStageUI(IUpdateStageController updateStageController) {
 		if (updateStageController == null)
 			throw new IllegalArgumentException ("updateStageController");
-		
+
 		this.updateStageController = updateStageController;
 		setDefaultLookAndFeelDecorated(true);
-		
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainUI.class.getResource("/tecec/ui/files/icone_tecec.png")));
+
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		
+
 		setBounds(100, 100, 450, 230);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -105,9 +105,9 @@ public class UpdateStageUI extends JDialog implements IUpdateStageUI {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						updateStage();
-						
+
 					}
-					
+
 				});
 			}
 		}
@@ -117,7 +117,7 @@ public class UpdateStageUI extends JDialog implements IUpdateStageUI {
 	@Override
 	public void setpKStage(String pKStage) {
 		this.updateStageController.setPKStage(pKStage);
-		
+
 	}
 	protected void initDataBindings() {
 		BeanProperty<IUpdateStageController, String> iUpdateStageControllerBeanProperty = BeanProperty.create("stageName");

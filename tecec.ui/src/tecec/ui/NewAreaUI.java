@@ -17,6 +17,7 @@ import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 
 import java.awt.Component;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
@@ -31,7 +32,7 @@ import javax.swing.UIManager;
 public class NewAreaUI extends JDialog implements INewAreaUI {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -64,14 +65,15 @@ public class NewAreaUI extends JDialog implements INewAreaUI {
 	 */
 	public NewAreaUI(INewAreaController newAreaController) {
 		this.newAreaController = newAreaController;
-		
-		JDialog.setDefaultLookAndFeelDecorated(true);	
+
+		JDialog.setDefaultLookAndFeelDecorated(true);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainUI.class.getResource("/tecec/ui/files/icone_tecec.png")));
 
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		setBounds(100, 100, 450, 298);
 		getContentPane().setLayout(null);
-		
+
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Cadastrar Nova \u00C1rea:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(10, 11, 414, 239);
@@ -86,10 +88,10 @@ public class NewAreaUI extends JDialog implements INewAreaUI {
 			cboAreas = new JComboBox();
 			cboAreas.setBounds(84, 41, 320, 20);
 			panel.add(cboAreas);
-			
+
 			cboAreas.setRenderer(new DefaultListCellRenderer(){
 				/**
-				 * 
+				 *
 				 */
 				private static final long serialVersionUID = 1L;
 
@@ -99,12 +101,12 @@ public class NewAreaUI extends JDialog implements INewAreaUI {
 						boolean cellHasFocus) {
 					super.getListCellRendererComponent(list, value, index, isSelected,
 							cellHasFocus);
-					
+
 					if (value instanceof Area) {
 						Area area = (Area)value;
 						setText(area.getName());
 					}
-					
+
 					return this;
 				}
 			});

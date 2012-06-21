@@ -1,13 +1,11 @@
 package tecec.ui;
 
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -29,9 +27,9 @@ import tecec.contract.RuleViolation;
 import tecec.ui.contract.control.IAreaViewerController;
 import tecec.ui.contract.record.AreaRecord;
 import tecec.ui.contract.view.IAreaViewerUI;
-import java.awt.Font;
 import java.awt.Dimension;
-import javax.swing.SwingConstants;
+import java.awt.Toolkit;
+
 import java.awt.FlowLayout;
 
 public class AreaViewerUI extends JDialog implements IAreaViewerUI {
@@ -87,6 +85,7 @@ public class AreaViewerUI extends JDialog implements IAreaViewerUI {
 		this.areaViewerController = areViewerController;
 
 		setDefaultLookAndFeelDecorated(true);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainUI.class.getResource("/tecec/ui/files/icone_tecec.png")));
 
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);

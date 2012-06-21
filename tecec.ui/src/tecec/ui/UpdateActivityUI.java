@@ -1,6 +1,7 @@
 package tecec.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -41,7 +42,7 @@ public class UpdateActivityUI extends JDialog implements IUpdateActivityUI {
 		} else {
 			try {
 				this.updateActivityController.updateActivity();
-				
+
 				setVisible(false);
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(this, e, "ERRO",
@@ -64,8 +65,9 @@ public class UpdateActivityUI extends JDialog implements IUpdateActivityUI {
 
 	public UpdateActivityUI(IUpdateActivityController updateActivityController) {
 		this.updateActivityController = updateActivityController;
-		
+
 		setDefaultLookAndFeelDecorated(true);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainUI.class.getResource("/tecec/ui/files/icone_tecec.png")));
 
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);

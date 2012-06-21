@@ -7,10 +7,10 @@ import javax.swing.border.EmptyBorder;
 import tecec.ui.contract.control.INewStatusController;
 import tecec.ui.contract.view.INewStatusUI;
 import tecec.contract.RuleViolation;
-import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 
-import java.awt.Font;
+import java.awt.Toolkit;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import org.jdesktop.beansbinding.*;
@@ -22,16 +22,16 @@ import javax.swing.border.TitledBorder;
 
 public class NewStatusUI extends JDialog implements INewStatusUI {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private tecec.ui.contract.control.INewStatusController newStatusController;
-		
+
 	@Override
 	public void setVisible(boolean visible){
 		super.setVisible(visible);
 	}
-	
+
 	private void storeStatus() {
 		try {
 			RuleViolation violation = this.newStatusController
@@ -41,7 +41,7 @@ public class NewStatusUI extends JDialog implements INewStatusUI {
 						"Erro", JOptionPane.ERROR_MESSAGE);
 			} else {
 				this.newStatusController.createStatus();
-				
+
 				this.setVisible(false);
 			}
 		} catch (Exception e) {
@@ -66,8 +66,9 @@ public class NewStatusUI extends JDialog implements INewStatusUI {
 		}
 
 		this.newStatusController = newStatusController;
-		
+
 		setDefaultLookAndFeelDecorated(true);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainUI.class.getResource("/tecec/ui/files/icone_tecec.png")));
 
 		setLocationByPlatform(true);
 		setModal(true);
@@ -77,22 +78,22 @@ public class NewStatusUI extends JDialog implements INewStatusUI {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Cadastrar Novo Status:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(10, 11, 414, 153);
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
+
 				txtStatusDescription = new JTextField();
 				txtStatusDescription.setBounds(74, 42, 330, 20);
 				panel.add(txtStatusDescription);
 				txtStatusDescription.setColumns(10);
-				
+
 						JLabel lblNome = new JLabel("Descri\u00E7\u00E3o:");
 						lblNome.setBounds(10, 45, 81, 14);
 						panel.add(lblNome);
-						
+
 								btnCreateStatus = new JButton("Cadastrar");
 								btnCreateStatus.setBounds(323, 114, 81, 28);
 								panel.add(btnCreateStatus);

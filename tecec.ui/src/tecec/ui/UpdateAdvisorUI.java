@@ -1,6 +1,7 @@
 package tecec.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Toolkit;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -27,7 +28,7 @@ import java.awt.Dimension;
 public class UpdateAdvisorUI extends JDialog implements IUpdateAdvisorUI {
 
 	private tecec.ui.contract.control.IUpdateAdvisorController updateAdvisorController;
-	
+
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -40,35 +41,36 @@ public class UpdateAdvisorUI extends JDialog implements IUpdateAdvisorUI {
 	public void setpkAdvisor(String pkAdvisor) {
 		this.updateAdvisorController.setPKAdvisor(pkAdvisor);
 	}
-	
+
 	private void updateAdvisor(){
 		RuleViolation violation = this.updateAdvisorController.getUpdateViolation();
-		
+
 		if (violation != null) {
 			JOptionPane.showMessageDialog(this, violation.getDescription(), "ERRO", JOptionPane.ERROR_MESSAGE);
 		}
 		else{
 			try {
 				this.updateAdvisorController.updateAdvisor();
-				
+
 				this.setVisible(false);
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(this, e, "ERRO", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-	}	
+	}
 
 	public UpdateAdvisorUI(IUpdateAdvisorController updateAdvisorController) {
 		setPreferredSize(new Dimension(450, 230));
 		setMinimumSize(new Dimension(450, 230));
 		setMaximumSize(new Dimension(450, 230));
 		this.updateAdvisorController = updateAdvisorController;
-		
+
 		setDefaultLookAndFeelDecorated(true);
-		
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainUI.class.getResource("/tecec/ui/files/icone_tecec.png")));
+
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		
+
 		setBounds(100, 100, 450, 230);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setPreferredSize(new Dimension(450, 230));

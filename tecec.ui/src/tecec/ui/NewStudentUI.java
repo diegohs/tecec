@@ -21,13 +21,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Dimension;
 import java.awt.Point;
+import java.awt.Toolkit;
+
 import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
 
 public class NewStudentUI extends JDialog implements INewStudentUI {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private INewStudentController newStudentController;
@@ -66,8 +68,9 @@ public class NewStudentUI extends JDialog implements INewStudentUI {
 	 */
 	public NewStudentUI(INewStudentController newStudentController) {
 		this.newStudentController = newStudentController;
-		
+
 		setDefaultLookAndFeelDecorated(true);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainUI.class.getResource("/tecec/ui/files/icone_tecec.png")));
 
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);

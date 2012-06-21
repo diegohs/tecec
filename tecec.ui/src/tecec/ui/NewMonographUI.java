@@ -1,6 +1,7 @@
 package tecec.ui;
 
 import java.awt.Component;
+import java.awt.Toolkit;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,13 +33,12 @@ import java.util.List;
 import org.jdesktop.swingbinding.JComboBoxBinding;
 import org.jdesktop.swingbinding.SwingBindings;
 import tecec.dto.Area;
-import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 import java.awt.Dimension;
 
 public class NewMonographUI extends JDialog implements INewMonographUI {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private tecec.ui.contract.control.INewMonographController newMonographController;
@@ -101,6 +101,7 @@ public class NewMonographUI extends JDialog implements INewMonographUI {
 		this.newMonographController = newMonographController;
 
 		setDefaultLookAndFeelDecorated(true);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainUI.class.getResource("/tecec/ui/files/icone_tecec.png")));
 
 		setLocationByPlatform(true);
 		setModal(true);
@@ -171,7 +172,7 @@ public class NewMonographUI extends JDialog implements INewMonographUI {
 
 		cboArea.setRenderer(new DefaultListCellRenderer() {
 			/**
-																													 * 
+																													 *
 																													 */
 			private static final long serialVersionUID = 1L;
 
@@ -201,7 +202,7 @@ public class NewMonographUI extends JDialog implements INewMonographUI {
 
 		cboAluno.setRenderer(new DefaultListCellRenderer() {
 			/**
-																																	 * 
+																																	 *
 																																	 */
 			private static final long serialVersionUID = 1L;
 
@@ -231,7 +232,7 @@ public class NewMonographUI extends JDialog implements INewMonographUI {
 
 		cboOrientador.setRenderer(new DefaultListCellRenderer() {
 			/**
-																																					 * 
+																																					 *
 																																					 */
 			private static final long serialVersionUID = 1L;
 
@@ -261,7 +262,7 @@ public class NewMonographUI extends JDialog implements INewMonographUI {
 
 		cboCoorientador.setRenderer(new DefaultListCellRenderer() {
 			/**
-																																									 * 
+																																									 *
 																																									 */
 			private static final long serialVersionUID = 1L;
 
@@ -291,7 +292,7 @@ public class NewMonographUI extends JDialog implements INewMonographUI {
 
 		cboStatus.setRenderer(new DefaultListCellRenderer() {
 			/**
-																																													 * 
+																																													 *
 																																													 */
 			private static final long serialVersionUID = 1L;
 
