@@ -135,7 +135,7 @@ public class NewAreaUI extends JDialog implements INewAreaUI {
 		}
 		{
 			btnNewArea = new JButton("Cadastrar");
-			btnNewArea.setBounds(323, 200, 81, 23);
+			btnNewArea.setBounds(287, 200, 117, 23);
 			panel.add(btnNewArea);
 			btnNewArea.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {

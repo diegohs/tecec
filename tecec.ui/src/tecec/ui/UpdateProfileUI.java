@@ -95,7 +95,7 @@ public class UpdateProfileUI extends JDialog implements IUpdateProfileUI {
 						txtProfileName.setColumns(10);
 
 								btnUpdateProfile = new JButton("Atualizar");
-								btnUpdateProfile.setBounds(327, 102, 75, 29);
+								btnUpdateProfile.setBounds(271, 108, 133, 23);
 								panel.add(btnUpdateProfile);
 								btnUpdateProfile.addActionListener(new ActionListener() {
 									public void actionPerformed(ActionEvent arg0) {

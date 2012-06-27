@@ -86,7 +86,7 @@ public class UpdateStatusUI extends JDialog implements IUpdateStatusUI {
 		panel.setLayout(null);
 
 		btnUpdateStatus = new JButton("Atualizar");
-		btnUpdateStatus.setBounds(329, 113, 75, 29);
+		btnUpdateStatus.setBounds(287, 114, 113, 23);
 		panel.add(btnUpdateStatus);
 
 				txtStatusDescription = new JTextField();

@@ -25,6 +25,8 @@ import java.awt.event.ActionEvent;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
+import javax.swing.border.TitledBorder;
+import javax.swing.border.EtchedBorder;
 
 
 public class AdvisorViewerUI extends JDialog implements IAdvisorViewerUI {
@@ -108,7 +110,7 @@ public class AdvisorViewerUI extends JDialog implements IAdvisorViewerUI {
 			panelButtons.setPreferredSize(new Dimension(750, 60));
 			panelButtons.setMinimumSize(new Dimension(750, 60));
 			panelButtons.setMaximumSize(new Dimension(750, 60));
-			panelButtons.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opção:", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 10))); // NOI18N
+			panelButtons.setBorder(new TitledBorder(null, "Op\u00E7\u00F5es:", TitledBorder.LEADING, TitledBorder.TOP, null, null)); // NOI18N
 			contentPanel.add(panelButtons, "cell 0 2,grow");
 			JButton btnNewAdvisor = new JButton("Adicionar Novo");
 			btnNewAdvisor.setPreferredSize(new Dimension(150, 25));

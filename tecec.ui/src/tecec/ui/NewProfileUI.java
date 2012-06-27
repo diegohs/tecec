@@ -91,7 +91,7 @@ public class NewProfileUI extends JDialog implements INewProfileUI {
 				txtProfileName.setColumns(10);
 
 						btnCreateProfile = new JButton("Cadastrar");
-						btnCreateProfile.setBounds(321, 102, 81, 29);
+						btnCreateProfile.setBounds(287, 114, 117, 23);
 						panel.add(btnCreateProfile);
 
 								JLabel lblNome = new JLabel("Nome:");

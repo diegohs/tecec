@@ -31,6 +31,8 @@ import tecec.ui.contract.control.IActivityViewerController;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
+import javax.swing.border.TitledBorder;
+import javax.swing.border.EtchedBorder;
 
 public class ActivityViewerUI extends JDialog implements
 		tecec.ui.contract.view.IActivityViewerUI {
@@ -128,7 +130,7 @@ public class ActivityViewerUI extends JDialog implements
 				panelButtons.setPreferredSize(new Dimension(750, 60));
 				panelButtons.setMinimumSize(new Dimension(750, 60));
 				panelButtons.setMaximumSize(new Dimension(750, 60));
-				panelButtons.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opção:", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 10)));
+				panelButtons.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Op\u00E7\u00F5es:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 				contentPanel.add(panelButtons, "cell 0 2,grow");
 				btnNewActivity = new JButton("Cadastrar Atividade");
 				btnNewActivity.setPreferredSize(new Dimension(150, 25));

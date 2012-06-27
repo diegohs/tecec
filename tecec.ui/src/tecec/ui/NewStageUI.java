@@ -99,7 +99,7 @@ public class NewStageUI extends JDialog implements INewStageUI {
 			panel.setLayout(null);
 			{
 				btnCadastrar = new JButton("Cadastrar");
-				btnCadastrar.setBounds(323, 136, 81, 23);
+				btnCadastrar.setBounds(287, 136, 117, 23);
 				panel.add(btnCadastrar);
 				{
 					JLabel lblNome = new JLabel("Nome:");

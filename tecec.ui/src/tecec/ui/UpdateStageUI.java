@@ -76,7 +76,7 @@ public class UpdateStageUI extends JDialog implements IUpdateStageUI {
 			panel.setLayout(null);
 			{
 				JButton btnNewButton = new JButton("Atualizar");
-				btnNewButton.setBounds(329, 136, 75, 23);
+				btnNewButton.setBounds(287, 136, 117, 23);
 				panel.add(btnNewButton);
 				{
 					JLabel lblNome = new JLabel("Nome:");

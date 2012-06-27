@@ -95,7 +95,7 @@ public class NewStatusUI extends JDialog implements INewStatusUI {
 						panel.add(lblNome);
 
 								btnCreateStatus = new JButton("Cadastrar");
-								btnCreateStatus.setBounds(323, 114, 81, 28);
+								btnCreateStatus.setBounds(287, 114, 117, 23);
 								panel.add(btnCreateStatus);
 								btnCreateStatus.addActionListener(new ActionListener() {
 									public void actionPerformed(ActionEvent arg0) {

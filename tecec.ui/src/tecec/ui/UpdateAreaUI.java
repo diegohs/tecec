@@ -125,7 +125,7 @@ public class UpdateAreaUI extends JDialog implements IUpdateAreaUI {
 			}
 			{
 				JButton btnUpdate = new JButton("Atualizar");
-				btnUpdate.setBounds(329, 205, 75, 23);
+				btnUpdate.setBounds(271, 205, 133, 23);
 				panel.add(btnUpdate);
 				btnUpdate.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
