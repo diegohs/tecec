@@ -86,12 +86,12 @@ public class UpdateAreaUI extends JDialog implements IUpdateAreaUI {
 			panel.setLayout(null);
 			{
 				JLabel lblNewLabel = new JLabel("Super \u00C1rea:");
-				lblNewLabel.setBounds(13, 44, 76, 14);
+				lblNewLabel.setBounds(13, 44, 92, 17);
 				panel.add(lblNewLabel);
 			}
 			{
 				cboMainArea = new JComboBox();
-				cboMainArea.setBounds(84, 41, 320, 20);
+				cboMainArea.setBounds(109, 41, 295, 20);
 				panel.add(cboMainArea);
 				JLabel lblAtualizarrea = new JLabel("Atualizar Ã�rea");
 				lblAtualizarrea.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
@@ -108,13 +108,13 @@ public class UpdateAreaUI extends JDialog implements IUpdateAreaUI {
 			}
 			{
 				txtName = new JTextField();
-				txtName.setBounds(84, 90, 320, 20);
+				txtName.setBounds(101, 90, 303, 20);
 				panel.add(txtName);
 				txtName.setColumns(10);
 			}
 			{
 				txtDescription = new JTextField();
-				txtDescription.setBounds(84, 140, 320, 20);
+				txtDescription.setBounds(101, 140, 303, 20);
 				panel.add(txtDescription);
 				txtDescription.setColumns(10);
 			}

@@ -108,7 +108,7 @@ public class MonographViewerUI extends JFrame implements IMonographViewerUI {
 		panelButtons.setPreferredSize(new Dimension(750, 60));
 		panelButtons.setMinimumSize(new Dimension(750, 60));
 		panelButtons.setMaximumSize(new Dimension(750, 60));
-		panelButtons.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opções:", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 10))); // NOI18N
+		panelButtons.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opï¿½ï¿½es:", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 10))); // NOI18N
 		contentPane.add(panelButtons, "cell 0 2,grow");
 
 		btnNewMonograph = new JButton("Adicionar Novo");
@@ -118,13 +118,13 @@ public class MonographViewerUI extends JFrame implements IMonographViewerUI {
 		panelButtons.add(btnNewMonograph);
 
 		btnUpdateMonograph = new JButton("Atualizar Selecionado");
-		btnUpdateMonograph.setPreferredSize(new Dimension(150, 25));
+		btnUpdateMonograph.setPreferredSize(new Dimension(200, 25));
 		btnUpdateMonograph.setMinimumSize(new Dimension(150, 25));
 		btnUpdateMonograph.setMaximumSize(new Dimension(150, 25));
 		panelButtons.add(btnUpdateMonograph);
 
 		btnDeleteMonograph = new JButton("Excluir Selecionado");
-		btnDeleteMonograph.setPreferredSize(new Dimension(150, 25));
+		btnDeleteMonograph.setPreferredSize(new Dimension(200, 25));
 		btnDeleteMonograph.setMinimumSize(new Dimension(150, 25));
 		btnDeleteMonograph.setMaximumSize(new Dimension(150, 25));
 		panelButtons.add(btnDeleteMonograph);

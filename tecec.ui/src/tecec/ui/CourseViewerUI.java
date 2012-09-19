@@ -160,13 +160,13 @@ public class CourseViewerUI extends JDialog implements ICourseViewerUI {
 								showUpdateCourseUI();
 							}
 						});
-						btnAtualizar.setPreferredSize(new Dimension(150, 25));
+						btnAtualizar.setPreferredSize(new Dimension(200, 25));
 						btnAtualizar.setMinimumSize(new Dimension(150, 25));
 						btnAtualizar.setMaximumSize(new Dimension(150, 25));
 						panelButtons.add(btnAtualizar);
 						{
 							btnRemover = new JButton("Remover Selecionado");
-							btnRemover.setPreferredSize(new Dimension(150, 25));
+							btnRemover.setPreferredSize(new Dimension(200, 25));
 							btnRemover.setMinimumSize(new Dimension(150, 25));
 							btnRemover.setMaximumSize(new Dimension(150, 25));
 							panelButtons.add(btnRemover);

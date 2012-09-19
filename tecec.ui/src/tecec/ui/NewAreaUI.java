@@ -81,12 +81,12 @@ public class NewAreaUI extends JDialog implements INewAreaUI {
 		panel.setLayout(null);
 		{
 			JLabel lblNewLabel = new JLabel("Super \u00C1rea:");
-			lblNewLabel.setBounds(13, 44, 76, 14);
+			lblNewLabel.setBounds(13, 44, 91, 14);
 			panel.add(lblNewLabel);
 		}
 		{
 			cboAreas = new JComboBox();
-			cboAreas.setBounds(84, 41, 320, 20);
+			cboAreas.setBounds(105, 41, 299, 20);
 			panel.add(cboAreas);
 
 			cboAreas.setRenderer(new DefaultListCellRenderer(){
@@ -118,13 +118,13 @@ public class NewAreaUI extends JDialog implements INewAreaUI {
 		}
 		{
 			txtAreaName = new JTextField();
-			txtAreaName.setBounds(84, 90, 320, 20);
+			txtAreaName.setBounds(94, 90, 310, 20);
 			panel.add(txtAreaName);
 			txtAreaName.setColumns(10);
 		}
 		{
 			txtDescription = new JTextField();
-			txtDescription.setBounds(84, 140, 320, 20);
+			txtDescription.setBounds(94, 140, 310, 20);
 			panel.add(txtDescription);
 			txtDescription.setColumns(10);
 		}

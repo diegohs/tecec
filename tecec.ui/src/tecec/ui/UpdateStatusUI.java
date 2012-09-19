@@ -90,7 +90,7 @@ public class UpdateStatusUI extends JDialog implements IUpdateStatusUI {
 		panel.add(btnUpdateStatus);
 
 				txtStatusDescription = new JTextField();
-				txtStatusDescription.setBounds(74, 42, 330, 20);
+				txtStatusDescription.setBounds(91, 42, 313, 20);
 				panel.add(txtStatusDescription);
 				txtStatusDescription.setColumns(10);
 

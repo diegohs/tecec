@@ -86,7 +86,7 @@ public class NewStatusUI extends JDialog implements INewStatusUI {
 		panel.setLayout(null);
 
 				txtStatusDescription = new JTextField();
-				txtStatusDescription.setBounds(74, 42, 330, 20);
+				txtStatusDescription.setBounds(89, 42, 315, 20);
 				panel.add(txtStatusDescription);
 				txtStatusDescription.setColumns(10);
 

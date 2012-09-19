@@ -119,13 +119,13 @@ public class ProfileViewerUI extends JFrame implements IProfileViewerUI {
 		panelButtons.add(btnNewProfile);
 
 		btnUpdateProfile = new JButton("Atualizar Selecionado");
-		btnUpdateProfile.setPreferredSize(new Dimension(150, 25));
+		btnUpdateProfile.setPreferredSize(new Dimension(200, 25));
 		btnUpdateProfile.setMinimumSize(new Dimension(150, 25));
 		btnUpdateProfile.setMaximumSize(new Dimension(150, 25));
 		panelButtons.add(btnUpdateProfile);
 
 		btnDeleteProfile = new JButton("Excluir Selecionado");
-		btnDeleteProfile.setPreferredSize(new Dimension(150, 25));
+		btnDeleteProfile.setPreferredSize(new Dimension(200, 25));
 		btnDeleteProfile.setMinimumSize(new Dimension(150, 25));
 		btnDeleteProfile.setMaximumSize(new Dimension(150, 25));
 		panelButtons.add(btnDeleteProfile);

@@ -135,13 +135,13 @@ public class StudentViewerUI extends JDialog implements IStudentViewerUI {
 				panelButtons.add(btnNewStudent);
 				{
 					btnUpdateStudent = new JButton("Atualizar Selecionado");
-					btnUpdateStudent.setPreferredSize(new Dimension(150, 25));
+					btnUpdateStudent.setPreferredSize(new Dimension(200, 25));
 					btnUpdateStudent.setMinimumSize(new Dimension(150, 25));
 					btnUpdateStudent.setMaximumSize(new Dimension(150, 25));
 					panelButtons.add(btnUpdateStudent);
 					{
 						btnDeleteStudent = new JButton("Excluir Selecionado");
-						btnDeleteStudent.setPreferredSize(new Dimension(150, 25));
+						btnDeleteStudent.setPreferredSize(new Dimension(200, 25));
 						btnDeleteStudent.setMinimumSize(new Dimension(150, 25));
 						btnDeleteStudent.setMaximumSize(new Dimension(150, 25));
 						panelButtons.add(btnDeleteStudent);

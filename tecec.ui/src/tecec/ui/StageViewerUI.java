@@ -147,13 +147,13 @@ public class StageViewerUI extends JDialog implements IStageViewerUI {
 				panelButtons.add(btnNewButton);
 				{
 					btnNewButton_1 = new JButton("Atualizar Selecionado");
-					btnNewButton_1.setPreferredSize(new Dimension(150, 25));
+					btnNewButton_1.setPreferredSize(new Dimension(200, 25));
 					btnNewButton_1.setMinimumSize(new Dimension(150, 25));
 					btnNewButton_1.setMaximumSize(new Dimension(150, 25));
 					panelButtons.add(btnNewButton_1);
 					{
 						btnNewButton_2 = new JButton("Excluir Selecionado");
-						btnNewButton_2.setPreferredSize(new Dimension(150, 25));
+						btnNewButton_2.setPreferredSize(new Dimension(200, 25));
 						btnNewButton_2.setMinimumSize(new Dimension(150, 25));
 						btnNewButton_2.setMaximumSize(new Dimension(150, 25));
 						panelButtons.add(btnNewButton_2);

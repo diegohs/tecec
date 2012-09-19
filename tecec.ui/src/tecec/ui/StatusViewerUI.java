@@ -120,13 +120,13 @@ public class StatusViewerUI extends JFrame implements IStatusViewerUI {
 		panelButtons.add(btnNewStatus);
 
 		btnUpdateStatus = new JButton("Atualizar Selecionado");
-		btnUpdateStatus.setPreferredSize(new Dimension(150, 25));
+		btnUpdateStatus.setPreferredSize(new Dimension(200, 25));
 		btnUpdateStatus.setMinimumSize(new Dimension(150, 25));
 		btnUpdateStatus.setMaximumSize(new Dimension(150, 25));
 		panelButtons.add(btnUpdateStatus);
 
 		btnDeleteStatus = new JButton("Excluir Selecionado");
-		btnDeleteStatus.setPreferredSize(new Dimension(150, 25));
+		btnDeleteStatus.setPreferredSize(new Dimension(200, 25));
 		btnDeleteStatus.setMinimumSize(new Dimension(150, 25));
 		btnDeleteStatus.setMaximumSize(new Dimension(150, 25));
 		panelButtons.add(btnDeleteStatus);

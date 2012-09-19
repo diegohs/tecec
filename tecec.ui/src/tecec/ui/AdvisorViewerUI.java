@@ -119,13 +119,13 @@ public class AdvisorViewerUI extends JDialog implements IAdvisorViewerUI {
 			panelButtons.add(btnNewAdvisor);
 			{
 				btnUpdateAdvisor = new JButton("Atualizar Selecionado");
-				btnUpdateAdvisor.setPreferredSize(new Dimension(150, 25));
+				btnUpdateAdvisor.setPreferredSize(new Dimension(200, 25));
 				btnUpdateAdvisor.setMinimumSize(new Dimension(150, 25));
 				btnUpdateAdvisor.setMaximumSize(new Dimension(150, 25));
 				panelButtons.add(btnUpdateAdvisor);
 				{
 					btnDeleteAdvisor = new JButton("Excluir Selecionado");
-					btnDeleteAdvisor.setPreferredSize(new Dimension(150, 25));
+					btnDeleteAdvisor.setPreferredSize(new Dimension(200, 25));
 					btnDeleteAdvisor.setMinimumSize(new Dimension(150, 25));
 					btnDeleteAdvisor.setMaximumSize(new Dimension(150, 25));
 					panelButtons.add(btnDeleteAdvisor);
