@@ -40,8 +40,8 @@ public class UpdateStageController extends BaseController implements IUpdateStag
 		String old = this.stageName;
 		this.stageName = name;
 		
-		super.notifyOfPropertyChange("stageName", old, name);
-		super.notifyOfPropertyChange("canUpdate", null, getCanUpdate());
+		super.notifyOfPropertyChange("stageName");
+		super.notifyOfPropertyChange("canUpdate");
 
 	}
 
@@ -50,8 +50,8 @@ public class UpdateStageController extends BaseController implements IUpdateStag
 		String old = this.stageYear;
 		this.stageYear = year;
 		
-		super.notifyOfPropertyChange("stageYear", old, year);
-		super.notifyOfPropertyChange("canUpdate", null, getCanUpdate());		
+		super.notifyOfPropertyChange("stageYear");
+		super.notifyOfPropertyChange("canUpdate");		
 	}
 
 	@Override

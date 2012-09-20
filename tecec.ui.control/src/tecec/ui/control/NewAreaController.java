@@ -31,8 +31,8 @@ public class NewAreaController extends BaseController implements
 
 		this.areaName = name;
 
-		super.notifyOfPropertyChange("areaName", null, name);
-		super.notifyOfPropertyChange("canCreateArea", old, name);
+		super.notifyOfPropertyChange("areaName");
+		super.notifyOfPropertyChange("canCreateArea");
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class NewAreaController extends BaseController implements
 
 		this.description = description;
 
-		super.notifyOfPropertyChange("description", old, description);
+		super.notifyOfPropertyChange("description");
 	}
 
 	@Override
@@ -127,7 +127,7 @@ public class NewAreaController extends BaseController implements
 		this.setAreaName("");
 		this.setDescription("");
 		
-		super.notifyOfPropertyChange("areas", null, getAreas());
+		super.notifyOfPropertyChange("areas");
 		
 		setSelectedArea(null);
 		setSelectedAreaIndex(-1);

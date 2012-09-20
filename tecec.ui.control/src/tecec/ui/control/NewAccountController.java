@@ -30,7 +30,7 @@ public class NewAccountController extends BaseController implements INewAccountC
 	public void refresh() {
 		setID("");
 		
-		super.notifyOfPropertyChange("profiles", null, getProfiles());
+		super.notifyOfPropertyChange("profiles");
 		
 		setSelectedProfile(null);
 		setSelectedProfileIndex(-1);
@@ -40,7 +40,7 @@ public class NewAccountController extends BaseController implements INewAccountC
 	public void setID(String id) {
 		this.id = id;
 		
-		super.notifyOfPropertyChange("id", null, id);
+		super.notifyOfPropertyChange("id");
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public class NewAccountController extends BaseController implements INewAccountC
 	public void setUserName(String userName) {
 		this.userName = userName;
 		
-		super.notifyOfPropertyChange("userName", null, userName);
+		super.notifyOfPropertyChange("userName");
 	}
 
 	@Override
@@ -104,14 +104,14 @@ public class NewAccountController extends BaseController implements INewAccountC
 	public void setSelectedProfile(Profile profile) {
 		this.selectedProfile = profile;
 		
-		super.notifyOfPropertyChange("selectedProfile", null, profile);
+		super.notifyOfPropertyChange("selectedProfile");
 	}
 
 	@Override
 	public void setSelectedProfileIndex(int i) {
 		this.selectedProfileIndex = i;
 		
-		super.notifyOfPropertyChange("selectedProfileIndex", null, i);
+		super.notifyOfPropertyChange("selectedProfileIndex");
 	}
 
 }

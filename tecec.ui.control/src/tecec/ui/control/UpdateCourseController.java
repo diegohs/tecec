@@ -41,7 +41,7 @@ public class UpdateCourseController extends BaseController implements
 
 		this.courseName = name;
 
-		super.notifyOfPropertyChange("courseName", old, name);
+		super.notifyOfPropertyChange("courseName");
 	}
 
 	@Override
@@ -68,8 +68,8 @@ public class UpdateCourseController extends BaseController implements
 		String old = this.courseTurn;
 		this.courseTurn = turn;
 
-		super.notifyOfPropertyChange("courseTurn", old, turn);
-		super.notifyOfPropertyChange("canUpdate", null, getCanUpdate());
+		super.notifyOfPropertyChange("courseTurn");
+		super.notifyOfPropertyChange("canUpdate");
 
 	}
 
@@ -78,8 +78,8 @@ public class UpdateCourseController extends BaseController implements
 		String old = this.courseYear;
 		this.courseYear = year;
 
-		super.notifyOfPropertyChange("courseYear", old, year);
-		super.notifyOfPropertyChange("canUpdate", null, getCanUpdate());
+		super.notifyOfPropertyChange("courseYear");
+		super.notifyOfPropertyChange("canUpdate");
 
 	}
 

@@ -28,7 +28,7 @@ public class NewStudentController extends BaseController implements
 	public void setStudentName(String name) {
 		String oldValue = getStudentName();
 		this.studentName = name;
-		notifyOfPropertyChange("studentName", oldValue, name);
+		notifyOfPropertyChange("studentName");
 		
 	}
 
@@ -41,7 +41,7 @@ public class NewStudentController extends BaseController implements
 	public void setStudentEmail(String email) {
 		String oldValue = getStudentEmail();
 		this.studentEmail = email;
-		notifyOfPropertyChange("studentEmail", oldValue, email);		
+		notifyOfPropertyChange("studentEmail");		
 	}
 
 	@Override

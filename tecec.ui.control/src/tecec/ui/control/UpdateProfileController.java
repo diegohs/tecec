@@ -36,7 +36,7 @@ public class UpdateProfileController extends BaseController implements
 
 		this.profileName = name;
 
-		super.notifyOfPropertyChange("profileName", old, name);
+		super.notifyOfPropertyChange("profileName");
 	}
 
 	@Override

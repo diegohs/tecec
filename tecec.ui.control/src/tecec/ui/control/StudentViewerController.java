@@ -33,8 +33,8 @@ public class StudentViewerController  extends BaseController implements IStudent
 	public void setNameFilter(String nameFilter) {
 		String old = this.nameFilter;		
 		this.nameFilter = nameFilter;
-		super.notifyOfPropertyChange("nameFilter", old, nameFilter);		
-		super.notifyOfPropertyChange("students", null, getStudents());		
+		super.notifyOfPropertyChange("nameFilter");		
+		super.notifyOfPropertyChange("students");		
 	}
 
 	@Override
@@ -46,9 +46,9 @@ public class StudentViewerController  extends BaseController implements IStudent
 	public void setSelectedStudent(Student student) {
 		Student old = this.selectedStudent;		
 		this.selectedStudent = student;
-		super.notifyOfPropertyChange("selectedStudent", old, student);
-		super.notifyOfPropertyChange("canUpdateStudent", old, student);
-		super.notifyOfPropertyChange("canDeleteStudent", old, student);		
+		super.notifyOfPropertyChange("selectedStudent");
+		super.notifyOfPropertyChange("canUpdateStudent");
+		super.notifyOfPropertyChange("canDeleteStudent");		
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class StudentViewerController  extends BaseController implements IStudent
 	@Override
 	public void deleteStudent() throws RuleViolationException {
 		this.studentWriter.deleteStudent(this.selectedStudent.getPKStudent());			
-		super.notifyOfPropertyChange("students", null, getStudents());
+		super.notifyOfPropertyChange("students");
 		
 	}
 
@@ -85,14 +85,14 @@ public class StudentViewerController  extends BaseController implements IStudent
 	public void showNewStudentUI() {
 		this.newStudentUI.refresh();
 		this.newStudentUI.setVisible(true);		
-		super.notifyOfPropertyChange("students", null, getStudents());			
+		super.notifyOfPropertyChange("students");			
 	}
 
 	@Override
 	public void showUpdateStudentUI() {
 		this.updateStudentUI.setpkStudent(this.selectedStudent.getPKStudent());
 		this.updateStudentUI.setVisible(true);		
-		super.notifyOfPropertyChange("students", null, getStudents());		
+		super.notifyOfPropertyChange("students");		
 	}
 
 	@Override

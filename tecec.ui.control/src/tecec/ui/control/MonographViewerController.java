@@ -63,8 +63,8 @@ public class MonographViewerController extends BaseController implements IMonogr
 	public void setNameFilter(String nameFilter) {
 		this.nameFilter = nameFilter;
 
-		super.notifyOfPropertyChange("nameFilter", null, nameFilter);
-		super.notifyOfPropertyChange("monographs", null, getMonographs());
+		super.notifyOfPropertyChange("nameFilter");
+		super.notifyOfPropertyChange("monographs");
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class MonographViewerController extends BaseController implements IMonogr
 		this.newMonographUI.refresh();
 		this.newMonographUI.setVisible(true);
 		
-		super.notifyOfPropertyChange("monographs", null, getMonographs());
+		super.notifyOfPropertyChange("monographs");
 	}
 	
 	@Override
@@ -85,14 +85,14 @@ public class MonographViewerController extends BaseController implements IMonogr
 		this.updateMonographUI.setPKMonograph(this.selectedMonograph.getMonograph().getpKMonograph());
 		this.updateMonographUI.setVisible(true);		
 		
-		super.notifyOfPropertyChange("monographs", null, getMonographs());
+		super.notifyOfPropertyChange("monographs");
 	}
 	
 	@Override
 	public void deleteMonograph() {
 		this.monographWriter.deleteMonograph(this.selectedMonograph.getMonograph().getpKMonograph());
 		
-		super.notifyOfPropertyChange("monographs", null, getMonographs());	
+		super.notifyOfPropertyChange("monographs");	
 	}
 	
 	@Override
@@ -102,13 +102,11 @@ public class MonographViewerController extends BaseController implements IMonogr
 
 	@Override
 	public void setSelectedMonograph(MonographRecord monograph) {
-		MonographRecord old = this.selectedMonograph;
-		
 		this.selectedMonograph = monograph;
 
-		super.notifyOfPropertyChange("selectedMonograph", old, monograph);
-		super.notifyOfPropertyChange("canUpdateMonograph", null, getCanUpdateMonograph());
-		super.notifyOfPropertyChange("canDeleteMonograph", null, getCanDeleteMonograph());
+		super.notifyOfPropertyChange("selectedMonograph");
+		super.notifyOfPropertyChange("canUpdateMonograph");
+		super.notifyOfPropertyChange("canDeleteMonograph");
 
 	}
 	

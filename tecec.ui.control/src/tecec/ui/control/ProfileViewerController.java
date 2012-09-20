@@ -32,8 +32,8 @@ public class ProfileViewerController extends BaseController implements IProfileV
 		
 		this.nameFilter = nameFilter;
 		
-		super.notifyOfPropertyChange("nameFilter", old, nameFilter);
-		super.notifyOfPropertyChange("profiles", null, getProfiles());
+		super.notifyOfPropertyChange("nameFilter");
+		super.notifyOfPropertyChange("profiles");
 	}
 
 	@Override
@@ -47,9 +47,9 @@ public class ProfileViewerController extends BaseController implements IProfileV
 		
 		this.selectedProfile = profile;
 
-		super.notifyOfPropertyChange("selectedProfile", old, profile);
-		super.notifyOfPropertyChange("canUpdateProfile", old, profile);
-		super.notifyOfPropertyChange("canDeleteProfile", old, profile);
+		super.notifyOfPropertyChange("selectedProfile");
+		super.notifyOfPropertyChange("canUpdateProfile");
+		super.notifyOfPropertyChange("canDeleteProfile");
 	}
 	
 	
@@ -71,7 +71,7 @@ public class ProfileViewerController extends BaseController implements IProfileV
 		this.newProfileUI.refresh();
 		this.newProfileUI.setVisible(true);
 		
-		super.notifyOfPropertyChange("profiles", null, getProfiles());
+		super.notifyOfPropertyChange("profiles");
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class ProfileViewerController extends BaseController implements IProfileV
 		this.updateProfileUI.setpKProfile(this.selectedProfile.getpKProfile());
 		this.updateProfileUI.setVisible(true);
 		
-		super.notifyOfPropertyChange("profiles", null, getProfiles());
+		super.notifyOfPropertyChange("profiles");
 	}
 
 	@Override
@@ -96,7 +96,7 @@ public class ProfileViewerController extends BaseController implements IProfileV
 	public void deleteProfile() {
 		this.profileWriter.deleteProfile(this.selectedProfile.getpKProfile());
 		
-		super.notifyOfPropertyChange("profiles", null, getProfiles());
+		super.notifyOfPropertyChange("profiles");
 	}
 
 	@Override

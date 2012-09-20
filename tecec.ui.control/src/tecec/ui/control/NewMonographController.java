@@ -118,7 +118,7 @@ public class NewMonographController extends BaseController implements
 
 		this.title = title;
 
-		super.notifyOfPropertyChange("monographTitle", null, title);
+		super.notifyOfPropertyChange("monographTitle");
 	}
 
 	@Override
@@ -155,18 +155,16 @@ public class NewMonographController extends BaseController implements
 	public void setSelectedCourse(Course course) {
 		this.selectedCourse = course;
 
-		super.notifyOfPropertyChange("selectedCourse", null, course);
-		super.notifyOfPropertyChange("canSelectStudent", null,
-				getCanSelectStudent());
-		super.notifyOfPropertyChange("students", null,
-				getStudents());
+		super.notifyOfPropertyChange("selectedCourse");
+		super.notifyOfPropertyChange("canSelectStudent");
+		super.notifyOfPropertyChange("students");
 	}
 
 	@Override
 	public void setSelectedCourseIndex(int i) {
 		this.selectedCourseIndex = i;
 
-		super.notifyOfPropertyChange("selectedCourseIndex", null, i);
+		super.notifyOfPropertyChange("selectedCourseIndex");
 	}
 
 	@Override
@@ -194,13 +192,13 @@ public class NewMonographController extends BaseController implements
 	public void setSelectedArea(Area area) {
 		this.selectedArea = area;
 		
-		super.notifyOfPropertyChange("selectedArea", null, area);
+		super.notifyOfPropertyChange("selectedArea");
 	}
 
 	@Override
 	public void setSelectecAreaIndex(int i) {
 		this.selectedAreaIndex = i;
-		super.notifyOfPropertyChange("selectedAreaIndex", null, i);
+		super.notifyOfPropertyChange("selectedAreaIndex");
 	}
 
 	@Override
@@ -234,13 +232,13 @@ public class NewMonographController extends BaseController implements
 	public void setSelectedStudent(Student student) {
 		this.selectedStudent = student;
 		
-		super.notifyOfPropertyChange("selectedStudent", null, student);
+		super.notifyOfPropertyChange("selectedStudent");
 	}
 
 	@Override
 	public void setSelectedStudentIndex(int i) {
 		this.selectedStudentIndex = i;
-		super.notifyOfPropertyChange("selectedStudentIndex", null, i);
+		super.notifyOfPropertyChange("selectedStudentIndex");
 	}
 
 	@Override
@@ -268,13 +266,14 @@ public class NewMonographController extends BaseController implements
 	public void setSelectedAdvisor(Advisor advisor) {
 		this.selectedAdvisor = advisor;
 		
-		super.notifyOfPropertyChange("selectedAdvisor", null, advisor);
+		super.notifyOfPropertyChange("selectedAdvisor");
 	}
 
 	@Override
 	public void setSelectedAdvisorIndex(int i) {
 		this.selectedAdvisorIndex = i;
-		super.notifyOfPropertyChange("selectedAdvisorIndex", null, i);
+		
+		super.notifyOfPropertyChange("selectedAdvisorIndex");
 	}
 
 	@Override
@@ -302,13 +301,14 @@ public class NewMonographController extends BaseController implements
 	public void setSelectedStatus(Status status) {
 		this.selectedStatus = status;
 		
-		super.notifyOfPropertyChange("selectedStatus", null, status);
+		super.notifyOfPropertyChange("selectedStatus");
 	}
 
 	@Override
 	public void setSelectedStatusIndex(int i) {
 		this.selectedStatusIndex = i;
-		super.notifyOfPropertyChange("selectedStatusIndex", null, i);
+		
+		super.notifyOfPropertyChange("selectedStatusIndex");
 	}
 
 	@Override
@@ -336,14 +336,14 @@ public class NewMonographController extends BaseController implements
 	public void setSelectedCoadvisor(Advisor coadvisor) {
 		this.selectedCoadvisor = coadvisor;
 		
-		super.notifyOfPropertyChange("selectedCoadvisor", null, coadvisor);
+		super.notifyOfPropertyChange("selectedCoadvisor");
 	}
 
 	@Override
 	public void setSelectedCoadvisorIndex(int i) {
 		this.selectedCoadvisorIndex = i;
 
-		super.notifyOfPropertyChange("selectedCoadvisorIndex", null, i);
+		super.notifyOfPropertyChange("selectedCoadvisorIndex");
 	}
 
 	@Override
@@ -367,11 +367,11 @@ public class NewMonographController extends BaseController implements
 	public void refresh() {
 		setMonographTitle("");
 
-		super.notifyOfPropertyChange("areas", null, getAreas());
-		super.notifyOfPropertyChange("advisors", null, getAdvisors());
-		super.notifyOfPropertyChange("coadvisors", null, getCoadvisors());
-		super.notifyOfPropertyChange("courses", null, getCourses());
-		super.notifyOfPropertyChange("status", null, getStatus());
+		super.notifyOfPropertyChange("areas");
+		super.notifyOfPropertyChange("advisors");
+		super.notifyOfPropertyChange("coadvisors");
+		super.notifyOfPropertyChange("courses");
+		super.notifyOfPropertyChange("status");
 		
 		setSelectedArea(null);
 		setSelectedAdvisor(null);

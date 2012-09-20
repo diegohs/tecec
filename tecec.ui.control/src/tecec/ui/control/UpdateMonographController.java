@@ -99,7 +99,7 @@ public class UpdateMonographController extends BaseController implements IUpdate
 	public void setMonographTitle(String monographTitle) {
 		this.monographTitle = monographTitle;
 		
-		super.notifyOfPropertyChange("monographTitle", null, monographTitle);
+		super.notifyOfPropertyChange("monographTitle");
 	}
 
 
@@ -123,12 +123,12 @@ public class UpdateMonographController extends BaseController implements IUpdate
 		List<Status> statuses = getStatus();		
 		List<Student> students = getStudents();
 		
-		super.notifyOfPropertyChange("areas", null, areas);
-		super.notifyOfPropertyChange("advisors", null, advisors);
-		super.notifyOfPropertyChange("coadvisors", null, coadvisors);
-		super.notifyOfPropertyChange("statuses", null, statuses);
-		super.notifyOfPropertyChange("students", null, students);
-		super.notifyOfPropertyChange("courses", null, courses);	
+		super.notifyOfPropertyChange("areas");
+		super.notifyOfPropertyChange("advisors");
+		super.notifyOfPropertyChange("coadvisors");
+		super.notifyOfPropertyChange("statuses");
+		super.notifyOfPropertyChange("students");
+		super.notifyOfPropertyChange("courses");	
 		
 		setSelectedAdvisor(null);
 		setSelectedArea(null);
@@ -256,18 +256,16 @@ public class UpdateMonographController extends BaseController implements IUpdate
 	public void setSelectedCourse(Course course) {
 		this.selectedCourse = course;
 
-		super.notifyOfPropertyChange("selectedCourse", null, course);
-		super.notifyOfPropertyChange("canSelectStudent", null,
-				getCanSelectStudent());
-		super.notifyOfPropertyChange("students", null,
-				getStudents());
+		super.notifyOfPropertyChange("selectedCourse");
+		super.notifyOfPropertyChange("canSelectStudent");
+		super.notifyOfPropertyChange("students");
 	}
 
 	@Override
 	public void setSelectedCourseIndex(int i) {
 		this.selectedCourseIndex = i;
 		
-		super.notifyOfPropertyChange("selectedCourseIndex", null, i);
+		super.notifyOfPropertyChange("selectedCourseIndex");
 	}
 
 	@Override
@@ -295,14 +293,14 @@ public class UpdateMonographController extends BaseController implements IUpdate
 	public void setSelectedArea(Area area) {
 		this.selectedArea = area;
 		
-		super.notifyOfPropertyChange("selectedArea", null, area);
+		super.notifyOfPropertyChange("selectedArea");
 	}
 
 	@Override
 	public void setSelectedAreaIndex(int i) {
 		this.selectedAreaIndex = i;
 		
-		super.notifyOfPropertyChange("selectedAreaIndex", null, i);
+		super.notifyOfPropertyChange("selectedAreaIndex");
 	}
 
 	@Override
@@ -336,14 +334,14 @@ public class UpdateMonographController extends BaseController implements IUpdate
 	public void setSelectedStudent(Student student) {
 		this.selectedStudent = student;
 		
-		super.notifyOfPropertyChange("selectedStudent", null, student);
+		super.notifyOfPropertyChange("selectedStudent");
 	}
 
 	@Override
 	public void setSelectedStudentIndex(int i) {
 		this.selectedStudentIndex = i;
 		
-		super.notifyOfPropertyChange("selectedStudentIndex", null, i);
+		super.notifyOfPropertyChange("selectedStudentIndex");
 	}
 
 	@Override
@@ -371,14 +369,14 @@ public class UpdateMonographController extends BaseController implements IUpdate
 	public void setSelectedAdvisor(Advisor advisor) {
 		this.selectedAdvisor = advisor;
 		
-		super.notifyOfPropertyChange("selectedAdvisor", null, advisor);
+		super.notifyOfPropertyChange("selectedAdvisor");
 	}
 
 	@Override
 	public void setSelectedAdvisorIndex(int i) {
 		this.selectedAdvisorIndex = i;
 		
-		super.notifyOfPropertyChange("selectedAdvisorIndex", null, i);
+		super.notifyOfPropertyChange("selectedAdvisorIndex");
 	}
 
 	@Override
@@ -412,14 +410,14 @@ public class UpdateMonographController extends BaseController implements IUpdate
 	public void setSelectedCoadvisor(Advisor coadvisor) {
 		this.selectedCoadvisor = coadvisor;
 		
-		super.notifyOfPropertyChange("selectedCoadvisor", null, coadvisor);
+		super.notifyOfPropertyChange("selectedCoadvisor");
 	}
 
 	@Override
 	public void setSelectedCoadvisorIndex(int i) {
 		this.selectedCoadvisorIndex = i;
 
-		super.notifyOfPropertyChange("selectedCoadvisorIndex", null, i);
+		super.notifyOfPropertyChange("selectedCoadvisorIndex");
 	}
 
 	@Override
@@ -447,14 +445,14 @@ public class UpdateMonographController extends BaseController implements IUpdate
 	public void setSelectedStatus(Status status) {
 		this.selectedStatus = status;
 		
-		super.notifyOfPropertyChange("selectedStatus", null, status);
+		super.notifyOfPropertyChange("selectedStatus");
 	}
 
 	@Override
 	public void setSelectedStatusIndex(int i) {
 		this.selectedStatusIndex = i;
 
-		super.notifyOfPropertyChange("selectedStatusIndex", null, i);
+		super.notifyOfPropertyChange("selectedStatusIndex");
 	}
 
 	@Override

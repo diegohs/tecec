@@ -108,22 +108,17 @@ public class CoordinatorPageController extends BaseController implements
 	public void setSelectedActivity(ActivityRecord activity) {
 		this.selectedActivity = activity;
 
-		super.notifyOfPropertyChange("selectedActivity", null, activity);
-		super.notifyOfPropertyChange("canUpdate", null, getCanUpdate());
-		super.notifyOfPropertyChange("canDelete", null, getCanDelete());
-		super.notifyOfPropertyChange("canDownloadFile", null,
-				getCanDownloadFile());
+		super.notifyOfPropertyChange("selectedActivity");
+		super.notifyOfPropertyChange("canUpdate");
+		super.notifyOfPropertyChange("canDelete");
+		super.notifyOfPropertyChange("canDownloadFile");
 
 		if (activity != null) {
-			super.notifyOfPropertyChange("selectedActivity.handIn.grade", null,
-					activity.getHandIn().getGrade());
-			super.notifyOfPropertyChange("selectedActivity.handIn.remark",
-					null, activity.getHandIn().getRemark());
+			super.notifyOfPropertyChange("selectedActivity.handIn.grade");
+			super.notifyOfPropertyChange("selectedActivity.handIn.remark");
 		} else {
-			super.notifyOfPropertyChange("selectedActivity.handIn.grade", null,
-					null);
-			super.notifyOfPropertyChange("selectedActivity.handIn.remark",
-					null, null);
+			super.notifyOfPropertyChange("selectedActivity.handIn.grade");
+			super.notifyOfPropertyChange("selectedActivity.handIn.remark");
 		}
 
 	}
@@ -140,7 +135,7 @@ public class CoordinatorPageController extends BaseController implements
 				.getPKHandIn(), this.selectedActivity.getHandIn().getGrade(),
 				this.selectedActivity.getHandIn().getRemark());
 
-		super.notifyOfPropertyChange("activities", null, getActivities());
+		super.notifyOfPropertyChange("activities");
 	}
 
 	@Override
@@ -173,7 +168,7 @@ public class CoordinatorPageController extends BaseController implements
 
 	@Override
 	public void refresh() {
-		super.notifyOfPropertyChange("activities", null, getActivities());
+		super.notifyOfPropertyChange("activities");
 	}
 
 	@Override
@@ -196,7 +191,7 @@ public class CoordinatorPageController extends BaseController implements
 		this.handInWriter.deleteHandIn(this.selectedActivity.getHandIn()
 				.getPKHandIn());
 
-		super.notifyOfPropertyChange("activities", null, getActivities());
+		super.notifyOfPropertyChange("activities");
 	}
 
 	@Override

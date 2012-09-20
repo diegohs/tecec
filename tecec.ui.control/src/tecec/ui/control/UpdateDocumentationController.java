@@ -43,8 +43,8 @@ public class UpdateDocumentationController extends BaseController implements
 		String old = this.fileName;
 		this.fileName = fileName;
 
-		super.notifyOfPropertyChange("documentationFileName", old, fileName);
-		super.notifyOfPropertyChange("canUpdate", null, getCanUpdate());
+		super.notifyOfPropertyChange("documentationFileName");
+		super.notifyOfPropertyChange("canUpdate");
 
 	}
 
@@ -53,8 +53,8 @@ public class UpdateDocumentationController extends BaseController implements
 		byte[] old = this.documentationData;
 		this.documentationData = data;
 
-		super.notifyOfPropertyChange("documentationData", old, data);
-		super.notifyOfPropertyChange("canUpdate", null, getCanUpdate());
+		super.notifyOfPropertyChange("documentationData");
+		super.notifyOfPropertyChange("canUpdate");
 	}
 
 	@Override

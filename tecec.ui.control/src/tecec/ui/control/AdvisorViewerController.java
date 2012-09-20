@@ -31,8 +31,8 @@ public class AdvisorViewerController  extends BaseController implements IAdvisor
 	public void setNameFilter(String nameFilter) {
 		String old = this.nameFilter;		
 		this.nameFilter = nameFilter;
-		super.notifyOfPropertyChange("nameFilter", old, nameFilter);		
-		super.notifyOfPropertyChange("advisors", null, getAdvisors());		
+		super.notifyOfPropertyChange("nameFilter");		
+		super.notifyOfPropertyChange("advisors");		
 	}
 
 	@Override
@@ -42,11 +42,11 @@ public class AdvisorViewerController  extends BaseController implements IAdvisor
 
 	@Override
 	public void setSelectedAdvisor(Advisor advisor) {
-		Advisor old = this.selectedAdvisor;		
 		this.selectedAdvisor = advisor;
-		super.notifyOfPropertyChange("selectedAdvisor", old, advisor);
-		super.notifyOfPropertyChange("canUpdateAdvisor", old, advisor);
-		super.notifyOfPropertyChange("canDeleteAdvisor", old, advisor);		
+		
+		super.notifyOfPropertyChange("selectedAdvisor");
+		super.notifyOfPropertyChange("canUpdateAdvisor");
+		super.notifyOfPropertyChange("canDeleteAdvisor");		
 	}
 
 	@Override
@@ -63,7 +63,7 @@ public class AdvisorViewerController  extends BaseController implements IAdvisor
 	@Override
 	public void deleteAdvisor() {
 		this.advisorWriter.deleteAdvisor(this.selectedAdvisor.getPKAdvisor());			
-		super.notifyOfPropertyChange("advisors", null, getAdvisors());
+		super.notifyOfPropertyChange("advisors");
 		
 	}
 
@@ -81,14 +81,14 @@ public class AdvisorViewerController  extends BaseController implements IAdvisor
 	public void showNewAdvisorUI() {
 		this.newAdvisorUI.refresh();
 		this.newAdvisorUI.setVisible(true);		
-		super.notifyOfPropertyChange("advisors", null, getAdvisors());			
+		super.notifyOfPropertyChange("advisors");			
 	}
 
 	@Override
 	public void showUpdateAdvisorUI() {
 		this.updateAdvisorUI.setpkAdvisor(this.selectedAdvisor.getPKAdvisor());
 		this.updateAdvisorUI.setVisible(true);		
-		super.notifyOfPropertyChange("advisors", null, getAdvisors());		
+		super.notifyOfPropertyChange("advisors");		
 	}
 
 	@Override

@@ -27,7 +27,7 @@ public class NewDocumentationController extends BaseController implements INewDo
 	public void setDocumentationFileName(String fileName) {
 		String oldValue = getDocumentationFileName();
 		this.fileName = fileName;
-		notifyOfPropertyChange ("fileName", oldValue, fileName);
+		notifyOfPropertyChange ("fileName");
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class NewDocumentationController extends BaseController implements INewDo
 	public void setDocumentationData(byte[] data) {
 		byte[] old = getDocumentationData();
 		this.data = data;
-		notifyOfPropertyChange ("data", old, data);
+		notifyOfPropertyChange ("data");
 	}
 
 	@Override

@@ -38,8 +38,7 @@ public class StudentPageController extends BaseController implements
 	public void setPKStudent(String pKStudent) {
 		this.pKStudent = pKStudent;
 
-		super.notifyOfPropertyChange("activityRecords", null,
-				this.getActivityRecords());
+		super.notifyOfPropertyChange("activityRecords");
 	}
 
 	@Override
@@ -51,11 +50,9 @@ public class StudentPageController extends BaseController implements
 	public void setSelectedActivityRecord(ActivityRecord activityRecord) {
 		this.selectedActivityRecord = activityRecord;
 
-		super.notifyOfPropertyChange("canHandIn", null, this.getCanHandIn());
-		super.notifyOfPropertyChange("selectedActivityDescription", null,
-				this.getSelectedActivityDescription());
-		super.notifyOfPropertyChange("selectedHandInRemark", null,
-				this.getSelectedActivityRecord());
+		super.notifyOfPropertyChange("canHandIn");
+		super.notifyOfPropertyChange("selectedActivityDescription");
+		super.notifyOfPropertyChange("selectedHandInRemark");
 	}
 
 	@Override
@@ -132,7 +129,7 @@ public class StudentPageController extends BaseController implements
 
 	@Override
 	public void refresh() {
-		super.notifyOfPropertyChange("activityRecords", null, getActivityRecords());
+		super.notifyOfPropertyChange("activityRecords");
 	}
 
 	@Override
@@ -141,7 +138,7 @@ public class StudentPageController extends BaseController implements
 				this.getSelectedActivityRecord().getActivity().getpKActivity(), 
 				file);
 		
-		super.notifyOfPropertyChange("activityRecords", null, getActivityRecords());
+		super.notifyOfPropertyChange("activityRecords");
 	}
 
 }

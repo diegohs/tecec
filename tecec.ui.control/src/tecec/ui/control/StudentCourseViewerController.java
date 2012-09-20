@@ -44,9 +44,8 @@ public class StudentCourseViewerController extends BaseController implements
 		this.correlatedCourses = this.courseReader
 				.getStudentCourses(this.pKStudent);
 
-		super.notifyOfPropertyChange("correlatedCourses", null,
-				this.correlatedCourses);
-		super.notifyOfPropertyChange("canDelete", null, this.getCanDelete());
+		super.notifyOfPropertyChange("correlatedCourses");
+		super.notifyOfPropertyChange("canDelete");
 	}
 
 	private void loadCourses() {
@@ -63,8 +62,8 @@ public class StudentCourseViewerController extends BaseController implements
 			}
 		}
 
-		super.notifyOfPropertyChange("courses", null, this.courses);
-		super.notifyOfPropertyChange("canInsert", null, this.getCanInsert());
+		super.notifyOfPropertyChange("courses");
+		super.notifyOfPropertyChange("canInsert");
 	}
 
 	@Override
@@ -120,18 +119,16 @@ public class StudentCourseViewerController extends BaseController implements
 	public void setSelectedCourse(Course course) {
 		this.selectedCourse = course;
 
-		super.notifyOfPropertyChange("selectedCourse", null,
-				this.selectedCourse);
-		super.notifyOfPropertyChange("canInsert", null, this.getCanInsert());
+		super.notifyOfPropertyChange("selectedCourse");
+		super.notifyOfPropertyChange("canInsert");
 	}
 
 	@Override
 	public void setSelectedCorrelatedCourse(Course course) {
 		this.selectedCorrelatedCourse = course;
 
-		super.notifyOfPropertyChange("selectedCorrelatedCourse", null,
-				this.selectedCorrelatedCourse);
-		super.notifyOfPropertyChange("canDelete", null, this.getCanDelete());
+		super.notifyOfPropertyChange("selectedCorrelatedCourse");
+		super.notifyOfPropertyChange("canDelete");
 	}
 
 	@Override
@@ -154,9 +151,8 @@ public class StudentCourseViewerController extends BaseController implements
 		this.courses = newCourses;
 		this.correlatedCourses = newCorrelatedCourses;
 
-		super.notifyOfPropertyChange("courses", null, this.courses);
-		super.notifyOfPropertyChange("correlatedCourses", null,
-				this.correlatedCourses);
+		super.notifyOfPropertyChange("courses");
+		super.notifyOfPropertyChange("correlatedCourses");
 	}
 
 	@Override
@@ -179,9 +175,8 @@ public class StudentCourseViewerController extends BaseController implements
 		this.courses = newCourses;
 		this.correlatedCourses = newCorrelatedCourses;
 
-		super.notifyOfPropertyChange("courses", null, this.courses);
-		super.notifyOfPropertyChange("correlatedCourses", null,
-				this.correlatedCourses);
+		super.notifyOfPropertyChange("courses");
+		super.notifyOfPropertyChange("correlatedCourses");
 	}
 
 	@Override

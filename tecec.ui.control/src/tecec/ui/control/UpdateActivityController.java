@@ -43,8 +43,8 @@ public class UpdateActivityController extends BaseController implements IUpdateA
 	public void setActivityTitle(String title) {
 		this.title = title;
 
-		super.notifyOfPropertyChange("activityTitle", null, title);
-		super.notifyOfPropertyChange("canUpdate", null, getCanUpdate());
+		super.notifyOfPropertyChange("activityTitle");
+		super.notifyOfPropertyChange("canUpdate");
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class UpdateActivityController extends BaseController implements IUpdateA
 	public void setActivityDescription(String description) {
 		this.description = description;
 
-		super.notifyOfPropertyChange("activityDescription", null, description);
+		super.notifyOfPropertyChange("activityDescription");
 	}
 
 	@Override
@@ -68,8 +68,8 @@ public class UpdateActivityController extends BaseController implements IUpdateA
 	public void setActivityDueDate(String dueDate) {
 		this.dueDate = dueDate;
 
-		super.notifyOfPropertyChange("activityDueDate", null, dueDate);
-		super.notifyOfPropertyChange("canUpdate", null, getCanUpdate());
+		super.notifyOfPropertyChange("activityDueDate");
+		super.notifyOfPropertyChange("canUpdate");
 	}
 
 	@Override

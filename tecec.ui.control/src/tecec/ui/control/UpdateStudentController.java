@@ -41,8 +41,8 @@ public class UpdateStudentController extends BaseController implements
 
 		this.studentName = name;
 
-		super.notifyOfPropertyChange("studentName", old, name);
-		super.notifyOfPropertyChange("canUpdate", null, getCanUpdate());
+		super.notifyOfPropertyChange("studentName");
+		super.notifyOfPropertyChange("canUpdate");
 	}
 
 	@Override
@@ -51,8 +51,8 @@ public class UpdateStudentController extends BaseController implements
 
 		this.studentEmail = email;
 
-		super.notifyOfPropertyChange("studentEmail", old, email);
-		super.notifyOfPropertyChange("canUpdate", null, getCanUpdate());
+		super.notifyOfPropertyChange("studentEmail");
+		super.notifyOfPropertyChange("canUpdate");
 	}
 
 	@Override

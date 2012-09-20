@@ -40,8 +40,8 @@ public class DocumentationViewerController extends BaseController implements IDo
 	public void setNameFilter(String nameFilter) {
 		this.nameFilter = nameFilter;
 
-		super.notifyOfPropertyChange("nameFilter", null, nameFilter);
-		super.notifyOfPropertyChange("documentations", null, getDocumentations());
+		super.notifyOfPropertyChange("nameFilter");
+		super.notifyOfPropertyChange("documentations");
 	}
 
 	@Override
@@ -51,12 +51,11 @@ public class DocumentationViewerController extends BaseController implements IDo
 
 	@Override
 	public void setSelectedDocumentation(Documentation documentation) {
-		Documentation old = this.selectedDocumentation;
 		this.selectedDocumentation = documentation;
 		
-		super.notifyOfPropertyChange("selectedDocumentation", old, documentation);
-		super.notifyOfPropertyChange("canUpdateDocumentation", old, documentation);
-		super.notifyOfPropertyChange("canDeleteDocumentation", old, documentation);
+		super.notifyOfPropertyChange("selectedDocumentation");
+		super.notifyOfPropertyChange("canUpdateDocumentation");
+		super.notifyOfPropertyChange("canDeleteDocumentation");
 	}
 
 	@Override
@@ -75,7 +74,7 @@ public class DocumentationViewerController extends BaseController implements IDo
 	@Override
 	public void deleteDocumentation() {
 		this.documentationWriter.deleteDocumentation(this.selectedDocumentation.getpKDocumentation());
-		super.notifyOfPropertyChange("documentation", null, getDocumentations());
+		super.notifyOfPropertyChange("documentation");
 	}
 
 	@Override
@@ -91,14 +90,14 @@ public class DocumentationViewerController extends BaseController implements IDo
 	@Override
 	public void showNewDocumentationUI() {
 		this.newDocumentationUI.setVisible(true);
-		super.notifyOfPropertyChange("documentations", null, getDocumentations());
+		super.notifyOfPropertyChange("documentations");
 	}
 
 	@Override
 	public void showUpdateDocumentationUI() {
 		this.updateDocumentationUI.setPKDocumentation(this.selectedDocumentation.getpKDocumentation());
 		this.updateDocumentationUI.setVisible(true);		
-		super.notifyOfPropertyChange("documentations", null, getDocumentations());		
+		super.notifyOfPropertyChange("documentations");		
 	}
 
 

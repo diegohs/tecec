@@ -39,7 +39,7 @@ public class UpdateAreaController extends BaseController implements
 
 		List<Area> areas = getAreas();
 
-		super.notifyOfPropertyChange("areas", null, areas);		
+		super.notifyOfPropertyChange("areas");		
 
 		if (area.getfKMainArea() != null && !area.getfKMainArea().isEmpty()) {
 			setSelectedArea(null);
@@ -59,7 +59,7 @@ public class UpdateAreaController extends BaseController implements
 	public void setSelectedAreaIndex(int i) {
 		this.selectedAreaIndex = i;
 		
-		super.notifyOfPropertyChange("selectedAreaIndex", null, i);
+		super.notifyOfPropertyChange("selectedAreaIndex");
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class UpdateAreaController extends BaseController implements
 	public void setAreaName(String name) {
 		this.areaName = name;
 
-		super.notifyOfPropertyChange("areaName", null, name);
+		super.notifyOfPropertyChange("areaName");
 	}
 
 	@Override
@@ -83,7 +83,7 @@ public class UpdateAreaController extends BaseController implements
 	public void setAreaDescription(String description) {
 		this.areaDescription = description;
 
-		super.notifyOfPropertyChange("areaDescription", null, description);
+		super.notifyOfPropertyChange("areaDescription");
 	}
 
 	@Override
@@ -144,7 +144,7 @@ public class UpdateAreaController extends BaseController implements
 	public void setSelectedArea(Area area) {
 		this.selectedArea = area;
 		
-		super.notifyOfPropertyChange("selectedArea", null, area);
+		super.notifyOfPropertyChange("selectedArea");
 	}
 
 	@Override

@@ -38,8 +38,8 @@ public class StatusViewerController extends BaseController implements
 		String old = this.nameFilter;
 		this.nameFilter = nameFilter;
 		
-		super.notifyOfPropertyChange("nameFilter", old, nameFilter);
-		super.notifyOfPropertyChange("status", null, getStatus());
+		super.notifyOfPropertyChange("nameFilter");
+		super.notifyOfPropertyChange("status");
 	}
 
 	@Override
@@ -52,9 +52,9 @@ public class StatusViewerController extends BaseController implements
 		Status old = this.selectedStatus;
 		this.selectedStatus = status;
 		
-		super.notifyOfPropertyChange("selectedStatus", old, status);
-		super.notifyOfPropertyChange("canUpdateStatus", old, status);
-		super.notifyOfPropertyChange("canDeleteStatus", old, status);
+		super.notifyOfPropertyChange("selectedStatus");
+		super.notifyOfPropertyChange("canUpdateStatus");
+		super.notifyOfPropertyChange("canDeleteStatus");
 		
 	}
 
@@ -72,7 +72,7 @@ public class StatusViewerController extends BaseController implements
 	@Override
 	public void deleteStatus() {
 		this.statusWriter.deleteStatus(this.selectedStatus.getpKStatus());
-		super.notifyOfPropertyChange("status", null, getStatus());	
+		super.notifyOfPropertyChange("status");	
 	}
 
 	@Override
@@ -90,14 +90,14 @@ public class StatusViewerController extends BaseController implements
 		this.newStatusUI.refresh();
 		this.newStatusUI.setVisible(true);
 		
-		super.notifyOfPropertyChange("status", null, getStatus());
+		super.notifyOfPropertyChange("status");
 	}	
 
 	@Override
 	public void showUpdateStatusUI() {
 		this.updateStatusUI.setpKStatus(this.selectedStatus.getpKStatus());
 		this.updateStatusUI.setVisible(true);		
-		super.notifyOfPropertyChange("status", null, getStatus());
+		super.notifyOfPropertyChange("status");
 	}
 
 	@Override

@@ -28,7 +28,7 @@ public class NewAdvisorController extends BaseController implements
 	public void setAdvisorName(String name) {
 		String oldValue = getAdvisorName();
 		this.advisorName = name;
-		notifyOfPropertyChange("advisorName", oldValue, name);
+		notifyOfPropertyChange("advisorName");
 		
 	}
 
@@ -41,7 +41,7 @@ public class NewAdvisorController extends BaseController implements
 	public void setAdvisorEmail(String email) {
 		String oldValue = getAdvisorEmail();
 		this.advisorEmail = email;
-		notifyOfPropertyChange("advisorEmail", oldValue, email);		
+		notifyOfPropertyChange("advisorEmail");		
 	}
 
 	@Override

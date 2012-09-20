@@ -38,8 +38,8 @@ public class UpdateAdvisorController extends BaseController implements
 
 		this.advisorName = name;
 
-		super.notifyOfPropertyChange("advisorName", old, name);
-		super.notifyOfPropertyChange("canUpdate", null, getCanUpdate());
+		super.notifyOfPropertyChange("advisorName");
+		super.notifyOfPropertyChange("canUpdate");
 	}
 
 	@Override
@@ -48,8 +48,8 @@ public class UpdateAdvisorController extends BaseController implements
 
 		this.advisorEmail = email;
 
-		super.notifyOfPropertyChange("advisorEmail", old, email);
-		super.notifyOfPropertyChange("canUpdate", null, getCanUpdate());
+		super.notifyOfPropertyChange("advisorEmail");
+		super.notifyOfPropertyChange("canUpdate");
 	}
 
 	@Override

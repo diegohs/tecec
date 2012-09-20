@@ -39,7 +39,7 @@ public class UpdateStatusController extends BaseController implements
 	public void setStatusDescription(String description) {
 		String old = this.statusDescription;
 		this.statusDescription = description;
-		super.notifyOfPropertyChange("statusDescription", old, description);
+		super.notifyOfPropertyChange("statusDescription");
 
 	}
 

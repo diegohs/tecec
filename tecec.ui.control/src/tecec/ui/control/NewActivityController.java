@@ -38,8 +38,8 @@ public class NewActivityController extends BaseController implements
 	public void setActivityTitle(String title) {
 		this.title = title;
 
-		super.notifyOfPropertyChange("activityTitle", null, title);
-		super.notifyOfPropertyChange("canInsert", null, getCanInsert());
+		super.notifyOfPropertyChange("activityTitle");
+		super.notifyOfPropertyChange("canInsert");
 	}
 
 	@Override
@@ -51,7 +51,7 @@ public class NewActivityController extends BaseController implements
 	public void setActivityDescription(String description) {
 		this.description = description;
 
-		super.notifyOfPropertyChange("activityDescription", null, description);
+		super.notifyOfPropertyChange("activityDescription");
 	}
 
 	@Override
@@ -63,8 +63,8 @@ public class NewActivityController extends BaseController implements
 	public void setActivityDueDate(String dueDate) {
 		this.dueDate = dueDate;
 
-		super.notifyOfPropertyChange("activityDueDate", null, dueDate);
-		super.notifyOfPropertyChange("canInsert", null, getCanInsert());
+		super.notifyOfPropertyChange("activityDueDate");
+		super.notifyOfPropertyChange("canInsert");
 	}
 
 	@Override
@@ -154,16 +154,15 @@ public class NewActivityController extends BaseController implements
 	public void setSelectedStage(Stage stage) {
 		this.selectedStage = stage;
 
-		super.notifyOfPropertyChange("canInsert", null, this.getCanInsert());
-		super.notifyOfPropertyChange("selectedStage", null, stage);
+		super.notifyOfPropertyChange("canInsert");
+		super.notifyOfPropertyChange("selectedStage");
 	}
 
 	@Override
 	public void setSelectedStageIndex(int i) {
 		this.selectedStageIndex = i;
 
-		super.notifyOfPropertyChange("selectedStageIndex", null,
-				this.selectedStageIndex);
+		super.notifyOfPropertyChange("selectedStageIndex");
 	}
 
 	@Override
@@ -178,7 +177,7 @@ public class NewActivityController extends BaseController implements
 		this.setActivityTitle("");
 		this.setSelectedStage(null);
 		
-		super.notifyOfPropertyChange("stages", null, getStages());
+		super.notifyOfPropertyChange("stages");
 		
 		this.setSelectedStageIndex(-1);
 

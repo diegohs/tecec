@@ -32,8 +32,8 @@ public class CourseViewerController extends BaseController implements ICourseVie
 	public void setNameFilter(String nameFilter) {		
 		this.nameFilter = nameFilter;
 		
-		super.notifyOfPropertyChange("nameFilter", null, nameFilter);
-		super.notifyOfPropertyChange("courses", null, getCourses());
+		super.notifyOfPropertyChange("nameFilter");
+		super.notifyOfPropertyChange("courses");
 	}
 
 	@Override
@@ -47,9 +47,9 @@ public class CourseViewerController extends BaseController implements ICourseVie
 		
 		this.selectedCourse = course;
 
-		super.notifyOfPropertyChange("selectedCourse", old, course);
-		super.notifyOfPropertyChange("canUpdateCourse", old, course);
-		super.notifyOfPropertyChange("canDeleteCourse", old, course);
+		super.notifyOfPropertyChange("selectedCourse");
+		super.notifyOfPropertyChange("canUpdateCourse");
+		super.notifyOfPropertyChange("canDeleteCourse");
 	}
 
 	@Override
@@ -69,7 +69,7 @@ public class CourseViewerController extends BaseController implements ICourseVie
 		this.newCourseUI.refresh();
 		this.newCourseUI.setVisible(true);
 		
-		super.notifyOfPropertyChange("courses", null, getCourses());
+		super.notifyOfPropertyChange("courses");
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class CourseViewerController extends BaseController implements ICourseVie
 		this.updateCourseUI.setpKCourse(this.selectedCourse.getPKCourse());
 		this.updateCourseUI.setVisible(true);
 		
-		super.notifyOfPropertyChange("courses", null, getCourses());
+		super.notifyOfPropertyChange("courses");
 	}
 
 	@Override
@@ -100,7 +100,7 @@ public class CourseViewerController extends BaseController implements ICourseVie
 		
 		this.courseWriter.deleteCourse(this.selectedCourse.getPKCourse());
 		
-		super.notifyOfPropertyChange("courses", null, getCourses());
+		super.notifyOfPropertyChange("courses");
 	}
 
 	@Override

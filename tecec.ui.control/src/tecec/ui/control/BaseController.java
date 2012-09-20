@@ -10,9 +10,9 @@ public abstract class BaseController  {
 		propertyChanger = new PropertyChangeSupport(this);
 	}
 	
-	protected void notifyOfPropertyChange(String propertyName, Object oldValue, Object newValue)
+	protected void notifyOfPropertyChange(String propertyName)
 	{
-		propertyChanger.firePropertyChange(propertyName, oldValue, newValue);
+		propertyChanger.firePropertyChange(propertyName, null, null);
 	}
 
 	public void addPropertyChangeListener(PropertyChangeListener l) {

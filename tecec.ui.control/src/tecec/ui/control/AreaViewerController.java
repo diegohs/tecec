@@ -37,8 +37,8 @@ public class AreaViewerController extends BaseController implements
 	public void setNameFilter(String nameFilter) {
 		this.nameFilter = nameFilter;
 		
-		super.notifyOfPropertyChange("nameFilter", null, nameFilter);
-		super.notifyOfPropertyChange("areas", null, getAreas());
+		super.notifyOfPropertyChange("nameFilter");
+		super.notifyOfPropertyChange("areas");
 	}
 
 	@Override
@@ -51,7 +51,7 @@ public class AreaViewerController extends BaseController implements
 		this.newAreaUI.refresh();
 		this.newAreaUI.setVisible(true);
 
-		super.notifyOfPropertyChange("areas", null, getAreas());
+		super.notifyOfPropertyChange("areas");
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class AreaViewerController extends BaseController implements
 		this.newAreaUI.refresh();
 		this.newAreaUI.setVisible(true);
 
-		super.notifyOfPropertyChange("areas", null, getAreas());
+		super.notifyOfPropertyChange("areas");
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class AreaViewerController extends BaseController implements
 		this.updateAreaUI.setPKArea(this.selectedArea.getArea().getpKArea());
 		this.updateAreaUI.setVisible(true);
 
-		super.notifyOfPropertyChange("areas", null, getAreas());
+		super.notifyOfPropertyChange("areas");
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public class AreaViewerController extends BaseController implements
 	public void deleteArea() throws RuleViolationException {
 		this.areaWriter.deleteArea(this.selectedArea.getArea().getpKArea());
 
-		super.notifyOfPropertyChange("areas", null, getAreas());
+		super.notifyOfPropertyChange("areas");
 	}
 
 	@Override
@@ -90,15 +90,12 @@ public class AreaViewerController extends BaseController implements
 
 	@Override
 	public void setSelectedArea(AreaRecord area) {
-		AreaRecord old = this.selectedArea;
-
 		this.selectedArea = area;
 
-		super.notifyOfPropertyChange("selectedArea", old, area);
-		super.notifyOfPropertyChange("canCreateNewSubArea", null,
-				getCanCreateNewSubArea());
-		super.notifyOfPropertyChange("canUpdateArea", null, getCanUpdateArea());
-		super.notifyOfPropertyChange("canDeleteArea", null, getCanDeleteArea());
+		super.notifyOfPropertyChange("selectedArea");
+		super.notifyOfPropertyChange("canCreateNewSubArea");
+		super.notifyOfPropertyChange("canUpdateArea");
+		super.notifyOfPropertyChange("canDeleteArea");
 	}
 
 	@Override

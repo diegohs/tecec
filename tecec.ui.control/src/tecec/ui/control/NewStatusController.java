@@ -31,7 +31,7 @@ public class NewStatusController extends BaseController implements INewStatusCon
 		
 		this.statusDescription = description;
 		
-		notifyOfPropertyChange("statusDescription", oldValue, description);
+		notifyOfPropertyChange("statusDescription");
 	}
 	
 	@Override

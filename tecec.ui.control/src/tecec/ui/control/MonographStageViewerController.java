@@ -99,8 +99,8 @@ public class MonographStageViewerController extends BaseController implements
 		this.stages = newStages;
 		this.correlatedStages = newCorrelatedStages;
 		
-		super.notifyOfPropertyChange("stages", null, this.stages);
-		super.notifyOfPropertyChange("correlatedStages", null, this.correlatedStages);
+		super.notifyOfPropertyChange("stages");
+		super.notifyOfPropertyChange("correlatedStages");
 	}
 
 	@Override
@@ -123,8 +123,8 @@ public class MonographStageViewerController extends BaseController implements
 		this.stages = newStages;
 		this.correlatedStages = newCorrelatedStages;
 		
-		super.notifyOfPropertyChange("stages", null, this.stages);
-		super.notifyOfPropertyChange("correlatedStages", null, this.correlatedStages);
+		super.notifyOfPropertyChange("stages");
+		super.notifyOfPropertyChange("correlatedStages");
 	}
 
 	@Override
@@ -146,33 +146,32 @@ public class MonographStageViewerController extends BaseController implements
 
 		this.stages = stages;
 
-		super.notifyOfPropertyChange("stages", null, this.stages);
-		super.notifyOfPropertyChange("canInsert", null, this.getCanInsert());
+		super.notifyOfPropertyChange("stages");
+		super.notifyOfPropertyChange("canInsert");
 	}
 
 	private void loadCorrelatedStages() {
 		this.correlatedStages = stageReader.getStagesByMonograph(this.monograph
 				.getpKMonograph());
 
-		super.notifyOfPropertyChange("correlatedStages", null,
-				this.correlatedStages);
-		super.notifyOfPropertyChange("canDelete", null, this.getCanDelete());
+		super.notifyOfPropertyChange("correlatedStages");
+		super.notifyOfPropertyChange("canDelete");
 	}
 
 	@Override
 	public void setSelectedStage(Stage stage) {
 		this.selectedStage = stage;
 
-		super.notifyOfPropertyChange("selectedStage", null, this.selectedStage);
-		super.notifyOfPropertyChange("canInsert", null, this.getCanInsert());
+		super.notifyOfPropertyChange("selectedStage");
+		super.notifyOfPropertyChange("canInsert");
 	}
 
 	@Override
 	public void setSelectedCorrelatedStage(Stage stage) {
 		this.selectedCorrelatedStage = stage;
 
-		super.notifyOfPropertyChange("selectedCorrelatedStage", null, this.selectedCorrelatedStage);
-		super.notifyOfPropertyChange("canDelete", null, this.getCanDelete());
+		super.notifyOfPropertyChange("selectedCorrelatedStage");
+		super.notifyOfPropertyChange("canDelete");
 	}
 
 	@Override

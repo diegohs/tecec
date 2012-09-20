@@ -40,7 +40,7 @@ public class UpdateAccountController extends BaseController implements
 	public void setAccountID(String id) {
 		this.id = id;
 
-		super.notifyOfPropertyChange("ID", null, id);
+		super.notifyOfPropertyChange("ID");
 
 		refresh();
 	}
@@ -54,7 +54,7 @@ public class UpdateAccountController extends BaseController implements
 	public void setUserName(String userName) {
 		this.userName = userName;
 
-		super.notifyOfPropertyChange("userName", null, userName);
+		super.notifyOfPropertyChange("userName");
 	}
 
 	@Override
@@ -66,7 +66,7 @@ public class UpdateAccountController extends BaseController implements
 	public void setResetPassword(boolean reset) {
 		this.resetPassword = reset;
 
-		super.notifyOfPropertyChange("resetPassword", null, reset);
+		super.notifyOfPropertyChange("resetPassword");
 	}
 
 	@Override
@@ -88,7 +88,7 @@ public class UpdateAccountController extends BaseController implements
 	public void setSelectedProfile(Profile profile) {
 		this.selectedProfile = profile;
 
-		super.notifyOfPropertyChange("selectedProfile", null, selectedProfile);
+		super.notifyOfPropertyChange("selectedProfile");
 	}
 
 	@Override
@@ -111,7 +111,7 @@ public class UpdateAccountController extends BaseController implements
 	public void setSelectedProfileIndex(int i) {
 		this.selectedProfileIndex = i;
 
-		super.notifyOfPropertyChange("selectedProfileIndex", null, i);
+		super.notifyOfPropertyChange("selectedProfileIndex");
 	}
 
 	@Override
@@ -150,7 +150,7 @@ public class UpdateAccountController extends BaseController implements
 
 		List<Profile> profiles = getProfiles();
 
-		super.notifyOfPropertyChange("profiles", null, profiles);
+		super.notifyOfPropertyChange("profiles");
 
 		setSelectedProfile(null);
 		setSelectedProfileIndex(-1);

@@ -30,7 +30,7 @@ public class NewStageController extends BaseController implements INewStageContr
 	public void setStageName(String name) {
 		String old = getStageName ();
 		this.stageName = name;
-		notifyOfPropertyChange("stageName", old, name);
+		notifyOfPropertyChange("stageName");
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class NewStageController extends BaseController implements INewStageContr
 	public void setStageYear(String year) {
 		String old = getStageYear ();
 		this.stageYear = year;
-		notifyOfPropertyChange("stageYear", old, year);
+		notifyOfPropertyChange("stageYear");
 		
 	}
 

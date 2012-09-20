@@ -42,8 +42,8 @@ public class StageViewerController extends BaseController implements IStageViewe
 		String old = this.nameFilter;
 		this.nameFilter = nameFilter;
 		
-		this.notifyOfPropertyChange("nameFilter", old, nameFilter);
-		this.notifyOfPropertyChange("stages", null, getStages());
+		this.notifyOfPropertyChange("nameFilter");
+		this.notifyOfPropertyChange("stages");
 
 
 	}
@@ -58,9 +58,9 @@ public class StageViewerController extends BaseController implements IStageViewe
 		Stage old = this.selectedStage;
 		this.selectedStage = stage;
 		
-		super.notifyOfPropertyChange("selectedStage", old, stage);
-		super.notifyOfPropertyChange("canUpdateStage", old, stage);
-		super.notifyOfPropertyChange("canDeleteStage", old, stage);
+		super.notifyOfPropertyChange("selectedStage");
+		super.notifyOfPropertyChange("canUpdateStage");
+		super.notifyOfPropertyChange("canDeleteStage");
 	
 	}
 
@@ -79,7 +79,8 @@ public class StageViewerController extends BaseController implements IStageViewe
 	@Override
 	public void deleteStage() throws RuleViolationException {
 		this.stageWriter.deleteStage(this.selectedStage.getpKStage());
-		super.notifyOfPropertyChange("stages", null, getStages());
+		
+		super.notifyOfPropertyChange("stages");
 
 	}
 
@@ -98,7 +99,8 @@ public class StageViewerController extends BaseController implements IStageViewe
 	public void showNewStageUI() {
 		this.newStageUI.refresh();
 		this.newStageUI.setVisible(true);
-		super.notifyOfPropertyChange("stages", null, getStages());		
+		
+		super.notifyOfPropertyChange("stages");		
 		
 	}
 
@@ -106,7 +108,8 @@ public class StageViewerController extends BaseController implements IStageViewe
 	public void newUpdateStageUI() {
 		this.updateStageUI.setpKStage(this.selectedStage.getpKStage());
 		this.updateStageUI.setVisible(true);
-		super.notifyOfPropertyChange("stages", null, getStages());
+		
+		super.notifyOfPropertyChange("stages");
 	}
 
 	@Override

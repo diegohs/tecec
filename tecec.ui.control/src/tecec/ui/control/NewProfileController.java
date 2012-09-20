@@ -42,7 +42,7 @@ public class NewProfileController extends BaseController implements
 
 		this.profileName = name;
 
-		notifyOfPropertyChange("profileName", oldValue, name);
+		notifyOfPropertyChange("profileName");
 	}
 
 	@Override

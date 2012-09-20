@@ -45,16 +45,14 @@ public class LoginController extends BaseController implements ILoginController 
 	public void setID(String id) {
 		this.id = id;
 
-		super.notifyOfPropertyChange("id", null, id);
+		super.notifyOfPropertyChange("id");
 	}
 
 	private void setIsLoginEnabled(boolean enabled) {
 		this.isLoginEnabled = enabled;
 
-		super.notifyOfPropertyChange("isLoginEnabled", null,
-				this.isLoginEnabled);
-		super.notifyOfPropertyChange("isConfirmationVisible", null,
-				getIsConfirmationVisible());
+		super.notifyOfPropertyChange("isLoginEnabled");
+		super.notifyOfPropertyChange("isConfirmationVisible");
 	}
 
 	private boolean areCredentialsValid(String password) {
@@ -86,7 +84,7 @@ public class LoginController extends BaseController implements ILoginController 
 	public void setPassword(String password) {
 		this.password = password;
 
-		super.notifyOfPropertyChange("password", null, confirmation);
+		super.notifyOfPropertyChange("password");
 	}
 
 	@Override
@@ -98,7 +96,7 @@ public class LoginController extends BaseController implements ILoginController 
 	public void setConfirmation(String confirmation) {
 		this.confirmation = confirmation;
 
-		super.notifyOfPropertyChange("confirmation", null, confirmation);
+		super.notifyOfPropertyChange("confirmation");
 	}
 
 	@Override

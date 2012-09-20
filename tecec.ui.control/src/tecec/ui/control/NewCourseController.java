@@ -30,7 +30,7 @@ public class NewCourseController extends BaseController implements
 		
 		String old = getCourseName ();
 		this.courseName = name;
-		notifyOfPropertyChange("courseName", old, name);
+		notifyOfPropertyChange("courseName");
 		
 
 	}
@@ -44,7 +44,7 @@ public class NewCourseController extends BaseController implements
 	public void setCourseTurn(String turn) {
 		String old = getCourseTurn ();
 		this.courseTurn = turn;
-		notifyOfPropertyChange("courseTurn", old, turn);
+		notifyOfPropertyChange("courseTurn");
 		
 	}
 
@@ -57,7 +57,7 @@ public class NewCourseController extends BaseController implements
 	public void setCourseYear(String year) {
 		String old = getCourseYear ();
 		this.courseYear = year;
-		notifyOfPropertyChange("courseYear", old, year);
+		notifyOfPropertyChange("courseYear");
 		
 	}
 

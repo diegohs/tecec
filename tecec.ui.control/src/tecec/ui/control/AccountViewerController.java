@@ -46,7 +46,7 @@ public class AccountViewerController extends BaseController implements IAccountV
 	public void setFilter(String filter) {
 		this.filter = filter;
 		
-		super.notifyOfPropertyChange("accounts", null, getAccounts());
+		super.notifyOfPropertyChange("accounts");
 	}
 
 	@Override
@@ -96,9 +96,9 @@ public class AccountViewerController extends BaseController implements IAccountV
 	public void setSelectedAccount(AccountRecord account) {
 		this.selectedAccount = account;
 		
-		super.notifyOfPropertyChange("selectedAccount", null, selectedAccount);
-		super.notifyOfPropertyChange("canUpdate", null, getCanUpdate());
-		super.notifyOfPropertyChange("canDelete", null, getCanDelete());
+		super.notifyOfPropertyChange("selectedAccount");
+		super.notifyOfPropertyChange("canUpdate");
+		super.notifyOfPropertyChange("canDelete");
 	}
 
 	@Override
@@ -116,21 +116,21 @@ public class AccountViewerController extends BaseController implements IAccountV
 		this.updateAccountUI.setAccountID(this.getSelectedAccount().getId());
 		this.updateAccountUI.setVisible(true);
 
-		super.notifyOfPropertyChange("accounts", null, getAccounts());
+		super.notifyOfPropertyChange("accounts");
 	}
 
 	@Override
 	public void showNewAccountUI() {
 		this.newAccountUI.setVisible(true);
 
-		super.notifyOfPropertyChange("accounts", null, getAccounts());
+		super.notifyOfPropertyChange("accounts");
 	}
 
 	@Override
 	public void delete() throws RuleViolationException {
 		this.accountWriter.deleteAccount(this.getSelectedAccount().getId());
 
-		super.notifyOfPropertyChange("accounts", null, getAccounts());
+		super.notifyOfPropertyChange("accounts");
 	}
 
 	@Override
@@ -140,7 +140,7 @@ public class AccountViewerController extends BaseController implements IAccountV
 
 	@Override
 	public void refresh() {
-		super.notifyOfPropertyChange("accounts", null, getAccounts());
+		super.notifyOfPropertyChange("accounts");
 	}
 	
 }
