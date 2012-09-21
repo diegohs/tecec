@@ -9,7 +9,7 @@ import tecec.ui.contract.control.IAdvisorViewerController;
 import tecec.ui.contract.view.INewAdvisorUI;
 import tecec.ui.contract.view.IUpdateAdvisorUI;
 
-public class AdvisorViewerController  extends BaseController implements IAdvisorViewerController{
+public class AdvisorViewerController  extends BaseViewerController implements IAdvisorViewerController{
 
 	private String nameFilter;
 	private Advisor selectedAdvisor;
@@ -29,7 +29,6 @@ public class AdvisorViewerController  extends BaseController implements IAdvisor
 	
 	@Override
 	public void setNameFilter(String nameFilter) {
-		String old = this.nameFilter;		
 		this.nameFilter = nameFilter;
 		super.notifyOfPropertyChange("nameFilter");		
 		super.notifyOfPropertyChange("advisors");		
@@ -93,7 +92,14 @@ public class AdvisorViewerController  extends BaseController implements IAdvisor
 
 	@Override
 	public void refresh() {
-		setNameFilter("");
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected List<String[]> getExportSource() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

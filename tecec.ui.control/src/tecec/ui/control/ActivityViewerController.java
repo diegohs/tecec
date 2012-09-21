@@ -11,7 +11,7 @@ import tecec.ui.contract.control.IActivityViewerController;
 import tecec.ui.contract.view.INewActivityUI;
 import tecec.ui.contract.view.IUpdateActivityUI;
 
-public class ActivityViewerController extends BaseController implements
+public class ActivityViewerController extends BaseViewerController implements
 		IActivityViewerController {
 
 	private String title;
@@ -112,6 +112,12 @@ public class ActivityViewerController extends BaseController implements
 	@Override
 	public void refresh() {		
 		setTitleFilter("");
+	}
+
+	@Override
+	protected List<String[]> getExportSource() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

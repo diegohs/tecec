@@ -3,7 +3,7 @@ package tecec.ui.contract.control;
 import java.util.List;
 import tecec.dto.Status;
 
-public interface IStatusViewerController extends IRefreshable  {
+public interface IStatusViewerController extends IViewerController  {
 	
 	void setNameFilter (String nameFilter);
 	String getNameFilter ();

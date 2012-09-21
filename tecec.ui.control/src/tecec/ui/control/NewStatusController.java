@@ -26,9 +26,7 @@ public class NewStatusController extends BaseController implements INewStatusCon
 	}
 
 	@Override
-	public void setStatusDescription(String description) {
-		String oldValue = getStatusDescription ();
-		
+	public void setStatusDescription(String description) {		
 		this.statusDescription = description;
 		
 		notifyOfPropertyChange("statusDescription");

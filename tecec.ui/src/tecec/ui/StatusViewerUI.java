@@ -31,7 +31,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import javax.swing.border.TitledBorder;
-import javax.swing.border.EtchedBorder;
 
 public class StatusViewerUI extends JFrame implements IStatusViewerUI {
 

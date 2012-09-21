@@ -3,7 +3,7 @@ package tecec.ui.contract.control;
 import java.util.List;
 import tecec.dto.Permission;
 
-public interface IPermissionViewerController extends IRefreshable  {
+public interface IPermissionViewerController extends IViewerController  {
 	
 	void setNameFilter (String nameFilter);
 	String getNameFilter ();

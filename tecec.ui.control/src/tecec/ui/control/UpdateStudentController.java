@@ -37,8 +37,6 @@ public class UpdateStudentController extends BaseController implements
 
 	@Override
 	public void setStudentName(String name) {
-		String old = this.studentName;
-
 		this.studentName = name;
 
 		super.notifyOfPropertyChange("studentName");
@@ -47,8 +45,6 @@ public class UpdateStudentController extends BaseController implements
 
 	@Override
 	public void setStudentEmail(String email) {
-		String old = this.studentEmail;
-
 		this.studentEmail = email;
 
 		super.notifyOfPropertyChange("studentEmail");

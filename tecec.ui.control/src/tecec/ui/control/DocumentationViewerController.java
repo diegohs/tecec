@@ -15,7 +15,7 @@ import tecec.ui.contract.view.INewDocumentationUI;
 
 import tecec.ui.contract.view.IUpdateDocumentationUI;
 
-public class DocumentationViewerController extends BaseController implements IDocumentationViewerController {
+public class DocumentationViewerController extends BaseViewerController implements IDocumentationViewerController {
 
 	private String nameFilter;
 	
@@ -104,6 +104,13 @@ public class DocumentationViewerController extends BaseController implements IDo
 	@Override
 	public void refresh() {
 		setNameFilter("");
+	}
+
+
+	@Override
+	protected List<String[]> getExportSource() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

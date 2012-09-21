@@ -26,12 +26,9 @@ public class NewCourseController extends BaseController implements
 	}
 
 	@Override
-	public void setCourseName(String name) {
-		
-		String old = getCourseName ();
+	public void setCourseName(String name) {		
 		this.courseName = name;
-		notifyOfPropertyChange("courseName");
-		
+		notifyOfPropertyChange("courseName");		
 
 	}
 
@@ -42,7 +39,6 @@ public class NewCourseController extends BaseController implements
 
 	@Override
 	public void setCourseTurn(String turn) {
-		String old = getCourseTurn ();
 		this.courseTurn = turn;
 		notifyOfPropertyChange("courseTurn");
 		
@@ -55,7 +51,6 @@ public class NewCourseController extends BaseController implements
 
 	@Override
 	public void setCourseYear(String year) {
-		String old = getCourseYear ();
 		this.courseYear = year;
 		notifyOfPropertyChange("courseYear");
 		

@@ -17,7 +17,7 @@ import tecec.ui.contract.record.AccountRecord;
 import tecec.ui.contract.view.INewAccountUI;
 import tecec.ui.contract.view.IUpdateAccountUI;
 
-public class AccountViewerController extends BaseController implements IAccountViewerController {
+public class AccountViewerController extends BaseViewerController implements IAccountViewerController {
 
 	String filter;
 	AccountRecord selectedAccount;
@@ -141,6 +141,12 @@ public class AccountViewerController extends BaseController implements IAccountV
 	@Override
 	public void refresh() {
 		super.notifyOfPropertyChange("accounts");
+	}
+
+	@Override
+	protected List<String[]> getExportSource() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

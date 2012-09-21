@@ -11,7 +11,7 @@ import tecec.ui.contract.control.ICourseViewerController;
 import tecec.ui.contract.view.INewCourseUI;
 import tecec.ui.contract.view.IUpdateCourseUI;
 
-public class CourseViewerController extends BaseController implements ICourseViewerController {
+public class CourseViewerController extends BaseViewerController implements ICourseViewerController {
 
 	private String nameFilter;
 	private Course selectedCourse;
@@ -42,9 +42,7 @@ public class CourseViewerController extends BaseController implements ICourseVie
 	}
 
 	@Override
-	public void setSelectedCourse(Course course) {
-		Course old = this.selectedCourse;
-		
+	public void setSelectedCourse(Course course) {		
 		this.selectedCourse = course;
 
 		super.notifyOfPropertyChange("selectedCourse");
@@ -116,6 +114,12 @@ public class CourseViewerController extends BaseController implements ICourseVie
 			return new RuleViolation("Não é possível excluir um curso que possui estudantes cadastrados.");
 		}
 		
+		return null;
+	}
+
+	@Override
+	protected List<String[]> getExportSource() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 }

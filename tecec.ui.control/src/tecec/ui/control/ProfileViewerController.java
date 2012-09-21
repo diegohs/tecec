@@ -9,7 +9,7 @@ import tecec.ui.contract.control.IProfileViewerController;
 import tecec.ui.contract.view.INewProfileUI;
 import tecec.ui.contract.view.IUpdateProfileUI;
 
-public class ProfileViewerController extends BaseController implements IProfileViewerController {
+public class ProfileViewerController extends BaseViewerController implements IProfileViewerController {
 
 	private String nameFilter;
 	private Profile selectedProfile;
@@ -27,9 +27,7 @@ public class ProfileViewerController extends BaseController implements IProfileV
 	}
 	
 	@Override
-	public void setNameFilter(String nameFilter) {
-		String old = this.nameFilter;
-		
+	public void setNameFilter(String nameFilter) {		
 		this.nameFilter = nameFilter;
 		
 		super.notifyOfPropertyChange("nameFilter");
@@ -42,9 +40,7 @@ public class ProfileViewerController extends BaseController implements IProfileV
 	}
 
 	@Override
-	public void setSelectedProfile(Profile profile) {
-		Profile old = this.selectedProfile;
-		
+	public void setSelectedProfile(Profile profile) {		
 		this.selectedProfile = profile;
 
 		super.notifyOfPropertyChange("selectedProfile");
@@ -102,5 +98,11 @@ public class ProfileViewerController extends BaseController implements IProfileV
 	@Override
 	public void refresh() {
 		setNameFilter("");
+	}
+
+	@Override
+	protected List<String[]> getExportSource() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

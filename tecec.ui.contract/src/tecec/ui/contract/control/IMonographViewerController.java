@@ -4,7 +4,7 @@ import java.util.List;
 
 import tecec.ui.contract.record.MonographRecord;
 
-public interface IMonographViewerController extends IRefreshable  {
+public interface IMonographViewerController extends IViewerController  {
 
 	void setNameFilter (String nameFilter);
 	String getNameFilter ();

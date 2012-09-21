@@ -11,7 +11,7 @@ import tecec.contract.writer.IStudentWriter;
 import tecec.dto.Course;
 import tecec.ui.contract.control.IStudentCourseViewerController;
 
-public class StudentCourseViewerController extends BaseController implements
+public class StudentCourseViewerController extends BaseViewerController implements
 		IStudentCourseViewerController {
 
 	String pKStudent;
@@ -203,6 +203,12 @@ public class StudentCourseViewerController extends BaseController implements
 	public void refresh() {
 		loadCorrelatedCourses();
 		loadCourses();
+	}
+
+	@Override
+	protected List<String[]> getExportSource() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

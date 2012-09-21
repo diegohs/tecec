@@ -6,7 +6,7 @@ import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
 import tecec.dto.Stage;
 
-public interface IStageViewerController extends IRefreshable  {
+public interface IStageViewerController extends IViewerController  {
 	
 	void setNameFilter (String nameFilter);
 	String getNameFilter ();

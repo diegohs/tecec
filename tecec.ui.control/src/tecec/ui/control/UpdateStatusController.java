@@ -37,7 +37,6 @@ public class UpdateStatusController extends BaseController implements
 
 	@Override
 	public void setStatusDescription(String description) {
-		String old = this.statusDescription;
 		this.statusDescription = description;
 		super.notifyOfPropertyChange("statusDescription");
 

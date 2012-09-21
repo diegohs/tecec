@@ -11,7 +11,7 @@ import tecec.ui.contract.control.IStudentViewerController;
 import tecec.ui.contract.view.INewStudentUI;
 import tecec.ui.contract.view.IUpdateStudentUI;
 
-public class StudentViewerController  extends BaseController implements IStudentViewerController{
+public class StudentViewerController  extends BaseViewerController implements IStudentViewerController{
 
 	private String nameFilter;
 	private Student selectedStudent;
@@ -31,7 +31,6 @@ public class StudentViewerController  extends BaseController implements IStudent
 	
 	@Override
 	public void setNameFilter(String nameFilter) {
-		String old = this.nameFilter;		
 		this.nameFilter = nameFilter;
 		super.notifyOfPropertyChange("nameFilter");		
 		super.notifyOfPropertyChange("students");		
@@ -44,7 +43,6 @@ public class StudentViewerController  extends BaseController implements IStudent
 
 	@Override
 	public void setSelectedStudent(Student student) {
-		Student old = this.selectedStudent;		
 		this.selectedStudent = student;
 		super.notifyOfPropertyChange("selectedStudent");
 		super.notifyOfPropertyChange("canUpdateStudent");
@@ -103,6 +101,12 @@ public class StudentViewerController  extends BaseController implements IStudent
 	@Override
 	public RuleViolation getDeletionViolation() {
 		return this.studentWriter.getDeletionViolation(this.selectedStudent.getPKStudent());
+	}
+
+	@Override
+	protected List<String[]> getExportSource() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

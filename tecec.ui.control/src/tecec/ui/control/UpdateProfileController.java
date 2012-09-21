@@ -32,8 +32,6 @@ public class UpdateProfileController extends BaseController implements
 
 	@Override
 	public void setProfileName(String name) {
-		String old = this.profileName;
-
 		this.profileName = name;
 
 		super.notifyOfPropertyChange("profileName");

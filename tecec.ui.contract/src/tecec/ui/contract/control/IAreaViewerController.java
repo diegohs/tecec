@@ -6,7 +6,7 @@ import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
 import tecec.ui.contract.record.AreaRecord;
 
-public interface IAreaViewerController extends IRefreshable  {
+public interface IAreaViewerController extends IViewerController  {
 	void setNameFilter(String nameFilter);
 
 	String getNameFilter();

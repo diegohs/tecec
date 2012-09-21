@@ -13,7 +13,7 @@ import tecec.ui.contract.record.AreaRecord;
 import tecec.ui.contract.view.INewAreaUI;
 import tecec.ui.contract.view.IUpdateAreaUI;
 
-public class AreaViewerController extends BaseController implements
+public class AreaViewerController extends BaseViewerController implements
 		IAreaViewerController {
 
 	String nameFilter;
@@ -139,5 +139,11 @@ public class AreaViewerController extends BaseController implements
 	@Override
 	public void refresh() {
 		setNameFilter("");
+	}
+
+	@Override
+	protected List<String[]> getExportSource() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -40,7 +40,6 @@ public class UpdateDocumentationController extends BaseController implements
 
 	@Override
 	public void setDocumentationFileName(String fileName) {
-		String old = this.fileName;
 		this.fileName = fileName;
 
 		super.notifyOfPropertyChange("documentationFileName");
@@ -50,7 +49,6 @@ public class UpdateDocumentationController extends BaseController implements
 
 	@Override
 	public void setDocumentationData(byte[] data) {
-		byte[] old = this.documentationData;
 		this.documentationData = data;
 
 		super.notifyOfPropertyChange("documentationData");

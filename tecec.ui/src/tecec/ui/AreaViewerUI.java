@@ -32,7 +32,6 @@ import java.awt.Toolkit;
 
 import java.awt.FlowLayout;
 import javax.swing.border.TitledBorder;
-import javax.swing.border.EtchedBorder;
 
 public class AreaViewerUI extends JDialog implements IAreaViewerUI {
 

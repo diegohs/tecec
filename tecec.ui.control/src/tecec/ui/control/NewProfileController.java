@@ -38,8 +38,6 @@ public class NewProfileController extends BaseController implements
 
 	@Override
 	public void setProfileName(String name) {
-		String oldValue = getProfileName();
-
 		this.profileName = name;
 
 		notifyOfPropertyChange("profileName");

@@ -15,7 +15,7 @@ import tecec.ui.contract.view.INewStatusUI;
 
 import tecec.ui.contract.view.IUpdateStatusUI;
 
-public class StatusViewerController extends BaseController implements
+public class StatusViewerController extends BaseViewerController implements
 	IStatusViewerController {
 	
 	private String nameFilter;
@@ -35,7 +35,6 @@ public class StatusViewerController extends BaseController implements
 
 	@Override
 	public void setNameFilter(String nameFilter) {
-		String old = this.nameFilter;
 		this.nameFilter = nameFilter;
 		
 		super.notifyOfPropertyChange("nameFilter");
@@ -49,7 +48,6 @@ public class StatusViewerController extends BaseController implements
 
 	@Override
 	public void setSelectedStatus(Status status) {
-		Status old = this.selectedStatus;
 		this.selectedStatus = status;
 		
 		super.notifyOfPropertyChange("selectedStatus");
@@ -103,5 +101,11 @@ public class StatusViewerController extends BaseController implements
 	@Override
 	public void refresh() {
 		this.setNameFilter("");
+	}
+
+	@Override
+	protected List<String[]> getExportSource() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

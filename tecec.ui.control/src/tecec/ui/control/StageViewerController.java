@@ -17,7 +17,7 @@ import tecec.ui.contract.view.INewStageUI;
 
 import tecec.ui.contract.view.IUpdateStageUI;
 
-public class StageViewerController extends BaseController implements IStageViewerController {
+public class StageViewerController extends BaseViewerController implements IStageViewerController {
 
 	private String nameFilter;
 	private Stage selectedStage;
@@ -38,8 +38,6 @@ public class StageViewerController extends BaseController implements IStageViewe
 
 	@Override
 	public void setNameFilter(String nameFilter) {
-		
-		String old = this.nameFilter;
 		this.nameFilter = nameFilter;
 		
 		this.notifyOfPropertyChange("nameFilter");
@@ -55,7 +53,6 @@ public class StageViewerController extends BaseController implements IStageViewe
 
 	@Override
 	public void setSelectedStage(Stage stage) {
-		Stage old = this.selectedStage;
 		this.selectedStage = stage;
 		
 		super.notifyOfPropertyChange("selectedStage");
@@ -120,5 +117,11 @@ public class StageViewerController extends BaseController implements IStageViewe
 	@Override
 	public RuleViolation getDeletionViolation() {
 		return this.stageWriter.getDeletionViolation(this.selectedStage.getpKStage());
+	}
+
+	@Override
+	protected List<String[]> getExportSource() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -36,8 +36,6 @@ public class UpdateStageController extends BaseController implements IUpdateStag
 
 	@Override
 	public void setStageName(String name) {
-		
-		String old = this.stageName;
 		this.stageName = name;
 		
 		super.notifyOfPropertyChange("stageName");
@@ -47,7 +45,6 @@ public class UpdateStageController extends BaseController implements IUpdateStag
 
 	@Override
 	public void setStageYear(String year) {
-		String old = this.stageYear;
 		this.stageYear = year;
 		
 		super.notifyOfPropertyChange("stageYear");

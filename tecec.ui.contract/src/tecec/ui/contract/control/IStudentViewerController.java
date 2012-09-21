@@ -6,7 +6,7 @@ import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
 import tecec.dto.Student;
 
-public interface IStudentViewerController extends IRefreshable  {
+public interface IStudentViewerController extends IViewerController  {
 	void setNameFilter (String nameFilter);
 	String getNameFilter ();
 	

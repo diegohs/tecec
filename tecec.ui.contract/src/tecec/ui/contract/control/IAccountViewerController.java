@@ -6,7 +6,7 @@ import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
 import tecec.ui.contract.record.AccountRecord;
 
-public interface IAccountViewerController extends IRefreshable {	
+public interface IAccountViewerController extends IViewerController {	
 	void setFilter(String filter);
 	String getFilter();
 	

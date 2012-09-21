@@ -4,7 +4,7 @@ import java.util.List;
 
 import tecec.dto.Advisor;
 
-public interface IAdvisorViewerController extends IRefreshable  {
+public interface IAdvisorViewerController extends IViewerController  {
 	void setNameFilter (String nameFilter);
 	String getNameFilter ();
 	

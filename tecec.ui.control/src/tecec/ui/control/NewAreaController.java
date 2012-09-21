@@ -27,8 +27,6 @@ public class NewAreaController extends BaseController implements
 
 	@Override
 	public void setAreaName(String name) {
-		String old = this.areaName;
-
 		this.areaName = name;
 
 		super.notifyOfPropertyChange("areaName");
@@ -42,8 +40,6 @@ public class NewAreaController extends BaseController implements
 
 	@Override
 	public void setDescription(String description) {
-		String old = this.description;
-
 		this.description = description;
 
 		super.notifyOfPropertyChange("description");

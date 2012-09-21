@@ -24,7 +24,7 @@ import tecec.ui.contract.record.MonographRecord;
 import tecec.ui.contract.view.INewMonographUI;
 import tecec.ui.contract.view.IUpdateMonographUI;
 
-public class MonographViewerController extends BaseController implements IMonographViewerController {
+public class MonographViewerController extends BaseViewerController implements IMonographViewerController {
 
 	private String nameFilter;
 	private MonographRecord selectedMonograph;
@@ -169,5 +169,11 @@ public class MonographViewerController extends BaseController implements IMonogr
 	@Override
 	public void refresh() {
 		setNameFilter("");
+	}
+
+	@Override
+	protected List<String[]> getExportSource() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
