@@ -33,7 +33,12 @@ public class AdvisorViewerUI extends JDialog implements IAdvisorViewerUI {
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	private IAdvisorViewerController advisorViewerController;
+	
+	private void export(){
+		this.advisorViewerController.export();
+	}
 
 	private void showNewAdvisorUI(){
 		this.advisorViewerController.showNewAdvisorUI();
@@ -54,6 +59,7 @@ public class AdvisorViewerUI extends JDialog implements IAdvisorViewerUI {
 	private JButton btnDeleteAdvisor;
 	private JPanel panelPesquisa;
 	private JPanel panelButtons;
+	private JButton btnExport;
 
 	public AdvisorViewerUI(IAdvisorViewerController advisorViewerController) {
 		setTitle("Orientadores");
@@ -111,6 +117,15 @@ public class AdvisorViewerUI extends JDialog implements IAdvisorViewerUI {
 			panelButtons.setMaximumSize(new Dimension(750, 60));
 			panelButtons.setBorder(new TitledBorder(null, "Op\u00E7\u00F5es:", TitledBorder.LEADING, TitledBorder.TOP, null, null)); // NOI18N
 			contentPanel.add(panelButtons, "cell 0 2,grow");
+			{
+				btnExport = new JButton("Exportar");
+				btnExport.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						export();
+					}
+				});
+				panelButtons.add(btnExport);
+			}
 			JButton btnNewAdvisor = new JButton("Adicionar Novo");
 			btnNewAdvisor.setPreferredSize(new Dimension(150, 25));
 			btnNewAdvisor.setMinimumSize(new Dimension(150, 25));

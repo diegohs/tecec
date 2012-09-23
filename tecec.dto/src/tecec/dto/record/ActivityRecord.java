@@ -1,4 +1,4 @@
-package tecec.ui.contract.record;
+package tecec.dto.record;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

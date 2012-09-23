@@ -5,6 +5,8 @@ import java.util.List;
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
 import tecec.contract.reader.ICourseReader;
+import tecec.contract.reporting.IAccountReporter;
+import tecec.contract.reporting.ICourseReporter;
 import tecec.contract.writer.ICourseWriter;
 import tecec.dto.Course;
 import tecec.ui.contract.control.ICourseViewerController;
@@ -20,12 +22,16 @@ public class CourseViewerController extends BaseViewerController implements ICou
 	
 	private INewCourseUI newCourseUI;
 	private IUpdateCourseUI updateCourseUI;
+	private ICourseReporter reporter;
 
-	public CourseViewerController(ICourseReader courseReader, ICourseWriter courseWriter, INewCourseUI newCourseUI, IUpdateCourseUI updateCourseUI) {
+	public CourseViewerController(ICourseReader courseReader, ICourseWriter courseWriter, INewCourseUI newCourseUI, IUpdateCourseUI updateCourseUI, ICourseReporter reporter) {
+		super(reporter);
+		
 		this.courseReader = courseReader;
 		this.courseWriter = courseWriter;
 		this.newCourseUI = newCourseUI;
 		this.updateCourseUI = updateCourseUI;
+		this.reporter = reporter;
 	}
 	
 	@Override
@@ -119,7 +125,6 @@ public class CourseViewerController extends BaseViewerController implements ICou
 
 	@Override
 	protected List<String[]> getExportSource() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.reporter.format(this.getCourses());
 	}
 }

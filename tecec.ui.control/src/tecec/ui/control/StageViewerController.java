@@ -6,7 +6,7 @@ import java.util.List;
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
 import tecec.contract.reader.IStageReader;
-
+import tecec.contract.reporting.IAccountReporter;
 import tecec.contract.writer.IStageWriter;
 
 import tecec.dto.Stage;
@@ -28,7 +28,9 @@ public class StageViewerController extends BaseViewerController implements IStag
 	private IUpdateStageUI updateStageUI;
 	
 	public StageViewerController (IStageReader stageReader, IStageWriter stageWriter,
-			INewStageUI newStageUI, IUpdateStageUI updateStageUI) {
+			INewStageUI newStageUI, IUpdateStageUI updateStageUI, IAccountReporter reporter) {
+		super(reporter);
+		
 		this.stageReader = stageReader;
 		this.stageWriter = stageWriter;
 		this.newStageUI = newStageUI;

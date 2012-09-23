@@ -10,5 +10,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/tecec.ui.contract"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/tecec.ui.control"/>
 	<classpathentry kind="lib" path="lib/picocontainer-2.14.1.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/tecec.io"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

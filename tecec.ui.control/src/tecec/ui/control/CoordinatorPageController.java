@@ -12,6 +12,7 @@ import tecec.contract.reader.IHandInReader;
 import tecec.contract.reader.IMonographReader;
 import tecec.contract.reader.IStageReader;
 import tecec.contract.reader.IStudentReader;
+import tecec.contract.reporting.IActivityRecordReporter;
 import tecec.contract.writer.IHandInWriter;
 import tecec.dto.Activity;
 import tecec.dto.Course;
@@ -20,10 +21,10 @@ import tecec.dto.HandIn;
 import tecec.dto.Monograph;
 import tecec.dto.Stage;
 import tecec.dto.Student;
+import tecec.dto.record.ActivityRecord;
 import tecec.ui.contract.control.ICoordinatorPageController;
-import tecec.ui.contract.record.ActivityRecord;
 
-public class CoordinatorPageController extends BaseController implements
+public class CoordinatorPageController extends BaseViewerController implements
 		ICoordinatorPageController {
 
 	ActivityRecord selectedActivity;
@@ -36,12 +37,15 @@ public class CoordinatorPageController extends BaseController implements
 	IStudentReader studentReader;
 	IHandInWriter handInWriter;
 	IDocumentationReader documentationReader;
+	IActivityRecordReporter reporter;
 
 	public CoordinatorPageController(IActivityReader activityReader,
 			ICourseReader courseReader, IStageReader stageReader,
 			IHandInReader handInReader, IMonographReader monographReader,
 			IStudentReader studentReader, IHandInWriter handInWriter,
-			IDocumentationReader documentationReader) {
+			IDocumentationReader documentationReader, IActivityRecordReporter reporter) {
+		super(reporter);
+		
 		this.activityReader = activityReader;
 		this.courseReader = courseReader;
 		this.stageReader = stageReader;
@@ -50,6 +54,7 @@ public class CoordinatorPageController extends BaseController implements
 		this.studentReader = studentReader;
 		this.handInWriter = handInWriter;
 		this.documentationReader = documentationReader;
+		this.reporter = reporter;
 	}
 
 	@Override
@@ -197,6 +202,11 @@ public class CoordinatorPageController extends BaseController implements
 	@Override
 	public boolean getCanDelete() {
 		return this.selectedActivity != null;
+	}
+
+	@Override
+	protected List<String[]> getExportSource() {
+		return this.reporter.format(this.getActivities());
 	}
 
 }

@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import tecec.contract.RuleViolation;
+import tecec.dto.record.AccountRecord;
 import tecec.ui.contract.control.IAccountViewerController;
 
 import java.awt.Toolkit;
@@ -19,7 +20,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import org.jdesktop.beansbinding.BeanProperty;
 import java.util.List;
-import tecec.ui.contract.record.AccountRecord;
 import tecec.ui.contract.view.IAccountViewerUI;
 
 import org.jdesktop.swingbinding.JTableBinding;
@@ -40,6 +40,11 @@ public class AccountViewerUI extends JDialog implements IAccountViewerUI {
 	IAccountViewerController controller;
 	private JButton btnUpdateAccount;
 	private JButton btnDeleteAccount;
+	private JButton btnExport;
+	
+	private void export(){
+		controller.export();
+	}
 
 	private void showNewAccountUI(){
 		controller.showNewAccountUI();
@@ -91,7 +96,15 @@ public class AccountViewerUI extends JDialog implements IAccountViewerUI {
 				showNewAccountUI();
 			}
 		});
-		getContentPane().add(btnNewAccount, "flowx,cell 1 4,alignx right");
+		
+		btnExport = new JButton("Exportar");
+		btnExport.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				export();
+			}
+		});
+		getContentPane().add(btnExport, "flowx,cell 1 4,alignx right");
+		getContentPane().add(btnNewAccount, "cell 1 4,alignx right");
 
 		btnUpdateAccount = new JButton("Atualizar Selecionado");
 		btnUpdateAccount.addActionListener(new ActionListener() {
@@ -128,7 +141,7 @@ public class AccountViewerUI extends JDialog implements IAccountViewerUI {
 		jTableBinding.addColumnBinding(accountRecordBeanProperty).setColumnName("ID").setEditable(false);
 		//
 		BeanProperty<AccountRecord, String> accountRecordBeanProperty_1 = BeanProperty.create("userName");
-		jTableBinding.addColumnBinding(accountRecordBeanProperty_1).setColumnName("Usuário");
+		jTableBinding.addColumnBinding(accountRecordBeanProperty_1).setColumnName("Usu\u00C3\u00A1rio");
 		//
 		BeanProperty<AccountRecord, String> accountRecordBeanProperty_2 = BeanProperty.create("profileName");
 		jTableBinding.addColumnBinding(accountRecordBeanProperty_2).setColumnName("Perfil").setEditable(false);
@@ -156,5 +169,9 @@ public class AccountViewerUI extends JDialog implements IAccountViewerUI {
 		BeanProperty<IAccountViewerController, Boolean> iAccountViewerControllerBeanProperty_4 = BeanProperty.create("canDelete");
 		AutoBinding<IAccountViewerController, Boolean, JButton, Boolean> autoBinding_3 = Bindings.createAutoBinding(UpdateStrategy.READ, controller, iAccountViewerControllerBeanProperty_4, btnDeleteAccount, jButtonBeanProperty);
 		autoBinding_3.bind();
+		//
+		BeanProperty<IAccountViewerController, Boolean> iAccountViewerControllerBeanProperty_5 = BeanProperty.create("canExport");
+		AutoBinding<IAccountViewerController, Boolean, JButton, Boolean> autoBinding_4 = Bindings.createAutoBinding(UpdateStrategy.READ, controller, iAccountViewerControllerBeanProperty_5, btnExport, jButtonBeanProperty);
+		autoBinding_4.bind();
 	}
 }

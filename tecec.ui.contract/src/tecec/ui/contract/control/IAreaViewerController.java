@@ -4,7 +4,7 @@ import java.util.List;
 
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
-import tecec.ui.contract.record.AreaRecord;
+import tecec.dto.record.AreaRecord;
 
 public interface IAreaViewerController extends IViewerController  {
 	void setNameFilter(String nameFilter);

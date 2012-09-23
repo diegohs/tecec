@@ -4,7 +4,7 @@ import java.util.List;
 
 
 import tecec.contract.reader.IStatusReader;
-
+import tecec.contract.reporting.IAccountReporter;
 import tecec.contract.writer.IStatusWriter;
 
 import tecec.dto.Status;
@@ -26,7 +26,9 @@ public class StatusViewerController extends BaseViewerController implements
 	private INewStatusUI newStatusUI;
 	private IUpdateStatusUI updateStatusUI;
 	
-	public StatusViewerController (IStatusReader statusReader, IStatusWriter statusWriter, INewStatusUI newStatusUI, IUpdateStatusUI updateStatusUI) {
+	public StatusViewerController (IStatusReader statusReader, IStatusWriter statusWriter, INewStatusUI newStatusUI, IUpdateStatusUI updateStatusUI, IAccountReporter reporter) {
+		super(reporter);
+		
 		this.statusReader = statusReader;
 		this.statusWriter = statusWriter;
 		this.newStatusUI = newStatusUI;

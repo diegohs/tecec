@@ -5,6 +5,8 @@ import java.util.List;
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
 import tecec.contract.reader.IStudentReader;
+import tecec.contract.reporting.IAccountReporter;
+import tecec.contract.reporting.IStudentReporter;
 import tecec.contract.writer.IStudentWriter;
 import tecec.dto.Student;
 import tecec.ui.contract.control.IStudentViewerController;
@@ -20,13 +22,17 @@ public class StudentViewerController  extends BaseViewerController implements IS
 	private IStudentWriter studentWriter;	
 	private INewStudentUI newStudentUI;
 	private IUpdateStudentUI updateStudentUI;
+	private IStudentReporter reporter;
 	
 	public StudentViewerController (IStudentReader studentReader, IStudentWriter studentWriter, 
-			INewStudentUI newStudentUI, IUpdateStudentUI updateAdviorUI) {
+			INewStudentUI newStudentUI, IUpdateStudentUI updateAdviorUI, IStudentReporter reporter) {
+		super(reporter);
+		
 		this.studentReader = studentReader;
 		this.studentWriter = studentWriter;
 		this.newStudentUI = newStudentUI;
 		this.updateStudentUI = updateAdviorUI;
+		this.reporter = reporter;
 	}
 	
 	@Override
@@ -105,8 +111,7 @@ public class StudentViewerController  extends BaseViewerController implements IS
 
 	@Override
 	protected List<String[]> getExportSource() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.reporter.format(this.getStudents());
 	}
 
 }

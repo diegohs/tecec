@@ -3,6 +3,7 @@ package tecec.ui.control;
 import java.util.List;
 
 import tecec.contract.reader.IProfileReader;
+import tecec.contract.reporting.IAccountReporter;
 import tecec.contract.writer.IProfileWriter;
 import tecec.dto.Profile;
 import tecec.ui.contract.control.IProfileViewerController;
@@ -19,7 +20,9 @@ public class ProfileViewerController extends BaseViewerController implements IPr
 	private INewProfileUI newProfileUI;
 	private IUpdateProfileUI updateProfileUI;
 
-	public ProfileViewerController(IProfileReader profileReader, IProfileWriter profileWriter, INewProfileUI newProfileUI, IUpdateProfileUI updateProfileUI) {
+	public ProfileViewerController(IProfileReader profileReader, IProfileWriter profileWriter, INewProfileUI newProfileUI, IUpdateProfileUI updateProfileUI, IAccountReporter reporter) {
+		super(reporter);
+		
 		this.profileReader = profileReader;
 		this.profileWriter = profileWriter;
 		this.newProfileUI = newProfileUI;

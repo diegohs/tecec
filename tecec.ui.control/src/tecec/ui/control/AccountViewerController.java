@@ -8,12 +8,13 @@ import tecec.contract.RuleViolationException;
 import tecec.contract.reader.IAccountReader;
 import tecec.contract.reader.IProfileReader;
 import tecec.contract.reader.IStudentReader;
+import tecec.contract.reporting.IAccountReporter;
 import tecec.contract.writer.IAccountWriter;
 import tecec.dto.Account;
 import tecec.dto.Profile;
 import tecec.dto.Student;
+import tecec.dto.record.AccountRecord;
 import tecec.ui.contract.control.IAccountViewerController;
-import tecec.ui.contract.record.AccountRecord;
 import tecec.ui.contract.view.INewAccountUI;
 import tecec.ui.contract.view.IUpdateAccountUI;
 
@@ -30,16 +31,21 @@ public class AccountViewerController extends BaseViewerController implements IAc
 	INewAccountUI newAccountUI;
 	IUpdateAccountUI updateAccountUI;
 	
+	IAccountReporter reporter;
+	
 	public AccountViewerController(IAccountReader accountReader,
 			IAccountWriter accountWriter, IStudentReader studentReader,
 			IProfileReader profileReader, INewAccountUI newAccountUI,
-			IUpdateAccountUI updateAccountUI) {
+			IUpdateAccountUI updateAccountUI, IAccountReporter reporter) {
+		super(reporter);
+		
 		this.accountReader = accountReader;
 		this.accountWriter = accountWriter;
 		this.studentReader = studentReader;
 		this.profileReader = profileReader;
 		this.newAccountUI = newAccountUI;
 		this.updateAccountUI = updateAccountUI;
+		this.reporter = reporter;
 	}
 
 	@Override
@@ -145,8 +151,8 @@ public class AccountViewerController extends BaseViewerController implements IAc
 
 	@Override
 	protected List<String[]> getExportSource() {
-		// TODO Auto-generated method stub
-		return null;
+		List<String[]> source = this.reporter.format(getAccounts());
+		
+		return source;
 	}
-	
 }

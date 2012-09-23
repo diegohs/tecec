@@ -1,4 +1,4 @@
-package tecec.ui.contract.record;
+package tecec.dto.record;
 
 import tecec.dto.Monograph;
 

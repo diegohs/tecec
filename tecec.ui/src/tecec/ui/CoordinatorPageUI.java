@@ -25,7 +25,6 @@ import java.io.IOException;
 
 import org.jdesktop.beansbinding.BeanProperty;
 import java.util.List;
-import tecec.ui.contract.record.ActivityRecord;
 import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.SwingBindings;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
@@ -36,6 +35,8 @@ import tecec.dto.Documentation;
 
 import org.jdesktop.beansbinding.ELProperty;
 import tecec.dto.Stage;
+import tecec.dto.record.ActivityRecord;
+
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.Bindings;
 
@@ -52,6 +53,11 @@ public class CoordinatorPageUI extends JInternalFrame implements ICoordinatorPag
 	private JButton btnUpdate;
 	private JButton btnDownload;
 	private JButton btnDelete;
+	private JButton btnExport;
+	
+	private void export(){
+		this.controller.export();
+	}
 
 	private void delete(){
 		RuleViolation violation = this.controller.getDeletionViolation();
@@ -142,7 +148,15 @@ public class CoordinatorPageUI extends JInternalFrame implements ICoordinatorPag
 				update();
 			}
 		});
-		getContentPane().add(btnUpdate, "flowx,cell 3 7,alignx right");
+		
+		btnExport = new JButton("Exportar");
+		btnExport.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				export();
+			}
+		});
+		getContentPane().add(btnExport, "flowx,cell 3 7,alignx right");
+		getContentPane().add(btnUpdate, "cell 3 7,alignx right");
 
 		btnDownload = new JButton("Baixar Arquivo");
 		btnDownload.addActionListener(new ActionListener() {

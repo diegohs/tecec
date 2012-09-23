@@ -2,7 +2,7 @@ package tecec.ui.contract.control;
 
 import java.util.List;
 
-import tecec.ui.contract.record.MonographRecord;
+import tecec.dto.record.MonographRecord;
 
 public interface IMonographViewerController extends IViewerController  {
 

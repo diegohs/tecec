@@ -120,7 +120,29 @@ public class InjectorFactory {
 
 		container.addComponent(tecec.contract.reader.IDocumentationReader.class,
 				tecec.business.reader.DocumentationReader.class);
+		
+		// IO
 
+		container.addComponent(tecec.contract.io.IReportExporter.class,
+				tecec.io.CSVExporter.class);
+		
+		// Report
+
+		container.addComponent(tecec.contract.reporting.IAccountReporter.class,
+				tecec.business.reporting.AccountReporter.class);
+		container.addComponent(tecec.contract.reporting.IAreaReporter.class,
+				tecec.business.reporting.AreaReporter.class);
+		container.addComponent(tecec.contract.reporting.IMonographReporter.class,
+				tecec.business.reporting.MonographReporter.class);
+		container.addComponent(tecec.contract.reporting.IActivityRecordReporter.class,
+				tecec.business.reporting.ActivityRecordReporter.class);
+		container.addComponent(tecec.contract.reporting.ICourseReporter.class,
+				tecec.business.reporting.CourseReporter.class);
+		container.addComponent(tecec.contract.reporting.IStudentReporter.class,
+				tecec.business.reporting.StudentReporter.class);
+		container.addComponent(tecec.contract.reporting.IAdvisorReporter.class,
+				tecec.business.reporting.AdvisorReporter.class);
+		
 	}
 
 	private void RegisterUI(MutablePicoContainer container) {

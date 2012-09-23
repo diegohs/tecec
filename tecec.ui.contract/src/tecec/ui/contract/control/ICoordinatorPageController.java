@@ -5,9 +5,9 @@ import java.util.List;
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
 import tecec.dto.Documentation;
-import tecec.ui.contract.record.ActivityRecord;
+import tecec.dto.record.ActivityRecord;
 
-public interface ICoordinatorPageController extends IRefreshable {	
+public interface ICoordinatorPageController extends IViewerController {	
 	List<ActivityRecord> getActivities();
 	ActivityRecord getSelectedActivity();
 	void setSelectedActivity(ActivityRecord activity);

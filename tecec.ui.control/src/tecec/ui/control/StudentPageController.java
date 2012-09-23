@@ -5,12 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tecec.contract.reader.*;
+import tecec.contract.reporting.IActivityRecordReporter;
 import tecec.contract.writer.IHandInWriter;
 import tecec.dto.*;
+import tecec.dto.record.ActivityRecord;
 import tecec.ui.contract.control.IStudentPageController;
-import tecec.ui.contract.record.ActivityRecord;
 
-public class StudentPageController extends BaseController implements
+public class StudentPageController extends BaseViewerController implements
 		IStudentPageController {
 
 	String pKStudent;
@@ -22,16 +23,20 @@ public class StudentPageController extends BaseController implements
 	IHandInReader handInReader;
 	IHandInWriter handInWriter;
 	IStageReader stageReader;
+	IActivityRecordReporter activityReporter;
 
 	public StudentPageController(IMonographReader monographReader,
 			IActivityReader activityReader, ICourseReader courseReader,
-			IHandInReader handInReader, IStageReader stageReader, IHandInWriter handInWriter) {
+			IHandInReader handInReader, IStageReader stageReader, IHandInWriter handInWriter, IActivityRecordReporter reporter) {
+		super(reporter);
+		
 		this.monographReader = monographReader;
 		this.activityReader = activityReader;
 		this.courseReader = courseReader;
 		this.handInReader = handInReader;
 		this.handInWriter = handInWriter;
 		this.stageReader = stageReader;
+		this.activityReporter = reporter;
 	}
 
 	@Override
@@ -139,6 +144,11 @@ public class StudentPageController extends BaseController implements
 				file);
 		
 		super.notifyOfPropertyChange("activityRecords");
+	}
+
+	@Override
+	protected List<String[]> getExportSource() {
+		return this.activityReporter.format(this.getActivityRecords());
 	}
 
 }

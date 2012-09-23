@@ -22,11 +22,11 @@ import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.SwingBindings;
 
+import tecec.dto.record.MonographRecord;
 import tecec.ui.contract.control.IMonographViewerController;
 import tecec.ui.contract.view.IMonographViewerUI;
 
 import javax.swing.ListSelectionModel;
-import tecec.ui.contract.record.MonographRecord;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
@@ -39,6 +39,11 @@ public class MonographViewerUI extends JFrame implements IMonographViewerUI {
 	 */
 	private static final long serialVersionUID = 1L;
 	private IMonographViewerController monographViewerController;
+	
+	private void export()
+	{
+		this.monographViewerController.export();
+	}
 
 	private void showUpdateMonographUI(){
 		this.monographViewerController.showUpdateMonographUI();
@@ -61,6 +66,7 @@ public class MonographViewerUI extends JFrame implements IMonographViewerUI {
 	private JButton btnDeleteMonograph;
 	private JPanel panelPesquisa;
 	private JPanel panelButtons;
+	private JButton btnExport;
 
 	/**
 	 * Create the frame.
@@ -110,6 +116,14 @@ public class MonographViewerUI extends JFrame implements IMonographViewerUI {
 		panelButtons.setMaximumSize(new Dimension(750, 60));
 		panelButtons.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Op��es:", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 10))); // NOI18N
 		contentPane.add(panelButtons, "cell 0 2,grow");
+		
+		btnExport = new JButton("Exportar");
+		btnExport.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				export();
+			}
+		});
+		panelButtons.add(btnExport);
 
 		btnNewMonograph = new JButton("Adicionar Novo");
 		btnNewMonograph.setPreferredSize(new Dimension(150, 25));

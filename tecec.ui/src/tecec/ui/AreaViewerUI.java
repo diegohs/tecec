@@ -24,8 +24,8 @@ import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.SwingBindings;
 
 import tecec.contract.RuleViolation;
+import tecec.dto.record.AreaRecord;
 import tecec.ui.contract.control.IAreaViewerController;
-import tecec.ui.contract.record.AreaRecord;
 import tecec.ui.contract.view.IAreaViewerUI;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -40,6 +40,10 @@ public class AreaViewerUI extends JDialog implements IAreaViewerUI {
 	 */
 	private static final long serialVersionUID = 1L;
 	private tecec.ui.contract.control.IAreaViewerController areaViewerController;
+
+	private void export() {
+		this.areaViewerController.export();
+	}
 
 	private void createArea() {
 		this.areaViewerController.showNewAreaUI();
@@ -74,6 +78,7 @@ public class AreaViewerUI extends JDialog implements IAreaViewerUI {
 	private JButton btnDeleteArea;
 	private JPanel panelPesquisa;
 	private JPanel panelButtons;
+	private JButton btnExport;
 
 	/**
 	 * Create the dialog.
@@ -86,7 +91,8 @@ public class AreaViewerUI extends JDialog implements IAreaViewerUI {
 		this.areaViewerController = areViewerController;
 
 		setDefaultLookAndFeelDecorated(true);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(MainUI.class.getResource("/tecec/ui/files/icone_tecec.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(
+				MainUI.class.getResource("/tecec/ui/files/icone_tecec.png")));
 
 		setModal(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
@@ -94,14 +100,20 @@ public class AreaViewerUI extends JDialog implements IAreaViewerUI {
 		getContentPane().setLayout(new MigLayout("", "[800px]", "[600px]"));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, "cell 0 0,grow");
-		contentPanel.setLayout(new MigLayout("", "[800px]", "[50px][400px][50px]"));
+		contentPanel.setLayout(new MigLayout("", "[800px]",
+				"[50px][400px][50px]"));
 		{
 			panelPesquisa = new JPanel();
 			panelPesquisa.setPreferredSize(new Dimension(750, 60));
 			panelPesquisa.setMinimumSize(new Dimension(750, 60));
 			panelPesquisa.setMaximumSize(new Dimension(750, 60));
-			panelPesquisa.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pesquisa:", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 10))); // NOI18N
-			contentPanel.add(panelPesquisa, "cell 0 0,alignx center,aligny center");
+			panelPesquisa.setBorder(javax.swing.BorderFactory
+					.createTitledBorder(null, "Pesquisa:",
+							javax.swing.border.TitledBorder.LEFT,
+							javax.swing.border.TitledBorder.DEFAULT_POSITION,
+							new java.awt.Font("Comic Sans MS", 1, 10))); // NOI18N
+			contentPanel.add(panelPesquisa,
+					"cell 0 0,alignx center,aligny center");
 			{
 				txtNameFilter = new JTextField();
 				panelPesquisa.add(txtNameFilter);
@@ -128,8 +140,19 @@ public class AreaViewerUI extends JDialog implements IAreaViewerUI {
 				panelButtons.setPreferredSize(new Dimension(750, 60));
 				panelButtons.setMinimumSize(new Dimension(750, 60));
 				panelButtons.setMaximumSize(new Dimension(750, 60));
-				panelButtons.setBorder(new TitledBorder(null, "Op\u00E7\u00F5es: ", TitledBorder.LEADING, TitledBorder.TOP, null, null)); // NOI18N
+				panelButtons.setBorder(new TitledBorder(null,
+						"Op\u00E7\u00F5es: ", TitledBorder.LEADING,
+						TitledBorder.TOP, null, null)); // NOI18N
 				contentPanel.add(panelButtons, "flowx,cell 0 2");
+				{
+					btnExport = new JButton("Exportar");
+					btnExport.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							export();
+						}
+					});
+					panelButtons.add(btnExport);
+				}
 				JButton btnNewArea = new JButton("Adicionar \u00C1rea");
 				btnNewArea.setPreferredSize(new Dimension(150, 25));
 				panelButtons.add(btnNewArea);
@@ -162,38 +185,69 @@ public class AreaViewerUI extends JDialog implements IAreaViewerUI {
 		}
 		initDataBindings();
 	}
+
 	protected void initDataBindings() {
-		BeanProperty<IAreaViewerController, String> iAreaViewerControllerBeanProperty = BeanProperty.create("nameFilter");
-		BeanProperty<JTextField, String> jTextFieldBeanProperty = BeanProperty.create("text");
-		AutoBinding<IAreaViewerController, String, JTextField, String> autoBinding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, areaViewerController, iAreaViewerControllerBeanProperty, txtNameFilter, jTextFieldBeanProperty);
+		BeanProperty<IAreaViewerController, String> iAreaViewerControllerBeanProperty = BeanProperty
+				.create("nameFilter");
+		BeanProperty<JTextField, String> jTextFieldBeanProperty = BeanProperty
+				.create("text");
+		AutoBinding<IAreaViewerController, String, JTextField, String> autoBinding = Bindings
+				.createAutoBinding(UpdateStrategy.READ_WRITE,
+						areaViewerController,
+						iAreaViewerControllerBeanProperty, txtNameFilter,
+						jTextFieldBeanProperty);
 		autoBinding.bind();
 		//
-		BeanProperty<IAreaViewerController, List<AreaRecord>> iAreaViewerControllerBeanProperty_1 = BeanProperty.create("areas");
-		JTableBinding<AreaRecord, IAreaViewerController, JTable> jTableBinding = SwingBindings.createJTableBinding(UpdateStrategy.READ, areaViewerController, iAreaViewerControllerBeanProperty_1, tblArea);
+		BeanProperty<IAreaViewerController, List<AreaRecord>> iAreaViewerControllerBeanProperty_1 = BeanProperty
+				.create("areas");
+		JTableBinding<AreaRecord, IAreaViewerController, JTable> jTableBinding = SwingBindings
+				.createJTableBinding(UpdateStrategy.READ, areaViewerController,
+						iAreaViewerControllerBeanProperty_1, tblArea);
 		//
-		BeanProperty<AreaRecord, String> areaRecordBeanProperty = BeanProperty.create("mainAreaName");
-		jTableBinding.addColumnBinding(areaRecordBeanProperty).setColumnName("Super \u00C1rea").setEditable(false);
+		BeanProperty<AreaRecord, String> areaRecordBeanProperty = BeanProperty
+				.create("mainAreaName");
+		jTableBinding.addColumnBinding(areaRecordBeanProperty)
+				.setColumnName("Super \u00C1rea").setEditable(false);
 		//
-		BeanProperty<AreaRecord, String> areaRecordBeanProperty_1 = BeanProperty.create("area.name");
-		jTableBinding.addColumnBinding(areaRecordBeanProperty_1).setColumnName("Nome").setEditable(false);
+		BeanProperty<AreaRecord, String> areaRecordBeanProperty_1 = BeanProperty
+				.create("area.name");
+		jTableBinding.addColumnBinding(areaRecordBeanProperty_1)
+				.setColumnName("Nome").setEditable(false);
 		//
-		BeanProperty<AreaRecord, String> areaRecordBeanProperty_2 = BeanProperty.create("area.description");
-		jTableBinding.addColumnBinding(areaRecordBeanProperty_2).setColumnName("Descri\u00E7\u00E3o").setEditable(false);
+		BeanProperty<AreaRecord, String> areaRecordBeanProperty_2 = BeanProperty
+				.create("area.description");
+		jTableBinding.addColumnBinding(areaRecordBeanProperty_2)
+				.setColumnName("Descri\u00E7\u00E3o").setEditable(false);
 		//
 		jTableBinding.bind();
 		//
-		BeanProperty<IAreaViewerController, Boolean> iAreaViewerControllerBeanProperty_3 = BeanProperty.create("canUpdateArea");
-		BeanProperty<JButton, Boolean> jButtonBeanProperty = BeanProperty.create("enabled");
-		AutoBinding<IAreaViewerController, Boolean, JButton, Boolean> autoBinding_2 = Bindings.createAutoBinding(UpdateStrategy.READ, areaViewerController, iAreaViewerControllerBeanProperty_3, btnUpdateArea, jButtonBeanProperty);
+		BeanProperty<IAreaViewerController, Boolean> iAreaViewerControllerBeanProperty_3 = BeanProperty
+				.create("canUpdateArea");
+		BeanProperty<JButton, Boolean> jButtonBeanProperty = BeanProperty
+				.create("enabled");
+		AutoBinding<IAreaViewerController, Boolean, JButton, Boolean> autoBinding_2 = Bindings
+				.createAutoBinding(UpdateStrategy.READ, areaViewerController,
+						iAreaViewerControllerBeanProperty_3, btnUpdateArea,
+						jButtonBeanProperty);
 		autoBinding_2.bind();
 		//
-		BeanProperty<IAreaViewerController, Boolean> iAreaViewerControllerBeanProperty_4 = BeanProperty.create("canDeleteArea");
-		AutoBinding<IAreaViewerController, Boolean, JButton, Boolean> autoBinding_3 = Bindings.createAutoBinding(UpdateStrategy.READ, areaViewerController, iAreaViewerControllerBeanProperty_4, btnDeleteArea, jButtonBeanProperty);
+		BeanProperty<IAreaViewerController, Boolean> iAreaViewerControllerBeanProperty_4 = BeanProperty
+				.create("canDeleteArea");
+		AutoBinding<IAreaViewerController, Boolean, JButton, Boolean> autoBinding_3 = Bindings
+				.createAutoBinding(UpdateStrategy.READ, areaViewerController,
+						iAreaViewerControllerBeanProperty_4, btnDeleteArea,
+						jButtonBeanProperty);
 		autoBinding_3.bind();
 		//
-		BeanProperty<IAreaViewerController, AreaRecord> iAreaViewerControllerBeanProperty_5 = BeanProperty.create("selectedArea");
-		BeanProperty<JTable, AreaRecord> jTableBeanProperty = BeanProperty.create("selectedElement");
-		AutoBinding<IAreaViewerController, AreaRecord, JTable, AreaRecord> autoBinding_4 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, areaViewerController, iAreaViewerControllerBeanProperty_5, tblArea, jTableBeanProperty);
+		BeanProperty<IAreaViewerController, AreaRecord> iAreaViewerControllerBeanProperty_5 = BeanProperty
+				.create("selectedArea");
+		BeanProperty<JTable, AreaRecord> jTableBeanProperty = BeanProperty
+				.create("selectedElement");
+		AutoBinding<IAreaViewerController, AreaRecord, JTable, AreaRecord> autoBinding_4 = Bindings
+				.createAutoBinding(UpdateStrategy.READ_WRITE,
+						areaViewerController,
+						iAreaViewerControllerBeanProperty_5, tblArea,
+						jTableBeanProperty);
 		autoBinding_4.bind();
 	}
 

@@ -42,6 +42,10 @@ public class ActivityViewerUI extends JDialog implements
 	 */
 	private static final long serialVersionUID = 1L;
 	private tecec.ui.contract.control.IActivityViewerController activityViewerController;
+	
+	private void export(){
+		this.activityViewerController.export();
+	}
 
 	private void showNewActivityUI() {
 		this.activityViewerController.showNewActivityUI();
@@ -76,6 +80,7 @@ public class ActivityViewerUI extends JDialog implements
 	private JButton btnDeleteActivity;
 	private JPanel panelPesquisa;
 	private JPanel panelButtons;
+	private JButton btnExport;
 
 	public ActivityViewerUI(IActivityViewerController activityViewerController) {
 		setTitle("Atividades");
@@ -132,6 +137,15 @@ public class ActivityViewerUI extends JDialog implements
 				panelButtons.setMaximumSize(new Dimension(750, 60));
 				panelButtons.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Op\u00E7\u00F5es:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 				contentPanel.add(panelButtons, "cell 0 2,grow");
+				{
+					btnExport = new JButton("Export");
+					btnExport.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							export();
+						}
+					});
+					panelButtons.add(btnExport);
+				}
 				btnNewActivity = new JButton("Cadastrar Atividade");
 				btnNewActivity.setPreferredSize(new Dimension(150, 25));
 				btnNewActivity.setMinimumSize(new Dimension(150, 25));

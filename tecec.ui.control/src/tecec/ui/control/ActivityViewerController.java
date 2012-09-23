@@ -5,6 +5,7 @@ import java.util.List;
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
 import tecec.contract.reader.IActivityReader;
+import tecec.contract.reporting.IActivityRecordReporter;
 import tecec.contract.writer.IActivityWriter;
 import tecec.dto.Activity;
 import tecec.ui.contract.control.IActivityViewerController;
@@ -21,13 +22,19 @@ public class ActivityViewerController extends BaseViewerController implements
 	private tecec.contract.reader.IActivityReader activityReader;
 	private tecec.ui.contract.view.INewActivityUI newActivityUI;
 	private tecec.ui.contract.view.IUpdateActivityUI updateActivityUI;
+	
+	private IActivityRecordReporter activityReporter;
 
 	public ActivityViewerController(INewActivityUI newActivityUI,
-			IUpdateActivityUI updateActivityUI, IActivityWriter activityWriter, IActivityReader activityReader) {
+			IUpdateActivityUI updateActivityUI, IActivityWriter activityWriter,
+			IActivityReader activityReader, IActivityRecordReporter reporter) {
+		super(reporter);
+		
 		this.newActivityUI = newActivityUI;
 		this.updateActivityUI = updateActivityUI;
 		this.activityWriter = activityWriter;
 		this.activityReader = activityReader;
+		this.activityReporter = reporter;
 	}
 
 	@Override
@@ -116,7 +123,6 @@ public class ActivityViewerController extends BaseViewerController implements
 
 	@Override
 	protected List<String[]> getExportSource() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

@@ -6,10 +6,12 @@ import java.util.List;
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
 import tecec.contract.reader.IAreaReader;
+import tecec.contract.reporting.IAccountReporter;
+import tecec.contract.reporting.IAreaReporter;
 import tecec.contract.writer.IAreaWriter;
 import tecec.dto.Area;
+import tecec.dto.record.AreaRecord;
 import tecec.ui.contract.control.IAreaViewerController;
-import tecec.ui.contract.record.AreaRecord;
 import tecec.ui.contract.view.INewAreaUI;
 import tecec.ui.contract.view.IUpdateAreaUI;
 
@@ -21,13 +23,17 @@ public class AreaViewerController extends BaseViewerController implements
 
 	IAreaWriter areaWriter;
 	IAreaReader areaReader;
+	IAreaReporter areaReporter;
 
 	public AreaViewerController(IAreaWriter areaWriter, IAreaReader areaReader,
-			INewAreaUI newAreaUI, IUpdateAreaUI updateAreaUI) {
+			INewAreaUI newAreaUI, IUpdateAreaUI updateAreaUI, IAreaReporter reporter) {
+		super(reporter);
+		
 		this.areaWriter = areaWriter;
 		this.areaReader = areaReader;
 		this.newAreaUI = newAreaUI;
 		this.updateAreaUI = updateAreaUI;
+		this.areaReporter = reporter;
 	}
 
 	INewAreaUI newAreaUI;
@@ -143,7 +149,6 @@ public class AreaViewerController extends BaseViewerController implements
 
 	@Override
 	protected List<String[]> getExportSource() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.areaReporter.format(this.getAreas());
 	}
 }

@@ -21,11 +21,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import org.jdesktop.beansbinding.BeanProperty;
 import java.util.List;
-import tecec.ui.contract.record.ActivityRecord;
 import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.SwingBindings;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 import tecec.dto.Course;
+import tecec.dto.record.ActivityRecord;
+
 import org.jdesktop.beansbinding.ELProperty;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.Bindings;

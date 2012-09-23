@@ -9,6 +9,8 @@ import tecec.contract.reader.ICourseReader;
 import tecec.contract.reader.IMonographReader;
 import tecec.contract.reader.IStatusReader;
 import tecec.contract.reader.IStudentReader;
+import tecec.contract.reporting.IAccountReporter;
+import tecec.contract.reporting.IMonographReporter;
 import tecec.contract.writer.IMonographWriter;
 
 import tecec.dto.Advisor;
@@ -17,10 +19,10 @@ import tecec.dto.Course;
 import tecec.dto.Monograph;
 import tecec.dto.Status;
 import tecec.dto.Student;
+import tecec.dto.record.MonographRecord;
 
 import tecec.ui.contract.control.IMonographViewerController;
 
-import tecec.ui.contract.record.MonographRecord;
 import tecec.ui.contract.view.INewMonographUI;
 import tecec.ui.contract.view.IUpdateMonographUI;
 
@@ -38,7 +40,7 @@ public class MonographViewerController extends BaseViewerController implements I
 	private IAdvisorReader advisorReader;
 	private IAdvisorReader coadvisorReader;
 	private IStatusReader statusReader;
-	
+	private IMonographReporter monographReporter;
 
 	private INewMonographUI newMonographUI;
 	private IUpdateMonographUI updateMonographUI;
@@ -46,7 +48,9 @@ public class MonographViewerController extends BaseViewerController implements I
 	public MonographViewerController (IMonographReader monographReader, IMonographWriter monographWriter,
 			INewMonographUI newMonographUI, IUpdateMonographUI updateMonographUI,
 			IAreaReader areaReader, IStudentReader studentReader, ICourseReader courseReader,
-			IAdvisorReader advisorReader, IAdvisorReader coadvisorReader, IStatusReader statusReader) {
+			IAdvisorReader advisorReader, IAdvisorReader coadvisorReader, IStatusReader statusReader, IMonographReporter reporter) {
+		super(reporter);
+		
 		this.monographReader = monographReader;
 		this.monographWriter = monographWriter;
 		this.newMonographUI = newMonographUI;
@@ -57,6 +61,7 @@ public class MonographViewerController extends BaseViewerController implements I
 		this.advisorReader = advisorReader;
 		this.coadvisorReader = coadvisorReader;
 		this.statusReader = statusReader;
+		this.monographReporter = reporter;
 	}
 
 	@Override
@@ -173,7 +178,6 @@ public class MonographViewerController extends BaseViewerController implements I
 
 	@Override
 	protected List<String[]> getExportSource() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.monographReporter.format(this.getMonographs());
 	}
 }

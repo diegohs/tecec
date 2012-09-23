@@ -3,6 +3,8 @@ package tecec.ui.control;
 import java.util.List;
 
 import tecec.contract.reader.IAdvisorReader;
+import tecec.contract.reporting.IAccountReporter;
+import tecec.contract.reporting.IAdvisorReporter;
 import tecec.contract.writer.IAdvisorWriter;
 import tecec.dto.Advisor;
 import tecec.ui.contract.control.IAdvisorViewerController;
@@ -18,13 +20,17 @@ public class AdvisorViewerController  extends BaseViewerController implements IA
 	private IAdvisorWriter advisorWriter;	
 	private INewAdvisorUI newAdvisorUI;
 	private IUpdateAdvisorUI updateAdvisorUI;
+	private IAdvisorReporter reporter;
 	
 	public AdvisorViewerController (IAdvisorReader advisorReader, IAdvisorWriter advisorWriter, 
-			INewAdvisorUI newAdvisorUI, IUpdateAdvisorUI updateAdviorUI) {
+			INewAdvisorUI newAdvisorUI, IUpdateAdvisorUI updateAdviorUI, IAdvisorReporter reporter) {
+		super(reporter);		
+		
 		this.advisorReader = advisorReader;
 		this.advisorWriter = advisorWriter;
 		this.newAdvisorUI = newAdvisorUI;
 		this.updateAdvisorUI = updateAdviorUI;
+		this.reporter = reporter;
 	}
 	
 	@Override
@@ -92,14 +98,12 @@ public class AdvisorViewerController  extends BaseViewerController implements IA
 
 	@Override
 	public void refresh() {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 	}
 
 	@Override
 	protected List<String[]> getExportSource() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.reporter.format(this.getAdvisors());
 	}
 
 }

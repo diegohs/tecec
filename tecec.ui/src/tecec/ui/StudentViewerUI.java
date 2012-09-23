@@ -38,6 +38,10 @@ public class StudentViewerUI extends JDialog implements IStudentViewerUI {
 	private static final long serialVersionUID = 1L;
 	private IStudentViewerController studentViewerController;
 
+	private void export(){
+		this.studentViewerController.export();
+	}
+	
 	private void showNewStudentUI(){
 		this.studentViewerController.showNewStudentUI();
 	}
@@ -69,6 +73,7 @@ public class StudentViewerUI extends JDialog implements IStudentViewerUI {
 	private JButton btnDeleteStudent;
 	private JPanel panelPesquisa;
 	private JPanel panelButtons;
+	private JButton btnExport;
 
 	public StudentViewerUI(IStudentViewerController studentViewerController) {
 		setTitle("Alunos");
@@ -127,6 +132,15 @@ public class StudentViewerUI extends JDialog implements IStudentViewerUI {
 				panelButtons.setMaximumSize(new Dimension(750, 60));
 				panelButtons.setBorder(new TitledBorder(null, "Op\u00E7\u00F5es:", TitledBorder.LEADING, TitledBorder.TOP, null, null)); // NOI18N
 				contentPanel.add(panelButtons, "cell 0 2,grow");
+				{
+					btnExport = new JButton("Exportar");
+					btnExport.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							export();
+						}
+					});
+					panelButtons.add(btnExport);
+				}
 				JButton btnNewStudent = new JButton("Adicionar Novo");
 				btnNewStudent.setPreferredSize(new Dimension(150, 25));
 				btnNewStudent.setMinimumSize(new Dimension(150, 25));

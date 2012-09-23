@@ -4,7 +4,7 @@ import java.util.List;
 
 
 import tecec.contract.reader.IDocumentationReader;
-
+import tecec.contract.reporting.IAccountReporter;
 import tecec.contract.writer.IDocumentationWriter;
 
 import tecec.dto.Documentation;
@@ -28,7 +28,9 @@ public class DocumentationViewerController extends BaseViewerController implemen
 	
 	public DocumentationViewerController (INewDocumentationUI newDocumentationUI, 
 			IUpdateDocumentationUI updateDocumentationUI, IDocumentationWriter documentationWriter,
-			IDocumentationReader documentationReader) {
+			IDocumentationReader documentationReader, IAccountReporter reporter) {
+		super(reporter);
+		
 		this.newDocumentationUI = newDocumentationUI;
 		this.updateDocumentationUI = updateDocumentationUI;
 		this.documentationWriter = documentationWriter;

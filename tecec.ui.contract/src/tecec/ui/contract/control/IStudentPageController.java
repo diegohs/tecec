@@ -2,9 +2,9 @@ package tecec.ui.contract.control;
 
 import java.util.List;
 
-import tecec.ui.contract.record.ActivityRecord;
+import tecec.dto.record.ActivityRecord;
 
-public interface IStudentPageController extends IRefreshable  {
+public interface IStudentPageController extends IViewerController  {
 	void setPKStudent(String pKStudent);
 	
 	ActivityRecord getSelectedActivityRecord();

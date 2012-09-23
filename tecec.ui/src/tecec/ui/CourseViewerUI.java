@@ -49,6 +49,11 @@ public class CourseViewerUI extends JDialog implements ICourseViewerUI {
 	private JPanel panelPesquisa;
 	private JPanel panelButtons;
 	private JButton btnNewCourse;
+	private JButton btnExport;
+	
+	private void export(){
+		this.courseViewerController.export();
+	}
 
 	private void showNewCourseUI() {
 		courseViewerController.showNewCourseUI();
@@ -150,6 +155,15 @@ public class CourseViewerUI extends JDialog implements ICourseViewerUI {
 								showNewCourseUI();
 							}
 						});
+						{
+							btnExport = new JButton("Exportar");
+							btnExport.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent e) {
+									export();
+								}
+							});
+							panelButtons.add(btnExport);
+						}
 						panelButtons.add(btnNewCourse);
 					}
 					{

@@ -4,7 +4,7 @@ import java.util.List;
 
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
-import tecec.ui.contract.record.AccountRecord;
+import tecec.dto.record.AccountRecord;
 
 public interface IAccountViewerController extends IViewerController {	
 	void setFilter(String filter);
