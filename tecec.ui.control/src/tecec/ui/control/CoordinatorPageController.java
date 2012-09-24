@@ -29,6 +29,8 @@ public class CoordinatorPageController extends BaseViewerController implements
 
 	ActivityRecord selectedActivity;
 
+	boolean showLate, showOnTime;
+
 	IActivityReader activityReader;
 	ICourseReader courseReader;
 	IStageReader stageReader;
@@ -43,9 +45,10 @@ public class CoordinatorPageController extends BaseViewerController implements
 			ICourseReader courseReader, IStageReader stageReader,
 			IHandInReader handInReader, IMonographReader monographReader,
 			IStudentReader studentReader, IHandInWriter handInWriter,
-			IDocumentationReader documentationReader, IActivityRecordReporter reporter) {
+			IDocumentationReader documentationReader,
+			IActivityRecordReporter reporter) {
 		super(reporter);
-		
+
 		this.activityReader = activityReader;
 		this.courseReader = courseReader;
 		this.stageReader = stageReader;
@@ -79,7 +82,8 @@ public class CoordinatorPageController extends BaseViewerController implements
 						HandIn handIn = this.handInReader
 								.getHandInByActivityAndMonograph(
 										activity.getpKActivity(),
-										monograph.getpKMonograph());
+										monograph.getpKMonograph(),
+										this.showOnTime, this.showLate);
 
 						if (handIn != null) {
 							Student student = this.studentReader
@@ -155,10 +159,12 @@ public class CoordinatorPageController extends BaseViewerController implements
 
 	@Override
 	public Documentation getSelectedHandInFile() {
-		String pkDocumentation = this.getSelectedActivity().getHandIn().getFKDocumentation();
-		
-		Documentation doc = this.documentationReader.getDocumentationByPK(pkDocumentation);
-		
+		String pkDocumentation = this.getSelectedActivity().getHandIn()
+				.getFKDocumentation();
+
+		Documentation doc = this.documentationReader
+				.getDocumentationByPK(pkDocumentation);
+
 		return doc;
 	}
 
@@ -207,6 +213,22 @@ public class CoordinatorPageController extends BaseViewerController implements
 	@Override
 	protected List<String[]> getExportSource() {
 		return this.reporter.format(this.getActivities());
+	}
+
+	public boolean getShowLate() {
+		return showLate;
+	}
+
+	public void setShowLate(boolean showLate) {
+		this.showLate = showLate;
+	}
+
+	public boolean getShowOnTime() {
+		return showOnTime;
+	}
+
+	public void setShowOnTime(boolean showOnTime) {
+		this.showOnTime = showOnTime;
 	}
 
 }

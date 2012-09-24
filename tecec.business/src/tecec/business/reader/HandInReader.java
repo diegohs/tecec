@@ -13,8 +13,8 @@ public class HandInReader implements IHandInReader {
 	}
 
 	@Override
-	public HandIn getHandInByActivityAndMonograph(String pKActivity, String pKMonograph) {
-		return this.handInRepository.getHandInByActivityAndMonograph(pKActivity, pKMonograph);
+	public HandIn getHandInByActivityAndMonograph(String pKActivity, String pKMonograph, boolean showOnTime, boolean showLate) {
+		return this.handInRepository.getHandInByActivityAndMonograph(pKActivity, pKMonograph, showOnTime, showLate);
 	}
 
 }

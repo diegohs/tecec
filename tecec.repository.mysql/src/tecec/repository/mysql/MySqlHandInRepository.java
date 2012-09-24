@@ -90,8 +90,29 @@ public class MySqlHandInRepository extends MySqlRepository implements
 
 	@Override
 	public HandIn getHandInByActivityAndMonograph(String pKActivity,
-			String pKMonograph) {
-		String query = " SELECT * FROM HandIn WHERE FKActivity = :fKActivity AND FKMonograph = :fKMonograph;";
+			String pKMonograph, boolean showOnTime, boolean showLate) {
+		String query = " SELECT * FROM HandIn h " + 
+					   " INNER JOIN Activity a ON h.FKActivity = a.PKActivity " + 
+					   " WHERE FKActivity = :fKActivity " + 
+					   "   AND FKMonograph = :fKMonograph ";
+		
+		String firstWhere = " AND h.HandedOn > a.DueDate ";
+		String secondWhere = " h.HandedOn < a.DueDate ";
+		
+		if (showLate) {
+			query += firstWhere;
+			
+			if (showOnTime) {
+				query += "OR" + secondWhere;
+			}
+		}
+		else if(showOnTime){
+			query += "AND" + secondWhere;
+		}
+		else
+		{
+			return null;
+		}
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
 

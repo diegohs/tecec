@@ -27,9 +27,10 @@ public class StudentPageController extends BaseViewerController implements
 
 	public StudentPageController(IMonographReader monographReader,
 			IActivityReader activityReader, ICourseReader courseReader,
-			IHandInReader handInReader, IStageReader stageReader, IHandInWriter handInWriter, IActivityRecordReporter reporter) {
+			IHandInReader handInReader, IStageReader stageReader,
+			IHandInWriter handInWriter, IActivityRecordReporter reporter) {
 		super(reporter);
-		
+
 		this.monographReader = monographReader;
 		this.activityReader = activityReader;
 		this.courseReader = courseReader;
@@ -88,7 +89,8 @@ public class StudentPageController extends BaseViewerController implements
 						HandIn handIn = this.handInReader
 								.getHandInByActivityAndMonograph(
 										activity.getpKActivity(),
-										monograph.getpKMonograph());
+										monograph.getpKMonograph(),
+										true, true);
 
 						ActivityRecord record = new ActivityRecord();
 
@@ -138,11 +140,12 @@ public class StudentPageController extends BaseViewerController implements
 	}
 
 	@Override
-	public void handIn(String file) throws IOException  {
-		this.handInWriter.handIn(this.getSelectedActivityRecord().getMonograph().getpKMonograph(), 
-				this.getSelectedActivityRecord().getActivity().getpKActivity(), 
+	public void handIn(String file) throws IOException {
+		this.handInWriter.handIn(this.getSelectedActivityRecord()
+				.getMonograph().getpKMonograph(), this
+				.getSelectedActivityRecord().getActivity().getpKActivity(),
 				file);
-		
+
 		super.notifyOfPropertyChange("activityRecords");
 	}
 
@@ -150,5 +153,4 @@ public class StudentPageController extends BaseViewerController implements
 	protected List<String[]> getExportSource() {
 		return this.activityReporter.format(this.getActivityRecords());
 	}
-
 }

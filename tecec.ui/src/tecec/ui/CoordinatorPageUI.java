@@ -39,8 +39,11 @@ import tecec.dto.record.ActivityRecord;
 
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.Bindings;
+import javax.swing.JRadioButton;
+import javax.swing.JCheckBox;
 
-public class CoordinatorPageUI extends JInternalFrame implements ICoordinatorPageUI {
+public class CoordinatorPageUI extends JInternalFrame implements
+		ICoordinatorPageUI {
 	/**
 	 *
 	 */
@@ -54,12 +57,15 @@ public class CoordinatorPageUI extends JInternalFrame implements ICoordinatorPag
 	private JButton btnDownload;
 	private JButton btnDelete;
 	private JButton btnExport;
-	
-	private void export(){
+	private JLabel lblFiltro;
+	private JCheckBox chkLate;
+	private JCheckBox chkRegulares;
+
+	private void export() {
 		this.controller.export();
 	}
 
-	private void delete(){
+	private void delete() {
 		RuleViolation violation = this.controller.getDeletionViolation();
 
 		if (violation != null) {
@@ -76,7 +82,7 @@ public class CoordinatorPageUI extends JInternalFrame implements ICoordinatorPag
 
 	}
 
-	private void update(){
+	private void update() {
 		RuleViolation violation = this.controller.getUpdateViolation();
 
 		if (violation != null) {
@@ -92,10 +98,11 @@ public class CoordinatorPageUI extends JInternalFrame implements ICoordinatorPag
 		}
 	}
 
-	private void downloadFile(){
+	private void downloadFile() {
 		Documentation doc = this.controller.getSelectedHandInFile();
 
-		FileDialog dialog = new FileDialog((Frame)null, "Salvar", FileDialog.SAVE);
+		FileDialog dialog = new FileDialog((Frame) null, "Salvar",
+				FileDialog.SAVE);
 
 		dialog.setFile(doc.getFileName());
 
@@ -118,29 +125,46 @@ public class CoordinatorPageUI extends JInternalFrame implements ICoordinatorPag
 	public CoordinatorPageUI(ICoordinatorPageController controller) {
 		this.controller = controller;
 
-		setFrameIcon(new ImageIcon(this.getClass().getResource("/tecec/ui/files/icone_tecec.png")));
+		setFrameIcon(new ImageIcon(this.getClass().getResource(
+				"/tecec/ui/files/icone_tecec.png")));
 
 		setBounds(100, 100, 642, 461);
-		getContentPane().setLayout(new MigLayout("", "[][][88.00px:n][grow][20px:n]", "[20px:n][grow][20px:n][20px:n:30px,grow][20px:n][20px:n][20px:n][20px:n][20px:n]"));
+		getContentPane()
+				.setLayout(
+						new MigLayout(
+								"",
+								"[][53.00][grow][20px:n]",
+								"[20px:n][grow][20px:n][20px:n:30px,grow][20px:n][20px:n][20px:n][20px:n][20px:n]"));
 
 		JScrollPane scrollPane = new JScrollPane();
-		getContentPane().add(scrollPane, "cell 1 1 3 1,grow");
+		getContentPane().add(scrollPane, "cell 1 1 2 1,grow");
 
 		table = new JTable();
 		scrollPane.setViewportView(table);
 
-		JLabel lblNota = new JLabel("Nota:");
-		getContentPane().add(lblNota, "flowx,cell 1 2 3 1");
+		lblFiltro = new JLabel("Filtro:");
+		getContentPane().add(lblFiltro, "cell 1 2");
+		
+		chkRegulares = new JCheckBox("Regulares");
+		chkRegulares.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				refresh();
+			}
+		});
+		getContentPane().add(chkRegulares, "cell 1 3,alignx left");
 
-		txtGrade = new JTextField();
-		getContentPane().add(txtGrade, "cell 1 3 2 1,growx");
-		txtGrade.setColumns(10);
+		JLabel lblNota = new JLabel("Nota:");
+		getContentPane().add(lblNota, "flowx,cell 1 4");
 
 		JLabel lblComentrio = new JLabel("Coment\u00E1rio:");
-		getContentPane().add(lblComentrio, "cell 3 2");
+		getContentPane().add(lblComentrio, "cell 2 4");
+
+		txtGrade = new JTextField();
+		getContentPane().add(txtGrade, "cell 1 5,growx");
+		txtGrade.setColumns(10);
 
 		txtRemark = new JTextArea();
-		getContentPane().add(txtRemark, "cell 3 3 1 3,grow");
+		getContentPane().add(txtRemark, "cell 2 5,grow");
 
 		btnUpdate = new JButton("Atualizar Entrega");
 		btnUpdate.addActionListener(new ActionListener() {
@@ -148,15 +172,15 @@ public class CoordinatorPageUI extends JInternalFrame implements ICoordinatorPag
 				update();
 			}
 		});
-		
+
 		btnExport = new JButton("Exportar");
 		btnExport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				export();
 			}
 		});
-		getContentPane().add(btnExport, "flowx,cell 3 7,alignx right");
-		getContentPane().add(btnUpdate, "cell 3 7,alignx right");
+		getContentPane().add(btnExport, "flowx,cell 2 7,alignx right");
+		getContentPane().add(btnUpdate, "cell 2 7,alignx right");
 
 		btnDownload = new JButton("Baixar Arquivo");
 		btnDownload.addActionListener(new ActionListener() {
@@ -164,7 +188,7 @@ public class CoordinatorPageUI extends JInternalFrame implements ICoordinatorPag
 				downloadFile();
 			}
 		});
-		getContentPane().add(btnDownload, "cell 3 7,alignx right");
+		getContentPane().add(btnDownload, "cell 2 7,alignx right");
 
 		btnDelete = new JButton("Excluir Entrega");
 		btnDelete.addActionListener(new ActionListener() {
@@ -172,7 +196,15 @@ public class CoordinatorPageUI extends JInternalFrame implements ICoordinatorPag
 				delete();
 			}
 		});
-		getContentPane().add(btnDelete, "cell 3 7,alignx right");
+		getContentPane().add(btnDelete, "cell 2 7,alignx right");
+
+		chkLate = new JCheckBox("Atrasados");
+		chkLate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				refresh();
+			}
+		});
+		getContentPane().add(chkLate, "flowx,cell 2 3,alignx left");
 		initDataBindings();
 
 	}
@@ -240,5 +272,14 @@ public class CoordinatorPageUI extends JInternalFrame implements ICoordinatorPag
 		BeanProperty<JTable, ActivityRecord> jTableBeanProperty = BeanProperty.create("selectedElement");
 		AutoBinding<ICoordinatorPageController, ActivityRecord, JTable, ActivityRecord> autoBinding_5 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, controller, iCoordinatorPageControllerBeanProperty_6, table, jTableBeanProperty);
 		autoBinding_5.bind();
+		//
+		BeanProperty<ICoordinatorPageController, Boolean> iCoordinatorPageControllerBeanProperty_9 = BeanProperty.create("showLate");
+		BeanProperty<JCheckBox, Boolean> jCheckBoxBeanProperty = BeanProperty.create("selected");
+		AutoBinding<ICoordinatorPageController, Boolean, JCheckBox, Boolean> autoBinding_8 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, controller, iCoordinatorPageControllerBeanProperty_9, chkLate, jCheckBoxBeanProperty);
+		autoBinding_8.bind();
+		//
+		BeanProperty<ICoordinatorPageController, Boolean> iCoordinatorPageControllerBeanProperty_10 = BeanProperty.create("showOnTime");
+		AutoBinding<ICoordinatorPageController, Boolean, JCheckBox, Boolean> autoBinding_9 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, controller, iCoordinatorPageControllerBeanProperty_10, chkRegulares, jCheckBoxBeanProperty);
+		autoBinding_9.bind();
 	}
 }

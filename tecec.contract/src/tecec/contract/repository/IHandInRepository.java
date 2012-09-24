@@ -7,5 +7,5 @@ public interface IHandInRepository {
 	void deleteHandIn(String pKHandIn);
 	void updateHandIn(String pKHandIn, String grade, String remark);
 	
-	HandIn getHandInByActivityAndMonograph(String pKActivity, String pKMonograph);
+	HandIn getHandInByActivityAndMonograph(String pKActivity, String pKMonograph, boolean showOnTime, boolean showLate);
 }
