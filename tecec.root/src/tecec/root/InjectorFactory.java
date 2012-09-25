@@ -129,6 +129,8 @@ public class InjectorFactory {
 				tecec.business.reporting.StudentReporter.class);
 		container.addComponent(tecec.contract.reporting.IAdvisorReporter.class,
 				tecec.business.reporting.AdvisorReporter.class);
+		container.addComponent(tecec.contract.reporting.IActivityReporter.class,
+				tecec.business.reporting.ActivityReporter.class);
 		
 	}
 
