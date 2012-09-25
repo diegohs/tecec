@@ -6,6 +6,7 @@ import java.awt.Frame;
 import javax.swing.JInternalFrame;
 import net.miginfocom.swing.MigLayout;
 
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -41,6 +42,8 @@ import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.Bindings;
 import javax.swing.JRadioButton;
 import javax.swing.JCheckBox;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class CoordinatorPageUI extends JInternalFrame implements
 		ICoordinatorPageUI {
@@ -60,6 +63,11 @@ public class CoordinatorPageUI extends JInternalFrame implements
 	private JLabel lblFiltro;
 	private JCheckBox chkLate;
 	private JCheckBox chkRegulares;
+	private JLabel lblFiltro_1;
+	private JTextField txtFilter;
+	private JRadioButton rdbtnTtulo;
+	private JRadioButton rdbtnCurso;
+	private JRadioButton rdbtnAluno;
 
 	private void export() {
 		this.controller.export();
@@ -121,8 +129,12 @@ public class CoordinatorPageUI extends JInternalFrame implements
 					JOptionPane.ERROR_MESSAGE);
 		}
 	}
+	
+	private ButtonGroup radioGroup;
 
 	public CoordinatorPageUI(ICoordinatorPageController controller) {
+		
+		
 		this.controller = controller;
 
 		setFrameIcon(new ImageIcon(this.getClass().getResource(
@@ -131,19 +143,32 @@ public class CoordinatorPageUI extends JInternalFrame implements
 		setBounds(100, 100, 642, 461);
 		getContentPane()
 				.setLayout(
-						new MigLayout(
-								"",
-								"[][53.00][grow][20px:n]",
-								"[20px:n][grow][20px:n][20px:n:30px,grow][20px:n][20px:n][20px:n][20px:n][20px:n]"));
+						new MigLayout("", "[][53.00][grow][20px:n]", "[20px:n][20px:n][grow][20px:n][20px:n:30px,grow][20px:n][20px:n][20px:n][20px:n][20px:n]"));
+		
+		lblFiltro_1 = new JLabel("Filtrar por:");
+		getContentPane().add(lblFiltro_1, "cell 1 0,alignx left");
+		
+		rdbtnTtulo = new JRadioButton("T\u00EDtulo");
+		rdbtnTtulo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				refresh();
+			}
+		});
+		getContentPane().add(rdbtnTtulo, "flowx,cell 2 0");
+		
+		txtFilter = new JTextField();
+		getContentPane().add(txtFilter, "cell 1 1 2 1,growx");
+		txtFilter.setColumns(10);
 
 		JScrollPane scrollPane = new JScrollPane();
-		getContentPane().add(scrollPane, "cell 1 1 2 1,grow");
+		getContentPane().add(scrollPane, "cell 1 2 2 1,grow");
 
 		table = new JTable();
 		scrollPane.setViewportView(table);
 
-		lblFiltro = new JLabel("Filtro:");
-		getContentPane().add(lblFiltro, "cell 1 2");
+		lblFiltro = new JLabel("Mostrar:");
+		getContentPane().add(lblFiltro, "cell 1 3");
 		
 		chkRegulares = new JCheckBox("Regulares");
 		chkRegulares.addActionListener(new ActionListener() {
@@ -151,20 +176,28 @@ public class CoordinatorPageUI extends JInternalFrame implements
 				refresh();
 			}
 		});
-		getContentPane().add(chkRegulares, "cell 1 3,alignx left");
+		getContentPane().add(chkRegulares, "cell 1 4,alignx left");
+		
+				chkLate = new JCheckBox("Atrasados");
+				chkLate.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						refresh();
+					}
+				});
+				getContentPane().add(chkLate, "flowx,cell 2 4,alignx left");
 
 		JLabel lblNota = new JLabel("Nota:");
-		getContentPane().add(lblNota, "flowx,cell 1 4");
+		getContentPane().add(lblNota, "flowx,cell 1 5");
 
 		JLabel lblComentrio = new JLabel("Coment\u00E1rio:");
-		getContentPane().add(lblComentrio, "cell 2 4");
+		getContentPane().add(lblComentrio, "cell 2 5");
 
 		txtGrade = new JTextField();
-		getContentPane().add(txtGrade, "cell 1 5,growx");
+		getContentPane().add(txtGrade, "cell 1 6,growx");
 		txtGrade.setColumns(10);
 
 		txtRemark = new JTextArea();
-		getContentPane().add(txtRemark, "cell 2 5,grow");
+		getContentPane().add(txtRemark, "cell 2 6,grow");
 
 		btnUpdate = new JButton("Atualizar Entrega");
 		btnUpdate.addActionListener(new ActionListener() {
@@ -179,8 +212,8 @@ public class CoordinatorPageUI extends JInternalFrame implements
 				export();
 			}
 		});
-		getContentPane().add(btnExport, "flowx,cell 2 7,alignx right");
-		getContentPane().add(btnUpdate, "cell 2 7,alignx right");
+		getContentPane().add(btnExport, "flowx,cell 2 8,alignx right");
+		getContentPane().add(btnUpdate, "cell 2 8,alignx right");
 
 		btnDownload = new JButton("Baixar Arquivo");
 		btnDownload.addActionListener(new ActionListener() {
@@ -188,7 +221,7 @@ public class CoordinatorPageUI extends JInternalFrame implements
 				downloadFile();
 			}
 		});
-		getContentPane().add(btnDownload, "cell 2 7,alignx right");
+		getContentPane().add(btnDownload, "cell 2 8,alignx right");
 
 		btnDelete = new JButton("Excluir Entrega");
 		btnDelete.addActionListener(new ActionListener() {
@@ -196,17 +229,26 @@ public class CoordinatorPageUI extends JInternalFrame implements
 				delete();
 			}
 		});
-		getContentPane().add(btnDelete, "cell 2 7,alignx right");
-
-		chkLate = new JCheckBox("Atrasados");
-		chkLate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		getContentPane().add(btnDelete, "cell 2 8,alignx right");
+		
+		rdbtnCurso = new JRadioButton("Curso");
+		rdbtnCurso.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
 				refresh();
 			}
 		});
-		getContentPane().add(chkLate, "flowx,cell 2 3,alignx left");
-		initDataBindings();
+		getContentPane().add(rdbtnCurso, "cell 2 0");
+		
+		rdbtnAluno = new JRadioButton("Aluno");
+		getContentPane().add(rdbtnAluno, "cell 2 0");
+		
+		radioGroup = new ButtonGroup();
 
+		radioGroup.add(rdbtnAluno);
+		radioGroup.add(rdbtnCurso);
+		radioGroup.add(rdbtnTtulo);
+		
+		initDataBindings();
 	}
 
 	@Override
@@ -281,5 +323,23 @@ public class CoordinatorPageUI extends JInternalFrame implements
 		BeanProperty<ICoordinatorPageController, Boolean> iCoordinatorPageControllerBeanProperty_10 = BeanProperty.create("showOnTime");
 		AutoBinding<ICoordinatorPageController, Boolean, JCheckBox, Boolean> autoBinding_9 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, controller, iCoordinatorPageControllerBeanProperty_10, chkRegulares, jCheckBoxBeanProperty);
 		autoBinding_9.bind();
+		//
+		BeanProperty<ICoordinatorPageController, String> iCoordinatorPageControllerBeanProperty_7 = BeanProperty.create("filter");
+		BeanProperty<JTextField, String> jTextFieldBeanProperty_1 = BeanProperty.create("text");
+		AutoBinding<ICoordinatorPageController, String, JTextField, String> autoBinding_6 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, controller, iCoordinatorPageControllerBeanProperty_7, txtFilter, jTextFieldBeanProperty_1);
+		autoBinding_6.bind();
+		//
+		BeanProperty<ICoordinatorPageController, Boolean> iCoordinatorPageControllerBeanProperty_8 = BeanProperty.create("filterByTitle");
+		BeanProperty<JRadioButton, Boolean> jRadioButtonBeanProperty = BeanProperty.create("selected");
+		AutoBinding<ICoordinatorPageController, Boolean, JRadioButton, Boolean> autoBinding_7 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, controller, iCoordinatorPageControllerBeanProperty_8, rdbtnTtulo, jRadioButtonBeanProperty);
+		autoBinding_7.bind();
+		//
+		BeanProperty<ICoordinatorPageController, Boolean> iCoordinatorPageControllerBeanProperty_11 = BeanProperty.create("filterByCourse");
+		AutoBinding<ICoordinatorPageController, Boolean, JRadioButton, Boolean> autoBinding_10 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, controller, iCoordinatorPageControllerBeanProperty_11, rdbtnCurso, jRadioButtonBeanProperty);
+		autoBinding_10.bind();
+		//
+		BeanProperty<ICoordinatorPageController, Boolean> iCoordinatorPageControllerBeanProperty_12 = BeanProperty.create("filterByStudent");
+		AutoBinding<ICoordinatorPageController, Boolean, JRadioButton, Boolean> autoBinding_11 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, controller, iCoordinatorPageControllerBeanProperty_12, rdbtnAluno, jRadioButtonBeanProperty);
+		autoBinding_11.bind();
 	}
 }

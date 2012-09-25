@@ -73,7 +73,7 @@ public class AccountViewerController extends BaseViewerController implements IAc
 			record.setUserName(account.getUserName());
 			
 			if (account.getFKStudent() != null) {
-				Student student = this.studentReader.getStudentByPk(account.getFKStudent());
+				Student student = this.studentReader.getStudentByPk(account.getFKStudent(), "");
 				
 				record.setfKStudent(student.getPKStudent());
 				record.setStudentName(student.getName());				

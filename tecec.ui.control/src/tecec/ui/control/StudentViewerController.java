@@ -5,7 +5,6 @@ import java.util.List;
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
 import tecec.contract.reader.IStudentReader;
-import tecec.contract.reporting.IAccountReporter;
 import tecec.contract.reporting.IStudentReporter;
 import tecec.contract.writer.IStudentWriter;
 import tecec.dto.Student;

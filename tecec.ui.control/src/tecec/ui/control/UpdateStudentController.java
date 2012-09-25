@@ -29,7 +29,7 @@ public class UpdateStudentController extends BaseController implements
 	public void setPKStudent(String pkStudent) {
 		this.pkStudent = pkStudent;
 		
-		Student student = this.studentReader.getStudentByPk(pkStudent);
+		Student student = this.studentReader.getStudentByPk(pkStudent, "");
 
 		this.setStudentName(student.getName());
 		this.setStudentEmail(student.getEmail());

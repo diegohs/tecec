@@ -6,7 +6,6 @@ import java.util.List;
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
 import tecec.contract.reader.IAreaReader;
-import tecec.contract.reporting.IAccountReporter;
 import tecec.contract.reporting.IAreaReporter;
 import tecec.contract.writer.IAreaWriter;
 import tecec.dto.Area;

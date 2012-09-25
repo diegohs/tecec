@@ -8,12 +8,22 @@ import tecec.dto.Documentation;
 import tecec.dto.record.ActivityRecord;
 
 public interface ICoordinatorPageController extends IViewerController {
-	void setShowLate(boolean show);
+	void setFilter(String filter);
+	String getFilter();
 
+	void setFilterByStudent(boolean filter);
+	boolean getFilterByStudent();
+
+	void setFilterByTitle(boolean filter);
+	boolean getFilterByTitle();
+
+	void setFilterByCourse(boolean filter);
+	boolean getFilterByCourse();
+	
+	void setShowLate(boolean show);
 	boolean getShowLate();
 
 	void setShowOnTime(boolean show);
-
 	boolean getShowOnTime();
 
 	List<ActivityRecord> getActivities();

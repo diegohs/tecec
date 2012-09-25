@@ -13,7 +13,7 @@ public interface IStudentRepository {
 
 	Student getStudentByName(String name);
 
-	Student getStudentByPk(String pkStudent);
+	Student getStudentByPk(String pkStudent, String filter);
 
 	Student getStudentByEmail(String email);
 

@@ -19,8 +19,8 @@ public class StudentReader implements IStudentReader {
 	}
 
 	@Override
-	public Student getStudentByPk(String pkStudent) {
-		return studentRepository.getStudentByPk(pkStudent);
+	public Student getStudentByPk(String pkStudent, String filter) {
+		return studentRepository.getStudentByPk(pkStudent, filter);
 	}
 
 	@Override

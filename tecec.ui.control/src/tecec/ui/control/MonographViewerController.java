@@ -9,7 +9,6 @@ import tecec.contract.reader.ICourseReader;
 import tecec.contract.reader.IMonographReader;
 import tecec.contract.reader.IStatusReader;
 import tecec.contract.reader.IStudentReader;
-import tecec.contract.reporting.IAccountReporter;
 import tecec.contract.reporting.IMonographReporter;
 import tecec.contract.writer.IMonographWriter;
 
@@ -136,7 +135,7 @@ public class MonographViewerController extends BaseViewerController implements I
 			record.setMonograph(monograph);
 			
 			Area area = this.areaReader.getAreaByPK(monograph.getfKArea());
-			Student student = this.studentReader.getStudentByPk(monograph.getfKStudent());
+			Student student = this.studentReader.getStudentByPk(monograph.getfKStudent(), "");
 			Course course = this.courseReader.getCourseByPK(monograph.getfKCourse());
 			Advisor advisor = this.advisorReader.getAdvisorByPk(monograph.getfKAdvisor());
 			Advisor coadvisor = this.coadvisorReader.getAdvisorByPk(monograph.getfKCoadvisor());

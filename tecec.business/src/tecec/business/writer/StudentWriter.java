@@ -21,7 +21,7 @@ public class StudentWriter implements IStudentWriter {
 	@Override
 	public RuleViolation getUpdateViolation(String pkStudent, String newName,
 			String email) {
-		Student student = this.studentRepository.getStudentByPk(pkStudent);
+		Student student = this.studentRepository.getStudentByPk(pkStudent, "");
 		
 		if (student == null)
 			return new RuleViolation ("O estudante selecionado não existe no banco de dados.");

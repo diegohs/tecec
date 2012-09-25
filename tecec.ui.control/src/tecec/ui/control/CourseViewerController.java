@@ -1,14 +1,17 @@
 package tecec.ui.control;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
 import tecec.contract.reader.ICourseReader;
-import tecec.contract.reporting.IAccountReporter;
+import tecec.contract.reader.IStudentReader;
 import tecec.contract.reporting.ICourseReporter;
 import tecec.contract.writer.ICourseWriter;
 import tecec.dto.Course;
+import tecec.dto.Student;
+import tecec.dto.record.CourseStudentRecord;
 import tecec.ui.contract.control.ICourseViewerController;
 import tecec.ui.contract.view.INewCourseUI;
 import tecec.ui.contract.view.IUpdateCourseUI;
@@ -18,16 +21,18 @@ public class CourseViewerController extends BaseViewerController implements ICou
 	private String nameFilter;
 	private Course selectedCourse;
 	private ICourseReader courseReader;
+	private IStudentReader studentReader;
 	private ICourseWriter courseWriter;
 	
 	private INewCourseUI newCourseUI;
 	private IUpdateCourseUI updateCourseUI;
 	private ICourseReporter reporter;
 
-	public CourseViewerController(ICourseReader courseReader, ICourseWriter courseWriter, INewCourseUI newCourseUI, IUpdateCourseUI updateCourseUI, ICourseReporter reporter) {
+	public CourseViewerController(ICourseReader courseReader, IStudentReader studentReader, ICourseWriter courseWriter, INewCourseUI newCourseUI, IUpdateCourseUI updateCourseUI, ICourseReporter reporter) {
 		super(reporter);
 		
 		this.courseReader = courseReader;
+		this.studentReader = studentReader;
 		this.courseWriter = courseWriter;
 		this.newCourseUI = newCourseUI;
 		this.updateCourseUI = updateCourseUI;
@@ -125,6 +130,23 @@ public class CourseViewerController extends BaseViewerController implements ICou
 
 	@Override
 	protected List<String[]> getExportSource() {
-		return this.reporter.format(this.getCourses());
+		List<Course> courses = this.getCourses();
+		
+		List<CourseStudentRecord> records = new ArrayList<CourseStudentRecord>();
+		
+		for (Course course : courses) {
+			List<Student> students = studentReader.getStudentsByCourse(course.getPKCourse());
+					
+			for (Student student : students) {
+				CourseStudentRecord record = new CourseStudentRecord();
+				
+				record.setCourse(course);
+				record.setStudent(student);
+				
+				records.add(record);
+			}
+		}
+		
+		return this.reporter.format(records);
 	}
 }

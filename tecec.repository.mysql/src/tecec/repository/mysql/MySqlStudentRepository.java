@@ -2,6 +2,7 @@ package tecec.repository.mysql;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.UUID;
@@ -91,10 +92,15 @@ public class MySqlStudentRepository extends MySqlRepository implements
 	}
 
 	@Override
-	public Student getStudentByPk(String pKStudent) {
-		String query = "SELECT * FROM Student WHERE PKStudent = :pKStudent;";
-		SqlParameterSource parameters = new MapSqlParameterSource("pKStudent",
-				pKStudent);
+	public Student getStudentByPk(String pKStudent, String filter) {
+		String query = "SELECT * FROM Student WHERE PKStudent = :pKStudent AND Name LIKE :name;";
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("pKStudent", pKStudent);
+		map.put("name", "%" + filter + "%");
+		
+		SqlParameterSource parameters = new MapSqlParameterSource(map);
 
 		List<Student> result = jdbcTemplate.query(query, parameters,
 				new RowMapper<Student>() {

@@ -83,7 +83,7 @@ public class StudentPageController extends BaseViewerController implements
 
 				for (Stage stage : stages) {
 					List<Activity> activities = this.activityReader
-							.getActivitiesByStage(stage.getpKStage());
+							.getActivitiesByStage(stage.getpKStage(), "");
 
 					for (Activity activity : activities) {
 						HandIn handIn = this.handInReader

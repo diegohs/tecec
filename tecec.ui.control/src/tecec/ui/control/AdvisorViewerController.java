@@ -3,7 +3,6 @@ package tecec.ui.control;
 import java.util.List;
 
 import tecec.contract.reader.IAdvisorReader;
-import tecec.contract.reporting.IAccountReporter;
 import tecec.contract.reporting.IAdvisorReporter;
 import tecec.contract.writer.IAdvisorWriter;
 import tecec.dto.Advisor;

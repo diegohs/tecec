@@ -10,6 +10,6 @@ public interface IActivityRepository {
 	void deleteActivity(String pKActivity);
 	
 	List<Activity> getActivities(String titleFilter);
-	List<Activity> getActivitiesByStage(String pKStage);
+	List<Activity> getActivitiesByStage(String pKStage, String filter);
 	Activity getActivityByPK(String pKActivity);
 }

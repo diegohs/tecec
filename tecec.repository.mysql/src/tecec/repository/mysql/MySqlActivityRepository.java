@@ -2,6 +2,7 @@ package tecec.repository.mysql;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -38,7 +39,7 @@ public class MySqlActivityRepository extends MySqlRepository implements
 						"A chave primária do estudante deve ser um UUID.");
 			}
 		}
-		
+
 		if (activity.getFKStage() == null || activity.getFKStage().isEmpty()) {
 			throw new IllegalArgumentException(
 					"A atividade deve possuir uma etapa associada.");
@@ -126,10 +127,15 @@ public class MySqlActivityRepository extends MySqlRepository implements
 	}
 
 	@Override
-	public List<Activity> getActivitiesByStage(String pKStage) {
-		String query = " SELECT * FROM Activity WHERE FKStage = :fKStage";
+	public List<Activity> getActivitiesByStage(String pKStage, String filter) {
+		String query = " SELECT * FROM Activity WHERE FKStage = :fKStage AND Title LIKE :title";
 
-		SqlParameterSource parameters = new MapSqlParameterSource("fKStage", pKStage);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("fKStage", pKStage);
+		map.put("title", "%" + filter + "%");
+
+		SqlParameterSource parameters = new MapSqlParameterSource(map);
 
 		return getActivites(query, parameters);
 	}

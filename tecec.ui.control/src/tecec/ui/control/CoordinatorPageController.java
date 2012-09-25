@@ -29,6 +29,8 @@ public class CoordinatorPageController extends BaseViewerController implements
 
 	ActivityRecord selectedActivity;
 
+	String filter;
+	boolean filterByCourse, filterByStudent, filterByTitle;
 	boolean showLate, showOnTime;
 
 	IActivityReader activityReader;
@@ -58,13 +60,16 @@ public class CoordinatorPageController extends BaseViewerController implements
 		this.handInWriter = handInWriter;
 		this.documentationReader = documentationReader;
 		this.reporter = reporter;
+		
+		this.filter = "";
 	}
 
 	@Override
 	public List<ActivityRecord> getActivities() {
 		List<ActivityRecord> result = new ArrayList<ActivityRecord>();
 
-		List<Course> courses = this.courseReader.getCourses("");
+		List<Course> courses = this.courseReader
+				.getCourses(filterByCourse ? this.filter : "");
 
 		for (Course course : courses) {
 			List<Monograph> monographies = this.monographReader
@@ -76,7 +81,7 @@ public class CoordinatorPageController extends BaseViewerController implements
 
 				for (Stage stage : stages) {
 					List<Activity> activities = this.activityReader
-							.getActivitiesByStage(stage.getpKStage());
+							.getActivitiesByStage(stage.getpKStage(), filterByTitle ? this.filter : "");
 
 					for (Activity activity : activities) {
 						HandIn handIn = this.handInReader
@@ -87,7 +92,8 @@ public class CoordinatorPageController extends BaseViewerController implements
 
 						if (handIn != null) {
 							Student student = this.studentReader
-									.getStudentByPk(monograph.getfKStudent());
+									.getStudentByPk(monograph.getfKStudent(),
+											filterByStudent ? this.filter : "");
 
 							ActivityRecord record = new ActivityRecord();
 
@@ -229,6 +235,49 @@ public class CoordinatorPageController extends BaseViewerController implements
 
 	public void setShowOnTime(boolean showOnTime) {
 		this.showOnTime = showOnTime;
+	}
+
+	public String getFilter() {
+		return filter;
+	}
+
+	public void setFilter(String filter) {
+		this.filter = filter;
+
+		super.notifyOfPropertyChange("activities");
+	}
+
+	public boolean getFilterByCourse() {
+		return filterByCourse;
+	}
+
+	public void setFilterByCourse(boolean filterByCourse) {
+		this.filterByCourse = filterByCourse;
+
+		super.notifyOfPropertyChange("filterByCourse");
+		super.notifyOfPropertyChange("activities");
+	}
+
+	public boolean getFilterByStudent() {
+		return filterByStudent;
+	}
+
+	public void setFilterByStudent(boolean filterByStudent) {
+		this.filterByStudent = filterByStudent;
+
+		super.notifyOfPropertyChange("filterByStudent");
+		super.notifyOfPropertyChange("activities");
+	}
+
+	public boolean getFilterByTitle() {
+		return filterByTitle;
+	}
+
+	public void setFilterByTitle(boolean filterByTitle) {
+		this.filterByTitle = filterByTitle;
+
+		super.notifyOfPropertyChange("filterByTitle");
+		super.notifyOfPropertyChange("activities");
 	}
 
 }

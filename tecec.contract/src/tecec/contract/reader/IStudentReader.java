@@ -8,7 +8,7 @@ public interface IStudentReader {
 	List<Student> getStudents(String nameFilter);
 	List<Student> getStudentsByCourse(String pKCourse);
 
-	Student getStudentByPk(String pkStudent);
+	Student getStudentByPk(String pkStudent, String nameFilter);
 
 	public boolean doesUserHaveMonographiesInCourse(String pKStudent,
 			String pKCourse);
