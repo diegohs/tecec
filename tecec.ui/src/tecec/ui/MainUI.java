@@ -192,11 +192,6 @@ public class MainUI extends JFrame implements IMainUI {
 		refresh();
 	}
 
-	private void showProfileUI() {
-		mainUIController.showProfileViewerUI();
-		refresh();
-	}
-
 	private void showStageUI() {
 		mainUIController.showStageViewerUI();
 		refresh();
@@ -287,14 +282,6 @@ public class MainUI extends JFrame implements IMainUI {
 			}
 		});
 		mnCadastro.add(mntmStatus);
-
-		JMenuItem mntmProfile = new JMenuItem("Perfil");
-		mntmProfile.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				showProfileUI();
-			}
-		});
-		mnCadastro.add(mntmProfile);
 
 		JMenuItem mntmStage = new JMenuItem("Estágio");
 		mntmStage.addActionListener(new ActionListener() {

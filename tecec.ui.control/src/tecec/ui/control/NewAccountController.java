@@ -1,12 +1,8 @@
 package tecec.ui.control;
 
-import java.util.List;
-
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
-import tecec.contract.reader.IProfileReader;
 import tecec.contract.writer.IAccountWriter;
-import tecec.dto.Profile;
 import tecec.ui.contract.control.INewAccountController;
 
 public class NewAccountController extends BaseController implements INewAccountController {
@@ -14,26 +10,15 @@ public class NewAccountController extends BaseController implements INewAccountC
 	String id;
 	String userName;
 	
-	Profile selectedProfile;
-	int selectedProfileIndex;
+	IAccountWriter accountWriter;	
 	
-	IAccountWriter accountWriter;
-	IProfileReader profileReader;	
-	
-	public NewAccountController(IAccountWriter accountWriter,
-			IProfileReader profileReader) {
+	public NewAccountController(IAccountWriter accountWriter) {
 		this.accountWriter = accountWriter;
-		this.profileReader = profileReader;
 	}
 
 	@Override
 	public void refresh() {
 		setID("");
-		
-		super.notifyOfPropertyChange("profiles");
-		
-		setSelectedProfile(null);
-		setSelectedProfileIndex(-1);
 	}
 
 	@Override
@@ -61,11 +46,7 @@ public class NewAccountController extends BaseController implements INewAccountC
 	}
 
 	@Override
-	public RuleViolation getInsertViolation() {
-		if (this.selectedProfile == null) {
-			return new RuleViolation("Um perfil deve ser selecionado para o usuário.");
-		}
-		
+	public RuleViolation getInsertViolation() {		
 		if (this.id == null || this.id.isEmpty()) {
 			return new RuleViolation("O ID do usuário deve ser preenchido.");
 		}
@@ -85,33 +66,8 @@ public class NewAccountController extends BaseController implements INewAccountC
 			throw new RuleViolationException(violation);
 		}
 		
-		this.accountWriter.insertAccount(this.id, this.id, userName, this.selectedProfile.getpKProfile(), null);
+		this.accountWriter.insertAccount(this.id, this.id, userName, null);
 		
 		refresh();
 	}
-
-	@Override
-	public List<Profile> getProfiles() {
-		return this.profileReader.getProfiles("");
-	}
-
-	@Override
-	public Profile getSelectedProfile() {
-		return this.selectedProfile;
-	}
-
-	@Override
-	public void setSelectedProfile(Profile profile) {
-		this.selectedProfile = profile;
-		
-		super.notifyOfPropertyChange("selectedProfile");
-	}
-
-	@Override
-	public void setSelectedProfileIndex(int i) {
-		this.selectedProfileIndex = i;
-		
-		super.notifyOfPropertyChange("selectedProfileIndex");
-	}
-
 }

@@ -14,17 +14,11 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import org.jdesktop.beansbinding.BeanProperty;
-import java.util.List;
-
 import tecec.contract.RuleViolation;
-import tecec.dto.Profile;
-import org.jdesktop.swingbinding.JComboBoxBinding;
-import org.jdesktop.swingbinding.SwingBindings;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.Bindings;
@@ -41,7 +35,6 @@ public class UpdateAccountUI extends JDialog implements IUpdateAccountUI {
 	IUpdateAccountController controller;
 	private JTextField txtId;
 	private JTextField txtUserName;
-	private JComboBox cboProfile;
 	private JCheckBox chckbxNewCheckBox;
 
 	private void update(){
@@ -74,14 +67,6 @@ public class UpdateAccountUI extends JDialog implements IUpdateAccountUI {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new MigLayout("", "[][][grow][]", "[][][][][][][][]"));
-		{
-			JLabel lblNewLabel = new JLabel("Perfil:");
-			contentPanel.add(lblNewLabel, "cell 1 1,alignx left");
-		}
-		{
-			cboProfile = new JComboBox();
-			contentPanel.add(cboProfile, "cell 2 1,growx");
-		}
 		{
 			JLabel lblNewLabel_1 = new JLabel("ID:");
 			contentPanel.add(lblNewLabel_1, "cell 1 2,alignx left");
@@ -130,20 +115,6 @@ public class UpdateAccountUI extends JDialog implements IUpdateAccountUI {
 		this.controller.setAccountID(id);
 	}
 	protected void initDataBindings() {
-		BeanProperty<IUpdateAccountController, List<Profile>> iUpdateAccountControllerBeanProperty = BeanProperty.create("profiles");
-		JComboBoxBinding<Profile, IUpdateAccountController, JComboBox> jComboBinding = SwingBindings.createJComboBoxBinding(UpdateStrategy.READ, controller, iUpdateAccountControllerBeanProperty, cboProfile);
-		jComboBinding.bind();
-		//
-		BeanProperty<IUpdateAccountController, Integer> iUpdateAccountControllerBeanProperty_1 = BeanProperty.create("selectedProfileIndex");
-		BeanProperty<JComboBox, Integer> jComboBoxBeanProperty = BeanProperty.create("selectedIndex");
-		AutoBinding<IUpdateAccountController, Integer, JComboBox, Integer> autoBinding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, controller, iUpdateAccountControllerBeanProperty_1, cboProfile, jComboBoxBeanProperty);
-		autoBinding.bind();
-		//
-		BeanProperty<IUpdateAccountController, Profile> iUpdateAccountControllerBeanProperty_2 = BeanProperty.create("selectedProfile");
-		BeanProperty<JComboBox, Object> jComboBoxBeanProperty_1 = BeanProperty.create("selectedItem");
-		AutoBinding<IUpdateAccountController, Profile, JComboBox, Object> autoBinding_1 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, controller, iUpdateAccountControllerBeanProperty_2, cboProfile, jComboBoxBeanProperty_1);
-		autoBinding_1.bind();
-		//
 		BeanProperty<IUpdateAccountController, String> iUpdateAccountControllerBeanProperty_3 = BeanProperty.create("ID");
 		BeanProperty<JTextField, String> jTextFieldBeanProperty = BeanProperty.create("text");
 		AutoBinding<IUpdateAccountController, String, JTextField, String> autoBinding_2 = Bindings.createAutoBinding(UpdateStrategy.READ, controller, iUpdateAccountControllerBeanProperty_3, txtId, jTextFieldBeanProperty);

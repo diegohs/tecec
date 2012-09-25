@@ -109,8 +109,7 @@ public class LoginController extends BaseController implements ILoginController 
 		List<Account> accounts = this.accountReader.getAccounts("");
 
 		if (accounts.size() == 0) {
-			this.accountWriter.insertAccount("admin", "admin", "admin", null,
-					null);
+			this.accountWriter.insertAccount("admin", "admin", "admin", null);
 		}
 		
 		boolean isReset = this.accountReader.isPasswordReset(this.id);

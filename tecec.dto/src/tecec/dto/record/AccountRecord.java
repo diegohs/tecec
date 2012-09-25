@@ -5,14 +5,7 @@ public class AccountRecord {
 	private String fKStudent;
 	private String userName;
 	private String studentName;
-	private String profileName;
 	
-	public String getProfileName() {
-		return profileName;
-	}
-	public void setProfileName(String profileName) {
-		this.profileName = profileName;
-	}
 	public String getfKStudent() {
 		return fKStudent;
 	}

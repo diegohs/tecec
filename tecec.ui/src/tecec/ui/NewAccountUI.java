@@ -15,15 +15,10 @@ import tecec.ui.contract.view.INewAccountUI;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JComboBox;
 import org.jdesktop.beansbinding.BeanProperty;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
-import java.util.List;
-import tecec.dto.Profile;
-import org.jdesktop.swingbinding.JComboBoxBinding;
-import org.jdesktop.swingbinding.SwingBindings;
 
 public class NewAccountUI extends JDialog implements INewAccountUI {
 	/**
@@ -34,7 +29,6 @@ public class NewAccountUI extends JDialog implements INewAccountUI {
 	private JTextField txtName;
 
 	INewAccountController controller;
-	private JComboBox cboProfile;
 
 	private void insertAccount(){
 		RuleViolation violation = controller.getInsertViolation();
@@ -64,12 +58,6 @@ public class NewAccountUI extends JDialog implements INewAccountUI {
 		setResizable(false);
 		setBounds(100, 100, 419, 195);
 		getContentPane().setLayout(new MigLayout("", "[][][grow][]", "[][][][][][][]"));
-
-		JLabel lblNewLabel_4 = new JLabel("Perfil:");
-		getContentPane().add(lblNewLabel_4, "cell 1 1,alignx left");
-
-		cboProfile = new JComboBox();
-		getContentPane().add(cboProfile, "cell 2 1,growx");
 
 		JLabel lblNewLabel = new JLabel("ID:");
 		getContentPane().add(lblNewLabel, "flowx,cell 1 2");
@@ -110,19 +98,5 @@ public class NewAccountUI extends JDialog implements INewAccountUI {
 		BeanProperty<JTextField, String> jTextFieldBeanProperty_1 = BeanProperty.create("text");
 		AutoBinding<INewAccountController, String, JTextField, String> autoBinding_1 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, controller, iNewAccountControllerBeanProperty_1, txtID, jTextFieldBeanProperty_1);
 		autoBinding_1.bind();
-		//
-		BeanProperty<INewAccountController, List<Profile>> iNewAccountControllerBeanProperty_2 = BeanProperty.create("profiles");
-		JComboBoxBinding<Profile, INewAccountController, JComboBox> jComboBinding = SwingBindings.createJComboBoxBinding(UpdateStrategy.READ, controller, iNewAccountControllerBeanProperty_2, cboProfile);
-		jComboBinding.bind();
-		//
-		BeanProperty<INewAccountController, Integer> iNewAccountControllerBeanProperty_3 = BeanProperty.create("selectedProfileIndex");
-		BeanProperty<JComboBox, Integer> jComboBoxBeanProperty = BeanProperty.create("selectedIndex");
-		AutoBinding<INewAccountController, Integer, JComboBox, Integer> autoBinding_2 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, controller, iNewAccountControllerBeanProperty_3, cboProfile, jComboBoxBeanProperty);
-		autoBinding_2.bind();
-		//
-		BeanProperty<INewAccountController, Profile> iNewAccountControllerBeanProperty_4 = BeanProperty.create("selectedProfile");
-		BeanProperty<JComboBox, Object> jComboBoxBeanProperty_1 = BeanProperty.create("selectedItem");
-		AutoBinding<INewAccountController, Profile, JComboBox, Object> autoBinding_3 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, controller, iNewAccountControllerBeanProperty_4, cboProfile, jComboBoxBeanProperty_1);
-		autoBinding_3.bind();
 	}
 }

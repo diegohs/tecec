@@ -20,13 +20,12 @@ public class AccountWriter implements IAccountWriter {
 
 	@Override
 	public void insertAccount(String id, String plainPassword, String userName,
-			String fKProfile, String fKStudent) {
+			String fKStudent) {
 		try {
 			Account account = new Account();
 
 			account.setId(id);
 			account.setUserName(userName);
-			account.setfKProfile(fKProfile);
 			account.setFKStudent(fKStudent);
 
 			String hashedPassword = this.hasher.hash(plainPassword);

@@ -4,7 +4,6 @@ public class Account {
 	private String id;
 	private String password;
 	private String userName;
-	private String fKProfile;
 	private String fKStudent;
 	
 	public String getId() {
@@ -24,12 +23,6 @@ public class Account {
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
-	}
-	public String getfKProfile() {
-		return fKProfile;
-	}
-	public void setfKProfile(String fKProfile) {
-		this.fKProfile = fKProfile;
 	}
 	public String getFKStudent() {
 		return fKStudent;

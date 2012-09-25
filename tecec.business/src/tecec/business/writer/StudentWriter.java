@@ -74,7 +74,7 @@ public class StudentWriter implements IStudentWriter {
 		student.setEmail(email);
 		
 		this.studentRepository.insertStudent(student);
-		this.accountWriter.insertAccount(email, email, name, null, student.getPKStudent());
+		this.accountWriter.insertAccount(email, email, name, student.getPKStudent());
 	}
 
 	@Override

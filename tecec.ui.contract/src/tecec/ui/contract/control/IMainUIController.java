@@ -8,7 +8,6 @@ public interface IMainUIController extends IRefreshable  {
 	void showActivityViewerUI();
 	void showStatusViewerUI();
 	void showMonographViewerUI();
-	void showProfileViewerUI();
 	void showStageViewerUI();
 	void showAccountViewerUI();
 }

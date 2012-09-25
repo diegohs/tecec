@@ -15,17 +15,16 @@ public class AccountReporter extends BaseReporter<AccountRecord> implements IAcc
 	@Override
 	public String[] format(AccountRecord source) {
 		ArrayList<String> result = new ArrayList<String>();
-		
+
+		result.add(source.getId());
 		result.add(source.getUserName());
-		result.add(source.getStudentName());
-		result.add(source.getProfileName());
 		
 		return result.toArray(new String[3]);
 	}
 	
 	@Override
 	public String[] formatHeader() {
-		return new String[] { "Usuário", "Nome", "Perfil" };
+		return new String[] { "Usuário", "Nome" };
 	}
 
 }

@@ -22,8 +22,6 @@ public class ActivityViewerController extends BaseViewerController implements
 	private tecec.contract.reader.IActivityReader activityReader;
 	private tecec.ui.contract.view.INewActivityUI newActivityUI;
 	private tecec.ui.contract.view.IUpdateActivityUI updateActivityUI;
-	
-	private IActivityRecordReporter activityReporter;
 
 	public ActivityViewerController(INewActivityUI newActivityUI,
 			IUpdateActivityUI updateActivityUI, IActivityWriter activityWriter,
@@ -34,7 +32,6 @@ public class ActivityViewerController extends BaseViewerController implements
 		this.updateActivityUI = updateActivityUI;
 		this.activityWriter = activityWriter;
 		this.activityReader = activityReader;
-		this.activityReporter = reporter;
 	}
 
 	@Override

@@ -6,12 +6,10 @@ import java.util.List;
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
 import tecec.contract.reader.IAccountReader;
-import tecec.contract.reader.IProfileReader;
 import tecec.contract.reader.IStudentReader;
 import tecec.contract.reporting.IAccountReporter;
 import tecec.contract.writer.IAccountWriter;
 import tecec.dto.Account;
-import tecec.dto.Profile;
 import tecec.dto.Student;
 import tecec.dto.record.AccountRecord;
 import tecec.ui.contract.control.IAccountViewerController;
@@ -26,7 +24,6 @@ public class AccountViewerController extends BaseViewerController implements IAc
 	IAccountReader accountReader;
 	IAccountWriter accountWriter;
 	IStudentReader studentReader;
-	IProfileReader profileReader;
 	
 	INewAccountUI newAccountUI;
 	IUpdateAccountUI updateAccountUI;
@@ -34,15 +31,13 @@ public class AccountViewerController extends BaseViewerController implements IAc
 	IAccountReporter reporter;
 	
 	public AccountViewerController(IAccountReader accountReader,
-			IAccountWriter accountWriter, IStudentReader studentReader,
-			IProfileReader profileReader, INewAccountUI newAccountUI,
+			IAccountWriter accountWriter, IStudentReader studentReader, INewAccountUI newAccountUI,
 			IUpdateAccountUI updateAccountUI, IAccountReporter reporter) {
 		super(reporter);
 		
 		this.accountReader = accountReader;
 		this.accountWriter = accountWriter;
 		this.studentReader = studentReader;
-		this.profileReader = profileReader;
 		this.newAccountUI = newAccountUI;
 		this.updateAccountUI = updateAccountUI;
 		this.reporter = reporter;
@@ -78,12 +73,6 @@ public class AccountViewerController extends BaseViewerController implements IAc
 				record.setfKStudent(student.getPKStudent());
 				record.setStudentName(student.getName());				
 			}			
-			
-			if (account.getfKProfile() != null) {
-				Profile profile = this.profileReader.getProfileByPK(account.getfKProfile());
-				
-				record.setProfileName(profile.getName());
-			}
 			
 			record.setfKStudent(account.getFKStudent());
 			

@@ -1,10 +1,7 @@
 package tecec.ui.contract.control;
 
-import java.util.List;
-
 import tecec.contract.RuleViolation;
 import tecec.contract.RuleViolationException;
-import tecec.dto.Profile;
 
 public interface IUpdateAccountController extends IRefreshable {
 	void setAccountID(String id);
@@ -15,13 +12,7 @@ public interface IUpdateAccountController extends IRefreshable {
 	String getUserName();
 	
 	void setResetPassword(boolean reset);
-	boolean getResetPassword();
-	
-	List<Profile> getProfiles();
-	Profile getSelectedProfile();
-	void setSelectedProfile(Profile profile);
-	void setSelectedProfileIndex(int i);
-	int getSelectedProfileIndex();
+	boolean getResetPassword();	
 	
 	RuleViolation getUpdateViolation();
 	

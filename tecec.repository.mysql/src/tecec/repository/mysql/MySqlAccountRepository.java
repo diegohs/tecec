@@ -23,8 +23,8 @@ public class MySqlAccountRepository extends MySqlRepository implements IAccountR
 
 	@Override
 	public void insertAccount(Account account) {
-		String command = " INSERT INTO Account (ID, Password, UserName, FKProfile, FKStudent) " + 
-					     " VALUES(:id, :password, :userName, :fKProfile, :fKStudent) ";
+		String command = " INSERT INTO Account (ID, Password, UserName, FKStudent) " + 
+					     " VALUES(:id, :password, :userName, :fKStudent) ";
 		
 		SqlParameterSource parameters = new BeanPropertySqlParameterSource(account);
 		
@@ -58,7 +58,6 @@ public class MySqlAccountRepository extends MySqlRepository implements IAccountR
 				account.setId(arg0.getString("ID"));
 				account.setPassword(arg0.getString("Password"));
 				account.setUserName(arg0.getString("UserName"));
-				account.setfKProfile(arg0.getString("FKProfile"));
 				account.setFKStudent(arg0.getString("FKStudent"));
 
 				return account;
@@ -98,8 +97,7 @@ public class MySqlAccountRepository extends MySqlRepository implements IAccountR
 		String query = " UPDATE Account SET " + 
 					   " 	UserName = :userName, " + 
 					   " 	Password = :password, " + 
-					   " 	FKStudent = :fKStudent, " + 
-					   " 	FKProfile = :fKProfile " + 
+					   " 	FKStudent = :fKStudent " + 
 					   " WHERE ID = :id;  ";
 		
 		SqlParameterSource parameters = new BeanPropertySqlParameterSource(account);
